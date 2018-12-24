@@ -1,0 +1,20 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<div id="FieldSetTopMenu">
+<h2 class="center">Calendar Center</h2>
+
+        @Ajax.ActionLink("New Calendar", "Create", "Calendar", new {MinistryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "CalendarPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("View Calendar", "Details", "Calendar", new {MinistryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "CalendarPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("Fixed Banner #1", "UpdateFixedBanner", "Calendar", new {Description="FixedBanner1"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "CalendarPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("Fixed Banner #2", "UpdateFixedBanner", "Calendar", new {Description="FixedBanner2"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "CalendarPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("Fixed Banner #3", "UpdateFixedBanner", "Calendar", new {Description="FixedBanner3"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "CalendarPane" }, new {@id="pageSubTitle"})
+
+ </div>
+    <div id="CalendarPane">
+    @Html.Action("Details", "Calendar", new {MinistryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType})
+ </div>
+

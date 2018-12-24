@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Domain.ministryexpense>
+
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+
+
+<h2 class="center">Ministry Expense</h2>
+<div class="center">
+    @Ajax.ActionLink("Add Expense", "Create", "MinistryExpense", new {ministryID=@ViewBag.MinistryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane" }, new {@id="pageSubTitle"})
+    @Ajax.ActionLink("View Expense", "Details", "MinistryExpense", new {ministryID=@ViewBag.MinistryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane" }, new {@id="pageSubTitle"})
+</div>
+
+<div id="myPane" class="panel">
+@Html.Action("Details", "MinistryExpense", new {ministryID=@ViewBag.MinistryID})
+</div>

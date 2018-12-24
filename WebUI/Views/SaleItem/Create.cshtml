@@ -1,0 +1,100 @@
+﻿@model Domain.saleitem
+
+@{
+    ViewBag.Title = "Create";
+  
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Create", "SaleItem", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center-text">Create New Sale Item</h2>
+    @Html.ValidationSummary(true)    <fieldset>
+        <legend>Add sale item here...</legend>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.saleID)
+            @Html.ValidationMessageFor(model => model.saleID)
+        </div>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.productID)
+            @Html.ValidationMessageFor(model => model.productID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Quantity)
+            @Html.EditorFor(model => model.Quantity)
+            @Html.ValidationMessageFor(model => model.Quantity)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Discount)
+            @Html.TextBoxFor(model => model.Discount, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.Discount)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Total)
+            @Html.TextBoxFor(model => model.Total, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.Total)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Comment)
+            @Html.EditorFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.EnteredBy,"Entered By")
+            @Html.TextBoxFor(model => model.EnteredBy, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.EnteredBy)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.DateEntered,"Date Entered")
+            @Html.TextBoxFor(model => model.DateEntered, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.DateEntered)
+        </div>
+
+               <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#Quantity").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the total product quantity.");
+            }
+        });
+    });
+</script>

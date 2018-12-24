@@ -1,0 +1,307 @@
+﻿@model Domain.ministry
+
+@{
+    ViewBag.Title = "Edit";
+
+}
+
+<div id="AjaxFormPane" >
+    <div class="center" style="color:red">@TempData["message2"]</div>
+
+<div class="center">
+@using (Html.BeginForm("Edit", "Ministry", new { }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 id="FieldSetTopMenu">Edit Ministry</h2>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit ministry data here</legend>
+        <input id="ReturnCode" name="ReturnCode" type="hidden" value="@ViewBag.ReturnPage"/>
+        @Html.HiddenFor(model => model.ministryID)
+        @if (@ViewBag.Supervisor == true)
+        {
+        <div class="editor">
+            @Html.LabelFor(model => model.MinistryName, "Name")
+            @Html.EditorFor(model => model.MinistryName)
+            @Html.ValidationMessageFor(model => model.MinistryName)
+        </div>
+        }
+        else
+        {
+            
+        <div class="editor">
+            @Html.LabelFor(model => model.MinistryName, "Name")
+            @Html.TextBoxFor(model => model.MinistryName, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.MinistryName)
+        </div>            
+            
+        }
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Description)
+            @Html.TextAreaFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Contact)
+            @Html.EditorFor(model => model.Contact)
+            @Html.ValidationMessageFor(model => model.Contact)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.ContactEmail, "Email")
+            @Html.EditorFor(model => model.ContactEmail)
+            @Html.ValidationMessageFor(model => model.ContactEmail)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.PhoneNumber, "Phone #")
+            @Html.EditorFor(model => model.PhoneNumber)
+            @Html.ValidationMessageFor(model => model.PhoneNumber)
+        </div>
+
+         <div class="editor">
+            @Html.LabelFor(model => model.BriefDescription, "Brief Description")<br />
+            @Html.TextAreaFor(model => model.BriefDescription)
+            @Html.ValidationMessageFor(model => model.BriefDescription)
+        </div>
+
+         <div class="editor">
+            @Html.LabelFor(model => model.PageStyleID, "Page Style")
+             @Html.DropDownListFor(model => model.PageStyleID, ViewBag.MinistryPageStyle as SelectList, "")
+            @Html.ValidationMessageFor(model => model.PageStyleID)
+        </div>
+
+        @if (@ViewBag.Supervisor == true)
+        {
+        <div class="editor">
+            @Html.LabelFor(model => model.IsPublic, "Public?")
+             @Html.DropDownListFor(x => x.IsPublic, new[] { new SelectListItem() { Text = "Yes", Value = bool.TrueString }, new SelectListItem() { Text = "No", Value = bool.FalseString } }, "Choose an option") 
+            @Html.ValidationMessageFor(model => model.IsPublic)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.DefaultMemberType, "Member Type")
+            @Html.DropDownListFor(model => model.DefaultMemberType, ViewBag.DefaultMemberType as SelectList,"")
+            @Html.ValidationMessageFor(model => model.DefaultMemberType)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Status)
+            @Html.DropDownListFor(model => model.Status, ViewBag.StatusList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.StoryCreateAccess, "*Story Access")
+             @Html.DropDownListFor(x => x.StoryCreateAccess, new[] { new SelectListItem() { Text = "Yes", Value = bool.TrueString }, new SelectListItem() { Text = "No", Value = bool.FalseString } }, "Choose an option") 
+            @Html.ValidationMessageFor(model => model.StoryCreateAccess)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.PictureCreateAccess, "*Picture Access?")
+             @Html.DropDownListFor(x => x.PictureCreateAccess, new[] { new SelectListItem() { Text = "Yes", Value = bool.TrueString }, new SelectListItem() { Text = "No", Value = bool.FalseString } }, "Choose an option") 
+            @Html.ValidationMessageFor(model => model.PictureCreateAccess)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.VideoCreateAccess, "*Video Post Access")
+             @Html.DropDownListFor(x => x.VideoCreateAccess, new[] { new SelectListItem() { Text = "Yes", Value = bool.TrueString }, new SelectListItem() { Text = "No", Value = bool.FalseString } }, "Choose an option") 
+            @Html.ValidationMessageFor(model => model.VideoCreateAccess)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.IsGroupMinistry, "Group Ministry?")
+             @Html.DropDownListFor(x => x.IsGroupMinistry, new[] { new SelectListItem() { Text = "Yes", Value = bool.TrueString }, new SelectListItem() { Text = "No", Value = bool.FalseString } }, "Choose an option") 
+            @Html.ValidationMessageFor(model => model.IsGroupMinistry)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.GroupMinistryID, "Parent Ministy")
+            @Html.DropDownList("GroupMinistryID", ViewBag.GroupMinistryList as SelectList, "")
+        </div>
+            
+        <div class="editor">
+            @Html.LabelFor(model => model.DisplayBanner, "Display Banner")
+             @Html.DropDownListFor(x => x.DisplayBanner, new[] { new SelectListItem() { Text = "Yes", Value = bool.TrueString }, new SelectListItem() { Text = "No", Value = bool.FalseString } }, "Choose an option") 
+        </div>
+        }
+        else
+        {
+         <div class="editor">
+            @Html.LabelFor(model => model.IsPublic, "Public?")
+              @Html.TextBoxFor(model => model.IsPublic, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.IsPublic)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.DefaultMemberType, "Member Type")
+             @Html.TextBoxFor(model => model.DefaultMemberType, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.DefaultMemberType)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Status)
+             @Html.TextBoxFor(model => model.Status, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.StoryCreateAccess, "*Story Access")
+            @Html.TextBoxFor(model => model.StoryCreateAccess, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.StoryCreateAccess)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.PictureCreateAccess, "*Picture Access?")
+             @Html.TextBoxFor(model => model.PictureCreateAccess, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.PictureCreateAccess)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.VideoCreateAccess, "*Video Post Access")
+             @Html.TextBoxFor(model => model.VideoCreateAccess, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.VideoCreateAccess)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.IsGroupMinistry, "Group Ministry?")
+             @Html.TextBoxFor(model => model.IsGroupMinistry, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.IsGroupMinistry)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.GroupMinistryID, "Parent Ministy Name")
+             @Html.TextBoxFor(model => model.GroupMinistryID, new { @readonly = "readonly" })
+        </div>
+          
+        <div class="editor">
+            @Html.LabelFor(model => model.DisplayBanner, "Display Banner")
+             @Html.TextBoxFor(model => model.DisplayBanner, new { @readonly = "readonly" })
+        </div> 
+        }
+
+         <div class="editor">
+            @Html.LabelFor(model => model.MissionStatement, "Mission Statement")
+            @Html.TextAreaFor(model => model.MissionStatement)
+            @Html.ValidationMessageFor(model => model.MissionStatement)
+        </div>
+
+         <div class="editor">
+            @Html.LabelFor(model => model.Vision)
+            @Html.TextAreaFor(model => model.Vision)
+            @Html.ValidationMessageFor(model => model.Vision)
+        </div>
+
+         <div class="editor">
+            @Html.LabelFor(model => model.Title1, "Title #1")
+            @Html.EditorFor(model => model.Title1)
+            @Html.ValidationMessageFor(model => model.Title1)
+        </div>
+
+         <div class="editor">
+            @Html.LabelFor(model => model.Information1, "Information #1")
+            @Html.EditorFor(model => model.Information1)
+            @Html.ValidationMessageFor(model => model.Information1)
+        </div>
+
+         <div class="editor">
+            @Html.LabelFor(model => model.Title2, "Title #2")
+            @Html.EditorFor(model => model.Title2)
+            @Html.ValidationMessageFor(model => model.Title2)
+        </div>
+
+         <div class="editor">
+            @Html.LabelFor(model => model.Information2, "Information #2")
+            @Html.EditorFor(model => model.Information2)
+            @Html.ValidationMessageFor(model => model.Information2)
+        </div>
+
+         <div class="editor">
+            @Html.LabelFor(model => model.Title3, "Title #3")
+            @Html.EditorFor(model => model.Title3)
+            @Html.ValidationMessageFor(model => model.Title3)
+        </div>
+         <div class="editor">
+            @Html.LabelFor(model => model.Information3, "Information #3")
+            @Html.EditorFor(model => model.Information3)
+            @Html.ValidationMessageFor(model => model.Information3)
+        </div>
+
+        @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+        <p>*Access given to ministry leader(s)</p>
+                @if (@ViewBag.WebMaster == true)
+        {
+            <div class="editor">
+                @Html.LabelFor(model => model.CodeDesc, "Private Code")
+                 @Html.DropDownListFor(model => model.CodeDesc, new SelectList(new[] { "Children", "Youth","Men","Women","Seniors","Singles","Education","Church","Marriage","Adults","Young Adults","Babies","Rental" }), "") 
+                @Html.ValidationMessageFor(model => model.CodeDesc)
+            </div>
+        }
+        else
+        {
+             @Html.HiddenFor(model => model.CodeDesc)
+        }
+        @if (@ViewBag.Supervisor == true)
+        {
+         <div class="editor">
+        <label>Upload Banner Photo</label> 
+        <input id="files" type="file" name="files" />
+            </div>
+         }
+
+
+
+        @Html.HiddenFor(model => model.PictureID)
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+    </div>
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#MinistryName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the ministry name.");
+            }
+            else if ($("#Description").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the ministry description.");
+            }
+            else if ($("#Contact").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the name of the ministry contact person.");
+            }
+            else if ($("#ContactEmail").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the ministry email address.");
+            }
+            else if ($("#PhoneNumber").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the ministry phone number.");
+            }
+
+        });
+    });
+</script>
+
+

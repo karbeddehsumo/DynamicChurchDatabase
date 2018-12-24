@@ -1,0 +1,87 @@
+﻿@model IEnumerable<Domain.contribution>
+
+@{
+    //ViewBag.Title = "List";
+}
+
+<div id="TopPane"> 
+    <h3 class="center">Contribution</h3>
+    <span class="center">@ViewBag.Heading</span>
+    <div class="center">
+<div  class="slider">
+    
+@if (@ViewBag.RecordCount > 0)
+{
+<table class="table-striped table-hover table-condensed">
+    <caption>@ViewBag.Title</caption>
+    <thead>
+    <tr>
+        <th>
+            Date
+        </th>
+        @if(@ViewBag.DefaultSearch == true)
+        {
+            <th>
+                Member
+            </th>
+        }
+        <th>
+            Fund
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Check #
+        </th>
+        @if (@ViewBag.AllowEdit == true)
+        {
+        <th></th>
+        <th></th>
+        }
+    </tr>
+</thead>
+    <tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td style="margin-top:10px">
+            @item.ContributionDate.ToShortDateString()
+        </td>
+        @if(@ViewBag.DefaultSearch == true)
+        {
+            <td>
+                @item.member.FullName
+            </td>
+        }
+        <td>
+            @Html.DisplayFor(modelItem => item.FundName)
+        </td>
+        <td style="text-align:right">
+            @string.Format("{0:c}", @item.Amount)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckNumber)
+        </td>
+        @if (@ViewBag.AllowEdit == true)
+        {
+             <td>
+                @Ajax.ActionLink("Edit", "Edit", "Contribution", new {ContributionID=item.contributionID, ReturnBeginDate=@ViewBag.BeginDate,  ReturnEndDate=@ViewBag.EndDate,  ReturnType="List", ReturnCodeID = @ViewBag.CodeID,ReturnSearchType=@ViewBag.SearchType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+            </td>
+            <td>
+                @Ajax.ActionLink("Delete", "Delete", "Contribution", new {ContributionID=item.contributionID, ReturnBeginDate=@ViewBag.BeginDate,  ReturnEndDate=@ViewBag.EndDate,  ReturnType="List", ReturnCodeID = @ViewBag.CodeID,ReturnSearchType=@ViewBag.SearchType}, new AjaxOptions {Confirm="Do you want to delete this record?",HttpMethod="Post",  InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+            </td>
+        }
+
+    </tr>
+}
+        </tbody>
+</table>
+}
+else
+{
+ <p>No income records found!</p>   
+}
+</div>
+        </div>
+    </div>

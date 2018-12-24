@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Domain.programeventbudget>
+
+@{
+    ViewBag.Title = "List";
+    
+}
+
+<div>
+<div id="TopPane">
+
+</div>
+
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <tr>
+        <th>
+            ProgramEventID
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            Requestor
+        </th>
+        <th>
+            ProjectedTotalAmount
+        </th>
+        <th>
+            ActualTotalAmount
+        </th>
+        <th>
+            DueDate
+        </th>
+        <th>
+            CheckNumber
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Comment
+        </th>
+        <th>
+            EnteredBy
+        </th>
+        <th>
+            DateEntered
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProgramEventID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Requestor)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProjectedTotalAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ActualTotalAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DueDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CheckNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnteredBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateEntered)
+        </td>
+            <td>
+                    @Ajax.ActionLink("Edit", "Edit", "ProgramEventBudget", new {ProgramEventBudgetID=item.ProgramEventBudgetID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+            </td>
+            <td>
+                @Ajax.ActionLink("Delete", "Delete", "ProgramEventBudget", new {ProgramEventBudgetID=item.ProgramEventBudgetID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+            </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p>No event added yet!</p>   
+}
+</div>

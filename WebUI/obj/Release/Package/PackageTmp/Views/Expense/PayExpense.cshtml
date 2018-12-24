@@ -1,0 +1,96 @@
+﻿
+<div class="panel">
+<div id="ExpensePaymentPane">
+    @Html.Action("Create","Expense")
+</div>
+<table>
+    <tr>
+        <th>Payee</th>
+        <th>Due Date</th>
+        <th>Amount</th>
+        <th>Total</th>
+    </tr>
+@foreach(Domain.bill i in  @ViewBag.PendingBills)
+{
+    <tr>
+        <td>
+        @Ajax.ActionLink(@i.PayeeName, "Create", "Expense", new {payeeID=@i.payeeID, Amount=@i.TotalAmount}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ExpensePaymentPane" })
+    </td>
+        <td>
+            @i.DateDue.ToShortDateString()
+        </td>
+        <td style="text-align:right">
+            @string.Format("{0:c}",@i.AmountDue)
+        </td>
+        <td style="text-align:right">
+            @string.Format("{0:c}",@i.TotalAmount)
+        </td>
+    </tr>
+}
+    </table>
+
+<table>
+    <tr>
+
+        <th>
+            Date
+        </th>
+        <th>
+            Payee
+        </th>
+        <th>
+            Fund
+        </th>
+        <th>
+            Account
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Check
+        </th>
+        <th>
+            Comment
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+@foreach (Domain.expense item in @ViewBag.PendingExpenses)
+{
+<tr>
+        <td>
+            @item.ExpenseDate.ToShortDateString()
+        </td>
+        <td>
+            @item.Payee
+        </td>
+        <td>
+            @item.subcategory.SubCategoryName
+        </td>
+        <td>
+            @item.bankaccount.BankName
+        </td>
+           
+        <td>
+            @string.Format("{0:c}",@item.Amount)
+        </td>
+        <td>
+            @item.CheckNumber
+        </td>
+        <td>
+            @item.Comment
+        </td>
+
+                    <td>
+                    @Ajax.ActionLink("Edit", "Edit", "Expense", new {ExpenseID=item.expenseID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ExpensePaymentPane" })
+            </td>
+            <td>
+                @Ajax.ActionLink("Delete", "Delete", "Expense", new {ExpenseID=item.expenseID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ExpensePaymentPane" })
+            </td>
+
+    </tr> 
+}
+    </table>
+
+    </div>

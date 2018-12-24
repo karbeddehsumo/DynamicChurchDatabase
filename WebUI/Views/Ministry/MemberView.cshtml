@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "MinistryMemberView";
+}
+
+
+@if(@ViewBag.Requestor == "Member" )
+{
+   @Html.Action("MinistryMemberList", "Ministry", new {MinistryID=@ViewBag.MinistryID,Requestor=@ViewBag.Requestor})
+
+}
+else
+{
+    <div class="center">
+@Ajax.ActionLink("Add Member", "AddMinistryMember", "Ministry", new {MinistryID=@ViewBag.MinistryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane" }, new {@id="pageSubTitle"})
+@Ajax.ActionLink("List", "MinistryMemberList", "Ministry", new {MinistryID=@ViewBag.MinistryID,Requestor=@ViewBag.Requestor}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane" }, new {@id="pageSubTitle"})
+@Ajax.ActionLink("Send Email", "EmailDialog", "Member", new {RecipientType= "Ministry",ministryID=@ViewBag.MinistryID,SimpleForm=true}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane" }, new {@id="pageSubTitle"})
+    </div>
+    
+<div id="myPane" class="center">
+    @Html.Action("MinistryMemberList", "Ministry", new {MinistryID=@ViewBag.MinistryID})
+    </div>
+}

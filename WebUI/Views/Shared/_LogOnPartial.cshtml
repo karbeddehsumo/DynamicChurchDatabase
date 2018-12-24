@@ -1,0 +1,23 @@
+﻿
+<script src="../../Scripts/jquery-ui-1.8.20.min.js"></script>
+@if(Request.IsAuthenticated) {
+     <div style="display:inline-block">
+        Welcome <strong>@User.Identity.Name</strong>!
+         <a href="@Url.Action("LogOff","Account")"><span class="glyphicon glyphicon-off"></span> Log Off</a>
+         <!--
+        @using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm" })) {
+            @Html.AntiForgeryToken()
+            <a href="javascript:document.getElementById('logoutForm').submit()">Log off</a>
+        }
+             -->
+    </div>
+}
+<!--
+else {
+
+    @Ajax.ActionLink("Log On", "LogOn", "Account", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "loginPanel"})
+}
+<div id="loginPanel"></div>
+
+    -->
+

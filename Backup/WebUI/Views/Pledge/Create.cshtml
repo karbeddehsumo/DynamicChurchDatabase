@@ -1,0 +1,136 @@
+﻿@model Domain.pledge
+
+@{
+    ViewBag.Title = "Create";
+    
+}
+
+
+<div id="AjaxFormPane">
+ <div class="row">
+    <div class="col-xs-4 col-sm-4 col-md-4">
+      
+         @if (@ViewBag.Year == 0)
+         {
+            @Html.ListBox("MemberListBox", ViewBag.MemberList as SelectList, new { @class = "myListBox",size=40,selectionmode=1 })
+         }
+</div>
+    <div class="col-xs-8 col-sm-8 col-md-8">
+@using (Ajax.BeginForm("Create", "Pledge", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    @Html.AntiForgeryToken()
+
+    @Html.ValidationSummary(true)
+      @Html.HiddenFor(model => model.memberID)
+    <div class="fieldset">
+    <form role="form" class="form-horizontal" >
+            <h2 class="center">Add Pledge</h2>
+       
+        <div class="form-group">
+                @Html.Label("Member")
+                  @Html.TextBox("MemberDescription","", new {@readonly = "readonly"})
+              </div>
+        
+        <div class="form-group">
+            @Html.LabelFor(model => model.Type, "Period")
+            @Html.DropDownListFor(model => model.Type, ViewBag.PledgeTypeList as SelectList,"") 
+            @Html.ValidationMessageFor(model => model.Type)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FundID, "Fund")
+            @Html.DropDownListFor(model => model.FundID, ViewBag.MemberContributionTypeList as SelectList,"")
+            @Html.ValidationMessageFor(model => model.FundID)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount)
+            @Html.EditorFor(model => model.Amount)
+            @Html.ValidationMessageFor(model => model.Amount)
+        </div>
+
+        @if (@ViewBag.Year > 0)
+        {
+            <div class="form-group">
+                @Html.LabelFor(model => model.PledgeYear, "Year")
+                @Html.TextBoxFor(model => model.PledgeYear, new { @readonly = "readonly" })
+                @Html.ValidationMessageFor(model => model.PledgeYear)
+            </div>
+        }
+        else
+        {
+           <div class="form-group">
+                @Html.LabelFor(model => model.PledgeYear, "Year")
+                @Html.DropDownListFor(model => model.PledgeYear, ViewBag.PledgeYearList as SelectList,"")
+                @Html.ValidationMessageFor(model => model.PledgeYear)
+            </div>
+        }
+        @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+       
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+
+        </form>
+   </div>
+
+}
+     <div class="center-text" style="color:red">@TempData["message2"]</div>
+        </div>
+        </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+
+        $(document).on("change", "#MemberListBox", function (event) {
+            var memberid = $('#MemberListBox option:selected').val();
+            var _this = $(this);
+            $("#memberID").val($(this).val())
+            $("#MemberDescription").val($("#MemberListBox option:selected").text());
+        });
+
+
+        $("#Amount").change(function (event) {
+            this.value = this.value.replace(/,/g, "");
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#MemberDescription').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the member.");
+            }
+            else if ($('#Type option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the period.");
+            }
+            else if ($('#FundID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the fund type.");
+            }
+            else if ($("#Amount").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the amount.");
+            }
+            else if ($("#PledgeYear").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the year.");
+            }
+           
+
+        });
+    });
+</script>

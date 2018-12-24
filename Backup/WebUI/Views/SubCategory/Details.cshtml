@@ -1,0 +1,56 @@
+﻿
+
+
+<div class="panel">
+<h3 class="center">Budget Category</h3>
+
+    <div class="center">
+        @Ajax.ActionLink("Add Income Category", "Create", "subCategory", new {CategoryType="Income"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "SubCategoryDetailPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("Add Expense Category", "Create", "subCategory", new {CategoryType="Expense"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "SubCategoryDetailPane" }, new {@id="pageSubTitle"})
+        </div>
+<div class="center">
+    <div class="editor">
+        <label>Budget Type</label>
+        @Html.DropDownList("CategoryListSearch", new SelectList(new [] {"Income", "Expense"}))
+        </div>
+    <div class="editor">
+    <label>Budget Year</label>
+        @Html.DropDownList("BudgetYear", @ViewBag.BudgetYearCreateList as SelectList,(string)@ViewBag.Year)
+        </div>
+    <div class="editor">
+        <label>Sort Type</label>
+        @Html.DropDownList("SortType", new SelectList(new [] {"","Category", "Parent","Short Title","Bank Name"}))
+        </div>
+</div>
+  
+<div id="SubCategoryDetailPane" class="slider">
+@Html.Action("List", "SubCategory", new {CategoryType = "Income",budgetYear=@ViewBag.Year})
+</div>
+  </div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(document).on("change", "#CategoryListSearch", function (event) {
+            var categoryid = $('#CategoryListSearch option:selected').val();
+            var sorttype = $('#SortType option:selected').val();
+            var url = "/SubCategory/List";
+            var budgetyear = $('#BudgetYear option:selected').text();
+            $.get(url, { CategoryType: categoryid.toString(), budgetYear: budgetyear.toString(), SortType: sorttype.toString() }, function (data) { $("#SubCategoryDetailPane").html(data) });
+        });
+
+        $(document).on("change", "#BudgetYear", function (event) {
+            var categoryid = $('#CategoryListSearch option:selected').val();
+            var sorttype = $('#SortType option:selected').val();
+            var url = "/SubCategory/List";
+            var budgetyear = $('#BudgetYear option:selected').text();
+            $.get(url, { CategoryType: categoryid.toString(), budgetYear: budgetyear.toString(), SortType: sorttype.toString() }, function (data) { $("#SubCategoryDetailPane").html(data) });
+        });
+        $(document).on("change", "#SortType", function (event) {
+            var categoryid = $('#CategoryListSearch option:selected').val();
+            var sorttype = $('#SortType option:selected').val();
+            var url = "/SubCategory/List";
+            var budgetyear = $('#BudgetYear option:selected').text();
+            $.get(url, { CategoryType: categoryid.toString(), budgetYear: budgetyear.toString(), SortType: sorttype.toString() }, function (data) { $("#SubCategoryDetailPane").html(data) });
+        });
+    });
+ </script>

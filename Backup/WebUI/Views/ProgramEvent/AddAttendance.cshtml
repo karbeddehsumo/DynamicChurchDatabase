@@ -1,0 +1,61 @@
+﻿@{
+    ViewBag.Title = "AddAttendance";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+<div>
+   
+    <label>Add Attendees</label>
+     @using (Ajax.BeginForm("AddAttendance", "Attendance", new {}, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "familyroster"
+            }))
+            {
+                    
+                                 <label>Role</label>
+                             <input id="calendarID" name="calendarID" value="@ViewBag.CalendarID"  type="hidden"/>
+                             <input id="memberID" name="memberID"  type="hidden"/>
+                              <p>Attendees</p>
+                        @Html.ListBox("MemberRoster", ViewBag.MemberRoster as SelectList, new {size=40,selectionmode=1 })
+                                 <input id="submitButton" type="submit" value="Add" />
+
+            }
+    @if (@ViewBag.AttendanceRecordCount > 0)
+{
+    <table>
+        <tr><th>Name</th><th></th></tr>
+    @foreach (Domain.attendance a in @ViewBag.MeetingAttendees)
+    {
+        <tr>
+            <td>
+                @a.member.FullNameTitle
+            </td>
+            <td>
+               @Ajax.ActionLink("Delete", "Delete", "Attendance", new {AttandenceID=@a.attendanceID}, new AjaxOptions {HttpMethod = "Post",Confirm = "Are you sure?", InsertionMode = InsertionMode.Replace, UpdateTargetId = "AddAgendaPane2" })                
+            </td>
+        </tr>
+    }
+    </table>
+            }
+else
+{
+ <p>No attendance added yet!</p>   
+}
+ 
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+
+        $(document).on("change", "#MemberRoster", function (event) {
+            var id = $('#MemberRoster option:selected').val();
+            $("#memberID").val(id);
+        });
+
+    });
+
+ </script>

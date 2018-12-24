@@ -1,0 +1,97 @@
+﻿@model IEnumerable<Domain.calendar>
+
+@{
+    ViewBag.Title = "List";
+    
+}
+<div id="TopPane">
+
+</div>
+
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            eventID
+        </th>
+        <th>
+            StartTime
+        </th>
+        <th>
+            EndTime
+        </th>
+        <th>
+            Loacation
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            EnteredBy
+        </th>
+        <th>
+            DateEntered
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @string.Format("{0},{1}-{2}",@item.CalendarDate.ToString("ddd"),@item.CalendarDate.ToString("dd"),@item.CalendarDate.ToString("MMM"))
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.StartTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndTime)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Loacation)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnteredBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateEntered)
+        </td>
+              <td>
+                     @Ajax.ActionLink("Edit", "Edit", "Calendar", new {CalendarID=item.calendarID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+                </td>
+                <td>
+                    @Ajax.ActionLink("Delete", "Delete", "Calendar", new {CalendarID=item.calendarID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+                </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p>No attendance added yet!</p>   
+}
+
+

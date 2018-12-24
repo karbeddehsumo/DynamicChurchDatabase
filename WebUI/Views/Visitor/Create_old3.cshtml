@@ -1,0 +1,263 @@
+﻿@model Domain.visitor
+
+@{
+    ViewBag.Title = "Create";
+  
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Create", "Visitor", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center-text">Create New Visitor Or Guest</h2>    
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Add visitor here...</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Title)
+            @Html.DropDownListFor(model => model.Title, ViewBag.VisitorTitleList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.FirstName,"First Name")
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastName,"Last Name")
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.subCategoryID,"Category")
+            @Html.DropDownListFor(model => model.subCategoryID, ViewBag.VisitorCategoryList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.subCategoryID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.LastEventAttended,"Last Event Attended")
+            @Html.DropDownListFor(model => model.LastEventAttended, ViewBag.ProgramEventList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.LastEventAttended)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EventDate,"Event Date")
+             @Html.TextBoxFor(model => model.EventDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.EventDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.phoneNumber,"Phone #")
+            @Html.EditorFor(model => model.phoneNumber)
+            @Html.ValidationMessageFor(model => model.phoneNumber)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BestContact,"Best Contact")
+            @Html.DropDownListFor(model => model.BestContact, ViewBag.BestContactList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.BestContact)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Address)
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.City)
+            @Html.EditorFor(model => model.City)
+            @Html.ValidationMessageFor(model => model.City)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.State)
+            @Html.EditorFor(model => model.State)
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Zip)
+            @Html.EditorFor(model => model.Zip)
+            @Html.ValidationMessageFor(model => model.Zip)
+        </div>
+
+               <div class="editor-label">
+            @Html.HiddenFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.EnteredBy,"Entered By")
+            @Html.TextBoxFor(model => model.EnteredBy, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.EnteredBy)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.DateEntered,"Date Entered")
+            @Html.TextBoxFor(model => model.DateEntered, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.DateEntered)
+        </div>
+
+               <div id="formSubmitButton">
+            <input id="ButtonClick" type="submit" value="Create" />
+        </div>
+    </fieldset>
+}
+     <input id="ShowBestContactButton" value="Add best contact data" type="button" />
+    <input id="ShowVisitorTitleButton" value="Add visitor title." type="button" />
+    <input id="ShowVisitorCategoryButton" value="Add visitor category" type="button" />
+    <input id="ShowLastEventAttendedButton" value="Add last event attended type" type="button" />
+    <div id="BestContactDiv">
+    @using (Ajax.BeginForm("AddConstant", "Constant", new { @aCategory = "Best Contact" }, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "familyroster"
+            }))
+            {
+                    
+                                 <label>Add Best Contact</label>
+                             <input id="value1" name="value1" class="value11"  type="text"/>
+                                 <input id="BestContactSubmitBtn" type="submit" value="Add" />
+
+            }
+        </div>
+     <div id="VisitorTitleDiv">
+    @using (Ajax.BeginForm("AddConstant", "Constant", new { @aCategory = "Visitor Title" }, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "familyroster"
+            }))
+            {
+                    
+                                 <label>Add Title</label>
+                             <input id="value1" name="value1"  type="text"/>
+                                 <input id="VisitorTitleSubmitBtn" type="submit" value="Add" />
+
+            }
+        </div>
+         <div id="VisitorCategoryDiv">
+    @using (Ajax.BeginForm("AddConstant", "Constant", new { @aCategory = "Visitor Category" }, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "familyroster"
+            }))
+            {
+                    
+                                 <label>Add category</label>
+                             <input id="value1" name="value1"  type="text"/>
+                                 <input id="VisitorCategorySubmitBtn" type="submit" value="Add" />
+
+            }
+        </div>
+    <div id="LastedEventAttendedDiv">
+    @using (Ajax.BeginForm("AddConstant", "Constant", new { @aCategory = "Last Event Attended" }, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "familyroster"
+            }))
+            {
+                    
+                                 <label>Add Last Event Attended</label>
+                             <input id="value1" name="value1"  type="text"/>
+                                 <input id="LastEventAttededSubmitBtn" type="submit" value="Add" />
+
+            }
+        </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        //Add best contact
+        $('#BestContactDiv').hide();
+        $(document).on("click", "#ShowBestContactButton", function (event) {
+            //close other divs
+            $('#VisitorTitleDiv').hide();
+            $('#VisitorCategoryDiv').hide();
+
+            $('#AddPhoneDiv').hide();
+            $(".value11").val("");
+            $("#BestContactDiv").show();
+        });
+
+        $(document).on("click", "#BestContactSubmitBtn", function (event) {
+                $("#BestContactDiv").hide();
+        });
+
+        //Add visitor title
+        $('#VisitorTitleDiv').hide();
+        $(document).on("click", "#ShowVisitorTitleButton", function (event) {
+            //close other divs
+            $('#BestContactDiv').hide();
+            $('#VisitorCategoryDiv').hide();
+
+            $('#VisitorTitleDiv').hide();
+            $(".value11").val("");
+            $("#VisitorTitleDiv").show();
+        });
+
+        $(document).on("click", "#VisitorTitleSubmitBtn", function (event) {
+                $("#VisitorTitleDiv").hide();
+        });
+
+        //Add visitor category
+        $('#VisitorCategoryDiv').hide();
+        $(document).on("click", "#ShowVisitorCategoryButton", function (event) {
+            //close other divs
+            $('#BestContactDiv').hide();
+            $('#VisitorTitleDiv').hide();
+
+            $('#VisitorCategoryDiv').hide();
+            $(".value11").val("");
+            $("#VisitorCategoryDiv").show();
+        });
+
+        $(document).on("click", "#VisitorCategorySubmitBtn", function (event) {
+                $("#VisitorCategoryDiv").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#FirstName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the first name.");
+            }
+            else if ($("#LastName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the last name.");
+            }
+            else if ($('#subCategoryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the category");
+            }
+            else if ($('#BestContact option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the best contact type");
+            }
+            
+        });
+    });
+</script>

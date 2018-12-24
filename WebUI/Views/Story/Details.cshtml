@@ -1,0 +1,55 @@
+﻿@model Domain.story
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>story</legend>
+
+    <div class="display-label">MinistryID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MinistryID)
+    </div>
+
+    <div class="display-label">Header</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Header)
+    </div>
+
+    <div class="display-label">StoryLine</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StoryLine)
+    </div>
+
+    <div class="display-label">PictureID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PictureID)
+    </div>
+
+    <div class="display-label">StoryTypeID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StoryTypeID)
+    </div>
+
+    <div class="display-label">StoryDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StoryDate)
+    </div>
+
+    <div class="display-label">EnteredBy</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EnteredBy)
+    </div>
+
+    <div class="display-label">DateEntered</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateEntered)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.StoryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

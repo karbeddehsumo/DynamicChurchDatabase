@@ -1,0 +1,42 @@
+﻿@model Domain.story
+
+<div id="AjaxFormPane">
+            @if (@Model.picture != null){@Html.Partial("DisplayPictureMedium",@Model.picture)}
+        <h2>@Model.Header</h2>
+        <i>@string.Format("Date: {0}",@Model.StoryDate.ToShortDateString())</i>
+        <p>@Model.StoryLine
+           @Ajax.ActionLink("Edit", "Edit", "Story", new {StoryID=@Model.StoryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane"})
+        </p>  
+
+    <!--
+    @if(@Model.StoryType == "Main")
+    {
+        if (@Model.picture != null){@Html.Partial("DisplayPictureLarge100",@Model.picture)}
+        <h1>@Model.Header</h1>
+        <i>@string.Format("Date: {0} ",@Model.StoryDate.ToString("dddd d MMM yyyy"))</i> if (@Model.HasGroupPictures == true) {@Html.ActionLink("More pictures","GroupSlider", "Picture", new {ministryID=Model.MinistryID,GroupID=Model.StoryID},  new { target="_blank" })}
+        <p>@Model.StoryLine
+                @Ajax.ActionLink("Edit", "Edit", "Story", new {StoryID=@Model.StoryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane"})
+        </p>
+    }
+    else if(@Model.StoryType == "Side")
+    {
+        if (@Model.picture != null){@Html.Partial("DisplayPictureMedium",@Model.picture)}
+        <h2>@Model.Header</h2>
+        <i>@string.Format("Date: {0}",@Model.StoryDate.ToShortDateString())</i>
+        <p>@Model.StoryLine
+           @Ajax.ActionLink("Edit", "Edit", "Story", new {StoryID=@Model.StoryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane"})
+        </p>        
+    }
+    else
+    {
+        if (@Model.picture != null){@Html.Partial("DisplayPictureSmall",@Model.picture)}
+        <h3>@Model.Header</h3>
+       <i>@string.Format("Date: {0}",@Model.StoryDate.ToShortDateString())</i>
+        <p>@Model.StoryLine
+           @Ajax.ActionLink("Edit", "Edit", "Story", new {StoryID=@Model.StoryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane"})
+        </p>    
+    }
+    -->
+    
+    </div>
+

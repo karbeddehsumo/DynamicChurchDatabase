@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Domain.document>
+
+@if(@ViewBag.HasDocument == true)
+{
+
+<table>
+    <caption>Document List</caption>
+    <tr>
+        <th>
+            File Name
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Title
+        </td>
+         <td>
+            @Html.ActionLink("View", "GetFileFromDisk", "Document", new {DocumentID=item.documentID},  new { target="_blank" })
+        </td>
+      
+    </tr>
+}
+
+</table>
+}

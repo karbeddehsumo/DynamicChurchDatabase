@@ -1,0 +1,60 @@
+﻿@model Domain.budget
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="panel">
+<h2 class="center">Budget Report</h2>
+<div class="center GroupPanel">
+    <label>Budget Type</label>
+    @Html.DropDownList("BudgetType", new SelectList(new [] {"Income", "Expense"}),"Select Budget Type...") 
+    <label>Year</label>
+    @Html.DropDownList("BudgetYear", ViewBag.BudgetYearList as SelectList,"Select Budget Year...")
+    </div>
+
+<div id="BudgetDiv" class="center">
+    <br />
+@Html.Action("ExpenseBudgetList", "Budget", new {BudgetYear=@ViewBag.BudgetYear})
+</div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        // $("#BudgetSearch").change(function (event) {
+        $(document).on("change", "#BudgetType", function (event) {
+            var budgetyear = $('#BudgetYear option:selected').val();
+            var budgettype = $('#BudgetType option:selected').val();
+            if (budgettype == "Income")
+            {
+                var url = "/Budget/IncomeBudgetList";
+                $.get(url, { BudgetYear: budgetyear.toString() }, function (data) { $("#BudgetDiv").html(data) });
+            }
+            else
+            {
+                var url = "/Budget/ExpenseBudgetList";
+                $.get(url, { BudgetYear: budgetyear.toString() }, function (data) { $("#BudgetDiv").html(data) });
+             }
+                    
+        });
+
+        // $("#BudgetSearch").change(function (event) {
+        $(document).on("change", "#BudgetYear", function (event) {
+            var budgetyear = $('#BudgetYear option:selected').val();
+            var budgettype = $('#BudgetType option:selected').val();
+            if (budgettype == "Income") {
+                var url = "/Budget/IncomeBudgetList";
+                $.get(url, { BudgetYear: budgetyear.toString() }, function (data) { $("#BudgetDiv").html(data) });
+            }
+            else {
+                var url = "/Budget/ExpenseBudgetList";
+                $.get(url, { BudgetYear: budgetyear.toString() }, function (data) { $("#BudgetDiv").html(data) });
+            }
+        });
+
+    });
+
+ </script>

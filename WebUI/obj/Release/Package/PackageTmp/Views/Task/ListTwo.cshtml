@@ -1,0 +1,90 @@
+﻿@model IEnumerable<Domain.task>
+@{
+    ViewBag.Title = "Task";
+}
+
+<div id="AjaxFormPane" >
+<div class="slider">
+
+
+
+@if (@ViewBag.RecordCount > 0)
+{
+   
+<table>
+    <caption>
+         <span>@ViewBag.Heading</span>
+    </caption>
+    <tr>
+        
+        <th>
+            Title
+        </th>
+        <th>
+            Assigned To
+        </th>
+        <th>
+            Assign Date
+        </th>
+        <th>
+            Due Date
+        </th>
+        <th>
+            Completed (%)
+        </th>
+        <th>
+            Status
+        </th>
+  @if (@ViewBag.Supervisor == true)
+  {
+        <th></th>
+         <th></th>
+  }
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.member.FullNameTitle)
+        </td>
+        <td>
+            @item.AssignDate.ToShortDateString()
+        </td>
+        <td>
+            @item.DueDate.ToShortDateString()
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompletionRatio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+  @if (@ViewBag.Supervisor == true)
+  {
+        <td>
+            @Ajax.ActionLink("Edit", "Edit", "Task", new {TaskID=item.taskID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+            </td>
+        <td>
+            @Ajax.ActionLink("Delete", "Delete", "Task", new {TaskID=item.taskID}, new AjaxOptions {HttpMethod = "Post", Confirm = "Are you sure you want to delete this task?", InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+        </td>
+  }
+                <td>
+            @Ajax.ActionLink("Action Items", "ActionItemView", "Task", new {TaskID=item.taskID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+        </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+    
+ <p>No task added yet!</p>   
+}
+
+    </div>
+    </div>

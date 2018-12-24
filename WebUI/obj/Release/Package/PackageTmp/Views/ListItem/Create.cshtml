@@ -1,0 +1,233 @@
+﻿@model Domain.listitem
+
+@{
+    ViewBag.Title = "Create";
+    
+}
+
+
+<div id="myTablePane">
+    @Html.Action("List", "ListItem", new {ListTableID=@ViewBag.ListTableID})
+@using (Ajax.BeginForm("Create", "ListItem", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myTablePane" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <table>
+        <caption>@ViewBag.TableName</caption>
+    <tr>
+
+            @Html.HiddenFor(model => model.listTableID)
+            @Html.HiddenFor(model => model.Status)
+
+
+        @if (@ViewBag.Type1 != "")
+        {
+            if (@ViewBag.Type1 == "Date")
+            {
+              <td>
+                @Html.TextBoxFor(model => model.Value1, new {@type="date", @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            </td>
+            }
+            else
+            {
+            <td >
+                @Html.TextBoxFor(model => model.Value1, new { style = "width:100px" })
+            </td>
+            }
+        }
+
+        @if (@ViewBag.Type2 != "")
+        {
+            if (@ViewBag.Type2 == "Date")
+            {
+                      <td>
+                        @Html.TextBoxFor(model => model.Value2, new {@type="date", @Value = DateTime.Now.ToShortDateString(), id = "datepicker2" })
+                    </td>
+            }
+            else
+            {
+                <td>
+                    @Html.TextBoxFor(model => model.Value2, new { style = "width:100px" })
+                </td>
+            }
+        }
+
+        @if (@ViewBag.Type3 != "")
+        {
+            if (@ViewBag.Type3 == "Date")
+            {
+                          <td>
+                            @Html.TextBoxFor(model => model.Value3, new {@type="date", @Value = DateTime.Now.ToShortDateString(), id = "datepicker3" })
+                        </td>
+            }
+            else
+            {
+                    <td>
+                        @Html.TextBoxFor(model => model.Value3, new { style = "width:100px" })
+                    </td>
+            }
+        }
+
+        @if (@ViewBag.Type4 != "")
+        {
+            if (@ViewBag.Type4 == "Date")
+            {
+                          <td>
+
+                              @Html.TextBoxFor(model => model.Value4, new {@type="date", @Value=DateTime.Now.ToShortDateString(), id = "datepicker4" })
+                        </td>
+            }
+            else
+            {
+                    <td>
+                        @Html.TextBoxFor(model => model.Value4, new { style = "width:100px" })
+                    </td>
+            }
+        }
+
+        @if (@ViewBag.Type5 != "")
+        {
+            if (@ViewBag.Type5 == "Date")
+            {
+                          <td>
+                            @Html.TextBoxFor(model => model.Value5, new {@type="date", @Value = DateTime.Now.ToShortDateString(), id = "datepicker5" })
+                        </td>
+            }
+            else
+            {
+                    <td>
+                        @Html.TextBoxFor(model => model.Value5, new { style = "width:100px" })
+                    </td>
+            }
+        }
+
+        @if (@ViewBag.Type6 != "")
+        {
+            if (@ViewBag.Type6 == "Date")
+            {
+                          <td>
+                            @Html.TextBoxFor(model => model.Value6, new {@type="date", @Value = DateTime.Now.ToShortDateString(), id = "datepicker6" })
+                        </td>
+            }
+            else
+            {  
+                    <td>
+                        @Html.TextBoxFor(model => model.Value6, new { style = "width:100px" })
+                    </td>
+            }
+        }
+
+        @if (@ViewBag.Type7 != "")
+        {
+            if (@ViewBag.Type7 == "Date")
+            {
+                          <td>
+                            @Html.TextBoxFor(model => model.Value7, new {@type="date", @Value = DateTime.Now.ToShortDateString(), id = "datepicker7" })
+                        </td>
+            }
+            else
+            {
+                    <td>
+                        @Html.TextBoxFor(model => model.Value7, new { style = "width:100px" })
+                    </td>  
+            }
+        }
+
+
+      @if (@ViewBag.Type8 != "")
+      {
+          if (@ViewBag.Type8 == "Date")
+          {
+                          <td>
+                            @Html.TextBoxFor(model => model.Value8, new {@type="date", @Value = DateTime.Now.ToShortDateString(), id = "datepicker8" })
+                        </td>
+          }
+          else
+          {
+                    <td>
+                        @Html.TextBoxFor(model => model.Value8, new { style = "width:100px" })
+                    </td>
+          }
+      }
+
+        @if (@ViewBag.Type9 != "")
+        {
+            if (@ViewBag.Type9 == "Date")
+            {
+                              <td>
+                                @Html.TextBoxFor(model => model.Value9, new {@type="date", @Value = DateTime.Now.ToShortDateString(), id = "datepicker9" })
+                            </td>
+            }
+            else
+            {
+                        <td>
+                            @Html.TextBoxFor(model => model.Value9, new { style = "width:100px" })
+                        </td>
+            }
+        }
+        @if (@ViewBag.Type10 != "")
+        {
+            if (@ViewBag.Type10 == "Date")
+            {
+                          <td>
+                            @Html.TextBoxFor(model => model.Value10, new {@type="date", @Value = DateTime.Now.ToShortDateString(), id = "datepicker10" })
+                        </td>
+            }
+            else
+            {
+                    <td>
+                        @Html.TextBoxFor(model => model.Value10, new { style = "width:100px" })
+                    </td>
+            }
+        }
+
+        <td>
+            @Html.TextBoxFor(model => model.Comment, new { style = "width:100px" })
+        </td>
+             @Html.HiddenFor(model => model.EnteredBy)
+            @Html.HiddenFor(model => model.DateEntered)
+   
+
+    
+        <td >
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+        </td>
+
+
+       </tr>   
+       </table> 
+}
+<br />
+@Ajax.ActionLink("Edit Header", "Edit", "ListHeader", new { ListHeaderID = @ViewBag.TableHeaderID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myTablePane" })
+@Ajax.ActionLink("Edit Table", "Edit", "ListTable", new { ListTableID = @ViewBag.ListTableID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myTablePane" })
+@Ajax.ActionLink("Delete Table", "Delete", "ListTable", new {ListTableID=@ViewBag.ListTableID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myTablePane",Confirm = "Do you really want to delete this table?", HttpMethod = "Post" })
+
+</div>
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#bDateCalendar").datepicker();
+        $("#datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+        $('#datepicker3').not('.hasDatePicker').datepicker();
+        $('#datepicker4').not('.hasDatePicker').datepicker();
+        $('#datepicker5').not('.hasDatePicker').datepicker();
+        $('#datepicker6').not('.hasDatePicker').datepicker();
+        $('#datepicker7').not('.hasDatePicker').datepicker();
+        $('#datepicker8').not('.hasDatePicker').datepicker();
+        $('#datepicker9').not('.hasDatePicker').datepicker();
+        $('#datepicker10').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+
+        });
+    });
+</script>

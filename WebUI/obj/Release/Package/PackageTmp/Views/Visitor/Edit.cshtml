@@ -1,0 +1,224 @@
+﻿@model Domain.visitor
+
+<script src="@Url.Content("~/Scripts/jquery-1.7.1.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.min.js")" type="text/javascript"></script>
+<script src="@Url.Content("~/Scripts/jquery.validate.unobtrusive.min.js")" type="text/javascript"></script>
+
+<div id="AjaxFormPane" class="panel">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+@using (Ajax.BeginForm("Edit", "Visitor", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 id="FieldSetTopMenu">Edit Visitor</h2>   
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit visitor here...</legend>
+
+        @Html.HiddenFor(model => model.visitorID)
+
+        @if (@ViewBag.EditorType == "")
+       {
+       <div class="editor">
+            @Html.LabelFor(model => model.Title)
+            @Html.DropDownListFor(model => model.Title, ViewBag.VisitorTitleList as SelectList,"")
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+       }
+       else
+       {
+           @Html.HiddenFor(model => model.Title)
+       }
+
+        <div class="editor">
+            @Html.LabelFor(model => model.FirstName,"First Name")
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.LastName,"Last Name")
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Suffix)
+            @Html.DropDownListFor(model => model.Suffix, ViewBag.SuffixList as SelectList,"")
+            @Html.ValidationMessageFor(model => model.Suffix)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.subCategoryID,"Category")
+            @Html.DropDownListFor(model => model.subCategoryID, ViewBag.VisitorCategoryList as SelectList,"")
+            @Html.ValidationMessageFor(model => model.subCategoryID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.LastEventAttended,"Event Attended")
+           @Html.DropDownListFor(model => model.LastEventAttended, ViewBag.LastEventAttendedList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.LastEventAttended)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.EventDate,"Event Date")
+            @Html.TextBoxFor(model => model.EventDate, new { id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.EventDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.BestContact,"Best Contact")
+            @Html.DropDownListFor(model => model.BestContact, ViewBag.BestContactList as SelectList,"")
+            @Html.ValidationMessageFor(model => model.BestContact)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.phoneNumber,"Phone #")
+            @Html.EditorFor(model => model.phoneNumber)
+            @Html.ValidationMessageFor(model => model.phoneNumber)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.PhoneProviderID,"Phone Provider")
+            @Html.DropDownListFor(model => model.PhoneProviderID, ViewBag.CellProviderList as SelectList,"")
+            @Html.ValidationMessageFor(model => model.PhoneProviderID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Email)
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Address)
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Address2)
+            @Html.EditorFor(model => model.Address2)
+            @Html.ValidationMessageFor(model => model.Address2)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.City)
+            @Html.EditorFor(model => model.City)
+            @Html.ValidationMessageFor(model => model.City)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.State)
+            @Html.EditorFor(model => model.State)
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Zip)
+            @Html.EditorFor(model => model.Zip)
+            @Html.ValidationMessageFor(model => model.Zip)
+        </div>
+
+         @if (@ViewBag.EditorType == "")
+         {
+             <div class="editor">
+                @Html.LabelFor(model => model.Comment)
+                @Html.EditorFor(model => model.Comment)
+                @Html.ValidationMessageFor(model => model.Comment)
+            </div>
+
+            <div class="editor">
+                @Html.LabelFor(model => model.Status)
+                @Html.DropDownListFor(model => model.Status, ViewBag.StatusList as SelectList,"")
+                @Html.ValidationMessageFor(model => model.Status)
+            </div>
+        }
+         else
+         {
+           @Html.HiddenFor(model => model.Comment)
+             @Html.HiddenFor(model => model.Status)
+         } 
+
+
+        @Html.HiddenFor(model => model.EnteredBy)
+         @Html.HiddenFor(model => model.DateEntered)
+
+               <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#Title option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the title");
+            }
+            else if ($("#FirstName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the first name.");
+            }
+            else if ($("#LastName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the last name.");
+            }
+            else if ($('#subCategoryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the category");
+            }
+            else if ($('#LastEventAttended option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the last event this visitor attended");
+            }
+            else if ($('#BestContact option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the best contact type");
+            }
+
+            else if (($('#BestContact option:selected').text() == "Phone") && ($("#phoneNumber").val() == 0)) {
+                event.preventDefault();
+                alert("Please enter the phone number.");
+            }
+            else if (($('#BestContact option:selected').text() == "Text") && ($("#phoneNumber").val() == 0) && ($('#BestContact option:selected').text() == "")) {
+                event.preventDefault();
+                alert("Please enter the phone provider for texting.");
+            }
+
+            else if (($('#BestContact option:selected').text() == "Email") && ($("#Email").val() == 0)) {
+                event.preventDefault();
+                alert("Please enter the email address.");
+            }
+
+            else if (($('#BestContact option:selected').text() == "Email & Text") && ($('#PhoneProviderID option:selected').text() == "")) {
+                event.preventDefault();
+                alert("Please select the email phone provider.");
+            }
+
+            else if (($('#BestContact option:selected').text() == "Mail") && (($("#Address").val() == 0) || ($("#City").val() == 0) || ($("#State").val() == 0) || ($("#Zip").val() == 0))) {
+                event.preventDefault();
+                alert("Please enter the address, city, state and zip.");
+            }
+            else {
+
+            }
+        });
+    });
+</script>

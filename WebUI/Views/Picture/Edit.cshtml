@@ -1,0 +1,95 @@
+﻿@model Domain.picture
+
+@{
+    ViewBag.Title = "Edit";
+    
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Edit", "Picture", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center-text">Edit Picture</h2>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit picture here...</legend>
+
+        @Html.HiddenFor(model => model.pictureID)
+
+        <div class="editor">
+            @Html.LabelFor(model => model.ministryID)
+            @Html.DropDownListFor(model => model.ministryID, ViewBag.MinistryList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.ministryID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.PictureDate,"Date")
+            @Html.EditorFor(model => model.PictureDate)
+            @Html.ValidationMessageFor(model => model.PictureDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Description)
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.ImageMimeType)
+            @Html.EditorFor(model => model.ImageMimeType)
+            @Html.ValidationMessageFor(model => model.ImageMimeType)
+        </div>
+
+        
+        <div class="editor">
+            @Html.LabelFor(model => model.IsPublic,"Public?")
+             @Html.DropDownListFor(x => x.IsPublic, new[] { new SelectListItem() {Text = "Yes", Value = bool.TrueString},  new SelectListItem() {Text = "No", Value = bool.FalseString}}, "Choose an option") 
+            @Html.ValidationMessageFor(model => model.IsPublic)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Status)
+            @Html.EditorFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $("#familyID").change(function (event) {
+            var i = $("#familyID option:selected").text().indexOf('-');
+            $("#LastName").val($("#familyID option:selected").text().substring(0, i - 1));
+            $("#InterestAmount").val(parseFloat(($("#InterestRate").val() / 100) * $("#Amount").val()));
+        });
+
+        $('#ButtonClick').click(function (event) {
+
+        });
+    });
+</script>

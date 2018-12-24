@@ -1,0 +1,95 @@
+﻿@model IEnumerable<Domain.expense>
+
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+<div>
+<div id="TopPane">
+
+</div>
+
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <caption>@ViewBag.Title</caption>
+    <tr>
+         <th>
+            Date
+        </th>
+        <th>
+            Payee
+        </th>
+        <th>
+            Fund
+        </th>
+        
+        <th>
+            Amount
+        </th>
+        <th>
+            Check
+        </th>
+        <th>
+            Comment
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td style="margin-top:10px">
+            @item.ExpenseDate.ToShortDateString()
+        </td>
+        <td>
+            @item.Payee
+        </td>
+        <td>
+            @item.subcategory.SubCategoryName
+        </td>
+             
+        <td style="text-align:right">
+            @string.Format("{0:c}",@item.Amount)
+        </td>
+        <td>
+            @item.CheckNumber
+        </td>
+        <td>
+            @item.Comment
+        </td>
+        <td>
+
+            <input id="@item.CheckNumber" type="checkbox" value="@item.expenseID" class="Reconcile"/>
+        </td>
+
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p>No expense available yet!</p>   
+}
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        
+        $(document).on("click", ".Reconcile", function (event) {
+            var id = $(this).val();
+            var isChecked = $(this).is(':checked');
+            var url = "/Expense/CommitReconcileCheck";
+            if (isChecked == true)
+            {
+               $.get(url, { expenseID: id.toString(), flag: true }, function (data) { });
+            }
+            else
+            {
+               $.get(url, { expenseID: id.toString(), flag: false }, function (data) {});
+            }
+            
+        });
+
+
+    });
+</script>

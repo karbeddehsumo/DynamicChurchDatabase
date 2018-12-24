@@ -1,0 +1,82 @@
+﻿@model Domain.property
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div id="AjaxFormPane">
+<h2>Delete Property Record</h2>
+
+<h3>Are you sure you want to delete this record?</h3>
+<table>
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            subCategory
+        </th>
+        <th>
+            Comment
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            EnteredBy
+        </th>
+        <th>
+            DateEntered
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.subCategoryID)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.EnteredBy)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.DateEntered)
+        </td>
+    </tr>
+
+
+</table>
+
+@using (Ajax.BeginForm("Delete", "Property", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    <p>
+        <input id="PropertyID" name="PropertyID" type="hidden"  value="@ViewBag.PropertyID"/>
+     <input type="submit" value="Delete" /> <input id="CancelDeleteBtn" name="CancelDeleteBtn" type="button" value="Cancel Delete"/>
+    </p>
+}
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#CancelDeleteBtn').click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+    });
+</script>

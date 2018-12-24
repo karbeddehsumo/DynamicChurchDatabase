@@ -1,0 +1,117 @@
+﻿@model Domain.meeting
+@{
+    ViewBag.Title = "Report";
+   // Layout = "~/Views/Shared/_Layout3.cshtml";
+    int i = 0;                     
+}
+
+<div id="AjaxFormPane">
+<div>
+<p id="MinutesTitle" class="center"><u>@string.Format("{0}",@Model.ministry.MinistryName)</u></p>
+<span><strong>Date: </strong>@string.Format("{0} ({1} - {2})",@Model.meetingDate.ToString("D"),@Model.StartTime,@Model.EndTime)</span><br />
+<span><strong>Venue: </strong>@string.Format("{0}",@Model.meetingVenue)</span>
+    </div>
+<br />
+@if (@ViewBag.HasAttendee == true)
+{
+    <h4>Attendees:</h4>
+    
+    <ol class="float-left e ">
+    @foreach(Domain.attendance a in @ViewBag.Attendees)
+    {
+        <li class="indent">
+         @string.Format("{0}",@a.member.FullNameTitle)
+            </li>
+    }
+        </ol>
+      
+}
+else
+{
+     <h4>Attendees</h4>
+}
+<br />
+    <br />
+@if (@ViewBag.HasAgenda == true)
+{
+    <h4>Agendas:</h4>
+    <ol class="float-left d">
+    @foreach (Domain.meetingagenda a in @ViewBag.Agenda)
+    {
+        <li>
+         @string.Format("{0}",@a.Description)<br />
+            </li>
+    }
+        </ol>
+}
+else
+{
+     <h4>Agendas:</h4>
+}
+
+<br />
+    <br />
+@if (@ViewBag.HasNotes == true)
+{
+    <br />
+    <br />
+    <h3>Discussions:</h3>
+    <ol class="c">
+    @foreach (Domain.meetingnote n in @ViewBag.Notes)
+    {
+        <li>
+       <u>@string.Format("{0}",@n.meetingagenda.Description)</u> 
+            </li> 
+         <article>@n.Note</article>
+    <br />
+    }
+        </ol>
+}
+else
+{
+     <h4>Discussions:</h4>
+}
+<br />
+<br />
+    <br />
+<div id="myActionItemPane">
+@if (@ViewBag.HasAgenda == true)
+{
+<h3>Action Items:</h3>
+<table>
+    <thead>
+        <tr>
+            <th>#</th>
+            <th>Action Item</th>
+            <th>Who</th>
+            <th>Assigned Date</th>
+            <th>Due Date</th>
+            <th>% Completed</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (Domain.meetingagenda a in @ViewBag.Agenda)
+        {
+            
+            if(@a.task != null)
+            {
+                i++;
+           <tr>
+               <td style="text-align:right">@i</td>
+               <td>@a.task.Title</td>
+               <td>@a.task.member.FullNameTitle</td>
+               <td style="text-align:right">@a.task.AssignDate.ToString("d")</td>
+               <td style="text-align:right">@a.task.DueDate.ToString("d")</td>
+               <td style="text-align:right">@string.Format("{0}",@a.task.CompletionRatio)</td>            
+           </tr> 
+               
+        }
+            
+        }
+    </tbody>
+</table>
+}
+</div>
+<br />
+<strong>@string.Format("Neet Meeting: {0:MM/dd/yyyy}",@Model.NextMeetingDate)</strong>
+</div>

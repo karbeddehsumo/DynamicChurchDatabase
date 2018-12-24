@@ -1,0 +1,111 @@
+﻿@model Domain.ministry
+
+@{
+    ViewBag.Title = "Ministry";   
+}
+
+
+
+
+
+
+
+<h2>@string.Format("{0}",@Model.MinistryName)</h2>
+@Ajax.ActionLink("Edit Ministry", "Edit", "Ministry", new {MinistryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })
+@Ajax.ActionLink("Delete Ministry", "Delete", "Ministry", new {MinistryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })
+<div id="MinistryIncomeExpensePane"></div>
+<div>
+    @Html.Action("List", "MinistryIncome", new {SearchType="MinistrySearch",codeID=@Model.ministryID,bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+    @Ajax.ActionLink("Add Income", "Create", "MinistryIncome", new {ministryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })    
+
+</div>
+<div>
+    @Html.Action("List", "MinistryExpense", new {SearchType="MinistrySearch",codeID=@Model.ministryID,bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+   @Ajax.ActionLink("Add Expense", "Create", "MinistryExpense", new {ministryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })    
+
+</div>
+
+<div>
+    <p>List of ministry goals</p>
+     @Ajax.ActionLink("Add Goal", "Create", "Goal", new {MinistryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })    
+    @Html.Action("ListAdmin", "Goal", new {SearchType="MinistrySearch",codeID=@Model.ministryID,bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+</div>
+<div>
+    @Html.Action("List", "ProgramEvent", new {SearchType="MinistrySearch",codeID=@Model.ministryID,bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+</div>
+<div>
+    @Html.Action("List", "Meeting", new {SearchType="MinistrySearch",codeID=@Model.ministryID,bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+</div>
+<div>
+    <p>Ministry Members</p>
+    @Html.ListBox("MemberRoster", ViewBag.MemberRoster as SelectList, new {size=40,selectionmode=1 })
+</div>
+<div>
+    <label>Add Member</label>
+     @using (Ajax.BeginForm("MinistryMember", "Ministry", new {}, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "familyroster"
+            }))
+            {
+                    
+                                 <label>Role</label>
+                             <input id="ministryID" name="ministryID" value="@Model.ministryID"  type="hidden"/>
+                             <input id="memberID" name="memberID"  type="hidden"/>
+                               <input id="officeTitle" name="officeTitle"  type="text"/><br />
+         <label>Membership Date</label>
+                                <input id="membershipDate" name="membershipDate" value="@ViewBag.EndDate"  type="text"/><br />
+         @Html.DropDownList("MemberList", ViewBag.MemberList as SelectList, "")<br />
+                                 <input id="submitButton" type="submit" value="Add" />
+
+            }
+
+</div>
+<div>
+    @Html.Action("MyAnnouncement", "Announcement", new {bDate=@ViewBag.CalendarBeginDate,eDate=@ViewBag.CalendarEndDate,codeID=@Model.ministryID,SearchCode="MinistrySearch"})
+    @Ajax.ActionLink("Create Announcement", "Create", "Announcement", new {MinistryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })   
+</div>
+<div>
+    @Html.Action("List", "Calendar", new {bDate=@ViewBag.CalendarBeginDate,eDate=@ViewBag.CalendarEndDate,codeID=@Model.ministryID,SearchCode="Ministry"})
+</div>
+
+<div>
+        @Ajax.ActionLink("Add Pictures", "Create", "Picture", new {MinistryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })   
+
+</div>
+
+<div>
+    @Html.Action("List", "Picture", new {codeID=@Model.ministryID,SearchType="MinistrySearch",bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+</div>
+
+<div>
+    @Html.Action("List", "Story", new {SearchType="MinistrySearch",MinistryID=@Model.ministryID,bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+    @Ajax.ActionLink("Create Story", "Create", "Story", new {MinistryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })   
+    @Html.ActionLink("Newspaper","ChurchNewsPaper", "Story", new {},  new { target="_blank" })
+</div>
+
+<div>
+    @Ajax.ActionLink("Add Video", "Create", "Video", new {MinistryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })   
+    @Html.Action("List", "Video", new {SearchType="MinistrySearch",MinistryID=@Model.ministryID,bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+</div>
+
+<div>
+    @Html.Action("List", "Document", new {SearchType="MinistrySearch",MinistryID=@Model.ministryID,bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+    @Ajax.ActionLink("Add Document", "Create", "Document", new {MinistryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })   
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#membershipDate').not('.hasDatePicker').datepicker();
+        $(document).on("change", "#MemberList", function (event) {
+            var id = $('#MemberList option:selected').val();
+            $("#memberID").val(id);
+        });
+
+
+    });
+</script>
+
+

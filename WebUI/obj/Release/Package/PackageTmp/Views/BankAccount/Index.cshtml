@@ -1,0 +1,18 @@
+﻿@model Domain.bankaccount
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div id="FieldSetTopMenu">
+    <h2 id="pageTitle">Banking Center</h2>
+
+
+    <div class="center">
+        @Ajax.ActionLink("Add Bank Account", "Create", "BankAccount", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("View Bank Account", "List", "BankAccount", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" }, new {@id="pageSubTitle"})
+    </div>
+    </div>
+ <div id="RightPane" class="center panel">
+    @Html.Action("List","BankAccount")
+ </div>

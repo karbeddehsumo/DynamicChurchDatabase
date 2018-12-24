@@ -1,0 +1,30 @@
+﻿<script src="../../Scripts/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js" ></script>
+    <link rel="stylesheet" href="../../Content/Dreamweaver/FancyBox/source/jquery.fancybox.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="../../Content/Dreamweaver/FancyBox/source/jquery.fancybox.pack.js"></script>
+
+
+
+<a rel='GroupPic' class="fancybox fancybox.iframe" href="@ViewBag.url"><iframe style="width:100%; height:200px;" src="@ViewBag.url" frameborder="0" allowfullscreen onplay="0"></iframe></a>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+       // $(".fancybox").fancybox();
+        $("a[rel='GroupPic']").fancybox({
+            type: "iframe",
+            width: '70%',
+            height: '70%'
+        });
+
+    });
+
+    $("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+
+ </script>
+
+
+
+
+

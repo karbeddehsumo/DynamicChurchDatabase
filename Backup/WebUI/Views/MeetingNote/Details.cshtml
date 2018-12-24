@@ -1,0 +1,87 @@
+﻿@model Domain.meetingnote
+
+@{
+    ViewBag.Title = "Details";
+ 
+}
+
+
+
+<h2 class="center-text">View Meeting notes Report</h2>
+<br />
+
+<div>
+
+    <div class="float-left">
+        <p class="float-left">Begin Date </p>
+    <input id="bDate" type="text"  class="datepicker" value="@ViewBag.BeginDate" style="width:100px;" />
+        </div>
+    
+    <div class="float-left" style="padding-left:5px;">
+         <p class="float-left">End Date </p>
+     <input id="eDate" type="text"  class="datepicker" value="@ViewBag.EndDate" style="width:100px;" />
+        </div>
+
+
+<div class="float-left">
+    <div style="margin-top:10px">
+        <strong class="float-left">Ministry</strong>
+        @Html.DropDownList("MinistrySearch", ViewBag.MinistryList as SelectList,"")
+    </div>
+</div>
+
+    <div class="float-left">
+    <div style="margin-top:10px">
+        <strong class="float-left">Meeting</strong>
+        @Html.DropDownList("MeetingSearch", ViewBag.MinistryMeetingList as SelectList,"")
+    </div>
+</div>
+
+    <div class="float-left">
+    <div style="margin-top:10px">
+        <strong class="float-left">Status</strong>
+        @Html.DropDownList("StatusSearch", ViewBag.StatusList as SelectList,"")
+    </div>
+</div>
+
+    </div>
+
+<br />
+<br />
+
+<div class="AgendaData">
+@Html.Action("List", "MeetingNote", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate })
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        $("#MinistrySearch").change(function (event) {
+            var ministryid = $('#MinistrySearch option:selected').val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/MeetingNote/List";
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: ministryid.toString(), SearchType: "MinistrySearch" }, function (data) { $(".AgendaData").html(data) });
+        });
+        $("#StatusSearch").change(function (event) {
+            var status = $('#StatusSearch option:selected').text();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/MeetingNote/List";
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), code: status.toString(), SearchType: "StatusSearch" }, function (data) { $(".AgendaData").html(data) });
+            
+        });
+        $("#MeetingSearch").change(function (event) {
+            var MeetingID = $('#MeetingSearch option:selected').text();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/MeetingNote/List";
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: MeetingID.toString(), SearchType: "MeetingSearch" }, function (data) { $(".AgendaData").html(data) });
+
+        });
+
+    });
+
+ </script>

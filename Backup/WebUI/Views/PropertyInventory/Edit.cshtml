@@ -1,0 +1,154 @@
+﻿@model Domain.propertyinventory
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div id="AjaxFormPane" >
+    <h2 class="center">Edit Property</h2>
+    <div id="FieldSetTopMenu" style="color:red">@TempData["message2"]</div>
+    <div class="center">
+@using (Html.BeginForm("Edit", "PropertyInventory", new { }, FormMethod.Post, new {enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+            
+    @Html.ValidationSummary(true)    
+    <fieldset>
+        <legend>Edit property</legend>
+
+        @Html.HiddenFor(model => model.propertyInventoryID)
+        @Html.HiddenFor(model => model.propertyID)
+
+       
+        <div class="editor">
+            @Html.LabelFor(model => model.Title)
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.purchaseDate, "Date")
+            @Html.TextBoxFor(model => model.purchaseDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.purchaseDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Quantity)
+            @Html.EditorFor(model => model.Quantity)
+            @Html.ValidationMessageFor(model => model.Quantity)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Value)
+            @Html.EditorFor(model => model.Value)
+            @Html.ValidationMessageFor(model => model.Value)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Location)
+            @Html.EditorFor(model => model.Location)
+            @Html.ValidationMessageFor(model => model.Location)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.AssignedTo, "Assigned To")
+            @Html.DropDownListFor(model => model.AssignedTo, ViewBag.AssignedToList as SelectList)
+            @Html.ValidationMessageFor(model => model.AssignedTo)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Condition)
+            @Html.DropDownListFor(model => model.Condition, ViewBag.PropertyConditionList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Condition)
+        </div>
+
+        
+
+        <div class="editor">
+            @Html.LabelFor(model => model.TagNumber, "Tag #")
+            @Html.EditorFor(model => model.TagNumber)
+            @Html.ValidationMessageFor(model => model.TagNumber)
+        </div>
+
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Description)
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Comment)
+            @Html.EditorFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Status)
+            @Html.DropDownListFor(model => model.Status, ViewBag.StatusList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+        
+                <div class="editor">
+        <label>Upload Image</label> 
+        <input id="files" type="file" name="files"  />
+            </div>
+        <br />
+             <div class="editor">
+            <label>Upload document</label> 
+            <input id="documentFile" type="file" name="documentFile" />
+                 </div>
+
+            @Html.HiddenFor(model => model.PictureID)
+            @Html.HiddenFor(model => model.DocumentID)
+            @Html.HiddenFor(model => model.EnteredBy)
+            @Html.HiddenFor(model => model.DateEntered)
+
+               <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+</div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+
+        $("#ButtonClick").click(function (event) {
+            if ($('#Condition option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the property condition.");
+            }
+            else if ($('#Status option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the property status.");
+            }
+            else if ($("#Quantity").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the property quantity.");
+            }
+            else if ($("#Location").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the property loacation.");
+            }
+            else if ($("#Title").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the title of the property.");
+            }
+        });
+    });
+</script>

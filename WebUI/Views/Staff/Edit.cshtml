@@ -1,0 +1,111 @@
+﻿@model Domain.staff
+
+<div id="AjaxFormPane" >
+        <h2 class="center">Edit Staff</h2> 
+    <div class="center" style="color:red">@TempData["message2"]</div>
+
+    <div class="center">
+@using (Html.BeginForm("Edit", "Staff", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit Staff</legend>
+        @Html.Hidden("returnUrl", this.Request.RawUrl)
+
+        @Html.HiddenFor(model => model.staffID)
+        @Html.HiddenFor(model => model.pictureID)
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Title)
+            @Html.DropDownListFor(model => model.Title, ViewBag.ChurchTitleList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.FirstName, "First Name")
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.MiddleName, "Middle Name")
+            @Html.EditorFor(model => model.MiddleName)
+            @Html.ValidationMessageFor(model => model.MiddleName)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.LastName, "Last Name")
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+
+        <div class="editor">
+            @Html.LabelFor(model => model.HireDate, "Hire Date")
+            @Html.EditorFor(model => model.HireDate)
+            @Html.ValidationMessageFor(model => model.HireDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.SortOrder)
+            @Html.DropDownListFor(model => model.SortOrder, ViewBag.SortOrderList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.SortOrder)
+        </div>
+
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Status)
+            @Html.DropDownListFor(model => model.Status, ViewBag.StatusList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+            @Html.HiddenFor(model => model.EnteredBy)
+            @Html.HiddenFor(model => model.DateEntered)
+
+        <div class="editor">
+        <label>Upload File</label> 
+        <input id="files" type="file" name="files" />
+            </div>
+
+               <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+</div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#FirstName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the first name.");
+            }
+            else if ($("#LastName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the last name.");
+            }
+            else if ($('#Status option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the status.");
+            }
+
+        });
+
+    });
+</script>

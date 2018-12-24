@@ -1,0 +1,210 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    
+}
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+<div id="MeetingAgendaPane" class="clearfix">
+<div class="float-left panelSmall">
+    <strong class="center">Meeting Setup</strong>
+    <span>@string.Format("Title: {0}", @ViewBag.Heading)</span>
+<div id="AddAgendaPane"></div>
+   <div>
+    <label>Select & Add Meeting Attendees</label>
+     @using (Ajax.BeginForm("AddAttendance", "Attendance", new {}, new AjaxOptions
+     {
+         HttpMethod = "Post",
+         InsertionMode = InsertionMode.Replace,
+         UpdateTargetId = "familyroster"
+     }))
+     {                                               
+         <input id="calendarID" name="calendarID" value="@ViewBag.CalendarID"  type="hidden"/>
+        <input id="memberID" name="memberID"  type="hidden"/>
+                           
+        @Html.ListBox("MemberRoster", ViewBag.MemberRoster as SelectList, new {size=40,selectionmode=1 })
+                    <input id="AddAttendsubmitButton" type="submit" value="Add" />
+     }
+</div>
+
+    <div id="AttendanceList">
+    @Html.Action("MeetingAttendance", "Attendance", new {calendarID=@ViewBag.CalendarID})
+  
+</div>
+<div>
+    <label>Select Goal List</label><br />
+@Html.ListBox("GoalListBox", ViewBag.GoalList as SelectList, new { size=10,selectionmode=1 })
+
+
+
+<div id="TaskListPane">
+    <label>Select & Add Goal Tasks to Agenda</label><br />
+    @Html.ListBox("goalTaskList", new SelectList(new[] { "Choose" }), new {size=5,selectionmode=1 })<br />
+    <input id="GoalTaskBtn" name="GoalTaskBtn" value="Add" type="button" />
+</div> 
+</div>
+<div>
+<label>Add misc. Agenda</label>
+     @using (Ajax.BeginForm("AddGeneralAgenda", "MeetingAgenda", new { }, new AjaxOptions
+     {
+         HttpMethod = "Post",
+         InsertionMode = InsertionMode.Replace,
+         UpdateTargetId = "familyroster"
+     }))
+     {                                               
+         <input id="meetingID2" type="hidden" value="@ViewBag.MeetingID" />                        
+            <label>Agenda</label>
+            <input id="Description" name="Description" type="text" />
+                    <input id="MiscAgenasubmitButton2" type="submit" value="Add" />
+     }
+  </div>  
+<div id="AgendaList">
+    @Html.Action("MeetingAgendaList", "MeetingAgenda", new { MeetingID = @ViewBag.MeetingID })
+</div>
+
+@if (ViewBag.ActionItemRecordCount > 0)
+{
+    <table>
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Assigned To
+        </th>
+        <th>
+            Assign Date
+        </th>
+        <th>
+            Due Date
+        </th>
+        <th>
+            Completion Ratio
+        </th>
+        <th>
+            Status
+        </th>
+  
+        <th></th>
+         <th></th>
+    </tr>
+
+@foreach (Domain.task item in @ViewBag.ActionItems)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.member.FullNameTitle)
+        </td>
+        <td>
+            @item.AssignDate.ToShortDateString()
+        </td>
+        <td>
+            @item.DueDate.ToShortDateString()
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompletionRatio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+  
+        <td>
+            @Ajax.ActionLink("Edit", "Edit", "Task", new { TaskID = item.taskID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+            </td>
+        <td>
+            @Ajax.ActionLink("Delete", "Delete", "Task", new { TaskID = item.taskID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+        </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p>No action items added yet!</p>   
+}
+
+<div id="AddAgendaPane2"></div>
+<input id="meetingID" type="hidden" value="@ViewBag.MeetingID" />
+        </div>
+<div class="float-left panelSmall2">
+    <strong class="center">Meeting Minutes</strong>
+    <div id="MeetingMinutes">
+  @Html.Action("MeetingReport", "Meeting", new {MeetingID=@ViewBag.MeetingID}) 
+        </div>
+</div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+        $("#TaskListPane").hide();
+        $(document).on("change", "#GoalListBox", function (event) {
+            $.getJSON("/Task/GetTaskList", { GoalID: $('#GoalListBox option:selected').val() }, function(data) {
+                $('#goalTaskList').empty();
+                var markup = '';
+                for (var x = 0; x < data.length; x++) {
+                    markup += '<option value="' + data[x].Value + '">' + data[x].Text + '</option>';
+                }
+                $('#goalTaskList').html(markup).show();
+                $("#TaskListPane").show();
+            });
+        });
+
+
+       
+        $(document).on("click", "#GoalTaskBtn", function (event) {
+            var taskid = $('#TaskListPane option:selected').val();
+            var meetingID = $("#meetingID").val();
+            var TaskTitle = $('#TaskListPane option:selected').text();
+            var url = "/MeetingAgenda/AddGeneralAgenda";
+           
+          //  alert(url.toString());
+            $.get(url, { meetingID2: meetingID.toString(), taskid: taskid.toString(), Description: TaskTitle.toString() }, function (data) { });
+
+            //refresh
+            var meetingID = $("#meetingID2").val();
+            var url = "/MeetingAgenda/MeetingAgendaList";
+            $.get(url, { MeetingID: meetingID.toString() }, function (data) { $("#AgendaList").html(data) });
+
+
+        });
+
+        $(document).on("change", "#MemberRoster", function (event) {
+            var id = $('#MemberRoster option:selected').val();
+            $("#memberID").val(id);
+        });
+
+        $(document).on("click", "#AddAttendsubmitButton", function (event) {
+            var codeID = $("#calendarID").val();
+            var url = "/Attendance/MeetingAttendance";
+            $.get(url, { calendarID: codeID.toString() }, function (data) { $("#AttendanceList").html(data) });
+            
+            var meetingID = $("#meetingID2").val();
+            var url = "/Meeting/MeetingReport";
+            $.get(url, { MeetingID: meetingID.toString() }, function (data) { $("#MeetingMinutes").html(data) });
+            
+
+        });
+
+        
+        $(document).on("click", "#MiscAgenasubmitButton2", function (event) {
+            var meetingID = $("#meetingID2").val();
+            var url = "/MeetingAgenda/MeetingAgendaList";
+            $.get(url, { MeetingID: meetingID.toString() }, function (data) { $("#AgendaList").html(data) });
+
+        });
+
+        $(document).on("click", "#MiscAgenasubmitButton2", function (event) {
+            var meetingID = $("#meetingID2").val();
+            var url = "/MeetingAgenda/MeetingAgendaList";
+            $.get(url, { MeetingID: meetingID.toString() }, function (data) { $("#AgendaList").html(data) });
+
+        });
+    });
+
+ </script>

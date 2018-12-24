@@ -1,0 +1,79 @@
+﻿@model Domain.picture
+
+@{
+    ViewBag.Title = "Details";
+   
+}
+
+<div id="AjaxFormPane" class="panel">
+<h2 class="center">Picture View</h2>
+       <strong class="center">Select dates and search</strong><br />
+    <div class="center">
+        <label>Begin Date </label>
+        <input id="bPictureDate" type="text"  class="datepicker" value="@ViewBag.BeginDate" style="width:100px;" />
+         <label>End Date </label>
+        <input id="ePictureDate" type="text"  class="datepicker" value="@ViewBag.EndDate" style="width:100px;" />
+       <!--works <input id="submitAllPictureClick" name="submitAllClick" value="View All" type="submit"/><br />-->
+    </div>
+
+     <div class="center">
+    <input id="CallerType" name="CallerType" type="hidden" value="@ViewBag.CallerType" />
+        @if (@ViewBag.CallerType == "Ministry")
+        {
+            <!--
+             @Html.DropDownList("Ministry", ViewBag.MinistryList as SelectList)
+                -->
+        }
+        else
+        {
+            @Html.DropDownList("MinistrySearch", ViewBag.MinistryList as SelectList,"Select By Ministry...")
+        }
+        
+
+            @Html.DropDownList("StatusSearch", ViewBag.StatusList as SelectList,"Select By Status...")
+        </div>
+
+<div class="CalendarData">
+    
+
+</div>
+
+    </div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+        $("#bPictureDate").datepicker();
+        $("#ePictureDate").datepicker();
+
+        $("#MinistrySearch").change(function (event) {
+            var ministryid = $('#MinistrySearch option:selected').val();
+            var bdate = $("#bPictureDate").val();
+            var edate = $("#ePictureDate").val();
+            var url = "/Picture/List";
+            $("#StatusSearch").val("Select By Status...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: ministryid.toString(), SearchType: "MinistrySearch" }, function (data) { $(".CalendarData").html(data) });
+        });
+        $("#StatusSearch").change(function (event) {
+            var status = $('#StatusSearch option:selected').text();
+            var ministryid = $('#MinistrySearch option:selected').val();
+            var bdate = $("#bPictureDate").val();
+            var edate = $("#ePictureDate").val();
+            var url = "/Picture/List";
+            $("#MinistrySearch").val("Select By Ministry...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), code: status.toString(), codeID2: ministryid.toString(), SearchType: "StatusSearch" }, function (data) { $(".CalendarData").html(data) });
+
+        });
+
+        $(document).on("click", "#submitAllPictureClick", function (event) {
+            var bdate = $("#bPictureDate").val();
+            var edate = $("#ePictureDate").val();
+            var url = "/Picture/List";
+            $("#MinistrySearch").val("Select By Ministry...");
+            $("#StatusSearch").val("Select By Status...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), code: status.toString()}, function (data) { $(".CalendarData").html(data) });
+        });
+
+    });
+
+ </script>

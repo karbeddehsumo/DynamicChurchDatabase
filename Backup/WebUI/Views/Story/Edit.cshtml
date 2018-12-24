@@ -1,0 +1,122 @@
+﻿@model Domain.story
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Html.BeginForm("Edit", "Story", new { }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center-text">Edit Story</h2>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit story here...</legend>
+
+        @Html.HiddenFor(model => model.StoryID)
+
+            @Html.HiddenFor(model => model.MinistryID)
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Header, "Title")
+            @Html.EditorFor(model => model.Header)
+            @Html.ValidationMessageFor(model => model.Header)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.StoryLine, "Story")<br />
+            @Html.TextAreaFor(model => model.StoryLine, new { cols = "85", rows = "22", wrap = "virtual" })
+            @Html.ValidationMessageFor(model => model.StoryLine)
+        </div>
+
+    
+            @Html.HiddenFor(model => model.PictureID)
+
+        <div class="editor">
+            @Html.LabelFor(model => model.StoryTypeID, "Story Type")
+            @Html.DropDownListFor(model => model.StoryTypeID, ViewBag.StoryTypeList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.StoryTypeID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.StoryDate, "Date")
+            @Html.TextBoxFor(model => model.StoryDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.StoryDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.IsPublic,"Make Public")
+             @Html.DropDownListFor(x => x.IsPublic, new[] { new SelectListItem() {Text = "Yes", Value = bool.TrueString},  new SelectListItem() {Text = "No", Value = bool.FalseString}}, "Choose an option") 
+            @Html.ValidationMessageFor(model => model.IsPublic)
+        </div>
+        @if (@ViewBag.Supervisor == true)
+        {
+        <div class="editor">
+            @Html.LabelFor(model => model.Status)
+            @Html.DropDownListFor(model => model.Status, ViewBag.StatusList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.Status)
+        }
+
+
+        <div class="editor">
+        <label>Upload main picture</label> 
+        <input id="MainPic" type="file" name="MainPic"  />
+            </div>
+
+        <div class="editor">
+        <label>Upload related pictures</label> 
+        <input id="GroupPic" type="file" name="GroupPic"  multiple  />
+            </div>
+
+        @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+
+         <div id="formSubmitButton">
+            <input id="ButtonClick" type="submit" value="Save" />
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#Header").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the title of the story.");
+            }
+            else if ($("#StoryLine").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the story.");
+            }
+            else if ($('#StoryTypeID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the story type.");
+            }
+
+        });
+    });
+</script>

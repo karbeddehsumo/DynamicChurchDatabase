@@ -1,0 +1,146 @@
+﻿@model Domain.ministryincome
+
+@{
+    ViewBag.Title = "Create";
+    
+}
+
+<div id="AjaxFormPane" class="center">
+    <div class="center" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Create", "MinistryIncome", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 id="FieldSetTopMenu">Add New Income</h2>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Add ministry income here</legend>
+
+        @Html.HiddenFor(model => model.ministryID)
+        <input id="MinistryCode" type="hidden" value="@ViewBag.MinistryCode" />
+
+        <div class="editor">
+            @Html.LabelFor(model => model.subCategoryID,"Fund Type")
+            @Html.DropDownListFor(model => model.subCategoryID, ViewBag.SubCategoryList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.subCategoryID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Title,"Who/What")
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.IncomeDate,"Date")
+           @Html.TextBoxFor(model => model.IncomeDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.IncomeDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Amount)
+            @Html.EditorFor(model => model.Amount)
+            @Html.ValidationMessageFor(model => model.Amount)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Comment)
+            @Html.EditorFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+        @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+    <div id="FieldSetSubMenu">
+     <input id="ShowMinistryIncomeTypeButton" value="Add Income Type" type="button" />
+    <div id="IncomeTypeDiv">
+     @using (Ajax.BeginForm("AddConstant", "Constant", new { @aCategory = "Ministry Income Type" }, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "familyroster"
+            }))
+            {
+                    
+                                 <label>Add Income Type</label>
+                             <input id="value1" name="value1"  type="text"/>
+                             <input id="SortOrder" name="SortOrder" value="@ViewBag.MinistryID" type="hidden" />
+                                 <input id="IncomeTypeSubmitID" type="submit" value="Add" />
+
+            }
+        </div>
+        </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        //event type
+        $('#IncomeTypeDiv').hide();
+        $(document).on("click", "#ShowMinistryIncomeTypeButton", function (event) {
+            $('#IncomeTypeDiv').hide();
+            $("#value1").val("")
+            $("#IncomeTypeDiv").show();
+        });
+        $(document).on("click", "#IncomeTypeSubmitID", function (event) {
+            $("#IncomeTypeDiv").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#subCategoryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the income type.");
+            }
+            else if ($("#subCategoryID").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the  name.");
+            }
+            else if ($("#Title").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the title.");
+            }
+            else if ($("#Amount").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the amount.");
+            }
+
+        });
+
+        $(document).on("click", "#subCategoryID", function (event) {
+            var code = $("#MinistryCode").val();
+            $.ajax({
+                url: '@Url.Action("RefreshViewBag", "Constant", new {SearchString=@ViewBag.MinistryCode})',
+                type: 'POST',
+                // data: JSON.stringify(appointment),
+                dataType: 'json',
+                processData: false,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    var result = '';
+                    for (var i = 0, iL = data.length; i < iL; i++) {
+                        result += '<option value="' + data[i].Value + '">' + data[i].Text + '</option>';
+                    }
+                    $("#subCategoryID").html(result);
+                },
+            });
+        });
+
+    });
+</script>

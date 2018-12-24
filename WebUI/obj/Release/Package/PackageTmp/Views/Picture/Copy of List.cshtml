@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Domain.picture>
+
+@{
+    ViewBag.Title = "List";
+    
+}
+
+<div id="PictureListPane"></div>
+@if(@ViewBag.GroupPictures == true)
+{
+<div>
+    @if (@ViewBag.HasRecentPictures == true)
+    {
+     @Html.ActionLink("Recent Pictures","GroupSlider", "Picture", new {ministryID=@ViewBag.MinistryID,GroupID=0},  new { target="_blank" })<br />
+    }
+    @if (@ViewBag.HasGroupPictures == true)
+    {
+        foreach (Domain.picture p in @ViewBag.GroupPictureList)
+        {
+            @Html.ActionLink(p.GroupDescription,"GroupSlider", "Picture", new {ministryID=p.ministryID,GroupID=p.GroupID},  new { target="_blank" })<br />
+        }
+    }
+</div>
+}
+else
+{
+    
+<div>
+    @foreach(var p in @Model)
+    {
+        if (p.ImageData != null)
+        {
+            @Html.Partial("DisplayPictureLarge",p)
+            @Ajax.ActionLink("Edit", "Edit", "Picture", new {PictureID=p.pictureID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "PictureListPane" })
+            @Ajax.ActionLink("Delete", "Delete", "Picture", new {PictureID=p.pictureID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "PictureListPane" })
+
+        }    
+        <br />
+    }
+</div>
+        
+}
+
+

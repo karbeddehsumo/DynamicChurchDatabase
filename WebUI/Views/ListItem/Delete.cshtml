@@ -1,0 +1,116 @@
+﻿@model Domain.listitem
+
+@{
+    ViewBag.Title = "Delete";
+    
+}
+
+
+<div id="AjaxFormPane">
+<h2>Delete table Record</h2>
+
+<h3>Are you sure you want to delete this record?</h3>
+
+<table>
+    <tr>
+        <th>
+            listTableID
+        </th>
+        <th>
+            Value1
+        </th>
+        <th>
+            Value2
+        </th>
+        <th>
+            Value3
+        </th>
+        <th>
+            Value4
+        </th>
+        <th>
+            Value5
+        </th>
+        <th>
+            Value6
+        </th>
+        <th>
+            Value7
+        </th>
+        <th>
+            Value8
+        </th>
+        <th>
+            Value9
+        </th>
+        <th>
+            Value10
+        </th>
+        <th>
+            Comment
+        </th>
+        <th>
+            EnteredBy
+        </th>
+        <th>
+            DateEntered
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.listTableID)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Value1)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Value2)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Value3)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Value4)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Value5)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Value6)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Value7)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Value8)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Value9)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Value10)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.EnteredBy)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.DateEntered)
+        </td>
+    </tr>
+
+
+</table>
+
+@using (Ajax.BeginForm("Delete", "ListItem", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    <p>
+        <input type="submit" value="Delete" />
+        <input id="ListItemID" name="ListItemID" type="hidden"  value="@ViewBag.ListItemID"/>
+    </p>
+}
+    </div>

@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Domain.programevent>
+
+@{
+    ViewBag.Title = "List";
+    
+}
+
+<div id="AjaxFormPane" class="slider">
+
+
+@if (@ViewBag.RecordCount > 0)
+{
+<table id="table2">
+    <caption>Upcoming Events...</caption>
+<tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td >
+        <h4>@string.Format("{0}",@item.Title)</h4>
+        @if (@item.EndTime == null)
+        {
+            @string.Format("{0:d} Time: {1}",@item.C_When,@item.BeginTime)
+        }
+        else
+        {
+           @string.Format("{0:d} Time: {1}-{2}",@item.C_When,@item.BeginTime,@item.EndTime)
+        }<br />
+        @string.Format("Contact: {0}",@item.EventContact)<br />
+        @string.Format("{0}",@item.C_Where)<br />
+    </td>
+        
+            </tr>
+           
+    
+}
+</tbody>
+</table>
+}
+else
+{
+ <p>No event records found!</p>   
+}
+</div>

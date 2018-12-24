@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Domain.picture>
+
+@{
+    ViewBag.Title = "GroupSlider";
+}
+<script src="../../Scripts/jquery-1.7.1.js"></script>
+<script src="../../Scripts/Cycle.js"></script>
+<script src="../../Scripts/slider.js"></script>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#slideshow").cycle();
+        $("#slide2").cycle();
+    });
+
+ </script>
+
+<!--
+<div >
+
+       @foreach (Domain.picture p in @Model)
+       {
+        if (p.ImageData != null)
+        {
+      
+             <a style="width:80px;height:80px;" href="@Url.Action("GetImageByID", "Picture",new {PictureID=@p.pictureID})" rel="lightbox" data-lightbox="gallery" data-title="@p.Description"><img alt="Image 1" width="200" src="@Url.Action("GetImageByID", "Picture",new {PictureID=@p.pictureID})" /></a>
+       }              
+       }
+
+</div>
+    -->
+
+<div class="picturewrapper">
+<div id="slider">
+    <img id="1" src="../../Content/Dreamweaver/images/scene 2.jpg"/>
+    <img id="2" src="../../Content/Dreamweaver/images/scene.jpg" />
+    <img id="3" src="../../Content/Dreamweaver/images/map image.jpg" />
+    <img id="4" src="../../Content/Dreamweaver/images/NewLifeeChurch3.jpg"/>
+</div>
+
+<a href="#" class="left" onclick="prev(); return false;">Previous</a>
+<a href="#" class="right" onclick="next(); return false;">Next</a>
+    </div>

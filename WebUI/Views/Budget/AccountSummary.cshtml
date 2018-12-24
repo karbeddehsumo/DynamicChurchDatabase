@@ -1,0 +1,40 @@
+﻿
+
+<div class="panel">
+<h2 class="center">Financial Summary</h2>
+
+    <div class="center">
+        <div class="editor">
+        <label>Year</label>
+        @Html.DropDownList("BudgetYear", ViewBag.BudgetYearCreateList as SelectList, "Select Year...")
+            </div>
+        <div class="editor">
+        <label>Bank Account</label>
+        @Html.DropDownList("BankAccount", ViewBag.BankAccountList as SelectList, "Select Bank Account...")
+            </div>
+        <div class="float-right">
+        <input id="submitBtn" type="button" value="Submit"/>
+            </div>
+    </div>
+   
+<div id="AccountSummaryPane"></div>
+     </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(document).on("click", "#submitBtn", function (event) {
+            if ($('#BudgetYear option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the year.");
+            }
+            var year = $('#BudgetYear option:selected').val()
+            var bankaccountid = $('#BankAccount option:selected').val()
+            var url = "/Budget/AccountSummaryDetail";
+            $.get(url, { BudgetYear: year.toString(), BankAccountID: bankaccountid.toString() }, function (data) { $("#AccountSummaryPane").html(data) });
+        });
+
+    });
+
+ </script>

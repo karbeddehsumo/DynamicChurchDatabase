@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Domain.income>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<h3 class="center">@string.Format("Total: {0:c}",@ViewBag.TotalAmount)</h3>
+<div id="TopPane" class="center">
+
+    
+@if (@ViewBag.RecordCount > 0)
+{
+
+        
+        
+<table >
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            Fund
+        </th>
+        <th>Amount</th>
+        
+            @if(@ViewBag.ReportType != "Summary")
+    {
+                <th>Bank Account</th>
+        <th>
+            Comment
+        </th>
+    }
+    </tr>
+
+@foreach (var item in Model)
+{
+    <tr>
+         <td style="margin-top:10px">
+            @item.IncomeDate.ToShortDateString()
+        </td>
+        <td>
+            @item.Title
+        </td>
+        <td style="text-align:right">
+            @string.Format("{0:c}", Convert.ToDouble(@item.CashAmount) + Convert.ToDouble(@item.CheckAmount) + Convert.ToDouble(@item.CoinAmount))
+        </td>
+            @if (@ViewBag.ReportType != "Summary")
+            {
+                <td>
+                    @item.bankaccount.BankName
+                </td>
+        <td>
+            @item.Comment
+        </td>
+            }
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p>No income record found!</p>   
+}
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+
+    });
+
+ </script>
+
+
+
+

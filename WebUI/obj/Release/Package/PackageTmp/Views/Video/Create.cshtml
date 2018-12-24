@@ -1,0 +1,153 @@
+﻿@model Domain.video
+
+@{
+    ViewBag.Title = "Create";
+  
+}
+
+<div id="AjaxFormPane" class="clearfix">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Create", "Video", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 id="FieldSetTopMenu">Add Video</h2>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Add new video here...</legend>
+
+
+         <input id="CallerType" name="CallerType" type="hidden" value="@ViewBag.CallerType" />
+        <div class="editor">
+            
+            @if (@ViewBag.Ministry == "")
+            {
+                @Html.LabelFor(model => model.ministryID,"Ministry")
+                @Html.DropDownListFor(model => model.ministryID, ViewBag.MinistryList as SelectList, "")
+                @Html.ValidationMessageFor(model => model.ministryID)
+            }
+            else
+            {
+                @Html.HiddenFor(model => model.ministryID)
+            }
+            
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.VideoTitle,"Title")
+            @Html.EditorFor(model => model.VideoTitle)
+            @Html.ValidationMessageFor(model => model.VideoTitle)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.VideoDate,"Date")
+            @Html.TextBoxFor(model => model.VideoDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.VideoDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.URL)
+            @Html.EditorFor(model => model.URL)
+            @Html.ValidationMessageFor(model => model.URL)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.VideoTypeID,"Category")
+            @Html.DropDownListFor(model => model.VideoTypeID, ViewBag.VideoCategory as SelectList, "") 
+            @Html.ValidationMessageFor(model => model.VideoTypeID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Description)
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        @Html.HiddenFor(model => model.Status)
+        @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+
+               <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+    <div id="FieldSetSubMenu">
+    <input id="ShowVideoCategoryButton" value="Add New Video Category" type="button" />
+        <div id="VideoCategoryDiv">
+     @using (Ajax.BeginForm("AddConstant", "Constant", new { @aCategory = "Video Category" }, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "familyroster"
+            }))
+            {
+                    
+                                 <label>Add Video Category</label>
+                             <input id="value2" name="value1"  type="text"/>
+                                 <input id="VideoCategorySubmitID" type="submit" value="Add" />
+
+            }
+            </div>
+        </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#VideoTitle").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the title of the video.");
+            }
+
+        });
+
+        //event type
+        $('#VideoCategoryDiv').hide();
+        $(document).on("click", "#ShowVideoCategoryButton", function (event) {
+            $('#VideoCategoryDiv').hide();
+            $("#value2").val("")
+            $("#VideoCategoryDiv").show();
+        });
+
+       
+        $(document).on("click", "#VideoCategorySubmitID", function (event) {
+            $("#VideoCategoryDiv").hide();
+
+        });
+
+        $(document).on("click", "#VideoTypeID", function (event) {
+                $.ajax({
+                    url: '@Url.Action("RefreshViewBag", "Constant", new {SearchString="Video Category&S"})',
+                     type: 'POST',
+                    // data: JSON.stringify(appointment),
+                     dataType: 'json',
+                     processData: false,
+                     contentType: 'application/json; charset=utf-8',
+                     success: function (data) {
+                         var result = '';
+                         for (var i = 0, iL = data.length; i < iL; i++) {
+                             result += '<option value="' + data[i].Value + '">' + data[i].Text + '</option>';
+                         }
+                         $("#VideoTypeID").html(result);
+                     },
+             });
+        });
+
+       
+    });
+</script>

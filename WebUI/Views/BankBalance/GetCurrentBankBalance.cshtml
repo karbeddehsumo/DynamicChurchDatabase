@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Domain.bankaccount>
+
+<table id="FieldSetSubMenu">
+    <caption>Account Balance</caption>
+    <thead>
+        <tr>
+        <th>Account</th>
+        <th>Beginning Balance</th>
+        <th>Income Amt</th>
+        <th>Expense Amt</th>
+        <th>Balance</th>
+            </tr>
+    </thead>
+    <tbody>
+    @foreach(Domain.bankaccount b in @Model)
+    {
+    <tr>
+        <td>@b.BankNameAccountNumber</td>
+        <td style="text-align:right">@string.Format("{0:c}",@b.BeginningBalance)</td>
+        <td style="text-align:right">@string.Format("{0:c}",@b.CurrentRevenueTotalAmount)</td>
+        <td style="text-align:right">@string.Format("{0:c}",@b.CurrentExpenseTotalAmount)</td>
+        <td style="text-align:right">@string.Format("{0:c}",@b.EndingBalance)</td>
+    </tr>
+    }
+        </tbody>
+</table>

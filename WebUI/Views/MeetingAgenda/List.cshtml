@@ -1,0 +1,67 @@
+﻿@model IEnumerable<Domain.meetingagenda>
+
+@{
+    ViewBag.Title = "Index";
+    
+}
+<div id="TopPane">
+
+</div>
+<h2>Agenda List</h2>
+
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <tr>
+        <th>
+            meeting
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Entered By
+        </th>
+        <th>
+            Date Entered
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.meetingID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnteredBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateEntered)
+        </td>
+                     <td>
+                     @Ajax.ActionLink("Edit", "Edit", "MeetingAgenda", new {MeetingAgendaID=item.meetingAgendaID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+                </td>
+                <td>
+                    @Ajax.ActionLink("Delete", "Delete", "MeetingAgenda", new {MeetingAgendaID=item.meetingAgendaID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+                </td>
+
+    </tr>
+}
+
+</table>
+    }
+else
+{
+ <p>No attendance added yet!</p>   
+}

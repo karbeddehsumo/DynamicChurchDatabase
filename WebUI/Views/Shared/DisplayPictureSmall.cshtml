@@ -1,0 +1,15 @@
+﻿@model Domain.picture
+
+@{
+
+}
+
+
+    @if (@Model.ImageData != null)
+    {
+      
+            <img class="Portrait-small img-responsive" src="@Url.Action("GetImageByID", "Picture",new {PictureID=@Model.pictureID})" />
+            <br />
+            <h3 class="center float-none">@Model.Description</h3>
+      
+    } 

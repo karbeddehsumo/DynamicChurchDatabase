@@ -1,0 +1,20 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div id="FieldSetTopMenu">
+<h2 id="pageTitle">Billing Center</h2>
+
+    <div class="center">
+        @Ajax.ActionLink("Add Bill", "Create", "Bill", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("View Bills", "Details", "Bill", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("Payee", "Create", "Payee", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" }, new {@id="pageSubTitle"})
+    </div>
+    </div>
+        <div id="RightPane" class="center">
+        @Html.Action("Create","Bill")
+        </div>
+ 
+       

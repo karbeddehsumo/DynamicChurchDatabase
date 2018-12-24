@@ -1,0 +1,104 @@
+﻿@model Domain.budget
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div id="AjaxFormPane" class="panel">
+    <div class="center" style="color:red">@TempData["message2"]</div>
+
+<div class="center">
+@using (Ajax.BeginForm("Create", "Budget", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+    <h2  class="center">Add Budget</h2>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Add Budget</legend>
+                <div class="editor">
+            @Html.LabelFor(model => model.BudgetYear,"Year")
+            @Html.DropDownListFor(model => model.BudgetYear, ViewBag.BudgetYearCreateList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.BudgetYear)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type)
+           @Html.TextBoxFor(model => model.Type, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.Type)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.SubCategoryID,"Fund")
+            @Html.DropDownListFor(model => model.SubCategoryID, ViewBag.SubCategoryList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.SubCategoryID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Amount)
+            @Html.EditorFor(model => model.Amount)
+            @Html.ValidationMessageFor(model => model.Amount)
+        </div>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Comment)
+            @Html.EditorFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+        @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" class="btn btn-default" type="submit" >Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+    
+    
+}
+</div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $(function () {
+            $("#Amount").each(function () {
+                this.value = this.value.replace(/,/g, "");
+            }).on('keyup', function () {
+                this.value = this.value.replace(/,/g, "");
+            });
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#SubCategoryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the fund.");
+            }
+            else if ($('#BudgetYear option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the budget year.");
+            }
+            else if ($("#Amount").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the amount.");
+            }
+
+        });
+    });
+</script>

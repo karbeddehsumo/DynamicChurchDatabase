@@ -1,0 +1,73 @@
+﻿@model Domain.listheader
+
+@{
+    ViewBag.Title = "Details";
+   
+}
+
+
+
+<h2 class="center-text">View Ministry Income Report</h2>
+<br />
+
+<div>
+
+    <div class="float-left">
+        <p class="float-left">Begin Date </p>
+    <input id="bDate" type="text"  class="datepicker" value="@ViewBag.BeginDate" style="width:100px;" />
+        </div>
+    
+    <div class="float-left" style="padding-left:5px;">
+         <p class="float-left">End Date </p>
+     <input id="eDate" type="text"  class="datepicker" value="@ViewBag.EndDate" style="width:100px;" />
+        </div>
+
+
+<div class="float-left">
+    <div style="margin-top:10px">
+        <strong class="float-left">Ministry</strong>
+        @Html.DropDownList("MinistrySearch", ViewBag.MinistryList as SelectList,"")
+    </div>
+</div>
+
+    <div class="float-left">
+    <div style="margin-top:10px">
+        <strong class="float-left">Status</strong>
+        @Html.DropDownList("CategorySearch", ViewBag.SubCategoryList as SelectList,"")
+    </div>
+</div>
+
+    </div>
+
+<br />
+<br />
+
+<div class="CalendarData">
+@Html.Action("List", "Meeting", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate })
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        $("#MinistrySearch").change(function (event) {
+            var ministryid = $('#MinistrySearch option:selected').val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/MinistryIncome/List";
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: ministryid.toString(), SearchType: "MinistrySearch" }, function (data) { $(".CalendarData").html(data) });
+        });
+        $("#CategorySearch").change(function (event) {
+            var catid = $('#CategorySearch option:selected').val();
+            var ministryid = $('#MinistrySearch option:selected').val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/MinistryIncome/List";
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: catid.toString(), codeID2: ministryid.toString(),  SearchType: "StatusSearch" }, function (data) { $(".CalendarData").html(data) });
+            
+        });
+
+    });
+
+ </script>

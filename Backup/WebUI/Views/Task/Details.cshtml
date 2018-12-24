@@ -1,0 +1,116 @@
+﻿@model Domain.task
+
+@{
+    ViewBag.Title = "Details";
+  
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+<div>
+    <strong>Select dates and search</strong><br />
+        <label>Begin Date </label>
+        <input id="bDate" type="text"  class="datepicker" value="@ViewBag.BeginDate" style="width:100px;" />
+         <label>End Date </label>
+        <input id="eDate" type="text"  class="datepicker" value="@ViewBag.EndDate" style="width:100px;" />
+    <input id="submitAllClick" name="submitAllClick" value="View All" type="submit"/><br />
+
+        @Html.DropDownList("MinistrySearch", ViewBag.MinistryList as SelectList,"Select By Ministry...")
+        @Html.DropDownList("GoalSearch", ViewBag.GoalList as SelectList,"Select By Goals...")
+        @Html.DropDownList("AssignDueDateSearch", new SelectList(new [] {"Assigned Date Search", "Due Date Search"}),"Search by Assigned Due Date...") 
+        @Html.DropDownList("CompletionRatioSearch", ViewBag.CompletionRatioList2 as SelectList,"Select By Completion Ratio...")
+        @Html.DropDownList("StatusSearch", ViewBag.StatusList as SelectList,"Select By Status...")
+
+</div>
+<div class="CalendarData">
+@Html.Action("List", "Task", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate })
+</div>
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        $("#MinistrySearch").change(function (event) {
+            var ministryid = $('#MinistrySearch option:selected').val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Task/List";
+            $("#GoalSearch").val("Select By Goal...");
+            $("#AssignDueDateSearch").val("SSearch by Assigned Due Date...");
+            $("#CompletionRatioSearch").val("Select By Completion Ratio...");
+            $("#StatusSearch").val("Select By Status...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: ministryid.toString(), SearchType: "MinistrySearch" }, function (data) { $(".CalendarData").html(data) });
+        });
+
+        $("#GoalSearch").change(function (event) {
+            var goalid = $('#GoalSearch option:selected').val();
+            var url = "/Task/List";
+            $("#MinistrySearch").val("Select By Ministry...");
+            $("#AssignDueDateSearch").val("SSearch by Assigned Due Date...");
+            $("#CompletionRatioSearch").val("Select By Completion Ratio...");
+            $("#StatusSearch").val("Select By Status...");
+            $.get(url, { codeID: goalid.toString(), SearchType: "GoalSearch" }, function (data) { $(".CalendarData").html(data) });
+        });
+
+        $("#StatusSearch").change(function (event) {
+            var status = $('#StatusSearch option:selected').text();
+            var url = "/Task/List";
+            $("#MinistrySearch").val("Select By Ministry...");
+            $("#GoalSearch").val("Select By Goal...");
+            $("#AssignDueDateSearch").val("SSearch by Assigned Due Date...");
+            $("#CompletionRatioSearch").val("Select By Completion Ratio...");
+            $.get(url, { code: status.toString(), SearchType: "StatusSearch" }, function (data) { $(".CalendarData").html(data) });
+
+        });
+
+        $("#AssignDueDateSearch").change(function (event) {
+            var searchtype = $('#AssignDueDateSearch option:selected').text();
+            var ministryid = $('#MinistrySearch option:selected').val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Task/List";
+            $("#MinistrySearch").val("Select By Ministry...");
+            $("#GoalSearch").val("Select By Goal...");
+            $("#CompletionRatioSearch").val("Select By Completion Ratio...");
+            $("#StatusSearch").val("Select By Status...");
+            if (searchtype == "Assigned Date Search")
+            {
+                $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: catid.toString(), codeID2: ministryid.toString(), SearchType: searchtype.toString() }, function (data) { $(".CalendarData").html(data) });
+            }
+            else
+            {
+                $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: catid.toString(), codeID2: ministryid.toString(), SearchType: searchtype.toString()}, function (data) { $(".CalendarData").html(data) });
+            }
+
+        });
+
+        $("#CompletionRatioSearch").change(function (event) {
+            var CompletionRatio = $('#CompletionRatioSearch option:selected').val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Goal/List";
+            $("#MinistrySearch").val("Select By Ministry...");
+            $("#GoalSearch").val("Select By Goal...");
+            $("#AssignDueDateSearch").val("SSearch by Assigned Due Date...");
+            $("#StatusSearch").val("Select By Status...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeName: CompletionRatio.toString(), SearchType: "CompletionRatioSearch" }, function (data) { $(".GoalData").html(data) });
+
+        });
+
+        $(document).on("click", "#submitAllClick", function (event) {
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Task/List";
+            $("#MinistrySearch").val("Select By Ministry...");
+            $("#GoalSearch").val("Select By Goal...");
+            $("#AssignDueDateSearch").val("SSearch by Assigned Due Date...");
+            $("#CompletionRatioSearch").val("Select By Completion Ratio...");
+            $("#StatusSearch").val("Select By Status...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString() }, function (data) { $(".CalendarData").html(data) });
+
+        });
+    });
+
+ </script>

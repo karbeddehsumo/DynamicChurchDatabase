@@ -1,0 +1,35 @@
+﻿ @using (Ajax.BeginForm("MinistryMember", "Ministry", new {}, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "MinistryRosterID"
+            }))
+            {
+         <div id="MyPagePledge">
+             <fieldset>
+                 <legend>Add Member</legend>
+
+             <div class="editor">     
+                                               <div class="editor">
+                        <label>New member</label>
+         @Html.DropDownList("MemberList", ViewBag.MemberList as SelectList, "Select from Church List")<br />  
+                 </div>  
+                                 <label>Role</label>
+                             <input id="officeTitle" name="officeTitle"  type="text"/><br />
+                 </div>
+                             <input id="memberID" name="memberID"  type="hidden"/>
+                 <input id="ministryID2" name="ministryID" value="@ViewBag.MinistryID"  type="hidden"/>
+                               
+             <div class="editor">
+         <label>Membership Date</label>
+                                <input id="membershipDate" name="membershipDate" value="@ViewBag.aDate"  type="text"/><br />
+                 </div>
+
+             <div id="formSubmitButton">
+                                 <input id="AddMembersubmitButton" type="submit" value="Add" />
+             <input class="closeAllDiv" value="Close" type="button" />
+                 </div>
+                 </fieldset>
+             </div>
+            
+    }

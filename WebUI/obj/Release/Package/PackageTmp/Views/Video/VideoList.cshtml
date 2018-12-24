@@ -1,0 +1,22 @@
+﻿@model IEnumerable<Domain.video>
+
+
+@foreach(var item in Model)
+{
+    <a rel="video" class="fancybox.iframe" href="@item.URL"><img src="@item.URL" width="350px" height="199px"/></a>
+}
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //$(".fancybox").fancybox();
+        $("a[rel='video']").fancybox({
+            type: "image",
+            width: '70%',
+            height: '70%'
+        });
+    });
+
+    $("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+
+ </script>

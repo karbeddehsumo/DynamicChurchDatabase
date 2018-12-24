@@ -1,0 +1,131 @@
+﻿@model Domain.sale
+
+@{
+    ViewBag.Title = "Edit";
+  
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Create", "Ministry", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center-text">Create New Ministry</h2>
+    @Html.ValidationSummary(true)    <fieldset>
+        <legend>sale</legend>
+
+        @Html.HiddenFor(model => model.saleID)
+
+        <div class="editor">
+            @Html.LabelFor(model => model.saleDate)
+            @Html.TextBoxFor(model => model.saleDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.saleDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.saleAmount,"Amount")
+            @Html.EditorFor(model => model.saleAmount)
+            @Html.ValidationMessageFor(model => model.saleAmount)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.NumberProduct,"Quantity")
+            @Html.EditorFor(model => model.NumberProduct)
+            @Html.ValidationMessageFor(model => model.NumberProduct)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.SubTotal,"Sub-Total")
+            @Html.TextBoxFor(model => model.SubTotal, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.SubTotal)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Tax)
+            @Html.TextBoxFor(model => model.Tax, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.Tax)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Total)
+            @Html.TextBoxFor(model => model.Total, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.Total)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.CheckNumber)
+            @Html.EditorFor(model => model.CheckNumber)
+            @Html.ValidationMessageFor(model => model.CheckNumber)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Cashier)
+            @Html.EditorFor(model => model.Cashier)
+            @Html.ValidationMessageFor(model => model.Cashier)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.EnteredBy,"Entered By")
+            @Html.TextBoxFor(model => model.EnteredBy, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.EnteredBy)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.DateEntered,"Date Entered")
+            @Html.TextBoxFor(model => model.DateEntered, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.DateEntered)
+        </div>
+
+               <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#saleAmount").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the sale amount.");
+            }
+            else if ($("#NumberProduct").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the total product quantity.");
+            }
+            else if ($("#SubTotal").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the sub-total.");
+            }
+            else if ($("#Tax").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the tax amount.");
+            }
+            else if ($("#Total").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the total amount.");
+            }
+            else if ($("#Cashier").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the cashier name.");
+            }
+        });
+    });
+</script>

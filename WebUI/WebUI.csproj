@@ -1,0 +1,1031 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{091329DA-C6AC-4441-88DA-769779425F49}</ProjectGuid>
+    <ProjectTypeGuids>{E53F8FEA-EAE0-44A6-8774-FFD645390401};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>WebUI</RootNamespace>
+    <AssemblyName>WebUI</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+    <UseIISExpress>true</UseIISExpress>
+    <IISExpressSSLPort />
+    <IISExpressAnonymousAuthentication />
+    <IISExpressWindowsAuthentication />
+    <IISExpressUseClassicPipelineMode />
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+    <MvcProjectUpgradeChecked>true</MvcProjectUpgradeChecked>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+    <OldToolsVersion>4.0</OldToolsVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.2.0\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp">
+      <HintPath>..\itextsharp.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.pdfa">
+      <HintPath>..\itextsharp.pdfa.dll</HintPath>
+    </Reference>
+    <Reference Include="itextsharp.xtra">
+      <HintPath>..\itextsharp.xtra.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="Mvc.Mailer, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\MvcMailer3.3.1\lib\40\Mvc.Mailer.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Mvc, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ninject.MVC3.3.2.1.0\lib\net45-full\Ninject.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Web.Optimization, Version=1.1.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Microsoft.AspNet.Web.Optimization.1.1.3\lib\net40\System.Web.Optimization.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Helpers, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.Helpers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=3.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Mvc.3.0.20105.1\lib\net40\System.Web.Mvc.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Providers">
+      <HintPath>..\packages\Microsoft.AspNet.Providers.Core.1.1\lib\net40\System.Web.Providers.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.Razor.1.0.20105.408\lib\net40\System.Web.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Deployment, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.Deployment.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Web.WebPages.Razor, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.AspNet.WebPages.1.0.20105.408\lib\net40\System.Web.WebPages.Razor.dll</HintPath>
+    </Reference>
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebActivatorEx.2.0.5\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="App_Start\BundleConfig.cs" />
+    <Compile Include="App_Start\NinjectWebCommon.cs" />
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AnnouncementController.cs" />
+    <Compile Include="Controllers\AttendanceController.cs" />
+    <Compile Include="Controllers\BankAccountController.cs" />
+    <Compile Include="Controllers\BankBalanceController.cs" />
+    <Compile Include="Controllers\BillController.cs" />
+    <Compile Include="Controllers\BudgetController.cs" />
+    <Compile Include="Controllers\CalendarController.cs" />
+    <Compile Include="Controllers\CategoryController.cs" />
+    <Compile Include="Controllers\ConstantController.cs" />
+    <Compile Include="Controllers\ContributionController.cs" />
+    <Compile Include="Controllers\DocumentController.cs" />
+    <Compile Include="Controllers\EmailController.cs" />
+    <Compile Include="Controllers\ExpenseController.cs" />
+    <Compile Include="Controllers\FamilyController.cs" />
+    <Compile Include="Controllers\GoalController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\IncomeController.cs" />
+    <Compile Include="Controllers\ListHeaderController.cs" />
+    <Compile Include="Controllers\ListItemController.cs" />
+    <Compile Include="Controllers\ListTableController.cs" />
+    <Compile Include="Controllers\MeetingAgendaController.cs" />
+    <Compile Include="Controllers\MeetingController.cs" />
+    <Compile Include="Controllers\MeetingNoteController.cs" />
+    <Compile Include="Controllers\MinistryExpenseController.cs" />
+    <Compile Include="Controllers\MinistryIncomeController.cs" />
+    <Compile Include="Controllers\PledgeController.cs" />
+    <Compile Include="Controllers\ProductController.cs" />
+    <Compile Include="Controllers\ProgramEventBudgetController.cs" />
+    <Compile Include="Controllers\ProgramEventController.cs" />
+    <Compile Include="Controllers\PropertyInventoryController.cs" />
+    <Compile Include="Controllers\MemberController.cs" />
+    <Compile Include="Controllers\MinistryController.cs" />
+    <Compile Include="Controllers\PayeeController.cs" />
+    <Compile Include="Controllers\PictureController.cs" />
+    <Compile Include="Controllers\PropertyController.cs" />
+    <Compile Include="Controllers\ResponsibilityController.cs" />
+    <Compile Include="Controllers\SaleController.cs" />
+    <Compile Include="Controllers\SaleItemController.cs" />
+    <Compile Include="Controllers\StaffController.cs" />
+    <Compile Include="Controllers\StoryController.cs" />
+    <Compile Include="Controllers\SubCategoryController.cs" />
+    <Compile Include="Controllers\TaskController.cs" />
+    <Compile Include="Controllers\VideoController.cs" />
+    <Compile Include="Controllers\VisitorController.cs" />
+    <Compile Include="Filters\RoleAuthentication.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Mailers\IUserMailer.cs" />
+    <Compile Include="Mailers\UserMailer.cs" />
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\churchdatabaseEntities.cs" />
+    <Compile Include="Models\churchdatabaseEntitiesContext.cs" />
+    <Compile Include="Models\churchdatabaseEntities\Context.cs" />
+    <Compile Include="Models\ConstantIntModel.cs" />
+    <Compile Include="Models\ConstantStringModel.cs" />
+    <Compile Include="Models\CalendarEvent.cs" />
+    <Compile Include="Models\EmailModel.cs" />
+    <Compile Include="Models\ContactUs.cs" />
+    <Compile Include="Models\Events.cs" />
+    <Compile Include="Models\FamilyMemberModel.cs" />
+    <Compile Include="Models\GoalTaskListModel.cs" />
+    <Compile Include="Models\RentProperty.cs" />
+    <Compile Include="Models\WebUIContext.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\Dreamweaver\css\Copy of styles.css" />
+    <Content Include="Content\Dreamweaver\css\responsive.css" />
+    <Content Include="Content\Dreamweaver\FancyBox\demo\1_b.jpg" />
+    <Content Include="Content\Dreamweaver\FancyBox\demo\1_s.jpg" />
+    <Content Include="Content\Dreamweaver\FancyBox\demo\2_b.jpg" />
+    <Content Include="Content\Dreamweaver\FancyBox\demo\2_s.jpg" />
+    <Content Include="Content\Dreamweaver\FancyBox\demo\3_b.jpg" />
+    <Content Include="Content\Dreamweaver\FancyBox\demo\3_s.jpg" />
+    <Content Include="Content\Dreamweaver\FancyBox\demo\4_b.jpg" />
+    <Content Include="Content\Dreamweaver\FancyBox\demo\4_s.jpg" />
+    <Content Include="Content\Dreamweaver\FancyBox\demo\5_b.jpg" />
+    <Content Include="Content\Dreamweaver\FancyBox\demo\5_s.jpg" />
+    <Content Include="Content\Dreamweaver\FancyBox\demo\ajax.txt" />
+    <Content Include="Content\Dreamweaver\FancyBox\demo\iframe.html" />
+    <Content Include="Content\Dreamweaver\FancyBox\demo\index.html" />
+    <Content Include="Content\Dreamweaver\FancyBox\lib\jquery-1.10.1.min.js" />
+    <Content Include="Content\Dreamweaver\FancyBox\lib\jquery-1.9.0.min.js" />
+    <Content Include="Content\Dreamweaver\FancyBox\lib\jquery.mousewheel-3.0.6.pack.js" />
+    <Content Include="Content\Dreamweaver\FancyBox\source\blank.gif" />
+    <Content Include="Content\Dreamweaver\FancyBox\source\fancybox_loading%402x.gif" />
+    <Content Include="Content\Dreamweaver\FancyBox\source\fancybox_loading.gif" />
+    <Content Include="Content\Dreamweaver\FancyBox\source\fancybox_overlay.png" />
+    <Content Include="Content\Dreamweaver\FancyBox\source\fancybox_sprite%402x.png" />
+    <Content Include="Content\Dreamweaver\FancyBox\source\fancybox_sprite.png" />
+    <Content Include="Content\Dreamweaver\FancyBox\source\helpers\fancybox_buttons.png" />
+    <Content Include="Content\Dreamweaver\FancyBox\source\helpers\jquery.fancybox-buttons.css" />
+    <Content Include="Content\Dreamweaver\FancyBox\source\helpers\jquery.fancybox-buttons.js" />
+    <Content Include="Content\Dreamweaver\FancyBox\source\helpers\jquery.fancybox-media.js" />
+    <Content Include="Content\Dreamweaver\FancyBox\source\helpers\jquery.fancybox-thumbs.css" />
+    <Content Include="Content\Dreamweaver\FancyBox\source\helpers\jquery.fancybox-thumbs.js" />
+    <Content Include="Content\Dreamweaver\FancyBox\source\jquery.fancybox.css" />
+    <Content Include="Content\Dreamweaver\FancyBox\source\jquery.fancybox.js" />
+    <Content Include="Content\Dreamweaver\FancyBox\source\jquery.fancybox.pack.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\changelog.txt" />
+    <Content Include="Content\Dreamweaver\FullCalendar\demos\agenda-views.html" />
+    <Content Include="Content\Dreamweaver\FullCalendar\demos\background-events.html" />
+    <Content Include="Content\Dreamweaver\FullCalendar\demos\basic-views.html" />
+    <Content Include="Content\Dreamweaver\FullCalendar\demos\default.html" />
+    <Content Include="Content\Dreamweaver\FullCalendar\demos\external-dragging.html" />
+    <Content Include="Content\Dreamweaver\FullCalendar\demos\gcal.html" />
+    <Content Include="Content\Dreamweaver\FullCalendar\demos\json.html" />
+    <Content Include="Content\Dreamweaver\FullCalendar\demos\languages.html" />
+    <Content Include="Content\Dreamweaver\FullCalendar\demos\php\get-events.php" />
+    <Content Include="Content\Dreamweaver\FullCalendar\demos\php\get-timezones.php" />
+    <Content Include="Content\Dreamweaver\FullCalendar\demos\php\utils.php" />
+    <Content Include="Content\Dreamweaver\FullCalendar\demos\selectable.html" />
+    <Content Include="Content\Dreamweaver\FullCalendar\demos\theme.html" />
+    <Content Include="Content\Dreamweaver\FullCalendar\demos\timezones.html" />
+    <Content Include="Content\Dreamweaver\FullCalendar\fullcalendar.css" />
+    <Content Include="Content\Dreamweaver\FullCalendar\fullcalendar.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\fullcalendar.min.css" />
+    <Content Include="Content\Dreamweaver\FullCalendar\fullcalendar.min.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\fullcalendar.print.css" />
+    <Content Include="Content\Dreamweaver\FullCalendar\gcal.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang-all.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\ar-ma.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\ar-sa.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\ar-tn.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\ar.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\bg.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\ca.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\cs.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\da.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\de-at.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\de.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\el.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\en-au.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\en-ca.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\en-gb.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\es.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\fa.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\fi.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\fr-ca.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\fr.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\he.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\hi.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\hr.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\hu.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\id.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\is.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\it.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\ja.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\ko.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\lt.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\lv.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\nb.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\nl.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\pl.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\pt-br.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\pt.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\ro.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\ru.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\sk.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\sl.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\sr-cyrl.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\sr.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\sv.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\th.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\tr.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\uk.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\vi.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\zh-cn.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lang\zh-tw.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\cupertino\images\animated-overlay.gif" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\cupertino\images\ui-bg_diagonals-thick_90_eeeeee_40x40.png" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\cupertino\images\ui-bg_flat_15_cd0a0a_40x100.png" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\cupertino\images\ui-bg_glass_100_e4f1fb_1x400.png" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\cupertino\images\ui-bg_glass_50_3baae3_1x400.png" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\cupertino\images\ui-bg_glass_80_d7ebf9_1x400.png" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\cupertino\images\ui-bg_highlight-hard_100_f2f5f7_1x100.png" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\cupertino\images\ui-bg_highlight-hard_70_000000_1x100.png" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\cupertino\images\ui-bg_highlight-soft_100_deedf7_1x100.png" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\cupertino\images\ui-bg_highlight-soft_25_ffef8f_1x100.png" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\cupertino\images\ui-icons_2694e8_256x240.png" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\cupertino\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\cupertino\images\ui-icons_3d80b3_256x240.png" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\cupertino\images\ui-icons_72a7cf_256x240.png" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\cupertino\images\ui-icons_ffffff_256x240.png" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\cupertino\jquery-ui.min.css" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\jquery-ui.custom.min.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\jquery.min.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\lib\moment.min.js" />
+    <Content Include="Content\Dreamweaver\FullCalendar\license.txt" />
+    <Content Include="Content\Dreamweaver\images\1446335987_common_new_edit_compose_.png" />
+    <Content Include="Content\Dreamweaver\images\1446335998_common_email_envelope_mail.png" />
+    <Content Include="Content\Dreamweaver\images\1446336006_common_new_edit_compose.png" />
+    <Content Include="Content\Dreamweaver\images\1446336021_common_calendar_month.png" />
+    <Content Include="Content\Dreamweaver\images\1446336030_common_calendar_day.png" />
+    <Content Include="Content\Dreamweaver\images\1446336069_common_heart_like_favourite_favorite.png" />
+    <Content Include="Content\Dreamweaver\images\1446336083_common_envelope_mail.png" />
+    <Content Include="Content\Dreamweaver\images\ark.jpg" />
+    <Content Include="Content\Dreamweaver\images\calendar-icon.png" />
+    <Content Include="Content\Dreamweaver\images\Congregation-Communion-Service.jpg" />
+    <Content Include="Content\Dreamweaver\images\Crosses.jpg" />
+    <Content Include="Content\Dreamweaver\images\DBT.jpg" />
+    <Content Include="Content\Dreamweaver\images\edit-icon.png" />
+    <Content Include="Content\Dreamweaver\images\email-icon.png" />
+    <Content Include="Content\Dreamweaver\images\FortStreet-Congregation.jpg" />
+    <Content Include="Content\Dreamweaver\images\icf logo revised.jpg" />
+    <Content Include="Content\Dreamweaver\images\Merry-Christmas.jpg" />
+    <Content Include="Content\Dreamweaver\images\mypage-record-edit-icon.jpg" />
+    <Content Include="Content\Dreamweaver\images\newspaper-icon.jpg" />
+    <Content Include="Content\Dreamweaver\images\search-icon.png" />
+    <Content Include="Content\Dreamweaver\images\sky.jpg" />
+    <Content Include="Content\Dreamweaver\images\Church1.jpg" />
+    <Content Include="Content\Dreamweaver\images\church2.jpg" />
+    <Content Include="Content\Dreamweaver\images\church3.jpg" />
+    <Content Include="Content\Dreamweaver\images\church4.jpg" />
+    <Content Include="Content\Dreamweaver\images\church5.jpg" />
+    <Content Include="Content\Dreamweaver\images\icf logo1.png" />
+    <Content Include="Content\Dreamweaver\images\brieghistory.jpg" />
+    <Content Include="Content\Dreamweaver\images\NewspaperBanner.jpg" />
+    <Content Include="Content\Dreamweaver\images\Update-Icon.png" />
+    <Content Include="Content\Dreamweaver\images\update-icon2.png" />
+    <Content Include="Content\Dreamweaver\images\Walkingbird.jpg" />
+    <Content Include="Content\Dreamweaver\images\FlyingBire.jpg" />
+    <Content Include="Content\Dreamweaver\images\Frog.jpg" />
+    <Content Include="Content\Dreamweaver\images\close.png" />
+    <Content Include="Content\Dreamweaver\images\loading.gif" />
+    <Content Include="Content\Dreamweaver\images\next.png" />
+    <Content Include="Content\Dreamweaver\images\prev.png" />
+    <Content Include="Content\fullcalendar.css" />
+    <Content Include="Content\fullcalendar.print.css" />
+    <Content Include="Content\Site.css" />
+    <Content Include="Content\Dreamweaver\about.html" />
+    <Content Include="Content\Dreamweaver\admin.html" />
+    <Content Include="Content\Dreamweaver\contact.html" />
+    <Content Include="Content\Dreamweaver\css\styles.css" />
+    <Content Include="Content\Dreamweaver\events.html" />
+    <Content Include="Content\Dreamweaver\finance.html" />
+    <Content Include="Content\Dreamweaver\images\man small.jpg" />
+    <Content Include="Content\Dreamweaver\images\children small.jpg" />
+    <Content Include="Content\Dreamweaver\images\crosses large.jpg" />
+    <Content Include="Content\Dreamweaver\images\facebook.png" />
+    <Content Include="Content\Dreamweaver\images\grass small.jpg" />
+    <Content Include="Content\Dreamweaver\images\map image.jpg" />
+    <Content Include="Content\Dreamweaver\images\NewLifeeChurch3.jpg" />
+    <Content Include="Content\Dreamweaver\images\path small.jpg" />
+    <Content Include="Content\Dreamweaver\images\river small.jpg" />
+    <Content Include="Content\Dreamweaver\images\scene 2.jpg" />
+    <Content Include="Content\Dreamweaver\images\scene.jpg" />
+    <Content Include="Content\Dreamweaver\images\twitter.png" />
+    <Content Include="Content\Dreamweaver\images\woman small.jpg" />
+    <Content Include="Content\Dreamweaver\images\youtube.png" />
+    <Content Include="Content\Dreamweaver\index.html" />
+    <Content Include="Content\Dreamweaver\member.html" />
+    <Content Include="Content\Dreamweaver\ministries.html" />
+    <Content Include="Content\Dreamweaver\ministrysummary.html" />
+    <Content Include="Content\themes\base\images\NewLifeeChurch3.jpg" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\jquery-ui.css" />
+    <Content Include="Content\themes\base\jquery.ui.accordion.css" />
+    <Content Include="Content\themes\base\jquery.ui.all.css" />
+    <Content Include="Content\themes\base\jquery.ui.autocomplete.css" />
+    <Content Include="Content\themes\base\jquery.ui.base.css" />
+    <Content Include="Content\themes\base\jquery.ui.button.css" />
+    <Content Include="Content\themes\base\jquery.ui.core.css" />
+    <Content Include="Content\themes\base\jquery.ui.datepicker.css" />
+    <Content Include="Content\themes\base\jquery.ui.dialog.css" />
+    <Content Include="Content\themes\base\jquery.ui.progressbar.css" />
+    <Content Include="Content\themes\base\jquery.ui.resizable.css" />
+    <Content Include="Content\themes\base\jquery.ui.selectable.css" />
+    <Content Include="Content\themes\base\jquery.ui.slider.css" />
+    <Content Include="Content\themes\base\jquery.ui.tabs.css" />
+    <Content Include="Content\themes\base\jquery.ui.theme.css" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_0_aaaaaa_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_flat_75_ffffff_40x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_55_fbf9ee_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_65_ffffff_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_dadada_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_75_e6e6e6_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_glass_95_fef1ec_1x400.png" />
+    <Content Include="Content\themes\base\minified\images\ui-bg_highlight-soft_75_cccccc_1x100.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_222222_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_2e83ff_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_454545_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_888888_256x240.png" />
+    <Content Include="Content\themes\base\minified\images\ui-icons_cd0a0a_256x240.png" />
+    <Content Include="Content\themes\base\minified\jquery-ui.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.accordion.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.autocomplete.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.button.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.core.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.datepicker.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.dialog.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.progressbar.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.resizable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.selectable.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.slider.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
+    <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
+    <Content Include="Content\bootstrap.css" />
+    <Content Include="Global.asax" />
+    <Content Include="App_Code\content.cshtml" />
+    <Content Include="Content\Dreamweaver\Templates\Home.dwt" />
+    <Content Include="Content\Dreamweaver\Templates\main.dwt" />
+    <Content Include="Content\Dreamweaver\FancyBox\.gitattributes" />
+    <Content Include="Content\Dreamweaver\FancyBox\CHANGELOG.md" />
+    <Content Include="Content\Dreamweaver\FancyBox\README.md" />
+    <Content Include="Content\Dreamweaver\FancyBox\sprite.psd" />
+    <Content Include="Content\Dreamweaver\FullCalendar\demos\json\events.json" />
+    <Content Include="Content\bootstrap.min.css" />
+    <None Include="Properties\PublishProfiles\churchdatabase.pubxml" />
+    <None Include="Scripts\jquery-1.7.1.intellisense.js" />
+    <Content Include="Scripts\ajax_googleapis.min.js" />
+    <Content Include="Scripts\bootstrap.js" />
+    <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\Cycle.js" />
+    <Content Include="Scripts\fullcalendar.js" />
+    <Content Include="Scripts\fullcalendar.min.js" />
+    <Content Include="Scripts\gcal.js" />
+    <Content Include="Scripts\jquery-1.7.1.js" />
+    <Content Include="Scripts\jquery-1.7.1.min.js" />
+    <None Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.js" />
+    <Content Include="Scripts\jquery-ui-1.8.20.min.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\lightbox.min.js" />
+    <Content Include="Scripts\malsup.cycle2.js" />
+    <Content Include="Scripts\malsup.github.io.jquery.cycle.all.js" />
+    <Content Include="Scripts\modernizr-2.5.3.js" />
+    <Content Include="Scripts\myScriptFile.js" />
+    <Content Include="Scripts\slider.js" />
+    <Content Include="Views\Member\mypage-record-edit-icon.jpg" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Scripts\jquery.unobtrusive-ajax.js" />
+    <Content Include="Scripts\jquery.unobtrusive-ajax.min.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.js" />
+    <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
+    <Content Include="Views\_ViewStart.cshtml" />
+    <Content Include="Views\Account\ChangePassword.cshtml" />
+    <Content Include="Views\Account\ChangePasswordSuccess.cshtml" />
+    <Content Include="Views\Account\LogOnOld.cshtml" />
+    <Content Include="Views\Account\Register.cshtml" />
+    <Content Include="Views\Home\About.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Shared\_LogOnPartialOld.cshtml" />
+    <Content Include="Views\Shared\_Layout_Modal.cshtml" />
+    <Content Include="Views\Web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="Views\BankAccount\List.cshtml" />
+    <Content Include="Views\BankAccount\Index.cshtml" />
+    <Content Include="Views\BankAccount\Create.cshtml" />
+    <Content Include="Views\BankAccount\Edit.cshtml" />
+    <Content Include="Views\BankAccount\Delete.cshtml" />
+    <Content Include="Views\Bill\Details.cshtml" />
+    <Content Include="Views\Bill\Create.cshtml" />
+    <Content Include="Views\Bill\Edit.cshtml" />
+    <Content Include="Views\Bill\Delete.cshtml" />
+    <Content Include="Views\Calendar\Index.cshtml" />
+    <Content Include="Views\Calendar\Details.cshtml" />
+    <Content Include="Views\Calendar\Create.cshtml" />
+    <Content Include="Views\Calendar\Edit.cshtml" />
+    <Content Include="Views\Calendar\Delete.cshtml" />
+    <Content Include="Views\Category\Details.cshtml" />
+    <Content Include="Views\Category\Create.cshtml" />
+    <Content Include="Views\Category\Edit.cshtml" />
+    <Content Include="Views\Category\Delete.cshtml" />
+    <Content Include="Views\Document\Index.cshtml" />
+    <Content Include="Views\Document\Details.cshtml" />
+    <Content Include="Views\Document\CreateOld.cshtml" />
+    <Content Include="Views\Document\Edit.cshtml" />
+    <Content Include="Views\Document\Delete.cshtml" />
+    <Content Include="Views\Family\Index.cshtml" />
+    <Content Include="Views\Family\Details.cshtml" />
+    <Content Include="Views\Family\Create.cshtml" />
+    <Content Include="Views\Family\Edit.cshtml" />
+    <Content Include="Views\Family\Delete.cshtml" />
+    <Content Include="Views\Goal\Index.cshtml" />
+    <Content Include="Views\Goal\Details.cshtml" />
+    <Content Include="Views\Goal\Create.cshtml" />
+    <Content Include="Views\Goal\Edit.cshtml" />
+    <Content Include="Views\Goal\Delete.cshtml" />
+    <Content Include="Views\Income\Index.cshtml" />
+    <Content Include="Views\Income\Details.cshtml" />
+    <Content Include="Views\Income\Create.cshtml" />
+    <Content Include="Views\Income\Edit.cshtml" />
+    <Content Include="Views\Income\Delete.cshtml" />
+    <Content Include="Views\Member\Index.cshtml" />
+    <Content Include="Views\Member\Details.cshtml" />
+    <Content Include="Views\Member\Create.cshtml" />
+    <Content Include="Views\Member\Edit.cshtml" />
+    <Content Include="Views\Member\Delete.cshtml" />
+    <Content Include="Views\Ministry\Index.cshtml" />
+    <Content Include="Views\Ministry\Details.cshtml" />
+    <Content Include="Views\Ministry\Create.cshtml" />
+    <Content Include="Views\Ministry\Edit.cshtml" />
+    <Content Include="Views\Ministry\Delete.cshtml" />
+    <Content Include="Views\Payee\Index.cshtml" />
+    <Content Include="Views\Payee\Details.cshtml" />
+    <Content Include="Views\Payee\Create.cshtml" />
+    <Content Include="Views\Payee\Edit.cshtml" />
+    <Content Include="Views\Payee\Delete.cshtml" />
+    <Content Include="Views\Picture\Index.cshtml" />
+    <Content Include="Views\Picture\Details_old.cshtml" />
+    <Content Include="Views\Picture\Create.cshtml" />
+    <Content Include="Views\Picture\Edit.cshtml" />
+    <Content Include="Views\Picture\Delete.cshtml" />
+    <Content Include="Views\Property\Index.cshtml" />
+    <Content Include="Views\Property\Details.cshtml" />
+    <Content Include="Views\Property\Create.cshtml" />
+    <Content Include="Views\Property\Edit.cshtml" />
+    <Content Include="Views\Property\Delete.cshtml" />
+    <Content Include="Views\Responsibility\Index.cshtml" />
+    <Content Include="Views\Responsibility\Details.cshtml" />
+    <Content Include="Views\Responsibility\Create.cshtml" />
+    <Content Include="Views\Responsibility\Edit.cshtml" />
+    <Content Include="Views\Responsibility\Delete.cshtml" />
+    <Content Include="Views\Staff\Index.cshtml" />
+    <Content Include="Views\Staff\Details.cshtml" />
+    <Content Include="Views\Staff\Create.cshtml" />
+    <Content Include="Views\Staff\Edit.cshtml" />
+    <Content Include="Views\Staff\Delete.cshtml" />
+    <Content Include="Views\SubCategory\Index.cshtml" />
+    <Content Include="Views\SubCategory\Details.cshtml" />
+    <Content Include="Views\SubCategory\Create.cshtml" />
+    <Content Include="Views\SubCategory\Edit.cshtml" />
+    <Content Include="Views\SubCategory\Delete.cshtml" />
+    <Content Include="Views\Task\Index.cshtml" />
+    <Content Include="Views\Task\Details.cshtml" />
+    <Content Include="Views\Task\Create.cshtml" />
+    <Content Include="Views\Task\Edit.cshtml" />
+    <Content Include="Views\Task\Delete.cshtml" />
+    <Content Include="Views\Video\Index.cshtml" />
+    <Content Include="Views\Video\Details.cshtml" />
+    <Content Include="Views\Video\Create.cshtml" />
+    <Content Include="Views\Video\Edit.cshtml" />
+    <Content Include="Views\Video\Delete.cshtml" />
+    <Content Include="Views\Visitor\Index.cshtml" />
+    <Content Include="Views\Visitor\Details.cshtml" />
+    <Content Include="Views\Visitor\Create.cshtml" />
+    <Content Include="Views\Visitor\Delete.cshtml" />
+    <Content Include="Views\Shared\_Layout22_old.cshtml" />
+    <Content Include="Views\Sale\Index.cshtml" />
+    <Content Include="Views\Sale\Details.cshtml" />
+    <Content Include="Views\Sale\Create.cshtml" />
+    <Content Include="Views\Sale\Edit.cshtml" />
+    <Content Include="Views\Sale\Delete.cshtml" />
+    <Content Include="Views\Product\Index.cshtml" />
+    <Content Include="Views\Product\Details.cshtml" />
+    <Content Include="Views\Product\Create.cshtml" />
+    <Content Include="Views\Product\Edit.cshtml" />
+    <Content Include="Views\Product\Delete.cshtml" />
+    <Content Include="Views\Meeting\Index.cshtml" />
+    <Content Include="Views\Meeting\Details.cshtml" />
+    <Content Include="Views\Meeting\Create.cshtml" />
+    <Content Include="Views\Meeting\Edit.cshtml" />
+    <Content Include="Views\Meeting\Delete.cshtml" />
+    <Content Include="Views\Home\Details.cshtml" />
+    <Content Include="Views\Constant\Details.cshtml" />
+    <Content Include="Views\Constant\Create.cshtml" />
+    <Content Include="Views\Constant\Edit.cshtml" />
+    <Content Include="Views\Constant\Delete.cshtml" />
+    <Content Include="Views\Constant\List.cshtml" />
+    <Content Include="Views\Category\List.cshtml" />
+    <Content Include="Views\SubCategory\List.cshtml" />
+    <Content Include="Views\Bill\Index.cshtml" />
+    <Content Include="Views\Category\Index.cshtml" />
+    <Content Include="Views\Constant\IndexOld.cshtml" />
+    <Content Include="Views\Home\Copy of Details.cshtml" />
+    <Content Include="Views\Home\Copy of Index.cshtml" />
+    <Content Include="Views\Shared\_Menu.cshtml" />
+    <Content Include="Views\Bill\Copy of Index.cshtml" />
+    <Content Include="Views\Bill\List.cshtml" />
+    <Content Include="Views\Payee\List.cshtml" />
+    <Content Include="Views\Expense\Index.cshtml" />
+    <Content Include="Views\Expense\Details.cshtml" />
+    <Content Include="Views\Expense\CreateTabs.cshtml" />
+    <Content Include="Views\Expense\Edit.cshtml" />
+    <Content Include="Views\Expense\Delete.cshtml" />
+    <Content Include="Views\ListTable\Index.cshtml" />
+    <Content Include="Views\ListTable\Details.cshtml" />
+    <Content Include="Views\ListTable\Create.cshtml" />
+    <Content Include="Views\ListTable\Edit.cshtml" />
+    <Content Include="Views\ListTable\Delete.cshtml" />
+    <Content Include="Views\ListItem\Index.cshtml" />
+    <Content Include="Views\ListItem\Details.cshtml" />
+    <Content Include="Views\ListItem\Create.cshtml" />
+    <Content Include="Views\ListItem\Edit.cshtml" />
+    <Content Include="Views\MeetingAgenda\Index.cshtml" />
+    <Content Include="Views\MeetingAgenda\Details.cshtml" />
+    <Content Include="Views\MeetingAgenda\Create.cshtml" />
+    <Content Include="Views\MeetingAgenda\Edit.cshtml" />
+    <Content Include="Views\MeetingAgenda\Delete.cshtml" />
+    <Content Include="Views\MeetingNote\Index.cshtml" />
+    <Content Include="Views\MeetingNote\Details.cshtml" />
+    <Content Include="Views\MeetingNote\Create.cshtml" />
+    <Content Include="Views\MeetingNote\Edit.cshtml" />
+    <Content Include="Views\MeetingNote\Delete.cshtml" />
+    <Content Include="Views\Pledge\Index.cshtml" />
+    <Content Include="Views\Pledge\Details.cshtml" />
+    <Content Include="Views\Pledge\Create.cshtml" />
+    <Content Include="Views\Pledge\Edit.cshtml" />
+    <Content Include="Views\Pledge\Delete.cshtml" />
+    <Content Include="Views\ProgramEvent\Index.cshtml" />
+    <Content Include="Views\ProgramEvent\Details.cshtml" />
+    <Content Include="Views\ProgramEvent\Create.cshtml" />
+    <Content Include="Views\ProgramEvent\Edit.cshtml" />
+    <Content Include="Views\ProgramEvent\Delete.cshtml" />
+    <Content Include="Views\SaleItem\Index.cshtml" />
+    <Content Include="Views\SaleItem\Details.cshtml" />
+    <Content Include="Views\Budget\Index.cshtml" />
+    <Content Include="Views\Budget\Details.cshtml" />
+    <Content Include="Views\Budget\Create.cshtml" />
+    <Content Include="Views\Budget\Edit.cshtml" />
+    <Content Include="Views\Budget\Delete.cshtml" />
+    <Content Include="Views\Income\List.cshtml" />
+    <Content Include="Views\MinistryIncome\Index.cshtml" />
+    <Content Include="Views\MinistryIncome\Details.cshtml" />
+    <Content Include="Views\MinistryIncome\Create.cshtml" />
+    <Content Include="Views\MinistryIncome\Edit.cshtml" />
+    <Content Include="Views\MinistryIncome\Delete.cshtml" />
+    <Content Include="Views\MinistryExpense\Index.cshtml" />
+    <Content Include="Views\MinistryExpense\Details.cshtml" />
+    <Content Include="Views\MinistryExpense\Create.cshtml" />
+    <Content Include="Views\MinistryExpense\Edit.cshtml" />
+    <Content Include="Views\MinistryExpense\Delete.cshtml" />
+    <Content Include="Views\Expense\List.cshtml" />
+    <Content Include="Views\Pledge\List.cshtml" />
+    <Content Include="Views\Member\List.cshtml" />
+    <Content Include="Views\Family\List.cshtml" />
+    <Content Include="Views\Contribution\List.cshtml" />
+    <Content Include="Views\Contribution\Create.cshtml" />
+    <Content Include="Views\Contribution\Edit.cshtml" />
+    <Content Include="Views\Contribution\Delete.cshtml" />
+    <Content Include="Views\Contribution\Details.cshtml" />
+    <Content Include="Views\Contribution\Index.cshtml" />
+    <Content Include="Views\Ministry\List.cshtml" />
+    <Content Include="Views\Announcement\Index.cshtml" />
+    <Content Include="Views\Announcement\Details.cshtml" />
+    <Content Include="Views\Announcement\Create.cshtml" />
+    <Content Include="Views\Announcement\Edit.cshtml" />
+    <Content Include="Views\Announcement\Delete.cshtml" />
+    <Content Include="Views\Announcement\List.cshtml" />
+    <Content Include="Views\Attendance\Index.cshtml" />
+    <Content Include="Views\Attendance\Details.cshtml" />
+    <Content Include="Views\Attendance\Create.cshtml" />
+    <Content Include="Views\Attendance\Edit.cshtml" />
+    <Content Include="Views\Attendance\Delete.cshtml" />
+    <Content Include="Views\Attendance\List.cshtml" />
+    <Content Include="Views\Budget\List.cshtml" />
+    <Content Include="Views\Calendar\List.cshtml" />
+    <Content Include="Views\Document\List.cshtml" />
+    <Content Include="Views\Goal\List.cshtml" />
+    <Content Include="Views\Meeting\List.cshtml" />
+    <Content Include="Views\MeetingAgenda\List.cshtml" />
+    <Content Include="Views\MeetingNote\List.cshtml" />
+    <Content Include="Views\MinistryIncome\List.cshtml" />
+    <Content Include="Views\MinistryExpense\List.cshtml" />
+    <Content Include="Views\ListTable\List.cshtml" />
+    <Content Include="Views\Picture\List.cshtml" />
+    <Content Include="Views\ListItem\List.cshtml" />
+    <Content Include="Views\ListHeader\Index.cshtml" />
+    <Content Include="Views\ListHeader\Details.cshtml" />
+    <Content Include="Views\ListHeader\Create.cshtml" />
+    <Content Include="Views\ListHeader\Edit.cshtml" />
+    <Content Include="Views\ListHeader\Delete.cshtml" />
+    <Content Include="Views\ListHeader\List.cshtml" />
+    <Content Include="Views\ListItem\Delete.cshtml" />
+    <Content Include="Views\Product\List.cshtml" />
+    <Content Include="Views\ProgramEvent\List.cshtml" />
+    <Content Include="Views\ProgramEventBudget\Index.cshtml" />
+    <Content Include="Views\ProgramEventBudget\Details.cshtml" />
+    <Content Include="Views\ProgramEventBudget\Create.cshtml" />
+    <Content Include="Views\ProgramEventBudget\Edit.cshtml" />
+    <Content Include="Views\ProgramEventBudget\Delete.cshtml" />
+    <Content Include="Views\Property\List.cshtml" />
+    <Content Include="Views\SaleItem\List.cshtml" />
+    <Content Include="Views\SaleItem\Create.cshtml" />
+    <Content Include="Views\SaleItem\Edit.cshtml" />
+    <Content Include="Views\SaleItem\Delete.cshtml" />
+    <Content Include="Views\ProgramEventBudget\List.cshtml" />
+    <Content Include="Views\Responsibility\List.cshtml" />
+    <Content Include="Views\Sale\List.cshtml" />
+    <Content Include="Views\Staff\List.cshtml" />
+    <Content Include="Views\Task\List.cshtml" />
+    <Content Include="Views\Video\List.cshtml" />
+    <Content Include="Views\Visitor\List.cshtml" />
+    <Content Include="Views\BankBalance\Index.cshtml" />
+    <Content Include="Views\BankBalance\Details.cshtml" />
+    <Content Include="Views\BankBalance\Create.cshtml" />
+    <Content Include="Views\BankBalance\Edit.cshtml" />
+    <Content Include="Views\BankBalance\Delete.cshtml" />
+    <Content Include="Views\BankBalance\List.cshtml" />
+    <Content Include="Views\Constant\Index.cshtml" />
+    <Content Include="Views\Income\Copy of Index.cshtml" />
+    <Content Include="Views\Home\Copy %282%29 of Index.cshtml" />
+    <Content Include="Views\Home\Events.cshtml" />
+    <Content Include="Views\Home\Contact.cshtml" />
+    <Content Include="Views\Home\Ministries.cshtml" />
+    <Content Include="Views\Home\Copy of About.cshtml" />
+    <Content Include="Views\Shared\_Layout3.cshtml" />
+    <Content Include="Views\Home\WebMaster.cshtml" />
+    <Content Include="Views\Home\Member.cshtml" />
+    <Content Include="Views\Home\Admin.cshtml" />
+    <Content Include="Views\Home\Finance.cshtml" />
+    <Content Include="Views\Home\Ministry.cshtml" />
+    <Content Include="Views\Income\ListActive.cshtml" />
+    <Content Include="Views\Expense\ListActive.cshtml" />
+    <Content Include="Views\Contribution\ListActive.cshtml" />
+    <Content Include="Views\Member\MyPage.cshtml" />
+    <Content Include="Views\Ministry\MyMinistry.cshtml" />
+    <Content Include="Views\Ministry\ListAdmin.cshtml" />
+    <Content Include="Views\Ministry\MinistryView.cshtml" />
+    <Content Include="Views\Calendar\Copy of List.cshtml" />
+    <Content Include="Views\Calendar\ListAdmin.cshtml" />
+    <Content Include="Views\Income\AdminReport.cshtml" />
+    <Content Include="Views\Member\AdminPage.cshtml" />
+    <Content Include="Views\Member\AdminPage3.cshtml" />
+    <Content Include="Views\Income\Copy of Details.cshtml" />
+    <Content Include="Views\Account\Copy of LogOn.cshtml" />
+    <Content Include="Views\Expense\Copy of Details.cshtml" />
+    <Content Include="Views\Account\LogOn.cshtml" />
+    <Content Include="Views\Shared\_LogOnPartial.cshtml" />
+    <Content Include="Views\Budget\ListAdmin.cshtml" />
+    <Content Include="Views\Budget\AdminDetails.cshtml" />
+    <Content Include="Views\Ministry\AdminPage.cshtml" />
+    <Content Include="Views\Ministry\MinistryPageAdmin.cshtml" />
+    <Content Include="Views\Goal\ListMinistry.cshtml" />
+    <Content Include="Views\Task\ListByGoal.cshtml" />
+    <Content Include="Views\Task\ListByGoalAdmin.cshtml" />
+    <Content Include="Views\Member\AdminMemberPage.cshtml" />
+    <Content Include="Views\Income\Copy of AdminReport.cshtml" />
+    <Content Include="Views\Budget\AdminBudgetPage.cshtml" />
+    <Content Include="Views\Bill\ExpenseList.cshtml" />
+    <Content Include="Views\Pledge\ListMember.cshtml" />
+    <Content Include="Views\Expense\PayExpense.cshtml" />
+    <Content Include="Views\Announcement\MyAnnouncement.cshtml" />
+    <Content Include="Views\Ministry\MinistryPage.cshtml" />
+    <Content Include="Views\Shared\DisplayPictureLarge.cshtml" />
+    <Content Include="Views\Visitor\Create_old3.cshtml" />
+    <Content Include="Views\ProgramEvent\ListMinistry.cshtml" />
+    <Content Include="Views\MeetingAgenda\MeetingAgenga.cshtml" />
+    <Content Include="Views\MeetingAgenda\AddAgenda.cshtml" />
+    <Content Include="Views\ProgramEvent\AddAttendance.cshtml" />
+    <Content Include="Views\Picture\DisplayPicque.cshtml" />
+    <Content Include="Views\Shared\DisplayPictureMedium.cshtml" />
+    <Content Include="Views\Shared\DisplayPictureSmall.cshtml" />
+    <Content Include="Views\ListTable\Display.cshtml" />
+    <Content Include="Views\Budget\AccountSummary.cshtml" />
+    <Content Include="Views\Budget\AccountSummaryDetail.cshtml" />
+    <Content Include="Views\BankBalance\GetCurrentBankBalance.cshtml" />
+    <Content Include="Views\Story\Index.cshtml" />
+    <Content Include="Views\Story\Details.cshtml" />
+    <Content Include="Views\Story\Create.cshtml" />
+    <Content Include="Views\Story\Edit.cshtml" />
+    <Content Include="Views\Story\Delete.cshtml" />
+    <Content Include="Views\Story\List.cshtml" />
+    <Content Include="Views\Expense\ReconcileCheck.cshtml" />
+    <Content Include="Views\Expense\ReconcileView.cshtml" />
+    <Content Include="Views\Video\DisplayVideo.cshtml" />
+    <Content Include="Views\Payee\FrequencyReport.cshtml" />
+    <Content Include="Views\Document\GetFileFromDisk.cshtml" />
+    <Content Include="Views\Story\ChurchNewsPaper.cshtml" />
+    <Content Include="Views\ListItem\Create_old2.cshtml" />
+    <Content Include="Views\ListItem\Create_old3.cshtml" />
+    <Content Include="Views\ListItem\Copy of Edit.cshtml" />
+    <Content Include="Views\Staff\DisplayStaff.cshtml" />
+    <Content Include="Views\Responsibility\StaffDuties.cshtml" />
+    <Content Include="Views\UserMailer\_Layout.cshtml" />
+    <Content Include="Views\UserMailer\Welcome.cshtml" />
+    <Content Include="Views\UserMailer\PasswordReset.cshtml" />
+    <Content Include="Views\ListItem\ListStatus.cshtml" />
+    <Content Include="Views\Pledge\ListDetail.cshtml" />
+    <Content Include="Views\ProgramEvent\Copy of List.cshtml" />
+    <Content Include="Views\Shared\DisplayPictureLarge100.cshtml" />
+    <Content Include="Views\Meeting\MeetingReport.cshtml" />
+    <Content Include="Views\Announcement\AdminMisc.cshtml" />
+    <Content Include="Views\Picture\GroupSlider.cshtml" />
+    <Content Include="Views\ListTable\DefaultOpenTables.cshtml" />
+    <Content Include="Views\Member\MemberSecurity.cshtml" />
+    <Content Include="Views\Member\GetMemberRoleList.cshtml" />
+    <Content Include="Views\Ministry\StoryCenteredPageLayout.cshtml" />
+    <Content Include="Views\Ministry\PictureCenteredPageLayout.cshtml" />
+    <Content Include="Views\Ministry\VideoCenteredPageLayout.cshtml" />
+    <Content Include="Views\Ministry\DefaultPageLayout.cshtml" />
+    <Content Include="Views\Task\ActionItemView.cshtml" />
+    <Content Include="Views\Task\ListTwo.cshtml" />
+    <Content Include="Views\Ministry\MinistryIndexView.cshtml" />
+    <Content Include="Views\Member\MemberDataView.cshtml" />
+    <Content Include="Views\Member\MyPageEdit.cshtml" />
+    <Content Include="Views\Document\Create.cshtml" />
+    <Content Include="Views\Member\EmailDialog.cshtml" />
+    <Content Include="Views\PropertyInventory\Create.cshtml" />
+    <Content Include="Views\PropertyInventory\Delete.cshtml" />
+    <Content Include="Views\PropertyInventory\Details.cshtml" />
+    <Content Include="Views\PropertyInventory\Edit.cshtml" />
+    <Content Include="Views\PropertyInventory\Index.cshtml" />
+    <Content Include="Views\PropertyInventory\List.cshtml" />
+    <Content Include="Views\PropertyInventory\PropertyInventoryCategoryList.cshtml" />
+    <Content Include="Views\PropertyInventory\PropertySummary.cshtml" />
+    <Content Include="Views\Calendar\Copy of Details.cshtml" />
+    <Content Include="Views\PropertyInventory\Copy of Details.cshtml" />
+    <Content Include="Views\Ministry\Copy of MinistryPageAdmin.cshtml" />
+    <Content Include="Views\Ministry\Copy of List.cshtml" />
+    <Content Include="Views\ProgramEvent\GoalEvents.cshtml" />
+    <Content Include="Views\Calendar\DisplayCalendar.cshtml" />
+    <Content Include="Views\Task\ActionItemIndex.cshtml" />
+    <Content Include="Views\Meeting\AdminList.cshtml" />
+    <Content Include="Views\Ministry\Copy of MinistryPage.cshtml" />
+    <Content Include="Views\Goal\Copy of ListMinistry.cshtml" />
+    <Content Include="Views\Picture\Copy of List.cshtml" />
+    <Content Include="Views\Picture\Copy of GroupSlider.cshtml" />
+    <Content Include="Views\Picture\Copy %282%29 of List.cshtml" />
+    <Content Include="Views\ListTable\Copy of List.cshtml" />
+    <Content Include="Views\ListItem\Copy of List.cshtml" />
+    <Content Include="Views\Story\DisplayStory.cshtml" />
+    <Content Include="Views\Ministry\MinistryMember.cshtml" />
+    <Content Include="Views\Member\AddChildParent.cshtml" />
+    <Content Include="Views\Ministry\MemberView.cshtml" />
+    <Content Include="Views\Ministry\ParentView.cshtml" />
+    <Content Include="Views\Ministry\RemoveParent.cshtml" />
+    <Content Include="Views\Account\Copy %282%29 of LogOn.cshtml" />
+    <Content Include="Views\Account\LogOff.cshtml" />
+    <Content Include="Views\Staff\Copy of DisplayStaff.cshtml" />
+    <Content Include="Views\Member\RemoveMeFromFamilyView.cshtml" />
+    <Content Include="Views\Member\AddSpouseView.cshtml" />
+    <Content Include="Views\Budget\Copy of Details.cshtml" />
+    <Content Include="Views\Member\EditActiveMember.cshtml" />
+    <Content Include="Views\Member\EditAllMember.cshtml" />
+    <Content Include="Views\Member\UpdateMemberStatus.cshtml" />
+    <Content Include="Views\Member\Copy of AdminPage.cshtml" />
+    <Content Include="Views\Pledge\MemberPledgeEnable.cshtml" />
+    <Content Include="Views\Family\FamilyMemberList.cshtml" />
+    <Content Include="Views\Picture\Copy %282%29 of GroupSlider.cshtml" />
+    <Content Include="Views\Video\VideoList.cshtml" />
+    <Content Include="Views\Home\Copy of Contact.cshtml" />
+    <Content Include="Views\Calendar\FullCalendar.cshtml" />
+    <Content Include="Views\Home\SlideShow.cshtml" />
+    <Content Include="Views\Home\Donation.cshtml" />
+    <Content Include="Views\Home\Copy %282%29 of About.cshtml" />
+    <Content Include="Views\UserMailer\WelcomeText.cshtml" />
+    <Content Include="Views\Ministry\MinistryHomePage.cshtml" />
+    <Content Include="Views\UserMailer\_LayoutText.cshtml" />
+    <Content Include="Views\Member\Copy of EmailDialog.cshtml" />
+    <Content Include="Views\Ministry\MinistryViewAll.cshtml" />
+    <Content Include="Views\Ministry\GetMinistryPage.cshtml" />
+    <Content Include="Views\Story\LatestStories.cshtml" />
+    <Content Include="Views\Video\LatestVideo.cshtml" />
+    <Content Include="Views\Announcement\MinistryAnnouncements.cshtml" />
+    <Content Include="Views\ListTable\GetMinistryGeneralTables.cshtml" />
+    <Content Include="Views\Announcement\MinistryGeneralAnnouncements.cshtml" />
+    <Content Include="Views\Ministry\Copy of MyMinistry.cshtml" />
+    <Content Include="Views\Home\GetMinistryPage.cshtml" />
+    <Content Include="Views\Announcement\GeneralAnnouncement.cshtml" />
+    <Content Include="Views\Member\BirthdayAnniversaryList.cshtml" />
+    <Content Include="Views\Calendar\GetBannerCalendarEvent.cshtml" />
+    <Content Include="Views\Home\DisplayBannerCalendarEvent.cshtml" />
+    <Content Include="Views\Home\DisplayPublicMinistryBanner.cshtml" />
+    <Content Include="Views\Home\GetMinistryPage2.cshtml" />
+    <Content Include="Views\UserMailer\EmailOrText.cshtml" />
+    <Content Include="Views\UserMailer\VisitorEmailOrText.cshtml" />
+    <Content Include="Views\Home\HowToInstructions.cshtml" />
+    <Content Include="Views\Home\HowToVideos.cshtml" />
+    <Content Include="Views\Home\GetHomePage3BoxRight.cshtml" />
+    <Content Include="Views\Home\GetHomePage3BoxLeft.cshtml" />
+    <Content Include="Views\Home\GetHomePage3BoxBottom.cshtml" />
+    <Content Include="Views\Home\GetHomePage3BoxTop.cshtml" />
+    <Content Include="Views\Home\GetHomePageFull.cshtml" />
+    <Content Include="Views\Shared\Logo.cshtml" />
+    <Content Include="Views\Member\MyPage2.cshtml" />
+    <Content Include="Views\Story\ChurchNewsPaper2.cshtml" />
+    <Content Include="Views\Shared\DisplayPictureLarge2.cshtml" />
+    <Content Include="Views\Picture\Details.cshtml" />
+    <Content Include="Views\Income\PastorDashBoard.cshtml" />
+    <Content Include="Views\Ministry\AddMinistryMember.cshtml" />
+    <Content Include="Views\Ministry\MinistryMemberList.cshtml" />
+    <Content Include="Views\Attendance\MeetingAttendance.cshtml" />
+    <Content Include="Views\MeetingAgenda\MeetingAgendaList.cshtml" />
+    <Content Include="Views\Shared\DisplayPictureLarge3.cshtml" />
+    <Content Include="Views\Visitor\UpdateVisitorProfile.cshtml" />
+    <Content Include="Views\Visitor\Edit.cshtml" />
+    <Content Include="Views\Staff\Copy %282%29 of DisplayStaff.cshtml" />
+    <Content Include="Views\Shared\_LayouSimpleLogin.cshtml" />
+    <Content Include="Views\Shared\_Layout.cshtml" />
+    <Content Include="Views\Expense\Create.cshtml" />
+    <Content Include="Views\Contribution\CreateList.cshtml" />
+    <Content Include="Views\Constant\HowToVideos.cshtml" />
+    <Content Include="Views\Account\RecoveryPassword.cshtml" />
+    <Content Include="Views\Account\RecoverySecurityQuestion.cshtml" />
+    <Content Include="Views\Account\LogOnModal.cshtml" />
+    <Content Include="Views\Constant\GetVideos.cshtml" />
+    <Content Include="Views\PropertyInventory\RentalEmailDisplay.cshtml" />
+    <Content Include="Views\UserMailer\ContactUs.cshtml" />
+    <Content Include="Views\UserMailer\RentalRequest.cshtml" />
+    <Content Include="Views\Document\LatestDocument.cshtml" />
+    <Content Include="Views\UserMailer\Copy of Welcome.cshtml" />
+    <Content Include="Views\UserMailer\Copy of WelcomeText.cshtml" />
+    <Content Include="Views\UserMailer\Copy of VisitorEmailOrText.cshtml" />
+    <Content Include="Views\UserMailer\Copy of PasswordReset.cshtml" />
+    <Content Include="Views\Constant\MiscUpdate.cshtml" />
+    <Content Include="Views\Constant\GetConstantMisc.cshtml" />
+    <Content Include="Views\Pledge\CreatePledge.cshtml" />
+    <Content Include="Views\Member\FamilyDOBDisplay.cshtml" />
+    <Content Include="Views\Budget\BudgetCategoryDetails.cshtml" />
+    <Content Include="Views\Home\Copy of Ministries.cshtml" />
+    <Content Include="Views\Contribution\Copy of Create.cshtml" />
+    <Content Include="Views\Income\AdminDashBoard.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\ClientFiles\" />
+    <Folder Include="Content\themes\base\myImages\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Domain\Domain.csproj">
+      <Project>{9f47ae29-1a4b-41cc-aff6-22038d2ed6d9}</Project>
+      <Name>Domain</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <PropertyGroup>
+    <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
+    <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>
+  </PropertyGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(VSToolsPath)\WebApplications\Microsoft.WebApplication.targets" Condition="'$(VSToolsPath)' != ''" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" Condition="false" />
+  <Target Name="MvcBuildViews" AfterTargets="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(WebProjectOutputDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>True</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>58204</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>http://localhost:54613/</IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target> -->
+</Project>

@@ -1,0 +1,158 @@
+﻿@model Domain.listitem
+
+@{
+    ViewBag.Title = "Create";
+    
+}
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Create", "ListItem", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>@ViewBag.TableName</legend>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.listTableID)
+            @Html.ValidationMessageFor(model => model.listTableID)
+        </div>
+
+        @if (@ViewBag.FieldName1 != "")
+        {
+        <div class="editor">
+            @Html.LabelFor(model => model.Value1,(string)@ViewBag.FieldName1)
+            @Html.EditorFor(model => model.Value1)
+            @Html.ValidationMessageFor(model => model.Value1)
+        </div>
+        }
+
+        @if (@ViewBag.FieldName2 != "")
+        {
+        <div class="editor">
+            @Html.LabelFor(model => model.Value2,(string)@ViewBag.FieldName2)
+            @Html.EditorFor(model => model.Value2)
+            @Html.ValidationMessageFor(model => model.Value2)
+        </div>
+        }
+
+        @if (@ViewBag.FieldName3 != "")
+        {
+        <div class="editor">
+            @Html.LabelFor(model => model.Value3,(string)@ViewBag.FieldName3)
+            @Html.EditorFor(model => model.Value3)
+            @Html.ValidationMessageFor(model => model.Value3)
+        </div>
+        }
+
+        @if (@ViewBag.FieldName4 != "")
+        {
+        <div class="editor">
+            @Html.LabelFor(model => model.Value4,(string)@ViewBag.FieldName4)
+            @Html.EditorFor(model => model.Value4)
+            @Html.ValidationMessageFor(model => model.Value4)
+        </div>
+        }
+
+        @if (@ViewBag.FieldName5 != "")
+        {
+        <div class="editor">
+            @Html.LabelFor(model => model.Value5,(string)@ViewBag.FieldName5)
+            @Html.EditorFor(model => model.Value5)
+            @Html.ValidationMessageFor(model => model.Value5)
+        </div>
+        }
+
+        @if (@ViewBag.FieldName6 != "")
+        {
+            
+        <div class="editor">
+            @Html.LabelFor(model => model.Value6,(string)@ViewBag.FieldName6)
+            @Html.EditorFor(model => model.Value6)
+            @Html.ValidationMessageFor(model => model.Value6)
+        </div>
+        }
+
+        @if (@ViewBag.FieldName7 != "")
+        {
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Value7,(string)@ViewBag.FieldName7)
+            @Html.EditorFor(model => model.Value7)
+            @Html.ValidationMessageFor(model => model.Value7)
+        </div>            
+        }
+
+
+      @if (@ViewBag.FieldName8 != "")
+        {
+        <div class="editor">
+            @Html.LabelFor(model => model.Value8,(string)@ViewBag.FieldName8)
+            @Html.EditorFor(model => model.Value8)
+            @Html.ValidationMessageFor(model => model.Value8)
+        </div>
+       }
+
+        @if (@ViewBag.FieldName9 != "")
+        {
+        <div class="editor">
+            @Html.LabelFor(model => model.Value9,(string)@ViewBag.FieldName9)
+            @Html.TextBoxFor(model => model.Value9, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.Value9)
+        </div>
+        }
+        @if (@ViewBag.FieldName10 != "")
+        {
+        <div class="editor">
+            @Html.LabelFor(model => model.Value10,(string)@ViewBag.FieldName10)
+            @Html.TextBoxFor(model => model.Value10, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker2" })
+            @Html.ValidationMessageFor(model => model.Value10)
+        </div>
+        }
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Comment)
+            @Html.EditorFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+        <div class="editor">
+             @Html.HiddenFor(model => model.EnteredBy)
+            @Html.ValidationMessageFor(model => model.EnteredBy)
+        </div>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.DateEntered)
+            @Html.ValidationMessageFor(model => model.DateEntered)
+        </div>
+
+        <div id="formSubmitButton">
+            <input id="ButtonClick" type="submit" value="Create" />
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+           
+        });
+    });
+</script>

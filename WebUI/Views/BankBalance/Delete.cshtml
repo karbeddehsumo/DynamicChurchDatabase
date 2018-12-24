@@ -1,0 +1,81 @@
+﻿@model Domain.bankbalance
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div id="AjaxFormPane">
+
+<h3>Are you sure you want to delete this record?</h3>
+
+<table>
+    <tr>
+        <th>
+            BankAccountID
+        </th>
+        <th>
+            Begin Date
+        </th>
+        <th>
+            End Date
+        </th>
+        <th>
+            Begining Balance
+        </th>
+        <th>
+            Revenue Amount
+        </th>
+        <th>
+            Expense Amount
+        </th>
+        <th>
+            Ending Balance
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.BankAccountID)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.BeginDate)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.EndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.BeginingBalance)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.RevenueAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.ExpenseAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.EndingBalance)
+        </td>
+    </tr>
+
+</table>
+
+@using (Ajax.BeginForm("Delete", "BankBalance", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    <p>
+        <input id="BankBalanceID" name="BankBalanceID" type="hidden"  value="@ViewBag.BankBalanceID"/>
+     <input type="submit" value="Delete" /> <input id="CancelDeleteBtn" name="CancelDeleteBtn" type="button" value="Cancel Delete"/>
+    </p>
+}
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#CancelDeleteBtn').click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+    });
+</script>

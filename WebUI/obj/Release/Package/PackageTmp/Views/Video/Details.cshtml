@@ -1,0 +1,101 @@
+﻿@model Domain.video
+
+@{
+    ViewBag.Title = "Details";
+ 
+}
+<script src="../../Scripts/jquery-ui-1.8.20.min.js"></script>
+
+<div id="AjaxFormPane">
+    <div class="center" style="color:red">@TempData["message2"]</div>
+<div>
+    <strong>Select dates and search</strong><br />
+        <label>Begin Date </label>
+        <input id="bDate" type="text"  class="datepicker" value="@ViewBag.BeginDate" style="width:100px;" />
+         <label>End Date </label>
+        <input id="eDate" type="text"  class="datepicker" value="@ViewBag.EndDate" style="width:100px;" />
+        <input id="submitAllClick" name="submitAllClick" value="View All" type="submit"/><br />
+           <input id="CallerType" name="CallerType" type="hidden" value="@ViewBag.CallerType" />
+        @if (@ViewBag.CallerType == "Ministry")
+        {
+            <!--
+             @Html.DropDownList("MinistrySearch", ViewBag.MinistryList as SelectList)
+                -->
+        }
+        else
+        {
+            @Html.DropDownList("MinistrySearch", ViewBag.MinistryList as SelectList,"Select By Ministry...")
+        }
+        <input type="hidden" id="ministryID" value="@ViewBag.MinistryID"/>
+        @Html.DropDownList("StatusSearch", ViewBag.StatusList as SelectList)
+</div>
+<div id="CalendarData">
+     @if (@ViewBag.CallerType == "Ministry")
+        {
+        @Html.Action("List", "Video", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate,SearchType="MinistrySearch",CallerType="Ministry",codeID=@ViewBag.MinistryID})
+        }
+    else
+    {
+        @Html.Action("List", "Video", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})        
+    }
+</div>
+
+</div>
+
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        $("#MinistrySearch").change(function (event) {
+            var ministryid = $("#ministryID").val();//$('#MinistrySearch option:selected').val();
+            var callerType = $("#CallerType").val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Video/List";
+         //   $("#StatusSearch").val("Select By Status...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), MinistryID: ministryid.toString(), SearchType: "MinistrySearch", CallerType: callerType.toString() }, function (data) { $("#CalendarData").html(data) });
+        });
+        $("#StatusSearch").change(function (event) {
+            var catid = $('#StatusSearch option:selected').val();
+            var ministryid = $("#ministryID").val();//$('#MinistrySearch option:selected').val();
+            var callerType = $("#CallerType").val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Video/List";
+            //$("#MinistrySearch").val("Select By Ministry...");
+            if (callerType == "Ministry") {
+                $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), code: catid.toString(), MinistryID: ministryid.toString(), SearchType: "MinistryStatusSearch", CallerType: callerType.toString() }, function (data) { $("#CalendarData").html(data) });
+            }
+            else
+            {
+                $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: catid.toString(), MinistryID: ministryid.toString(), SearchType: "StatusSearch", CallerType: callerType.toString() }, function (data) { $("#CalendarData").html(data) });
+            }
+        });
+
+        $(document).on("click", "#submitAllClick", function (event) {
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var ministryid = $("#ministryID").val();//$('#MinistrySearch option:selected').val();
+            var callerType = $("#CallerType").val();
+            var url = "/Video/List";
+            //$("#MinistrySearch").val("Select By Ministry...");
+         //   $("#StatusSearch").val("Select By Status...");
+            if (callerType == "Ministry")
+            {
+                $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), MinistryID: ministryid.toString(), SearchType: "MinistrySearch", CallerType: callerType.toString() }, function (data) { $("#CalendarData").html(data) });
+            }
+         else
+         {
+                $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), SearchType: "", CallerType: callerType.toString() }, function (data) { $("#CalendarData").html(data) });
+
+            }
+        });
+
+    });
+
+ </script>

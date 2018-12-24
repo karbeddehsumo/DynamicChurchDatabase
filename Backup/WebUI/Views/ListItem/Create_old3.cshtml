@@ -1,0 +1,246 @@
+﻿@model Domain.listitem
+
+@{
+    ViewBag.Title = "Create";
+    
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Create", "ListItem", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <tr>
+
+            @Html.HiddenFor(model => model.listTableID)
+            @Html.ValidationMessageFor(model => model.listTableID)
+
+
+        @if (@ViewBag.FieldName1 != "")
+        {
+            if (@ViewBag.FieldName1 == "Date")
+            {
+              <td>
+                @Html.TextBoxFor(model => model.Value1, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+                @Html.ValidationMessageFor(model => model.Value1)
+            </td>
+            }
+        else
+            {
+            <td >
+                @Html.TextBoxFor(model => model.Value1, new {style="width:100px"})
+                @Html.ValidationMessageFor(model => model.Value1)
+            </td>
+            }
+        }
+
+        @if (@ViewBag.FieldName2 != "")
+        {
+                        if (@ViewBag.FieldName2 == "Date")
+                    {
+                      <td>
+                        @Html.TextBoxFor(model => model.Value2, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker2" })
+                        @Html.ValidationMessageFor(model => model.Value2)
+                    </td>
+                    }
+                else
+                    {
+                <td>
+                    @Html.TextBoxFor(model => model.Value2, new {style="width:100px"})
+                    @Html.ValidationMessageFor(model => model.Value2)
+                </td>
+                }
+        }
+
+        @if (@ViewBag.FieldName3 != "")
+        {
+                        if (@ViewBag.FieldName3 == "Date")
+                        {
+                          <td>
+                            @Html.TextBoxFor(model => model.Value3, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker3" })
+                            @Html.ValidationMessageFor(model => model.Value3)
+                        </td>
+                        }
+                    else
+                        {
+                    <td>
+                        @Html.TextBoxFor(model => model.Value3, new {style="width:100px"})
+                        @Html.ValidationMessageFor(model => model.Value3)
+                    </td>
+                    }
+        }
+
+        @if (@ViewBag.FieldName4 != "")
+        {
+                        if (@ViewBag.FieldName4 == "Date")
+                        {
+                          <td>
+                            @Html.TextBoxFor(model => model.Value4, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker4" })
+                            @Html.ValidationMessageFor(model => model.Value4)
+                        </td>
+                        }
+                    else
+                        {
+                    <td>
+                        @Html.TextBoxFor(model => model.Value4, new {style="width:100px"})
+                        @Html.ValidationMessageFor(model => model.Value4)
+                    </td>
+                    }
+        }
+
+        @if (@ViewBag.FieldName5 != "")
+        {
+                        if (@ViewBag.FieldName5 == "Date")
+                        {
+                          <td>
+                            @Html.TextBoxFor(model => model.Value5, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker5" })
+                            @Html.ValidationMessageFor(model => model.Value5)
+                        </td>
+                        }
+                    else
+                        {
+                    <td>
+                        @Html.TextBoxFor(model => model.Value5, new {style="width:100px"})
+                        @Html.ValidationMessageFor(model => model.Value5)
+                    </td>
+                    }
+        }
+
+        @if (@ViewBag.FieldName6 != "")
+        {
+                      if (@ViewBag.FieldName6 == "Date")
+                        {
+                          <td>
+                            @Html.TextBoxFor(model => model.Value6, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker6" })
+                            @Html.ValidationMessageFor(model => model.Value6)
+                        </td>
+                        }
+                    else
+                        {  
+                    <td>
+                        @Html.TextBoxFor(model => model.Value6, new {style="width:100px"})
+                        @Html.ValidationMessageFor(model => model.Value6)
+                    </td>
+                    }
+        }
+
+        @if (@ViewBag.FieldName7 != "")
+        {
+                        if (@ViewBag.FieldName7 == "Date")
+                        {
+                          <td>
+                            @Html.TextBoxFor(model => model.Value7, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker7" })
+                            @Html.ValidationMessageFor(model => model.Value7)
+                        </td>
+                        }
+                    else
+                        {
+                    <td>
+                        @Html.TextBoxFor(model => model.Value7, new {style="width:100px"})
+                        @Html.ValidationMessageFor(model => model.Value7)
+                    </td>  
+                    }          
+        }
+
+
+      @if (@ViewBag.FieldName8 != "")
+        {
+                      if (@ViewBag.FieldName8 == "Date")
+                        {
+                          <td>
+                            @Html.TextBoxFor(model => model.Value8, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker8" })
+                            @Html.ValidationMessageFor(model => model.Value8)
+                        </td>
+                        }
+                    else
+                        {
+                    <td>
+                        @Html.TextBoxFor(model => model.Value8, new {style="width:100px"})
+                        @Html.ValidationMessageFor(model => model.Value8)
+                    </td>
+                  }
+       }
+
+        @if (@ViewBag.FieldName9 != "")
+        {
+                        if (@ViewBag.FieldName9 == "Date")
+                            {
+                              <td>
+                                @Html.TextBoxFor(model => model.Value9, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker9" })
+                                @Html.ValidationMessageFor(model => model.Value9)
+                            </td>
+                            }
+                        else
+                            {
+                        <td>
+                            @Html.TextBoxFor(model => model.Value9, new {style="width:100px"})
+                            @Html.ValidationMessageFor(model => model.Value9)
+                        </td>
+                        }
+        }
+        @if (@ViewBag.FieldName10 != "")
+        {
+                        if (@ViewBag.FieldName10 == "Date")
+                        {
+                          <td>
+                            @Html.TextBoxFor(model => model.Value10, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker10" })
+                            @Html.ValidationMessageFor(model => model.Value10)
+                        </td>
+                        }
+                    else
+                        {
+                    <td>
+                        @Html.TextBoxFor(model => model.Value10, new {style="width:100px"})
+                        @Html.ValidationMessageFor(model => model.Value10)
+                    </td>
+                    }
+        }
+
+        <td>
+            @Html.TextBoxFor(model => model.Comment, new {style="width:100px"})
+            @Html.ValidationMessageFor(model => model.Comment)
+        </td>
+             @Html.HiddenFor(model => model.EnteredBy)
+            @Html.HiddenFor(model => model.DateEntered)
+
+   
+
+    
+        <td id="formSubmitButton">
+            <input id="ButtonClick" type="submit" value="Create" />
+        </td>
+
+       </tr>   
+}
+
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+        $('#datepicker3').not('.hasDatePicker').datepicker();
+        $('#datepicker4').not('.hasDatePicker').datepicker();
+        $('#datepicker5').not('.hasDatePicker').datepicker();
+        $('#datepicker6').not('.hasDatePicker').datepicker();
+        $('#datepicker7').not('.hasDatePicker').datepicker();
+        $('#datepicker8').not('.hasDatePicker').datepicker();
+        $('#datepicker9').not('.hasDatePicker').datepicker();
+        $('#datepicker10').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            alert("Button was clicked!");
+        });
+    });
+</script>

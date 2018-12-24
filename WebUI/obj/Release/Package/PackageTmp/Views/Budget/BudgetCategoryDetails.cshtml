@@ -1,0 +1,62 @@
+﻿
+
+@{
+    ViewBag.Title = "Budget";
+}
+
+<br />
+<br />
+<br />
+<strong class="center">@ViewBag.Heading</strong>
+<br />
+<div class="center">
+    @if (@ViewBag.CategoryType == "Income")
+            {
+                <table>
+            <tr>
+                <td>Fund</td>
+                <td>Total Amount</td>
+            </tr>
+            @foreach (var item in @ViewBag.BudgetSubcategoryList)
+            {
+                <tr>      
+                    <td>            
+                        @Ajax.ActionLink((string)@item.Name, "List", "Income", new {codeID = (int) @item.subcategoryID,code="CategorySearch",bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "BudgetDetailPane" }, new {@style="text-decoration:none;background-color:gainsboro;color:black;"})
+                    </td>
+                    <td style="text-align:right">
+                        @string.Format("{0:c}",@item.Amount)
+                    </td>
+                    
+                </tr>
+            }
+        </table>
+    }
+    else
+    {
+        <table>
+            <tr>
+                <td>Fund</td>
+                <td>Total Amount</td>
+            </tr>
+            @foreach (var item in @ViewBag.BudgetSubcategoryList)
+            {
+                <tr>      
+                    <td>            
+                        @Ajax.ActionLink((string)@item.Name, "List", "Expense", new {codeID = (int) @item.subcategoryID,code="CategorySearch",bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "BudgetDetailPane" }, new {@style="text-decoration:none;background-color:gainsboro;color:black;"})
+                    </td>
+                    <td style="text-align:right">
+                        @string.Format("{0:c}",@item.Amount)
+                    </td>
+                    
+                </tr>
+            }
+        </table>
+    }
+   
+    </div>
+<br />
+<br />
+<br />
+<div id="BudgetDetailPane" class="center">
+
+</div>

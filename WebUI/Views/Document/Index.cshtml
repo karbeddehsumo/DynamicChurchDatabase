@@ -1,0 +1,17 @@
+﻿@model Domain.document
+
+@{
+    ViewBag.Title = "Index";
+ 
+}
+
+<div>
+<h2 class="center">Document Center</h2>
+    <div class="center">
+@Ajax.ActionLink("New Document", "Create", "Document", new {MinistryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "CreateDocumentPane" }, new {@id="pageSubTitle"})
+@Ajax.ActionLink("View Document", "Details", "Document", new {MinistryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "CreateDocumentPane" }, new {@id="pageSubTitle"})
+</div>
+ <div id="CreateDocumentPane">
+    @Html.Action("Details", "Document", new {MinistryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType})
+ </div>
+    </div>

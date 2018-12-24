@@ -1,0 +1,83 @@
+﻿@model IEnumerable<Domain.staff>
+
+@{
+    ViewBag.Title = "DisplayStaff";
+}
+
+<h2 class="center">Staff</h2>
+<div class="panel" style="z-index:-1">
+            <div class="row">
+@foreach(Domain.staff item in @Model)
+{
+    <div  class="col-xs-12 col-sm-6 col-md-6">
+        <div  class="col-xs-12 col-sm-4 col-md-4">
+             @if (@item.picture != null)
+            {
+                <img class="Portrait-medium" src="@Url.Action("GetImageByID", "Picture",new {PictureID=@item.picture.pictureID})" /><br />         
+            }
+            else
+            {
+                <img class="Portrait-medium" src="@Url.Action("GetDefaultPeoplePicture", "Picture")" /><br />
+            }
+            </div>
+
+        <div  class="col-xs-12 col-sm-8 col-md-8">
+            <br />
+            <div>
+           <strong style="font-size:small; color:black;text-align:center;">@string.Format("{0}",@item.FullNameTitle)</strong><br />
+           @if (@item.mainResponsibility != null)
+            {
+            <span>@string.Format("{0}",@item.mainResponsibility.Title)</span>
+          }
+
+            <p>
+            @if (@item.mainResponsibility != null)
+            {
+                @item.mainResponsibility.BriefDescription
+            }
+            </p>
+                </div>
+   </div>
+</div>
+
+}
+    </div>
+    </div>
+
+<!--
+    <div class="panel">
+
+@foreach(Domain.staff item in @Model)
+{
+        <div class="row">
+        <div  class="col-xs-12 col-sm-3 col-md-2">
+             @if (@item.picture != null)
+            {
+                <img class="Portrait-medium" src="@Url.Action("GetImageByID", "Picture",new {PictureID=@item.picture.pictureID})" /><br />         
+            }
+            else
+            {
+                <img class="Portrait-medium" src="@Url.Action("GetDefaultPeoplePicture", "Picture")" /><br />
+            }
+            </div>
+
+        <div  class="col-xs-12 col-sm-6 col-md-6">
+            <br />
+           <strong style="font-size:small; color:black;text-align:center;">@string.Format("{0}",@item.FullNameTitle)</strong><br />
+           @if (@item.mainResponsibility != null)
+            {
+            <strong>@string.Format("{0}",@item.mainResponsibility.Title)</strong>
+          }
+
+            <p>
+            @if (@item.mainResponsibility != null)
+            {
+            @item.mainResponsibility.BriefDescription
+            }
+            </p>
+   </div>
+
+</div>
+}
+    </div>
+    -->

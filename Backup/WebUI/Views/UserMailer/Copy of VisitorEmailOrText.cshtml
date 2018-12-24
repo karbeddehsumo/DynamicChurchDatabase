@@ -1,0 +1,16 @@
+﻿@{
+    Layout = "~/Views/UserMailer/_LayoutText.cshtml";
+}
+@ViewBag.ChurchName <br />
+Hi @ViewBag.Name,<br /><br />
+@ViewBag.Message
+<br /><br />
+In Christ name,<br />
+@ViewBag.SeniorPastor
+<br />
+Code: @ViewBag.SenderCode<br />
+<a href="http://www.icfatlanta.org">www.icfatlanta.org</a>
+<br /><br />
+<a href="http://www.icfatlanta.org/Visitor/Unsubscribe?VisitorID=@ViewBag.VisitorID">Unsubscribe now</a><br />
+<a href="http://www.icfatlanta.org/Visitor/UpdateVisitorProfile?VisitorID=@ViewBag.VisitorID">Update my profile</a>
+

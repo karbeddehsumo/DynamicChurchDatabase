@@ -1,0 +1,74 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+
+
+<h3>View Income Report</h3>
+<br />
+
+<div id="SubtitleInline">
+    <p>Begin Date</p>
+    <input id="datepicker" type="text"  value="@ViewBag.BeginDate"" />
+
+    
+         <p>End Date </p>
+     <input id="datepicker2" type="text" value="@ViewBag.EndDate" style="width:100px;" />
+
+
+        @Html.DropDownList("CategoryListSearch", ViewBag.SubCategoryList as SelectList,"")
+
+        @Html.DropDownList("BankAccountListSearch", ViewBag.BankAccountList as SelectList,"")
+ </div>
+
+<br />
+<br />
+
+<div class="IncomeData">
+@Html.Action("List", "Income", new {bdate=@ViewBag.BeginDate,edate=@ViewBag.EndDate,code="DateRangeSearch" })
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+
+        $("#CategoryListSearch").change(function (event) {
+            var categoryid = $('#CategoryListSearch option:selected').val();
+            var bankaccountid = $('#BankAccountListSearch option:selected').val();
+            var bdate = $("#datepicker").val();
+            var edate = $("#datepicker2").val();
+            var url = "/Income/List";
+            if ($('#CategoryListSearch option:selected').val().length != 0) {
+                $.get(url, { code: 'CategorySearch', bDate: bdate.toString(), eDate: edate.toString(), codeID: categoryid.toString() }, function (data) { $(".IncomeData").html(data) });
+            }
+            else if ($('#BankAccountListSearch option:selected').val().length != 0) {
+                $.get(url, { code: 'BankAccountSearch', bDate: bdate.toString(), eDate: edate.toString(), codeID: bankaccountid.toString() }, function (data) { $(".IncomeData").html(data) });
+            }
+            else {
+                $.get(url, { code: 'DateRangeSearch', bDate: bdate.toString(), eDate: edate.toString() }, function (data) { $(".IncomeData").html(data) });
+            }
+        });
+        $("#BankAccountListSearch").change(function (event) {
+            var categoryid = $('#CategoryListSearch option:selected').val();
+            var bankaccountid = $('#BankAccountListSearch option:selected').val();
+            var bdate = $("#datepicker").val();
+            var edate = $("#datepicker2").val();
+            var url = "/Income/List";
+            if ($('#CategoryListSearch option:selected').val().length != 0) {
+                $.get(url, { code: 'CategorySearch', bDate: bdate.toString(), eDate: edate.toString(), codeID: categoryid.toString() }, function (data) { $(".IncomeData").html(data) });
+            }
+            else if ($('#BankAccountListSearch option:selected').val().length != 0) {
+                $.get(url, { code: 'BankAccountSearch', bDate: bdate.toString(), eDate: edate.toString(), codeID: bankaccountid.toString() }, function (data) { $(".IncomeData").html(data) });
+            }
+            else {
+                $.get(url, { code: 'DateRangeSearch', bDate: bdate.toString(), eDate: edate.toString() }, function (data) { $(".IncomeData").html(data) });
+            }
+        });
+
+    });
+
+ </script>

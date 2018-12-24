@@ -1,0 +1,214 @@
+﻿@model  Domain.ministry
+
+@{
+    ViewBag.Title = "MyMinistry";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+   // Layout = "";
+}
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+<div id="pageDiv">
+<div>
+<h2 id="pageTitle" class="center">Ministry Center</h2>
+    <div class="center">
+@Ajax.ActionLink("Ministry List", "AdminPage", "Ministry", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "pageDiv" }, new {@id="pageSubTitle",@title="View Ministries"})
+        </div>
+        </div>
+<div id="AdminMinistryPane" class="panel center clearfix">
+<h2 class="center">@string.Format("{0}",@Model.MinistryName)</h2><br />
+    <div class="center">
+@Ajax.ActionLink("Send Email", "EmailDialog", "Member", new {ministryID=@Model.ministryID,RecipientType="Ministry"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryPagePane" }) <br />
+</div>
+<div id="MinistryPage" class="center">
+    <input id="Ministry" type="button" value="Edit" title="Edit Ministry"/>
+    <input id="Income" type="button" value="Income" title="Add Income"/>
+    <input id="Expense" type="button" value="Expense" title="Add Expense" />
+    <input id="Goal" type="button" value="Goals" title="Goals"/>
+    <input id="Event" type="button" value="Events" title="Events"/>
+    <input id="Meeting" type="button" value="Meetings" title="Meeting"/>
+    <input id="Announcement" type="button" value="Announcements" title="Announcement" /><br />
+    <input id="Picture" type="button" value="Pictures" title="Pictures" />
+    <input id="Table" type="button" value="Data Tables" title="Tables"/>
+    <input id="Story" type="button" value="Stories" title="Stories"/>
+    <input id="Document" type="button" value="Docements" title="Documents"/>
+    <input id="Calendar" type="button" value="Calendar" title="Calendars"/>
+    <input id="Video" type="button" value="Videos" title="Videos"/>
+    <input id="Member" value="Members" type="button" title="Members"/>
+    @if ((@ViewBag.MinistryType == "Minor") && (@ViewBag.Superviosr == true))
+    {
+<input id="Parent" value="Parents" type="button" title="Parents"/>
+}
+
+</div>
+<input id="ministryID" name="ministryID" type="hidden" value="@Model.ministryID"/>
+    <br />
+<div id="MinistryPagePane" class="clearfix"></div>
+</div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#membershipDate').not('.hasDatePicker').datepicker();
+
+      
+        $(document).on("click", "#Ministry", function (event) {
+            var ministryID = $('#ministryID').val();
+            var url = "/Ministry/Edit";
+            $.get(url, { MinistryID: ministryID.toString(), Code: "MinistryPage" }, function (data) { $("#MinistryPagePane").html(data) });
+        });
+
+        $(document).on("click", "#Income", function (event) {
+            var ministryID = $('#ministryID').val();
+            var url = "/MinistryIncome/Index";
+            $.get(url, { ministryID: ministryID.toString() }, function (data) { $("#MinistryPagePane").html(data) });
+        });
+
+        $(document).on("click", "#Expense", function (event) {
+            var ministryID = $('#ministryID').val();
+            var url = "/MinistryExpense/Index";
+            $.get(url, {ministryID: ministryID.toString() }, function (data) { $("#MinistryPagePane").html(data) });
+
+        });
+
+        $(document).on("click", "#Goal", function (event) {
+            var ministryID = $('#ministryID').val();
+            var url = "/Goal/ListMinistry";
+            $.get(url, { SearchType: "MinistrySearch", codeID: ministryID.toString(), bDate: "1/1/2015", eDate: "1/1/2015" }, function (data) { $("#MinistryPagePane").html(data) });
+
+        });
+
+        $(document).on("click", "#Meeting", function (event) {
+            var ministryID = $('#ministryID').val();
+            var url = "/Meeting/Index";
+            $.get(url, { ministryID: ministryID.toString(),CallerType:"Ministry"}, function (data) { $("#MinistryPagePane").html(data) });
+
+        });
+
+        $(document).on("click", "#Announcement", function (event) {
+            var ministryID = $('#ministryID').val();
+            var url = "/Announcement/Index";
+            $.get(url, { ministryID: ministryID.toString(), CallerType: "Ministry" }, function (data) { $("#MinistryPagePane").html(data) });
+
+        });
+
+        $(document).on("click", "#Picture", function (event) {
+            var ministryID = $('#ministryID').val();
+            var url = "/Picture/Index";
+            $.get(url, { ministryID: ministryID.toString(), CallerType: "Ministry" }, function (data) { $("#MinistryPagePane").html(data) });
+          //  $.get(url, { SearchType: "MinistrySearch", codeID: ministryID.toString(), bDate: "1/1/2015", eDate: "1/1/2015" }, function (data) { $("#MinistryPagePane").html(data) });
+
+        });
+
+        $(document).on("click", "#Story", function (event) {
+            var ministryID = $('#ministryID').val();
+            var url = "/Story/List";
+            $.get(url, { SearchType: "MinistrySearch", MinistryID: ministryID.toString(), bDate: "1/1/2015", eDate: "1/1/2015" }, function (data) { $("#MinistryPagePane").html(data) });
+
+        });
+
+        $(document).on("click", "#Document", function (event) {
+            var ministryID = $('#ministryID').val();
+            var url = "/Document/Index";
+            $.get(url, { ministryID: ministryID.toString(), CallerType: "Ministry" }, function (data) { $("#MinistryPagePane").html(data) });
+
+        });
+
+        $(document).on("click", "#Table", function (event) {
+            var ministryID = $('#ministryID').val();
+            var url = "/ListTable/List";
+            $.get(url, { SearchType: "MinistrySearch", codeID: ministryID.toString(), bDate: "1/1/2015", eDate: "1/1/2015" }, function (data) { $("#MinistryPagePane").html(data) });
+        });
+
+
+        $(document).on("click", "#Event", function (event) {
+            var ministryID = $('#ministryID').val();
+            var url = "/ProgramEvent/List";
+            $.get(url, { SearchType: "MinistrySearch", codeID: ministryID.toString(), bDate: "1/1/2015", eDate: "1/1/2015" }, function (data) { $("#MinistryPagePane").html(data) });
+
+        });
+
+        $(document).on("click", "#Calendar", function (event) {
+            var ministryID = $('#ministryID').val();
+            var url = "/Calendar/Index";
+            $.get(url, { ministryID: ministryID.toString(), CallerType: "Ministry" }, function (data) { $("#MinistryPagePane").html(data) });
+
+        });
+
+        $(document).on("click", "#Video", function (event) {
+            var ministryID = $('#ministryID').val();
+            var url = "/Video/Index";
+            $.get(url, { ministryID: ministryID.toString(), CallerType: "Ministry" }, function (data) { $("#MinistryPagePane").html(data) });
+        });
+
+
+        $(document).on("click", "#Member", function (event) {
+            var ministryID = $('#ministryID').val();
+            var url = "/Ministry/MemberView";
+            $.get(url, { ministryID: ministryID.toString() }, function (data) { $("#MinistryPagePane").html(data) });
+        });
+
+        $(document).on("click", "#Parent", function (event) {
+            var ministryID = $('#ministryID').val();
+            var url = "/Ministry/ParentView";
+            $.get(url, { ministryID: ministryID.toString()}, function (data) { $("#MinistryPagePane").html(data) });
+
+        });
+
+
+
+        $(document).on("change", "#MemberList", function (event) {
+            var id = $('#MemberList option:selected').val();
+            $("#memberID").val(id);
+        });
+
+        //Add Member
+        $('#AddMemberDiv').hide();
+        $(document).on("click", "#ShowAddMemberButton", function (event) {
+            //close other divs
+           // $('#AddEmailDiv').hide();
+            $('#AddChildParentDiv').hide();
+
+            $('#AddMemberDiv').hide();
+            $('#AddMemberDiv').show();
+        });
+        $(document).on("click", "#AddMembersubmitButton", function (event) {
+            $("#AddMemberDiv").hide();
+        });
+
+        //Add Child Parent
+        $('#AddChildParentDiv').hide();
+        $(document).on("click", "#ShowChildParenteButton", function (event) {
+                $('#AddMemberDiv').hide();
+
+                $('#AddChildParentDiv').hide();
+                $('#AddChildParentDiv').show();
+        });
+        $(document).on("click", "#AddMembersubmitButton", function (event) {
+            $("#AddChildParentDiv").hide();
+        });
+
+        $(document).on("click", ".closeAllDiv", function (event) {
+            $('#AddMemberDiv').hide();
+            $('#AddChildParentDiv').hide();
+        });
+
+      
+        $(document).on("change", "#ChildParentList", function (event) {
+            $("#parentID").val($('#ChildParentList option:selected').val());
+        });
+
+        $(document).on("click", "#EmailAllParent", function (event) {
+            var status = $('#ChildParentList option:selected').val();
+            var url = "/Email/List";
+            $.get(url, { Status: status.toString() }, function (data) { $(".MinistryData").html(data) });
+        });
+
+        $(document).on("click", "#EmailSelectedParent", function (event) {
+            $("#parentID").val($('#ChildParentList option:selected').val());
+        });
+    });
+</script>
+
+

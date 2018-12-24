@@ -1,0 +1,112 @@
+﻿@model Domain.announcement
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div id="AjaxFormPane">
+    <div class="center" style="color:red">@TempData["message2"]</div>
+
+    <div class="center">
+@using (Html.BeginForm("Edit", "Announcement", new { }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center">Edit Announcement</h2>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>announcement</legend>
+
+        @Html.HiddenFor(model => model.announcementID)
+        <input id="CallerType" name="CallerType" type="hidden" value="@ViewBag.CallerType" />
+
+        <div class="editor">
+            @Html.LabelFor(model => model.ministryID,"Ministry")
+            @Html.DropDownListFor(model => model.ministryID, ViewBag.MinistryList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.ministryID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Title)
+             @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.BeginDate,"Begin Date")
+            @Html.TextBoxFor(model => model.BeginDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.BeginDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.EndDate,"End Date")
+            @Html.TextBoxFor(model => model.EndDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker2" })
+            @Html.ValidationMessageFor(model => model.EndDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Message)
+            @Html.TextAreaFor(model => model.Message)
+            @Html.ValidationMessageFor(model => model.Message)
+        </div>
+        @if (@ViewBag.Supervisor == true)
+        {
+        <div class="editor">
+            @Html.LabelFor(model => model.Status)
+            @Html.DropDownListFor(model => model.Status, ViewBag.StatusList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.Status)
+        }
+
+        <div class="editor">
+        <label>Upload File</label> 
+        <input id="files" type="file" name="files" multiple />
+            </div>
+
+         @Html.HiddenFor(model => model.EnteredBy)
+            @Html.HiddenFor(model => model.DateEntered)
+
+
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+    </div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#ministryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the ministry.");
+            }
+            else if ($("#Title").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the title.");
+            }
+            else if ($("#Message").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the message.");
+            }
+
+        });
+    });
+</script>

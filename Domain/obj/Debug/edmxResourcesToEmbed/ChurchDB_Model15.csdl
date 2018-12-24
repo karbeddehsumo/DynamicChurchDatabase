@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="C__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+    </Key>
+    <Property Name="MigrationId" Type="String" MaxLength="255" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Model" Type="Binary" MaxLength="Max" FixedLength="false" Nullable="false" />
+    <Property Name="ProductVersion" Type="String" MaxLength="32" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="budget">
+    <Key>
+      <PropertyRef Name="budgetID" />
+    </Key>
+    <Property Name="budgetID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="eventID" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DueDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="EstimatedAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="ActualAmount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EnteredBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateEntered" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="constant">
+    <Key>
+      <PropertyRef Name="constantID" />
+    </Key>
+    <Property Name="constantID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Category" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="ConstantName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Value1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Value2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Value3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="SortOrder" Type="Int32" Nullable="false" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EnteredBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateEntered" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="expens">
+    <Key>
+      <PropertyRef Name="expenseID" />
+    </Key>
+    <Property Name="expenseID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="subCategoryID" Type="Int32" Nullable="false" />
+    <Property Name="bankAccountID" Type="Int32" Nullable="false" />
+    <Property Name="Payee" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="PayeeID" Type="Int32" />
+    <Property Name="ExpenseDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CheckNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Reconcile" Type="Boolean" />
+    <Property Name="MinistryID" Type="Int32" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EnteredBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateEntered" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="listitem">
+    <Key>
+      <PropertyRef Name="listItemID" />
+    </Key>
+    <Property Name="listItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="listTableID" Type="Int32" Nullable="false" />
+    <Property Name="Name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Value1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Value2" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Value3" Type="Int32" Nullable="false" />
+    <Property Name="Value4" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EnteredBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateEntered" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="listtable">
+    <Key>
+      <PropertyRef Name="listTableID" />
+    </Key>
+    <Property Name="listTableID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ministryID" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="ListType" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EnteredBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateEntered" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="meetingagenda">
+    <Key>
+      <PropertyRef Name="meetingAgendaID" />
+    </Key>
+    <Property Name="meetingAgendaID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="meetingID" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EnteredBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateEntered" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="meetingnote">
+    <Key>
+      <PropertyRef Name="meetingNoteID" />
+    </Key>
+    <Property Name="meetingNoteID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="MeetingAgendaID" Type="Int32" Nullable="false" />
+    <Property Name="Note" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="NoteDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EnteredBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateEntered" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="pledge">
+    <Key>
+      <PropertyRef Name="pledgeID" />
+    </Key>
+    <Property Name="pledgeID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="memberID" Type="Int32" Nullable="false" />
+    <Property Name="Type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="FundName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Amount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="PledgeYear" Type="Int32" Nullable="false" />
+    <Property Name="EnteredBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateEntered" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="programevent">
+    <Key>
+      <PropertyRef Name="programEventID" />
+    </Key>
+    <Property Name="programEventID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="goalID" Type="Int32" Nullable="false" />
+    <Property Name="budgetID" Type="Int32" Nullable="false" />
+    <Property Name="Title" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="When" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Who" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="Where" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="What" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="How" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="Status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="EnteredBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+    <Property Name="DateEntered" Type="DateTime" Nullable="false" Precision="3" />
+  </EntityType>
+  <EntityType Name="saleitem">
+    <Key>
+      <PropertyRef Name="saleItemID" />
+    </Key>
+    <Property Name="saleItemID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="saleID" Type="Int32" Nullable="false" />
+    <Property Name="productID" Type="Int32" Nullable="false" />
+    <Property Name="Quantity" Type="Int32" Nullable="false" />
+    <Property Name="Discount" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Total" Type="Decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="C__MigrationHistory" EntityType="Self.C__MigrationHistory" />
+    <EntitySet Name="budgets" EntityType="Self.budget" />
+    <EntitySet Name="constants" EntityType="Self.constant" />
+    <EntitySet Name="expenses" EntityType="Self.expens" />
+    <EntitySet Name="listitems" EntityType="Self.listitem" />
+    <EntitySet Name="listtables" EntityType="Self.listtable" />
+    <EntitySet Name="meetingagendas" EntityType="Self.meetingagenda" />
+    <EntitySet Name="meetingnotes" EntityType="Self.meetingnote" />
+    <EntitySet Name="pledges" EntityType="Self.pledge" />
+    <EntitySet Name="programevents" EntityType="Self.programevent" />
+    <EntitySet Name="saleitems" EntityType="Self.saleitem" />
+  </EntityContainer>
+</Schema>

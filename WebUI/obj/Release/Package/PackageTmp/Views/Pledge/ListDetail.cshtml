@@ -1,0 +1,70 @@
+﻿@model IEnumerable<Domain.pledge>
+
+<div id="AjaxFormPane" class="center">
+@if (@ViewBag.RecordCount > 0)
+{
+    
+    <strong>@string.Format("Total Pledge: {0:c}",@ViewBag.TotalAmount)</strong>
+<table>
+    <caption>YTD Members Pledge Summary</caption>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Fund
+        </th>
+         <th>
+            Type
+        </th>
+        <th>
+            Pledge Amount
+        </th>
+        <th>
+            Year
+        </th>
+        <th>
+           Percent Paid
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @string.Format("{0}",@item.member.FullNameTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FundName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td style="text-align:right">
+            @string.Format("{0:c}",@item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PledgeYear)
+        </td>
+        <td style="text-align:right">
+            @string.Format("{0:p2}",@item.RatioCompleted)
+        </td>
+        <td>
+              @Ajax.ActionLink("Edit", "Edit", "Pledge", new {PledgeID=item.pledgeID, returnCode=true, ReturnPledgeYear=@ViewBag.PledgeYear, ReturnSearchType=@ViewBag.SearchType, ReturnCodeID=@ViewBag.CodeID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+        </td>
+        <td>
+                @Ajax.ActionLink("Delete", "Delete", "Pledge", new {PledgeID=item.pledgeID}, new AjaxOptions {Confirm="Do you want to delete this record?",HttpMethod="Post",  InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+        </td>
+
+    </tr>
+}
+
+</table>
+    
+}
+else
+{
+    <p>No pledges added yet</p>
+}
+</div>

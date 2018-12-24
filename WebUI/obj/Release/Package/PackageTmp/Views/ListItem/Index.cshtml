@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Domain.listitem>
+
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+
+
+<h2 class="center-text">Ministry Center</h2>
+<br />
+
+    <div>
+        @Ajax.ActionLink("Add Ministry", "Create", "Ministry", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+        @Ajax.ActionLink("View Ministries", "Details", "Ministry", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+        @Ajax.ActionLink("View Goals", "Index", "Goal", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+        @Ajax.ActionLink("View Meetings", "Index", "Meeting", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+
+    </div>
+
+<div id="RightPane">
+@Html.Action("List", "Ministry", new {Status="Active" })
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+    });
+
+ </script>
+

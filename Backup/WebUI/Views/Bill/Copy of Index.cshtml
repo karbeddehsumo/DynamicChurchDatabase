@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Domain.bill>
+
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+<h2>Billing</h2>
+
+
+<div id="payeeList">
+
+</div>
+<div id="payeeFrequencyList">
+
+</div>
+    
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th>
+            payeeID
+        </th>
+        <th>
+            PayeeName
+        </th>
+        <th>
+            AccountNumber
+        </th>
+        <th>
+            TotalAmount
+        </th>
+        <th>
+            AmountDue
+        </th>
+        <th>
+            DateDue
+        </th>
+        <th>
+            Comment
+        </th>
+        <th>
+            EnteredBy
+        </th>
+        <th>
+            DateEntered
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.payeeID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PayeeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountDue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateDue)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnteredBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateEntered)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.billID }) |
+            @Html.ActionLink("Details", "Details", new { id=item.billID }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.billID })
+        </td>
+    </tr>
+}
+
+</table>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+    });
+    </script>
+

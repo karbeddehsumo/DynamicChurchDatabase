@@ -1,0 +1,64 @@
+﻿@model Domain.contribution
+
+<div class="panel">
+<div class="center">
+<h2 class="center">Member Contribution Report</h2>
+    <div class="editor">
+        <label>Begin Date </label>
+    <input id="bDate" type="text"  class="datepicker" value="@ViewBag.BeginDate"/>
+    </div>
+    <div class="editor">
+         <label>End Date </label>
+     <input id="eDate" type="text"  class="datepicker" value="@ViewBag.EndDate" />
+        </div>
+    <div class="editor">
+        <label>Member</label>
+        @Html.DropDownList("MemberListSearch", ViewBag.MemberList as SelectList,"Select by Member...")
+        </div>
+    <div class="editor">
+       <label>Fund</label>
+        @Html.DropDownList("FundListSearch", ViewBag.MemberContrubutionFundList as SelectList,"Select by Fund Type...")
+        </div>
+    <div style="float:right">
+    <input id="submitAllClick" name="submitAllClick" value="View All" type="submit"/><br />
+        </div>
+    </div>
+
+<div class="ContributionData center">
+@Html.Action("List", "Contribution", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate })
+</div>
+    </div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        $("#MemberListSearch").change(function (event) {
+            var memberid = $('#MemberListSearch option:selected').val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Contribution/List";
+            $("#FundListSearch").val("Select By Fund Type...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: memberid.toString(), SearchType: "MemberSearch" }, function (data) { $(".ContributionData").html(data) });
+        });
+        $("#FundListSearch").change(function (event) {
+            var fundid = $('#FundListSearch option:selected').val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Contribution/List";
+            $("#MemberListSearch").val("Select By Member...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: fundid.toString(), SearchType: "FundSearch" }, function (data) { $(".ContributionData").html(data) });
+            
+        });
+
+        $(document).on("click", "#submitAllClick", function (event) {
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Contribution/List";
+            $("#MemberListSearch").val("Select By Member...");
+            $("#FundListSearch").val("Select By Fund Type...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), SearchType: "" }, function (data) { $(".ContributionData").html(data) });
+        });
+    });
+
+ </script>

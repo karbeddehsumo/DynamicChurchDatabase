@@ -1,0 +1,251 @@
+﻿@model Domain.member
+
+@{
+    ViewBag.Title = "Edit";
+}
+<link href="../../Content/themes/base/jquery.ui.datepicker.css" rel="stylesheet" />
+<script src="../../Scripts/jquery-ui-1.8.20.min.js"></script>
+
+<div id="AjaxFormPane">
+    <div id="ErrorMsg" class="center-text" style="color:red">@TempData["message2"]</div>
+@using (Html.BeginForm("Edit", "Member", new { }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend><strong>Edit member data...</strong></legend>
+
+        @Html.HiddenFor(model => model.memberID)
+        @Html.HiddenFor(model => model.familyID)
+
+
+        <div class="editor">
+            @Html.LabelFor(model => model.FirstName, "First Name")
+            @Html.EditorFor(model => model.FirstName)
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.MiddleName, "Middle Name")
+            @Html.EditorFor(model => model.MiddleName)
+            @Html.ValidationMessageFor(model => model.MiddleName)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.LastName, "Last Name")
+            @Html.EditorFor(model => model.LastName)
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Suffix)
+            @Html.DropDownListFor(model => model.Suffix, ViewBag.SuffixList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Suffix)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.PhoneNumber, "Phone #")
+            @Html.EditorFor(model => model.PhoneNumber)
+            @Html.ValidationMessageFor(model => model.PhoneNumber)
+        </div>
+        <div class="editor">
+            @Html.LabelFor(model => model.PhoneProviderID, "Phone Provider")
+            @Html.DropDownListFor(model => model.PhoneProviderID, ViewBag.CellProviderList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.PhoneProviderID)
+        </div>
+
+                 <div class="editor">
+            @Html.LabelFor(model => model.EmailAddress, "Email")
+            @Html.EditorFor(model => model.EmailAddress)
+            @Html.ValidationMessageFor(model => model.EmailAddress)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.DOB, "Date of Birth")
+            @Html.TextBoxFor(model => model.DOB, new { id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.DOB)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Gender)
+            @Html.DropDownListFor(x => x.Gender, new SelectList(new[] { "Male", "Female" }), "") 
+            @Html.ValidationMessageFor(model => model.Gender)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.MembershipDate, "Membership Date")
+            @Html.TextBoxFor(model => model.MembershipDate, new { id = "datepicker2" })
+            @Html.ValidationMessageFor(model => model.MembershipDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.ChurchTitle, "Church Title")
+            @Html.DropDownListFor(model => model.ChurchTitle, ViewBag.ChurchTitleList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.ChurchTitle)
+        </div>
+
+         <div class="editor">
+            @Html.LabelFor(model => model.Address)
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+         <div class="editor">
+            @Html.LabelFor(model => model.Address2)
+            @Html.EditorFor(model => model.Address2)
+            @Html.ValidationMessageFor(model => model.Address2)
+        </div>
+
+                 <div class="editor">
+            @Html.LabelFor(model => model.City)
+            @Html.EditorFor(model => model.City)
+            @Html.ValidationMessageFor(model => model.City)
+        </div>
+
+                 <div class="editor">
+            @Html.LabelFor(model => model.State)
+            @Html.EditorFor(model => model.State)
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+
+         <div class="editor">
+            @Html.LabelFor(model => model.Zip)
+            @Html.EditorFor(model => model.Zip)
+            @Html.ValidationMessageFor(model => model.Zip)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.ContactTypeID, "Contact Type")
+            @Html.DropDownListFor(model => model.ContactTypeID, ViewBag.ContactTypeList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.ContactTypeID)
+        </div>
+
+        @if ((@ViewBag.ViewPriviledge == true) || (@ViewBag.WebMaster == true))
+        {
+        <div class="editor">
+            @Html.LabelFor(model => model.Status)
+            @Html.DropDownListFor(model => model.Status, ViewBag.StatusList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.EnteredBy, "Entered By")
+            @Html.TextBoxFor(model => model.EnteredBy, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.EnteredBy)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.DateEntered, "Date Entered")
+            @Html.TextBoxFor(model => model.DateEntered, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.DateEntered)
+        </div>
+        }
+        else
+        {
+            @Html.HiddenFor(model => model.Status)
+            @Html.HiddenFor(model => model.EnteredBy)
+            @Html.HiddenFor(model => model.DateEntered)
+        }
+
+         <div class="editor">
+        <label>Upload File</label> 
+        <input id="files" type="file" name="files" />
+            </div>
+
+        @Html.HiddenFor(model => model.PictureID)
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+    
+}
+
+
+
+        <div id="FieldSetSubMenu">
+    @Ajax.ActionLink("Add Spouse","AddSpouseView","Member", new {memberID=@ViewBag.MemberID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "EditPane" },new {@class="mybutton",@title="Add & Update spouse data"})
+    @if (@ViewBag.Supervisor == true)
+    {
+    if(@ViewBag.MultipleFamilyMembers == true){
+         @Ajax.ActionLink("New Family", "RemoveMeFromFamilyView","Member", new {memberID=@ViewBag.MemberID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "EditPane" },new {@class="mybutton",@title="Create my ouwn family record"})
+    }
+    }
+         @Ajax.ActionLink("Resend Email", "ResendEmailInvite","Member", new {memberID=@ViewBag.MemberID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ErrorMsg" },new {@class="mybutton",@title="Email login credntials"})
+
+        
+        @Ajax.ActionLink("Delete Member", "Delete", "Member", new { MemberID = @Model.memberID }, new AjaxOptions { HttpMethod = "Post", Confirm = "Are you sure you want to delete this member record?", InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new {@class="mybutton"})
+
+         @Ajax.ActionLink("Edit Family", "Edit","Family", new {FamilyID = @Model.familyID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "EditPane" },new {@class="mybutton",@title="Edit my family record"})
+
+
+ </div>
+</div>
+
+<div id="EditPane"></div>
+
+   
+
+   
+
+
+
+<script type="text/javascript">
+  $(document).ready(function () {
+
+      $("#CloseBotton").click(function (event) {
+          $("#AjaxFormPane").hide();
+      });
+
+      
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+        $('#AnniversaryDate').not('.hasDatePicker').datepicker();
+   
+      /*
+        $("#familyID").change(function (event) {
+            var i = $("#familyID option:selected").text().indexOf('-');
+            $("#LastName").val($("#familyID option:selected").text().substring(0, i-1));
+            $("#InterestAmount").val(parseFloat(($("#InterestRate").val() / 100) * $("#Amount").val()));
+        });
+        */
+        $(document).on("change", "#provider", function (event) {
+            $("#providerID").val($(this).val());
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#FirstName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the first name.");
+            }
+            else if ($("#LastName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the last name.");
+            }
+            else if ($("#Gender").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the gender.");
+            }
+            else if ($("#ContactTypeID").val() == 0) {
+                event.preventDefault();
+                alert("Please select the contact type.");
+            }
+            else if ($("#PhoneNumber").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the phone number.");
+            }
+        });
+
+        $(document).on("click", "#ResendMemberInvite", function (event) {
+            var memberid = $("#memberID").value();
+            var url = "/Member/ResendEmailInvite";
+            $.get(url, {memberID: memberid.toString()}, function (data) { $("#AjaxFormPane").html(data) });
+
+        });
+
+        $('#RevmoveMeFromFamilyDiv').hide();
+        $('#MaritalJoinDiv').hide();
+    });
+</script>

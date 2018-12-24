@@ -1,0 +1,43 @@
+﻿
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //select first record
+        $('#MemberList option:first-child').attr("selected", "selected");
+        //$("#MemberList option:first-child").trigger('click');
+        $("#MemberList").click();
+
+
+        $(document).on("click", "#ShowEditMemberButton", function (event) {
+            //close other divs
+            $('#AdminMemberPaneDiv').hide();
+            $('#MemberListDiv').hide();
+            $('#MemberListAllDiv').hide();
+
+            $("#MemberListDiv").show();
+        });
+
+        $('.buttonClick').click(function () {
+            $('#AdminMemberPaneDiv').show();
+            $('#MemberListDiv').hide();
+            $('#MemberListAllDiv').hide();
+        });
+
+       
+
+        $(document).on("click", "#ActivateStatus", function (event) {
+            var memberid = $('#MemberAllList option:selected').val();
+            var url = "/Member/UpdateStatus";
+            $.get(url, { memberID: memberid.toString(), status: "Active" }, function (data) { $("#returnString").html(data) });
+        });
+
+        $(document).on("click", "#DeActivateStatus", function (event) {
+            var memberid = $('#MemberAllList option:selected').val();
+            var url = "/Member/UpdateStatus";
+            $.get(url, { memberID: memberid.toString(), status: "Inactive" }, function (data) { $("#returnString").html(data) });
+        });
+    });
+
+ </script>

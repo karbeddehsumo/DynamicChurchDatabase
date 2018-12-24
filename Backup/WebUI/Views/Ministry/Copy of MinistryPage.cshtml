@@ -1,0 +1,353 @@
+﻿@model  Domain.ministry
+
+@{
+    ViewBag.Title = "MyMinistry";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+
+<h2>@string.Format("{0}",@Model.MinistryName)</h2>
+<div>
+    <input id="Ministry" type="button" value="Edit Ministry" />
+    <input id="Income" type="button" value="Income" />
+    <input id="Expense" type="button" value="Expense" />
+    <input id="Goal" type="button" value="Goals" />
+    <input id="Event" type="button" value="Event" />
+    <input id="Meeting" type="button" value="Meetings" />
+    <input id="Announcement" type="button" value="Announcements" />
+    <input id="Picture" type="button" value="Picture" />
+    <input id="Table" type="button" value="Tables" />
+    <input id="Story" type="button" value="Stories" />
+    <input id="Document" type="button" value="Docements" />
+    <input id="Calendar" type="button" value="Calendar" />
+    <input id="Video" type="button" value="Video" />
+    <input id="ShowAddMemberButton" value="Member List" type="button" />
+    @if ((@ViewBag.MinistryType == "Minor") && (@ViewBag.Superviosr == true))
+    {
+<input id="ShowChildParenteButton" value="Parent List" type="button" />
+}
+
+</div>
+
+<div id="AjaxFormPane">
+
+
+<div id="MinistryDiv">
+@Html.Action("Edit", "Ministry",new {MinistryID=@Model.ministryID,Code="MinistryPage"})
+</div>
+
+
+<div id="IncomeDiv">
+    @Html.Action("List", "MinistryIncome", new {SearchType="MinistrySearch",codeID=@Model.ministryID,bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+    @Ajax.ActionLink("Add Income", "Create", "MinistryIncome", new {ministryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })    
+
+</div>
+
+
+<div id="ExpenseDiv">
+    @Html.Action("List", "MinistryExpense", new {SearchType="MinistrySearch",codeID=@Model.ministryID,bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+   @Ajax.ActionLink("Add Expense", "Create", "MinistryExpense", new {ministryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })    
+
+</div>
+
+
+<div id="GoalDiv">
+    <p>List of ministry goals</p>
+     @Ajax.ActionLink("Add Goal", "Create", "Goal", new {MinistryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })    
+    @Html.Action("List", "Goal", new {SearchType="MinistrySearch",codeID=@Model.ministryID,bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+</div>
+<div id="EventDiv">
+    @Html.Action("List", "ProgramEvent", new {SearchType="MinistrySearch",codeID=@Model.ministryID,bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+</div>
+<div id="MeetingDiv">
+    @Ajax.ActionLink("Create Meeting", "Create", "Meeting", new {MinistryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })    
+    @Html.Action("List", "Meeting", new {SearchType="MinistrySearch",codeID=@Model.ministryID,bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+</div>
+
+
+
+
+
+<div id="AddMemberDiv">
+    <p>Members List</p>
+    @Html.ListBox("MemberRoster", ViewBag.MemberRoster as SelectList, "")<br />
+    <label>Add Member</label>
+     @using (Ajax.BeginForm("MinistryMember", "Ministry", new {}, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "familyroster"
+            }))
+            {
+         <div style="display:inline-block">
+                    
+                                 <label>Role</label>
+                             <input id="ministryID" name="ministryID" value="@Model.ministryID"  type="hidden"/>
+                             <input id="memberID" name="memberID"  type="hidden"/>
+                               <input id="officeTitle" name="officeTitle"  type="text"/><br />
+         <label>Membership Date</label>
+                                <input id="membershipDate" name="membershipDate" value="@ViewBag.EndDate"  type="text"/><br />
+         @Html.DropDownList("MemberList", ViewBag.MemberList as SelectList, "")<br />
+                                 <input id="AddMembersubmitButton" type="submit" value="Add" />
+             <input class="closeAllDiv" value="Close" type="button" />
+             </div>
+            
+    }
+    
+</div>
+<div id="AddChildParentDiv">
+        
+     @if ((@ViewBag.MinistryType == "Minor") && (@ViewBag.Superviosr == true))
+    {
+         @Html.ListBox("ParentList", ViewBag.ParentChildList as SelectList, "")
+         <input id="EmailAllParent" type="button" value="Email all parents" />
+         <input id="EmailSelectedParent" type="button" value="Email Selected Parent"/>
+         <p>Ministry Members</p>
+         <p>Chick member to add parents contact</p>
+         @Html.ListBox("MemberRoster2", ViewBag.MemberRoster as SelectList, "")
+         
+         <div id="ChildParentListDiv">
+             <p>Choose & Add Parents</p>
+        @Html.ListBox("ChildParentList", new SelectList(new[]{"Choose"}))
+       
+         @using (Ajax.BeginForm("AddChildParent", "Member", new {}, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "familyroster"
+            }))
+            {
+         <div style="display:inline-block">
+                    
+                                 <label>Add Child Parent</label>
+                             <input id="parentID" name="parentID"  type="hidden"/>
+                             <input id="childID" name="childID"  type="hidden"/>
+                                 <input id="ChildParentButSubmitton" type="submit" value="Add" />
+                                 <input class="closeAllDiv" value="Close" type="button" />
+             </div>
+            }
+                  </div>
+            }
+        </div>
+<div id="AnnouncementDiv">
+    @Html.Action("MyAnnouncement", "Announcement", new {bDate=@ViewBag.CalendarBeginDate,eDate=@ViewBag.CalendarEndDate,codeID=@Model.ministryID,SearchCode="MinistrySearch"})
+    @Ajax.ActionLink("Create Announcement", "Create", "Announcement", new {MinistryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })   
+</div>
+<div id="CalendarDiv">
+    @Html.Action("List", "Calendar", new {bDate=@ViewBag.CalendarBeginDate,eDate=@ViewBag.CalendarEndDate,codeID=@Model.ministryID,SearchCode="Ministry"})
+</div>
+
+<div id="PictureDiv">
+    @if ((ViewBag.PictureAccess == true) && (ViewBag.Supervisor == true))
+    {
+       @Ajax.ActionLink("Add Pictures", "Create", "Picture", new {MinistryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })   
+    }
+        @Html.ActionLink("See recent pictures","List", "Picture", new {codeID=@Model.ministryID,SearchType="MinistrySearch",bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+    @Html.ActionLink("See recent pictures","List", "Picture", new {codeID=@Model.ministryID,SearchType="MinistrySearch",bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate},  new { target="_blank" })
+</div>
+
+<div id="TableDiv">
+    @Html.Action("DefaultOpenTables", "ListTable", new {ministryID=@Model.ministryID})
+    @Ajax.ActionLink("Create Table", "Create", "ListHeader", new {MinistryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })   
+</div>
+<div id="StoryDiv">
+    @Html.Action("List", "Story", new {SearchType="MinistrySearch",MinistryID=@Model.ministryID,bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+    @if ((ViewBag.StoryAccess == true) && (ViewBag.Supervisor == true))
+    {
+        @Ajax.ActionLink("Create Story", "Create", "Story", new {MinistryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })   
+    }
+         @Html.ActionLink("Newspaper","ChurchNewsPaper", "Story", new {},  new { target="_blank" })
+</div>
+<div id="VideoDiv">
+    @if ((ViewBag.VideoAccess == true) && (ViewBag.Supervisor == true))
+    {
+       @Ajax.ActionLink("Add Video", "Create", "Video", new {MinistryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })   
+    }
+        @Html.Action("List", "Video", new {SearchType="MinistrySearch",MinistryID=@Model.ministryID,bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+</div>
+<div id="DocumentDiv">
+    @Html.Action("List", "Document", new {SearchType="MinistrySearch",MinistryID=@Model.ministryID,bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+    @if (ViewBag.Supervisor == true)
+    {
+       @Ajax.ActionLink("Add Document", "Create", "Document", new {MinistryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MinistryIncomeExpensePane" })   
+    }
+        </div>
+
+
+
+    </div>
+<div id="MinistryIncomeExpensePane">
+
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#membershipDate').not('.hasDatePicker').datepicker();
+
+       
+    
+        $.fn.myFunction = function () {
+            $("#MinistryDiv").hide();
+            $("#IncomeDiv").hide();
+            $("#ExpenseDiv").hide();
+            $("#GoalDiv").hide();
+            $("#EventDiv").hide();
+            $("#MeetingDiv").hide();
+            $("#AddMemberDiv").hide();
+            $("#AddChildParentDiv").hide();
+            $("#AnnouncementDiv").hide();
+            $("#CalendarDiv").hide();
+            $("#PictureDiv").hide();
+            $("#TableDiv").hide();
+            $("#StoryDiv").hide();
+            $("#VideoDiv").hide();
+            $("#DocumentDiv").hide();
+        }
+
+        $.fn.myFunction();
+
+
+
+
+        $(document).on("click", "#Ministry", function (event) {
+            $.fn.myFunction();
+            alert("edit working");
+            $("#MinistryDiv").show();
+        });
+
+        $(document).on("click", "#Income", function (event) {
+            $.fn.myFunction();
+            alert("Income working");
+            $("#IncomeDiv").show();
+        });
+
+        $(document).on("click", "#Expense", function (event) {
+            $.fn.myFunction();
+            $("#ExpenseDiv").show();
+        });
+
+        $(document).on("click", "#Goal", function (event) {
+            $.fn.myFunction();
+            $("#GoalDiv").show();
+        });
+
+        $(document).on("click", "#Meeting", function (event) {
+            $.fn.myFunction();
+            $("#MeetingDiv").show();
+        });
+
+        $(document).on("click", "#Announcement", function (event) {
+            $.fn.myFunction();
+            $("#AnnouncementDiv").show();
+        });
+
+        $(document).on("click", "#Picture", function (event) {
+            $.fn.myFunction();
+            $("#PictureDiv").show();
+        });
+
+        $(document).on("click", "#Story", function (event) {
+            $.fn.myFunction();
+            $("#StoryDiv").show();
+        });
+
+        $(document).on("click", "#Document", function (event) {
+            $.fn.myFunction();
+            $("#DocumentDiv").show();
+        });
+
+        $(document).on("click", "#Table", function (event) {
+            $.fn.myFunction();
+            $("#TableDiv").show();
+        });
+
+
+        $(document).on("click", "#Event", function (event) {
+            $.fn.myFunction();
+            $("#EventDiv").show();
+        });
+
+        $(document).on("click", "#Calendar", function (event) {
+            $.fn.myFunction();
+            $("#CalendarDiv").show();
+        });
+
+        $(document).on("click", "#Video", function (event) {
+            $.fn.myFunction();
+            $("#VideoDiv").show();
+        });
+
+
+
+
+
+
+        $(document).on("change", "#MemberList", function (event) {
+            var id = $('#MemberList option:selected').val();
+            $("#memberID").val(id);
+        });
+
+        //Add Member
+        $('#AddMemberDiv').hide();
+        $(document).on("click", "#ShowAddMemberButton", function (event) {
+            //close other divs
+           // $('#AddEmailDiv').hide();
+            $('#AddChildParentDiv').hide();
+
+            $('#AddMemberDiv').hide();
+            $('#AddMemberDiv').show();
+        });
+        $(document).on("click", "#AddMembersubmitButton", function (event) {
+            $("#AddMemberDiv").hide();
+        });
+
+        //Add Child Parent
+        $('#AddChildParentDiv').hide();
+        $(document).on("click", "#ShowChildParenteButton", function (event) {
+                $('#AddMemberDiv').hide();
+
+                $('#AddChildParentDiv').hide();
+                $('#AddChildParentDiv').show();
+        });
+        $(document).on("click", "#AddMembersubmitButton", function (event) {
+            $("#AddChildParentDiv").hide();
+        });
+
+        $(document).on("click", ".closeAllDiv", function (event) {
+            $('#AddMemberDiv').hide();
+            $('#AddChildParentDiv').hide();
+        });
+
+        $("#ChildParentListDiv").hide();
+        $(document).on("change", "#MemberRoster2", function (event) {
+            $("#childID").val($('#MemberRoster2 option:selected').val());
+            $.getJSON("/Member/GetFamilyMemberList", { MemberID: $('#MemberRoster2 option:selected').val() }, function (data) {
+                $('#ChildParentList').empty();
+                var markup = '';
+                for (var x = 0; x < data.length; x++) {
+                    markup += '<option value="' + data[x].Value + '">' + data[x].Text + '</option>';
+                }
+                $('#ChildParentList').html(markup).show();
+                $("#ChildParentListDiv").show();
+            });
+        });
+
+        $(document).on("change", "#ChildParentList", function (event) {
+            $("#parentID").val($('#ChildParentList option:selected').val());
+        });
+
+        $(document).on("click", "#EmailAllParent", function (event) {
+            var status = $('#ChildParentList option:selected').val();
+            var url = "/Email/List";
+            $.get(url, { Status: status.toString() }, function (data) { $(".MinistryData").html(data) });
+        });
+
+        $(document).on("click", "#EmailSelectedParent", function (event) {
+            $("#parentID").val($('#ChildParentList option:selected').val());
+        });
+    });
+</script>
+
+

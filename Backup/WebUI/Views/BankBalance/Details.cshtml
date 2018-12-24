@@ -1,0 +1,50 @@
+﻿@model Domain.bankbalance
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>bankbalance</legend>
+
+    <div class="display-label">BankAccountID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BankAccountID)
+    </div>
+
+    <div class="display-label">BeginDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BeginDate)
+    </div>
+
+    <div class="display-label">EndDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EndDate)
+    </div>
+
+    <div class="display-label">BeginingBalance</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BeginingBalance)
+    </div>
+
+    <div class="display-label">RevenueAmount</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.RevenueAmount)
+    </div>
+
+    <div class="display-label">ExpenseAmount</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ExpenseAmount)
+    </div>
+
+    <div class="display-label">EndingBalance</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EndingBalance)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.BankBalanceID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

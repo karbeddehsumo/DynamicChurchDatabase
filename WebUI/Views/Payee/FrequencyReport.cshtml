@@ -1,0 +1,50 @@
+﻿@model IEnumerable<Domain.payee>
+
+
+@if(ViewBag.RecordCount > 0)
+{
+    <table id="FieldSetSubMenu">
+        <caption>Utility Payment Frequency</caption>
+        <thead>
+            <tr>
+                <th>Payee</th>
+                <th>Last Payed</th>
+                <th># Days Ago</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach(var item in @Model)
+            {
+                <tr>
+                    <td>@item.PayeeName</td>
+                    <td>@item.LastPaymentDate.ToShortDateString()</td>
+                    <td>@string.Format("{0}",System.DateTime.Today.Subtract((DateTime)@item.LastPaymentDate).TotalDays)</td>
+                    <td style="color:red">
+                    @if (@item.Frequency == "Monthly" && (System.DateTime.Today.Subtract((DateTime)@item.LastPaymentDate).TotalDays >= 30))
+                    {
+                        @string.Format("Due")
+                    }
+                    else if (@item.Frequency == "Monthly" && (System.DateTime.Today.Subtract((DateTime)@item.LastPaymentDate).TotalDays >= 25))
+                    {
+                         @string.Format("Due Soon")
+                    }
+                    else if (@item.Frequency == "Quarterly" && (System.DateTime.Today.Subtract((DateTime)@item.LastPaymentDate).TotalDays >= 90))
+                    {
+                        @string.Format("Due")
+                    }
+                    else if (@item.Frequency == "Quarterly" && (System.DateTime.Today.Subtract((DateTime)@item.LastPaymentDate).TotalDays >= 80))
+                    {
+                         @string.Format("Due Soon")
+                    }
+                    else
+                        {
+                        
+                    }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+

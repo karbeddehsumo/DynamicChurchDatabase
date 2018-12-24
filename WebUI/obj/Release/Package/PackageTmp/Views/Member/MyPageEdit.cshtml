@@ -1,0 +1,149 @@
+﻿@model Domain.member
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div id="AjaxFormPane" class="MyPageEdit" >
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("MYPageEdit", "Member", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit my data...</legend>
+
+        @Html.HiddenFor(model => model.memberID)
+        @Html.HiddenFor(model => model.familyID)
+
+
+        <div class="editor">
+            @Html.LabelFor(model => model.FirstName, "First Name")
+            @Html.TextBoxFor(model => model.FirstName, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.MiddleName, "Middle Name")
+            @Html.EditorFor(model => model.MiddleName)
+            @Html.ValidationMessageFor(model => model.MiddleName)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.LastName, "Last Name")
+            @Html.TextBoxFor(model => model.LastName, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.PhoneNumber, "Phone #")
+            @Html.EditorFor(model => model.PhoneNumber)
+            @Html.ValidationMessageFor(model => model.PhoneNumber)
+        </div>
+        <div class="editor">
+            @Html.LabelFor(model => model.PhoneProviderID, "Phone Provider")
+            @Html.DropDownListFor(model => model.PhoneProviderID, ViewBag.CellProviderList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.PhoneProviderID)
+        </div>
+
+                 <div class="editor">
+            @Html.LabelFor(model => model.EmailAddress, "Email")
+            @Html.EditorFor(model => model.EmailAddress)
+            @Html.ValidationMessageFor(model => model.EmailAddress)
+        </div>
+        <div class="editor">
+            @Html.LabelFor(model => model.DOB, "Date of Birth")
+            @Html.TextBoxFor(model => model.DOB, new { id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.DOB)
+        </div>
+        <div class="editor">
+            @Html.LabelFor(model => model.Gender)
+            @Html.TextBoxFor(model => model.Gender, new { @readonly = "readonly" })
+            <!--@Html.DropDownListFor(x => x.Gender, new SelectList(new[] { "Male", "Female" }), "") -->
+            @Html.ValidationMessageFor(model => model.Gender)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.MembershipDate, "Membership Date")
+            @Html.TextBoxFor(model => model.MembershipDate, new { id = "datepicker2" })
+            @Html.ValidationMessageFor(model => model.MembershipDate)
+        </div>
+        <div class="editor">
+            @Html.LabelFor(model => model.ChurchTitle, "Church Title")
+            @Html.TextBoxFor(model => model.ChurchTitle, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.ChurchTitle)
+        </div>
+         <div class="editor">
+            @Html.LabelFor(model => model.Address)
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+         <div class="editor">
+            @Html.LabelFor(model => model.Address2)
+            @Html.EditorFor(model => model.Address2)
+            @Html.ValidationMessageFor(model => model.Address2)
+        </div>
+
+                 <div class="editor">
+            @Html.LabelFor(model => model.City)
+            @Html.EditorFor(model => model.City)
+            @Html.ValidationMessageFor(model => model.City)
+        </div>
+
+                 <div class="editor">
+            @Html.LabelFor(model => model.State)
+            @Html.EditorFor(model => model.State)
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+
+         <div class="editor">
+            @Html.LabelFor(model => model.Zip)
+            @Html.EditorFor(model => model.Zip)
+            @Html.ValidationMessageFor(model => model.Zip)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.ContactTypeID, "Contact Type")
+            @Html.DropDownListFor(model => model.ContactTypeID, ViewBag.ContactTypeList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.ContactTypeID)
+        </div>
+
+
+            @Html.HiddenFor(model => model.Status)
+            @Html.HiddenFor(model => model.EnteredBy)
+            @Html.HiddenFor(model => model.DateEntered)
+        
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+    @if(@ViewBag.UpdateFamilyBirthdate)
+    {
+    @Html.Action("FamilyDOBDisplay", "Member", new {familyID=@ViewBag.FamilyID})
+    }
+ </div>  
+<script type="text/javascript">
+  $(document).ready(function () {
+
+      $("#CloseBotton").click(function (event) {
+          $("#AjaxFormPane").hide();
+      });
+
+      $("#ButtonClick").click(function (event) {
+          $("#AjaxFormPane").hide();
+      });
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+        $('#AnniversaryDate').not('.hasDatePicker').datepicker();
+    
+
+      });
+</script>
+

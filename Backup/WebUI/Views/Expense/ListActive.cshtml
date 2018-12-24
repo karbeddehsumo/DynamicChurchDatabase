@@ -1,0 +1,93 @@
+﻿@model IEnumerable<Domain.expense>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<div>
+<div id="TopPane">
+
+</div>
+
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            Payee
+        </th>
+        <th>
+            Fund
+        </th>
+        <th>
+            Account
+        </th>
+        
+        
+        <th>
+            Amount
+        </th>
+        <th>
+            Check
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Comment
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td style="margin-top:10px">
+            @item.ExpenseDate.ToShortDateString()
+        </td>
+        <td>
+            @item.Payee
+        </td>
+        <td>
+            @item.subcategory.SubCategoryName
+        </td>
+        <td>
+            @item.bankaccount.BankName
+        </td>
+        
+
+        
+        <td style="text-align:right">
+            @string.Format("{0:c}",@item.Amount)
+        </td>
+        <td>
+            @item.CheckNumber
+        </td>
+        <td>
+            @item.Status
+        </td>
+        <td>
+            @item.Comment
+        </td>
+               <td>
+                     @Ajax.ActionLink("Edit", "Edit", "Expense", new {ExpenseID=item.expenseID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+                </td>
+                <td>
+                    @Ajax.ActionLink("Delete", "Delete", "Expense", new {ExpenseID=item.expenseID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+                </td>
+
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p>No expend record found!</p>   
+}
+</div>
+
+

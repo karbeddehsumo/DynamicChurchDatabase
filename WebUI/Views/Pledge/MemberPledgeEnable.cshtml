@@ -1,0 +1,30 @@
+﻿<div class="center">
+    <h2 class="center">Member Pledge Enable</h2>
+     @using (Ajax.BeginForm("UpConstant", "Constant", new { @aCategory = "Member Pledge Entry" }, new AjaxOptions
+     {
+         HttpMethod = "Post",
+         InsertionMode = InsertionMode.Replace,
+         UpdateTargetId = "familyroster"
+     }))
+     {
+                    <strong class="center">Enable or Disable Member Pledge Entry</strong>
+         <span class="center" style="color:red">@ViewBag.MemberPledgeEntry</span>
+         <input id="ConstantName" name="ConstantName" value="Member Pledge Entry" type="hidden" />
+         <div class="editor">
+             <label>Select Type: </label>
+                                <label><input type="radio" name="Value1" value="Enable">Enable
+                                <input type="radio" name="Value1" value="Disable">Disable</label>
+                 
+             </div>
+         <div class="editor">
+         <label>Select Pledge Year</label>
+         @Html.DropDownList("Value2", ViewBag.PledgeYearList as SelectList)
+             </div>
+         <div class="float-right">
+                                 <input id="PledgeEnableSubmitID" type="submit" value="Submit" />
+             </div>
+
+     }
+        
+        </div>
+

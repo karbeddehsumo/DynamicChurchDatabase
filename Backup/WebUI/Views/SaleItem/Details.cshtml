@@ -1,0 +1,45 @@
+﻿@model Domain.saleitem
+
+@{
+    ViewBag.Title = "Details";
+  
+}
+
+
+
+<h2 class="center-text">View Sale Item Report</h2>
+<br />
+
+<div>
+
+<div class="float-left">
+    <div style="margin-top:10px">
+        <strong class="float-left">Sales</strong>
+        @Html.DropDownList("SalesSearch", ViewBag.ProductList as SelectList,"")
+    </div>
+</div>
+
+    </div>
+
+<br />
+<br />
+
+<div class="CalendarData">
+@Html.Action("List", "SaleItem", new {})
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#DateSearch').not('.hasDatePicker').datepicker();
+
+        $("#SalesSearch").change(function (event) {
+            var saleid = $('#SalesSearch option:selected').val();
+            var url = "/SaleItem/List";
+            $.get(url, { code: saleid.toString() }, function (data) { $(".CalendarData").html(data) });
+
+        });
+
+    });
+
+ </script>

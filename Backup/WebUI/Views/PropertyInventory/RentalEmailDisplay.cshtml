@@ -1,0 +1,78 @@
+﻿
+<script src="../../Scripts/jquery-ui-1.8.20.min.js"></script>
+<!--
+<form id="contactUsEmail" class="form-horizontal form-group-sm" role="form" method="post"  action="@Url.Action("SendRentalEmail", "PropertyInventory", new {returnUrl=""})">
+            <div class="form-group">
+                <label  for="EventDate">*Event Date:</label>
+                 <input id="EventDate" name="EventDate" type="text" required="required"  class="datepicker form-control" value="@ViewBag.TodayDate" />     
+             </div>
+             <div class="form-group">
+                <label for="FullName">Full Name:</label>
+              <input id="FullName"  name="FullName" type="text" required="required" placeholder="Full Name" class="form-control input-sm" size="5" >
+            </div>
+            <div class="form-group">
+                <label for="PhoneNumber">*Phone #:</label>
+              <input id="PhoneNumber" name="PhoneNumber" type="text" required="required" placeholder="Phone #" class="form-control input-sm" size="5">
+            </div>
+            <div class="form-group">
+                <label for="EmaiAddress">*Email:</label>
+              <input id="EmaiAddress" name="EmaiAddress" type="text" required="required" placeholder="Email address" class="form-control input-sm" size="5">
+            </div>
+             <div class="form-group">
+                <label for="BusinessName">*Business Name:</label>
+              <input id="BusinessName" name="BusinessName" type="text"  placeholder="Business name" class="form-control input-sm" size="5">
+            </div>
+            <div class="form-group">
+                <label for="DescribeEvent">*Briefly describe your event:</label>
+                <textarea class="form-control" rows="5" required="required" id="DescribeEvent" name="DescribeEvent"></textarea>
+            </div>
+              
+                <button id="LoginSubmitBtn" type="submit" class="btn btn-success btn-sm">Send</button>
+              <p>*Required fields.</p>
+          
+          </form>
+-->
+        <div id="emailReturnMsg" class="center" style="color:red">@TempData["ContactUsEmailReturnMsg"]</div>
+        @using (Ajax.BeginForm("SendRentalEmail", "PropertyInventory", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "emailReturnMsg" }))
+        {
+            <strong class="center" style="color:red">Property Rental Email</strong>
+            <div class="form-group">
+                <label  for="EventDate">*Event Date:</label>
+                 <input id="EventDate" name="EventDate" type="text" required="required" style="width:100%"  class="datepicker form-control" value="@ViewBag.TodayDate" />     
+             </div>
+             <div class="form-group">
+                <label for="FullName">Full Name:</label>
+              <input id="FullName"  name="FullName" type="text" required="required" placeholder="Full Name" style="width:100%" class="form-control" >
+            </div>
+            <div class="form-group">
+                <label for="PhoneNumber">*Phone #:</label>
+              <input id="PhoneNumber" name="PhoneNumber" type="text" required="required" placeholder="Phone #" style="width:100%" class="form-control" >
+            </div>
+            <div class="form-group">
+                <label for="EmaiAddress">*Email:</label>
+              <input id="EmaiAddress" name="EmaiAddress" type="text" required="required" placeholder="Email address" style="width:100%" class="form-control">
+            </div>
+             <div class="form-group">
+                <label for="BusinessName">*Business Name:</label>
+              <input id="BusinessName" name="BusinessName" type="text"  placeholder="Business name" style="width:100%" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="DescribeEvent">*Briefly describe your event:</label>
+                <textarea class="form-control" rows="5" required="required" id="DescribeEvent" name="DescribeEvent"></textarea>
+            </div>
+              
+                <button id="LoginSubmitBtn" type="submit" class="btn btn-success btn-sm">Send</button>
+              <p>*Required fields.</p>
+          
+            if(@ViewBag.IsRentalContract == true)
+            {
+              @Html.ActionLink("Rental Contract", "GetFileFromDisk", "Document", new {DocumentID=@ViewBag.RentalContractID},  new { target="_blank" })
+        }
+        <br />
+        if(@ViewBag.IsRentalPolicy == true)
+        {
+             @Html.ActionLink("Rental Rules", "GetFileFromDisk", "Document", new {DocumentID=ViewBag.RentalPolicyID},  new { target="_blank" })
+
+        }
+
+        }

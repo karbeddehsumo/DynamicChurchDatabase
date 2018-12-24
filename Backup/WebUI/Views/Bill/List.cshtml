@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Domain.bill>
+
+@{
+    ViewBag.Title = "List";
+}
+
+
+<div id="TopPane" class="slider center">
+
+@if (ViewBag.RecordCount > 0)
+{
+<table>
+    <tr>
+        <th>
+            Payee
+        </th>
+        <th>
+            Account#
+        </th>
+        <th>
+            Total Amount
+        </th>
+        <th>
+            Amount Due
+        </th>
+        <th>
+            Date Due
+        </th>
+        <th>
+            Comment
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PayeeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccountNumber)
+        </td>
+        <td style="text-align:right">
+            @string.Format("{0:c}",@item.TotalAmount)
+        </td>
+        <td style="text-align:right">
+           @string.Format("{0:c}",@item.AmountDue)
+        </td>
+        <td style="text-align:right">
+            @string.Format("{0}",@item.DateDue.ToShortDateString())
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+               <td>
+                     @Ajax.ActionLink("Edit", "Edit", "Bill", new {BillID=item.billID, ReturnBeginDate=@ViewBag.BeginDate,  ReturnEndDate=@ViewBag.EndDate,  ReturnType="List", ReturnBillID = @ViewBag.BillID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+                </td>
+                <td>
+                    @Ajax.ActionLink("Delete", "Delete", "Bill", new {BillID=item.billID, ReturnBeginDate=@ViewBag.BeginDate,  ReturnEndDate=@ViewBag.EndDate,  ReturnType="List", ReturnBillID = @ViewBag.BillID}, new AjaxOptions {Confirm="Do you want to delete this record?",HttpMethod="Post",  InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+                </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+    <p>No bills records found.</p>
+}
+    </div>

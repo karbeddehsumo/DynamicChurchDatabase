@@ -1,0 +1,105 @@
+﻿@model Domain.contribution
+
+@{
+    ViewBag.Title = "Edit";
+    
+}
+
+<div id="AjaxFormPane">
+    <div class="center" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Edit", "Contribution", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center">Edit Contribution</h2>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit member contribution here...</legend>
+
+        @Html.HiddenFor(model => model.contributionID)
+
+        @Html.HiddenFor(model => model.ReturnBeginDate)
+        @Html.HiddenFor(model => model.ReturnEndDate)
+        @Html.HiddenFor(model => model.ReturnCodeID)
+        @Html.HiddenFor(model => model.ReturnSearchType)
+        @Html.HiddenFor(model => model.ReturnType)
+
+        <div class="editor">
+            @Html.LabelFor(model => model.memberID,"Member")
+            @Html.DropDownListFor(model => model.memberID, ViewBag.MemberList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.memberID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Amount)
+            @Html.EditorFor(model => model.Amount)
+            @Html.ValidationMessageFor(model => model.Amount)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.ContributionDate,"Date")
+            @Html.TextBoxFor(model => model.ContributionDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.ContributionDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.CheckNumber,"Check #")
+            @Html.EditorFor(model => model.CheckNumber)
+            @Html.ValidationMessageFor(model => model.CheckNumber)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.subCategoryID,"Fund")
+            @Html.DropDownListFor(model => model.subCategoryID, ViewBag.MemberContrubutionFundList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.subCategoryID)
+        </div>
+
+
+        @Html.HiddenFor(model => model.DateEntered)
+        @Html.HiddenFor(model => model.EnteredBy)
+
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $("#Amount").change(function (event) {
+            this.value = this.value.replace(/,/g, "");
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#subCategoryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the fund.");
+            }
+            else if ($("#Amount").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the amount.");
+            }
+            if ($('#memberID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the member.");
+            }
+
+        });
+    });
+</script>

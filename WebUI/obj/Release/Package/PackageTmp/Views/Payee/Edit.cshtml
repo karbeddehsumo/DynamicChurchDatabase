@@ -1,0 +1,148 @@
+﻿@model Domain.payee
+
+@{
+    ViewBag.Title = "Edit";
+    
+}
+
+<div id="AjaxFormPane"  class="panel">
+    
+ <div class="center" style="color:red">@TempData["message2"]</div>
+<div class="center">
+@using (Ajax.BeginForm("Edit", "Payee", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+   @Html.AntiForgeryToken()
+        <br />
+   <h2 class="center">Edit Payee</h2>
+<br />
+
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit payee data...</legend>
+        @Html.HiddenFor(model => model.payeeID)
+
+        <div class="editor">
+            @Html.LabelFor(model => model.BankAccountID,"Bank Account")
+             @Html.DropDownListFor(model => model.BankAccountID, ViewBag.BankAccountList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.BankAccountID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.SubCategoryID,"SubCategory")
+             @Html.DropDownListFor(model => model.SubCategoryID, ViewBag.SubCategoryList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.SubCategoryID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.PayeeTypeID,"Payee Type")
+             @Html.DropDownListFor(model => model.PayeeTypeID, ViewBag.PayeeTypeList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.PayeeTypeID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.AccountNumber,"Account Number")
+            @Html.EditorFor(model => model.AccountNumber)
+            @Html.ValidationMessageFor(model => model.AccountNumber)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.PayeeName,"Payee")
+            @Html.EditorFor(model => model.PayeeName)
+            @Html.ValidationMessageFor(model => model.PayeeName)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.PhoneNumber,"Phone Number")
+            @Html.EditorFor(model => model.PhoneNumber)
+            @Html.ValidationMessageFor(model => model.PhoneNumber)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Email)
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.URL)
+            @Html.EditorFor(model => model.URL)
+            @Html.ValidationMessageFor(model => model.URL)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Frequency)
+           @Html.DropDownListFor(model => model.Frequency, ViewBag.FrequencyList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Frequency)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Status)
+            @Html.DropDownListFor(model => model.Status, ViewBag.StatusList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Description)
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.EnteredBy,"Entered By")
+            @Html.TextBoxFor(model => model.EnteredBy, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.EnteredBy)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.DateEntered,"Date Entered")
+            @Html.TextBoxFor(model => model.DateEntered, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.DateEntered)
+        </div>
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+    </div>
+    </div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#SubCategoryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the category.");
+            }
+            else if ($("#AccountNumber").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the account number.");
+            }
+            else if ($("#PayeeName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the payee name.");
+            }
+            else if ($("#PayeeName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the payee name.");
+            }
+            else if ($('#Frequency option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the frequency.");
+            }
+            else if ($('#PayeeTypeID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the payee type.");
+            }
+        });
+
+    });
+</script>

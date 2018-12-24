@@ -1,0 +1,58 @@
+﻿   
+@{
+    ViewBag.Title = "Details";
+}
+<script src="../../Scripts/jquery-ui-1.8.20.min.js"></script>
+<link href="../../Content/themes/base/jquery.ui.datepicker.css" rel="stylesheet" />
+ <div class="clearfix">
+ @using (Ajax.BeginForm("JoinMaritalFamily", "Member", new { }, new AjaxOptions
+    {
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "resultMsg"
+    }))
+    {
+                    <fieldset>
+                                 <legend>Choose Spouse (Note: Both families data will be combined)</legend>
+                        <strong class="center">@ViewBag.Header</strong>
+                                 @Html.ListBox("MaritalspouseID", ViewBag.MemberList as SelectList, new { @class = "myListBox",size=40,selectionmode=1  })
+         
+        
+                             <input id="memberID2" name="memberID"  type="hidden"   value="@ViewBag.MemberID"/><br />
+        
+
+            <div class="editor">
+                <label>Anniversary Date</label>
+                <input id="AnniversaryDate" name="AnniversaryDate" type="text" class="AnniversaryDate"/>
+            </div>
+                        <div class="editor">
+               <label> @Html.CheckBox("JointTithe", false) Joint Tithe?</label><br />   
+            <label> @Html.CheckBox("moveEntireFamily", false) Update children family data</label><br />      
+            </div>                                 
+            <button id="MaritalJoinSubmitBtn" type="submit" class="btn btn-default center">Click to Join Us</button>
+
+                        </fieldset>
+
+    }
+<div id="resultMsg"></div>
+     </div>  
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $("#AnniversaryDate").datepicker();
+
+        $(document).on("click", "#MaritalJoinSubmitBtn", function (event) {
+            $("#MaritalJoinDiv").hide();
+            if ($('#MaritalspouseID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the member spouse.");
+            }
+            else if ($('#AnniversaryDate').val().length == 0) {
+                alert("Please select marriage date.");
+            }
+            else {
+                $("#MaritalJoinDiv").hide();
+            }
+        });
+    });
+</script>

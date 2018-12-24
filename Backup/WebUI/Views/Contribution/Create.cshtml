@@ -1,0 +1,203 @@
+﻿@model Domain.contribution
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+
+<div id="AjaxFormPane" class="clearfix" >
+    <div class="float-left" >
+@using (Ajax.BeginForm("Create", "Contribution", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    @Html.AntiForgeryToken()
+    
+    @Html.ValidationSummary(true)
+        @Html.HiddenFor(model => model.memberID)   
+        <h2 class="center">Add Contribution</h2>
+    <div class="fieldset">
+    <form role="form" class="form-horizontal" >
+              <div class="form-group">
+                  <div class="control-label">
+                @Html.Label("Member")
+                      </div>
+                  <div class="controls">
+                  @Html.TextBox("MemberDescription", (string)ViewBag.MemberName, new { @readonly = "readonly" })
+                      </div>
+              </div>
+ 
+        <div class="form-group">
+            @Html.LabelFor(model => model.subCategoryID, "Fund Type")
+            @Html.DropDownListFor(model => model.subCategoryID, ViewBag.MemberContrubutionFundList as SelectList, "Select Fund Type...")
+            @Html.ValidationMessageFor(model => model.subCategoryID)
+        </div>
+
+                <div class="form-group">
+            @Html.LabelFor(model => model.ContributionDate, "Date")
+            @Html.TextBoxFor(model => model.ContributionDate, new { @Value = ViewBag.DefaultDate, id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.ContributionDate)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount)
+            @Html.TextBoxFor(model => model.Amount, new { @placeholder = "$0.00" })
+            @Html.ValidationMessageFor(model => model.Amount)
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.CheckNumber, "Check #")
+            @Html.EditorFor(model => model.CheckNumber)
+            @Html.ValidationMessageFor(model => model.CheckNumber)
+        </div>
+
+        
+            @Html.HiddenFor(model => model.EnteredBy)
+            @Html.HiddenFor(model => model.DateEntered)
+
+
+        <div id="formSubmitButton" class="float-right">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+
+        </form>
+</div>
+}
+
+<div class="center">
+        <input id="ShowContributionFundTypeButton" value="Add Fund Type" type="button" title="Add contribution fund type" />
+    <div id="ContributionFundTypeDiv">
+     @using (Ajax.BeginForm("AddConstant", "Constant", new { @aCategory = "Member Contribution" }, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "familyroster"
+            }))
+            {
+                    
+                                 <label>Add new Contribution Fund Type</label>
+                             <input id="value1" name="value1"  type="text"/>
+                                 <input id="ConstributionFundSubmitID" type="submit" value="Add" />
+
+            }
+        
+        </div>
+    
+    @if(@ViewBag.Supervisor == true)
+    {
+        <input id="TaxStatement" type="button" value="Tax Report" title="Print Contribution Report"/>
+    }
+   
+        <div id="ContributionList" class="center"></div>
+</div>
+        <p class="center" style="color:red">@TempData["message2"]</p>
+    <div id="memberContribution" class="center">
+        @Html.Action("ListActive", "Contribution", new {bDate=@ViewBag.BeginDate,edate=@ViewBag.EndDate,memberID=@ViewBag.MemberID})
+    </div>
+
+<input id="bDate" type="hidden"  class="datepicker"  value="@ViewBag.BeginDate"/>
+<input id="eDate" type="hidden"  class="datepicker" value="@ViewBag.EndDate" />
+</div>
+    </div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $("#Amount").change(function (event) {
+            this.value = this.value.replace(/,/g, "");
+        });
+
+        $("#ContributionListsubmit").click(function (event) {
+           // event.preventDefault();
+            $("#ContributionList").show();
+        });
+
+    /*    
+        //set member listbox default value
+        var defaultID = $("#memberID").val()
+        //$("#MemberListBox option").eq(n).attr('selected', 'selected')
+        $("#MemberListBox option[value='" + defaultID + "']").attr("selected", true);
+        
+        $("#MemberDescription").val($("#MemberListBox option:selected").text());
+*/
+        
+        $("#MemberListBox option").change(function () {
+            var memberid = $('#MemberListBox option:selected').val();
+            $("#memberID").val(memberid.toString());
+
+            $("#ContributionList").hide();
+            $("#MemberDescription").val($("#MemberListBox option:selected").text());
+
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Contribution/ListActive";
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), memberID: memberid.toString() }, function (data) { $("#memberContribution").html(data) });
+        });
+
+        //fund type
+        $('#ContributionFundTypeDiv').hide();
+        $(document).on("click", "#ShowContributionFundTypeButton", function (event) {
+            $('#ContributionFundTypeDiv').hide();
+            $("#value1").val("")
+            $("#ContributionFundTypeDiv").show();
+        });
+        $(document).on("click", "#ConstributionFundSubmitID", function (event) {
+            $("#ContributionFundTypeDiv").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#MemberDescription').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the member.");
+            }
+            else if ($('#subCategoryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the fund.");
+            }
+            else if ($("#Amount").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the amount.");
+            }
+            if ($('#memberID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the member.");
+            }
+
+        });
+
+        $(document).on("click", "#TaxStatement", function (event) {
+            var selectedID = $('#MemberListBox option:selected').val();
+            var url = "/Contribution/TaxReport";
+            window.open(url + "?memberID=" + selectedID.toString());
+
+        });
+
+        $(document).on("click", "#subCategoryID2", function (event) {
+            $.ajax({
+                url: '@Url.Action("RefreshViewBag", "Constant", new {SearchString="Member Contribution&Z"})',
+                    type: 'POST',
+                    // data: JSON.stringify(appointment),
+                    dataType: 'json',
+                    processData: false,
+                    contentType: 'application/json; charset=utf-8',
+                    success: function (data) {
+                        var result = '';
+                        for (var i = 0, iL = data.length; i < iL; i++) {
+                            result += '<option value="' + data[i].Value + '">' + data[i].Text + '</option>';
+                        }
+                        $("#subCategoryID").html(result);
+                    },
+                });
+        });
+
+    });
+</script>

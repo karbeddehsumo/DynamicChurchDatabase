@@ -1,0 +1,19 @@
+﻿@{
+    ViewBag.Title = "Index";
+    
+}
+
+
+
+<h2>Meeting Notes Center</h2>
+
+
+<div>
+    <div>
+        @Ajax.ActionLink("New Meeting Notes", "Create", "MeetingNote", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+        @Ajax.ActionLink("View Meeting Notes", "Details", "MeetingNote", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+    </div>
+ <div id="RightPane" class="minorContent">
+    @Html.Action("List", "MeetingNote", new {bdate=@ViewBag.BeginDate,edate=@ViewBag.EndDate })
+ </div>
+</div>

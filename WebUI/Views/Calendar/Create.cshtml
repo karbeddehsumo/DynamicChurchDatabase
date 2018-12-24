@@ -1,0 +1,319 @@
+﻿@model Domain.calendar
+
+@{
+    ViewBag.Title = "Create";
+}
+
+
+<div id="AjaxFormPane" class="panel">
+    <h2 class="center">Add Calendar</h2>
+    <div class="center-" style="color:red">@TempData["message2"]</div>
+
+    <div class="center">
+@using (Ajax.BeginForm("Create", "Calendar", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Add calendar</legend>
+         <div class="editor">
+            @Html.LabelFor(model => model.Title)
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+
+         <input id="CallerType" name="CallerType" type="hidden" value="@ViewBag.CallerType" />
+        <div class="editor">
+            
+            @if (@ViewBag.Ministry == "")
+            {
+                @Html.LabelFor(model => model.ministryID,"Ministry")
+                @Html.DropDownListFor(model => model.ministryID, ViewBag.MinistryList as SelectList, "")
+                @Html.ValidationMessageFor(model => model.ministryID)
+            }
+            else
+            {
+                @Html.HiddenFor(model => model.ministryID)
+            }
+            
+        </div>
+
+
+        <div class="editor">
+            @Html.LabelFor(model => model.CalendarDate,"Begin Date")
+            @Html.TextBoxFor(model => model.CalendarDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.CalendarDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.CalendarEndDate,"End Date")
+            @Html.TextBoxFor(model => model.CalendarEndDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker2" })
+            @Html.ValidationMessageFor(model => model.CalendarEndDate)
+        </div>
+   <!--
+        <div class="editor">
+             <label id="EventTypeLabelID">Type List</label>
+            @Html.DropDownList("MinistryEventType", ViewBag.MinistryActivityList as SelectList, "Choose Event type")
+        </div>
+       -->
+        <div class="editor">
+             @Html.LabelFor(model => model.EventType,"Event Type")
+             @Html.DropDownListFor(model => model.EventType, ViewBag.MinistryActivityList as SelectList, "Choose Event type")
+            @Html.ValidationMessageFor(model => model.EventType)
+        </div>
+    
+
+        <div class="editor">
+            @Html.LabelFor(model => model.StartTime,"Start Time")
+            @Html.DropDownListFor(model => model.StartTime, ViewBag.TimeIncrementList as SelectList, "Choose Start Time")
+            @Html.ValidationMessageFor(model => model.StartTime)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.EndTime,"End Time")
+            @Html.DropDownListFor(model => model.EndTime, ViewBag.TimeIncrementList as SelectList, "Choose End Time")
+            @Html.ValidationMessageFor(model => model.EndTime)
+        </div>
+
+        <div class="editor">
+           @Html.LabelFor(model => model.Location)
+            @Html.EditorFor(model => model.Location)
+            @Html.ValidationMessageFor(model => model.Location)
+        </div>
+        <div class="editor">
+             <label id="LocationListLabelID">Location List</label>
+             @Html.DropDownList("EventLocation", ViewBag.MeetingVenueList as SelectList, "Choose Location")
+            </div>
+
+        @if (ViewBag.FixedBanner == true)
+        {
+            @Html.HiddenFor(model => model.Description)
+        }
+        else
+        {
+            <div class="editor">
+                @Html.LabelFor(model => model.Description)
+                @Html.EditorFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        }
+
+
+         @if (@ViewBag.Ministry == "")
+            {
+                 <div class="editor">
+                    @Html.LabelFor(model => model.PublicAccess,"Access")
+                     @Html.DropDownListFor(model => model.PublicAccess, new List<SelectListItem> { new SelectListItem{Text="Public", Value="True"}, new SelectListItem{Text="Private", Value="False"}},"Select One")
+                    @Html.ValidationMessageFor(model => model.PublicAccess)
+                </div>
+            }
+            else
+            {
+                @Html.HiddenFor(model => model.PublicAccess)
+            }
+
+
+
+        @Html.HiddenFor(model => model.Status)
+        @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+
+      <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+          <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+        </div>
+    @if ((@ViewBag.WebMaster == true) || (@ViewBag.Supervisor == true))
+    {
+    <div id="FieldSetSubMenu" >
+    <input id="ShowEventTypeButton" value="Add Event Type" type="button" />
+     <input id="ShowEventVenueButton" value="Add Location" type="button" />
+    <div id="EventTypeDiv" class="center">
+     @using (Ajax.BeginForm("AddConstant", "Constant", new { @aCategory = "Ministry Activity" }, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "familyroster"
+            }))
+            {
+                    
+                                 <label>Add Event Type</label>
+                             <input id="value1" name="value1"  type="text"/>
+                                 <input id="EventTypeSubmitID" type="submit" value="Add" />
+                                <input id="CloseEventTypeSubmitID" type="button" value="Close" />
+
+            }
+        </div>
+
+     <div id="EventVenueDiv" class="center">
+     @using (Ajax.BeginForm("AddConstant", "Constant", new { @aCategory = "Church Venue" }, new AjaxOptions
+     {
+         HttpMethod = "Post",
+         InsertionMode = InsertionMode.Replace,
+         UpdateTargetId = "familyroster"
+     }))
+     {
+                    
+                                 <label>Add Event Venue</label>
+                             <input id="value2" name="value1"  type="text"/>
+                                 <input id="EventVenueSubmitID" type="submit" value="Add" />
+                                <input id="CloseEventVenueSubmitID" type="button" value="Close" />
+     }
+        </div>
+        </div>
+    }
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+
+        //event type
+        $('#EventTypeDiv').hide();
+        $(document).on("click", "#ShowEventTypeButton", function (event) {
+            $('#EventVenueDiv').hide();
+            $("#value1").val("")
+            $("#EventTypeDiv").show();
+        });
+        $(document).on("click", "#EventTypeSubmitID", function (event) {
+            $("#EventTypeDiv").hide();
+        });
+
+        //event venue
+        $('#EventVenueDiv').hide();
+        $(document).on("click", "#ShowEventVenueButton", function (event) {
+            $('#EventTypeDiv').hide();
+            $("#value2").val("")
+            $("#EventVenueDiv").show();
+        });
+        $(document).on("click", "#EventVenueSubmitID", function (event) {
+            $("#EventVenueDiv").hide();
+        });
+
+        $("#CloseEventTypeSubmitID").click(function (event) {
+            $("#EventTypeDiv").hide();
+        });
+
+        $("#CloseEventVenueSubmitID").click(function (event) {
+            $("#EventVenueDiv").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#Title").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the title.");
+            }
+            else if ($('#ministryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the ministry.");
+            }          
+            else if ($('#EventType option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the event type.");
+            }
+            else if ($('#PublicAccess option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the public access.");
+            }
+
+        });
+
+        $(document).on("click", "#MinistryEventType", function (event) {
+            // $("#MinistryEventType").change(function (event) {
+            alert("ministry eventy type");
+            var MinistryEventType = $('#MinistryEventType option:selected').text();
+            $("#EventType").val(MinistryEventType);
+
+            $.ajax({
+                url: '@Url.Action("RefreshViewBag", "Constant", new { SearchString = "Ministry Activity&S" })',
+                 type: 'POST',
+                 // data: JSON.stringify(appointment),
+                 dataType: 'json',
+                 processData: false,
+                 contentType: 'application/json; charset=utf-8',
+                 success: function (data) {
+                     var result = '';
+                     for (var i = 0, iL = data.length; i < iL; i++) {
+                         result += '<option value="' + data[i].Value + '">' + data[i].Text + '</option>';
+                     }
+                     $("#MinistryEventType").html(result);
+                 },
+             });
+        });
+
+        $(document).on("click", "#EventLocation", function (event) {
+      //  $("#EventLocation").change(function (event) {
+            var MinistryLocation = $('#EventLocation option:selected').text();
+            $("#Location").val(MinistryLocation);
+            $.ajax({
+                url: '@Url.Action("RefreshViewBag", "Constant", new {SearchString="Church Venue&S"})',
+                 type: 'POST',
+                 // data: JSON.stringify(appointment),
+                 dataType: 'json',
+                 processData: false,
+                 contentType: 'application/json; charset=utf-8',
+                 success: function (data) {
+                     var result = '';
+                     for (var i = 0, iL = data.length; i < iL; i++) {
+                         result += '<option value="' + data[i].Value + '">' + data[i].Text + '</option>';
+                     }
+                     $("#EventLocation").html(result);
+                 },
+            });
+
+        });
+
+
+            $('#ministryID').change(function () {
+                $.getJSON("/Calendar/MinistryActivity", { MinistryName: $('#ministryID option:selected').text() }, function (data) {
+                    $("#MinistryEventType").fillSelect(data);
+            });
+        });
+
+
+        $.fn.clearSelect = function () {
+            return this.each(function () {
+                //if (this.tagName == 'SELECT')
+                    this.options.length = 0;
+            });
+        }
+
+
+        $.fn.fillSelect = function (data) {
+            return this.clearSelect().each(function () {
+               // if (this.tagName == 'SELECT') {
+                    var dropdownList = this;
+                    $.each(data, function (index, optionData) {
+                        var option = new Option(optionData.Text, optionData.Value);
+
+                        if ($.browser.msie) {
+                            dropdownList.add(option);
+                        }
+                        else {
+                            dropdownList.add(option, null);
+                        }
+                    });
+              //  }
+            });
+        }
+
+
+
+    });
+</script>
+
+
+

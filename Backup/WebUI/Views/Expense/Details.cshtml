@@ -1,0 +1,83 @@
+﻿
+@{
+
+}
+
+<div class="panel">
+<h2 class="center">Expense Report</h2>
+
+<div class="GroupPanel">
+    <div class="center">
+       <label>Begin Date </label>
+    <input id="edatepicker" type="text"  value="@ViewBag.BeginDate" style="width:100px;"/>
+ 
+         <label>End Date </label>
+     <input id="edatepicker2" type="text" value="@ViewBag.EndDate" style="width:100px;"/>
+        <input id="ExpenseBtn" type="button" value="View All"/>
+</div>
+   <div class="center">
+        @Html.DropDownList("eCategoryListSearch", ViewBag.SubCategoryList as SelectList,"Search By Fund...")
+
+        @Html.DropDownList("eBankAccountListSearch", ViewBag.BankAccountList as SelectList,"Search By Bank Account...")
+    </div>
+    
+    </div>
+    <br />
+<div class="ExpenseData center">
+@Html.Action("List", "Expense", new {bdate=@ViewBag.BeginDate,edate=@ViewBag.EndDate,code="DateRangeSearch" })
+</div>
+    </div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#edatepicker").datepicker();
+        $("#edatepicker2").datepicker();
+
+        //    $("#CategoryListSearch").change(function (event) {
+        $(document).on("change", "#eCategoryListSearch", function (event) {
+            var categoryid = $('#eCategoryListSearch option:selected').val();
+            var bankaccountid = $('#eBankAccountListSearch option:selected').val();
+            var bdate = $("#edatepicker").val();
+            var edate = $("#edatepicker2").val();
+            var url = "/Expense/List";
+            $("#eBankAccountListSearch").val("Search By Bank Account...");
+            if ($('#eCategoryListSearch option:selected').val().length != 0) {
+                $.get(url, { code: 'CategorySearch', bDate: bdate.toString(), eDate: edate.toString(), codeID: categoryid.toString() }, function (data) { $(".ExpenseData").html(data) });
+            }
+            else if ($('#eBankAccountListSearch option:selected').val().length != 0) {
+                $.get(url, { code: 'BankAccountSearch', bDate: bdate.toString(), eDate: edate.toString(), codeID: bankaccountid.toString() }, function (data) { $(".ExpenseData").html(data) });
+            }
+            else {
+                $.get(url, { code: 'DateRangeSearch', bDate: bdate.toString(), eDate: edate.toString() }, function (data) { $(".ExpenseData").html(data) });
+            }
+        });
+        //$("#eBankAccountListSearch").change(function (event) {
+        $(document).on("change", "#eBankAccountListSearch", function (event) {
+            var categoryid = $('#eCategoryListSearch option:selected').val();
+            var bankaccountid = $('#eBankAccountListSearch option:selected').val();
+            var bdate = $("#edatepicker").val();
+            var edate = $("#edatepicker2").val();
+            var url = "/Expense/List";
+            $("#eCategoryListSearch").val("Search By Category...");
+            if ($('#eCategoryListSearch option:selected').val().length != 0) {
+                $.get(url, { code: 'CategorySearch', bDate: bdate.toString(), eDate: edate.toString(), codeID: categoryid.toString() }, function (data) { $(".ExpenseData").html(data) });
+            }
+            else if ($('#eBankAccountListSearch option:selected').val().length != 0) {
+                $.get(url, { code: 'BankAccountSearch', bDate: bdate.toString(), eDate: edate.toString(), codeID: bankaccountid.toString() }, function (data) { $(".ExpenseData").html(data) });
+            }
+            else {
+                $.get(url, { code: 'DateRangeSearch', bDate: bdate.toString(), eDate: edate.toString() }, function (data) { $(".ExpenseData").html(data) });
+            }
+        });
+
+        $(document).on("click", "#ExpenseBtn", function (event) {
+            var bdate = $("#edatepicker").val();
+            var edate = $("#edatepicker2").val();
+            var url = "/Expense/List";
+            $("#eCategoryListSearch").val("Search By Category...");
+            $.get(url, { code: 'DateRangeSearch', bDate: bdate.toString(), eDate: edate.toString() }, function (data) { $(".ExpenseData").html(data) });
+
+        });
+    });
+
+ </script>

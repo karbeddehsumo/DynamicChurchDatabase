@@ -1,0 +1,87 @@
+﻿
+@{
+
+ }
+
+
+
+
+
+
+<div class="panel">
+
+    <h2 class="center" >Income Report</h2>
+    <div class="center GroupPanel">
+        <div >
+    <label>Begin Date</label>
+    <input id="datepicker" type="text"  value="@ViewBag.BeginDate" style="width:100px;"/>
+
+    
+         <label>End Date </label>
+     <input id="datepicker2" type="text" value="@ViewBag.EndDate" style="width:100px;"/>
+                <input id="IncomeBtn" type="button" value="View All"/>
+       </div>
+        <label>Fund</label>
+        @Html.DropDownList("CategoryListSearch", ViewBag.SubCategoryList as SelectList,"Select Fund Category...")
+         <label>Bank Account</label>
+        @Html.DropDownList("BankAccountListSearch", ViewBag.BankAccountList as SelectList, "Select Bank Account...")
+
+<br /><br />
+ </div>
+
+<div class="IncomeData center">
+@Html.Action("List", "Income", new {bdate=@ViewBag.BeginDate,edate=@ViewBag.EndDate,code="DateRangeSearch" })
+</div>
+    </div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#datepicker").datepicker();
+        $("#datepicker2").datepicker();
+       
+
+        //  $("#CategoryListSearch").change(function (event) {
+        $(document).on("change", "#CategoryListSearch", function (event) {
+            var categoryid = $('#CategoryListSearch option:selected').val();
+            var bankaccountid = $('#BankAccountListSearch option:selected').val();
+            var bdate = $("#datepicker").val();
+            var edate = $("#datepicker2").val();
+            var url = "/Income/List";
+            if ($('#CategoryListSearch option:selected').val().length != 0) {
+                $.get(url, { code: 'CategorySearch', bDate: bdate.toString(), eDate: edate.toString(), codeID: categoryid.toString() }, function (data) { $(".IncomeData").html(data) });
+            }
+            else if ($('#BankAccountListSearch option:selected').val().length != 0) {
+                $.get(url, { code: 'BankAccountSearch', bDate: bdate.toString(), eDate: edate.toString(), codeID: bankaccountid.toString() }, function (data) { $(".IncomeData").html(data) });
+            }
+            else {
+                $.get(url, { code: 'DateRangeSearch', bDate: bdate.toString(), eDate: edate.toString() }, function (data) { $(".IncomeData").html(data) });
+            }
+        });
+
+        $(document).on("click", "#IncomeBtn", function (event) {
+            //$('#CategoryListSearch').val('');
+            var bdate = $("#datepicker").val();
+            var edate = $("#datepicker2").val();
+            var url = "/Income/List";
+            $.get(url, {code: 'DateRangeSearch', bDate: bdate.toString(), eDate: edate.toString() }, function (data) { $(".IncomeData").html(data) });
+        });
+
+        $(document).on("change", "#BankAccountListSearch", function (event) {
+            var categoryid = $('#CategoryListSearch option:selected').val();
+            var bankaccountid = $('#BankAccountListSearch option:selected').val();
+            var bdate = $("#datepicker").val();
+            var edate = $("#datepicker2").val();
+            var url = "/Income/List";
+            if ($('#CategoryListSearch option:selected').val().length != 0) {
+                $.get(url, { code: 'CategorySearch', bDate: bdate.toString(), eDate: edate.toString(), codeID: categoryid.toString() }, function (data) { $(".IncomeData").html(data) });
+            }
+            else if ($('#BankAccountListSearch option:selected').val().length != 0) {
+                $.get(url, { code: 'BankAccountSearch', bDate: bdate.toString(), eDate: edate.toString(), codeID: bankaccountid.toString() }, function (data) { $(".IncomeData").html(data) });
+            }
+            else {
+                $.get(url, { code: 'DateRangeSearch', bDate: bdate.toString(), eDate: edate.toString() }, function (data) { $(".IncomeData").html(data) });
+            }
+        });
+    });
+
+ </script>

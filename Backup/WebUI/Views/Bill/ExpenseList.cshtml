@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Domain.bill>
+
+@{
+    ViewBag.Title = "List";
+}
+
+
+<h3>Pending Bills</h3>
+
+@if (ViewBag.RecordCount > 0)
+{
+<table>
+    <tr>
+        <th>
+            Payee
+        </th>
+        <th>
+            Total Amount
+        </th>
+        <th>
+            Amount Due
+        </th>
+        <th>
+            Date Due
+        </th>
+        <th>
+            Comment
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.PayeeName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TotalAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AmountDue)
+        </td>
+        <td>
+            @string.Format("{0}",@item.DateDue.ToShortDateString())
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+    <p>Not Bills data yet.</p>
+}

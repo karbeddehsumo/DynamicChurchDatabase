@@ -1,0 +1,107 @@
+﻿@model IEnumerable<Domain.task>
+@{
+    ViewBag.Title = "Task";
+
+}
+
+<div>
+
+
+ <label>>> @Ajax.ActionLink("Goal", "ListMinistry", "Goal", new {SearchType="MinistrySearch", codeID=@ViewBag.MinistryID, bDate="1/1/2015", eDate="1/1/2015" }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TaskPane" }, new {@id="pageSubTitle"}) </label> 
+
+ 
+@if (@ViewBag.RecordCount > 0)
+{
+    if ((@ViewBag.Supervisor == true) || (@ViewBag.Supervisor2 == true))
+{
+    if(ViewBag.TaskType == "ActionItemList")
+    {
+      @Ajax.ActionLink("Add Action Item", "Create", "Task", new {goalID=@ViewBag.GoalID,parentTaskID=@ViewBag.ParentTaskID,Code="ActionItem"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TaskPane" })
+    }
+    else
+    {
+      @Ajax.ActionLink("Add Task", "Create", "Task", new {goalID=@ViewBag.GoalID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TaskPane" })
+    }
+}
+    <div id="TaskPane">
+        <div  >
+            <div class="center">Task List</div>
+<table>
+    <caption>
+        @if (@ViewBag.Heading2 == true)
+        {
+            <strong>@ViewBag.MinistryName</strong><br />
+            <span>@ViewBag.TaskTitle </span>
+        }
+        else
+        {
+            <span>@ViewBag.Heading</span>
+        }
+    </caption>
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Assigned To
+        </th>
+        <th>
+            Assign Date
+        </th>
+        <th>
+            Due Date
+        </th>
+        <th>
+            Completed (%)
+        </th>
+  @if ((@ViewBag.Supervisor == true) || (@ViewBag.Supervisor2 == true))
+  {
+        <th></th>
+         <th></th>
+  }
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.member.FullNameTitle)
+        </td>
+        <td>
+            @item.AssignDate.ToShortDateString()
+        </td>
+        <td>
+            @item.DueDate.ToShortDateString()
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CompletionRatio)
+        </td>
+  @if ((@ViewBag.Supervisor == true) || (@ViewBag.Supervisor2 == true))
+  {
+        <td>
+            @Ajax.ActionLink("Edit", "Edit", "Task", new {TaskID=item.taskID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TaskPane" })
+            </td>
+        <td>
+            @Ajax.ActionLink("Delete", "Delete", "Task", new {TaskID=item.taskID}, new AjaxOptions {HttpMethod = "Post", Confirm = "Are you sure you want to delete this task?", InsertionMode = InsertionMode.Replace, UpdateTargetId = "TaskPane" })
+        </td>
+  }
+                <td>
+            @Ajax.ActionLink("Action Items", "ActionItemIndex", "Task", new {TaskID=item.taskID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TaskPane" })
+        </td>
+    </tr>
+}
+
+</table>
+        </div>
+            </div>
+}
+else
+{
+    
+ <p>No task record found!</p>   
+}
+
+    </div>

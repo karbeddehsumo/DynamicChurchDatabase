@@ -1,0 +1,99 @@
+﻿@model IEnumerable<Domain.programevent>
+
+
+
+<div id="AjaxFormPane" class="slider">
+     <label>>> @Ajax.ActionLink("Goal", "ListMinistry", "Goal", new {SearchType="MinistrySearch", codeID=@ViewBag.MinistryID, bDate="1/1/2015", eDate="1/1/2015" }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new {@id="pageSubTitle"}) </label> 
+
+    @if(@ViewBag.Supervisor == true)
+    {
+        @Ajax.ActionLink("Add New Event", "Create", "ProgramEvent", new {GoalID=@ViewBag.GoalID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new {@id="pageSubTitle"}) 
+    }  
+    <br />
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <caption>
+     <span>@ViewBag.Header</span>   
+    </caption>
+    <tr>
+
+        <th>
+            Title
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Who
+        </th>
+        <th>
+            Where
+        </th>
+        <th>
+            What
+        </th>
+        <th>
+            How
+        </th>
+        <th>
+            Calendar
+        </th>
+        <th>
+            Document
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+
+        <td style="vertical-align:top">
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td style="vertical-align:top">
+            @item.DateBeginEndTime
+        </td>
+        <td style="vertical-align:top">
+            @Html.DisplayFor(modelItem => item.member.FullName)
+        </td>
+        <td style="vertical-align:top">
+            @Html.DisplayFor(modelItem => item.C_Where)
+        </td>
+        <td style="vertical-align:top">
+            @Html.DisplayFor(modelItem => item.C_What)
+        </td>
+        <td style="vertical-align:top">
+            @Html.DisplayFor(modelItem => item.C_How)
+        </td>
+        <td style="vertical-align:top">
+            @if(@item.CalendarID != 0)
+            {
+            @Ajax.ActionLink("Calendar", "DisplayCalendar", "Calendar", new {calendarID=@item.CalendarID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+            }
+                </td>
+        <td style="vertical-align:top">
+            @if(@item.DocumentID != null)
+            {
+                @Html.ActionLink("Document", "GetFileFromDisk", "Document", new {DocumentID=@item.DocumentID},  new { target="_blank" })
+            }
+        </td>
+        <td style="vertical-align:top">
+             @Html.ActionLink("Attendance", "AddAttendance", "ProgramEvent", new {ProgramEventID=item.programEventID},new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+        </td>
+        <td style="vertical-align:top">
+              @Ajax.ActionLink("Edit", "Edit", "ProgramEvent", new {ProgramEventID=item.programEventID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+              @Ajax.ActionLink("Delete", "Delete", "ProgramEvent", new {ProgramEventID=item.programEventID, @class="classname"}, new AjaxOptions {HttpMethod = "Post", Confirm = "Are you sure you want to delete this event?", InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+              
+        </td>
+    </tr>
+}
+
+</table>
+    }
+else
+{
+ <p>No event records found!</p>   
+}
+</div>

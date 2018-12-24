@@ -1,0 +1,28 @@
+﻿@model IEnumerable<Domain.responsibility>
+
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+<div>
+
+<h2 class="center">Staff Responisbility Center</h2>
+
+    <div class="center">
+        @Ajax.ActionLink("Add Staff Responsibility", "Create", "Responsibility", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+        @Ajax.ActionLink("View Staff Responsibility", "Details", "Responsibility", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+    </div>
+
+<div id="RightPane">
+@Html.Action("List", "Responsibility", new {})
+</div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+    });
+
+ </script>

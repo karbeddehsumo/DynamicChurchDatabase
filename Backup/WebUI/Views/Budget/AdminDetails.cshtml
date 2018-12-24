@@ -1,0 +1,32 @@
+﻿@model Domain.budget
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<h2 class="center">View Budget Report</h2>
+<div>
+        <span>Select budget year</span>
+        @Html.DropDownList("aBudgetSearch", ViewBag.BudgetYearList as SelectList,new { style = "width: 100px;" })
+
+</div>
+<div class="BudgetData">
+
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $(document).on("change", "#aBudgetSearch", function (event) {
+            var budgetyear = $('#aBudgetSearch option:selected').val();
+            var url = "/Budget/AdminBudgetPage";
+            $.get(url, { BudgetYear: budgetyear.toString() }, function (data) { $(".BudgetData").html(data) });
+
+        });
+
+
+    });
+
+ </script>

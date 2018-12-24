@@ -1,0 +1,38 @@
+﻿@model Domain.ministry
+
+@{
+    ViewBag.Title = "Ministries";
+
+}
+
+<h3>@Model.MinistryName</h3>
+
+
+@if(@Model.Goals != null)
+{
+foreach(var i in @Model.Goals)
+{
+        @Ajax.ActionLink(i.Title, "List", "Task", new {bDate=@ViewBag.BDate, eDate=@ViewBag.EDate,SearchType="GoalSearch", codeID=@i.goalID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+}
+}
+<div id="RightPane"></div>
+
+@Ajax.ActionLink("Add goals", "Create", "Goal", new {ministryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+
+
+<h3>Meetings</h3>
+@if (@Model.Meetings != null)
+{
+foreach(var i in @Model.Meetings)
+{
+    @string.Format("{0}",@i.Title)
+    @string.Format("{Date: 0}",i.MeetingDateTime)
+    @string.Format("{Place: 0}",i.meetingVenue)
+    
+
+}
+}
+
+
+
+

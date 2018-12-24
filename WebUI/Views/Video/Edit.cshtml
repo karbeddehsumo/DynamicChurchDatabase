@@ -1,0 +1,104 @@
+﻿@model Domain.video
+
+@{
+    ViewBag.Title = "Edit";
+  
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Create", "Sale", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 id="FieldSetTopMenu">Edit Video</h2>    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>video</legend>
+
+        @Html.HiddenFor(model => model.videoID)
+        <input id="CallerType" name="CallerType" type="hidden" value="@ViewBag.CallerType" />
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.ministryID)
+            @Html.ValidationMessageFor(model => model.ministryID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.VideoTitle,"Title")
+            @Html.EditorFor(model => model.VideoTitle)
+            @Html.ValidationMessageFor(model => model.VideoTitle)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.VideoDate,"Date")
+             @Html.TextBoxFor(model => model.VideoDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.VideoDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.URL)
+            @Html.EditorFor(model => model.URL)
+            @Html.ValidationMessageFor(model => model.URL)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Description)
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.VideoTypeID)
+             @Html.DropDownListFor(model => model.VideoTypeID, ViewBag.VideoCategory as SelectList, "") 
+            @Html.ValidationMessageFor(model => model.VideoTypeID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Status)
+            @Html.DropDownListFor(model => model.Status, ViewBag.StatusList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+
+        @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+               
+
+               <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#VideoTitle").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the title of the video.");
+            }
+            else if ($('#Status option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the status");
+            }
+
+        });
+    });
+</script>
+

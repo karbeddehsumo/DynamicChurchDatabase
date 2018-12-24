@@ -1,0 +1,143 @@
+﻿@model Domain.programevent
+
+@{
+    ViewBag.Title = "Create";
+    
+}
+
+<div id="AjaxFormPane" class="panel">
+    <div class="center" style="color:red">@TempData["message2"]</div>
+
+    <div class="center">
+@using (Ajax.BeginForm("Create", "ProgramEvent", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    @Html.AntiForgeryToken()
+           
+     @Html.ValidationSummary(true)
+   <span id="FieldSetTopMenu">@ViewBag.Heading</span>    
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Add new event here...</legend>
+
+            @Html.HiddenFor(model => model.goalID)
+
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Title,"Title")
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.C_When,"Begin Date")
+           @Html.TextBoxFor(model => model.C_When, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.C_When)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.EventEndDate,"End Date")
+           @Html.TextBoxFor(model => model.EventEndDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker2" })
+            @Html.ValidationMessageFor(model => model.EventEndDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.C_Who,"Contact")
+             @Html.DropDownListFor(model => model.C_Who, ViewBag.MinistryMemberList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.C_Who)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.C_Where,"Venue")
+            @Html.EditorFor(model => model.C_Where)
+            @Html.ValidationMessageFor(model => model.C_Where)
+        </div>
+
+         <div class="editor">
+           <label>Venue List</label>
+            @Html.DropDownList("EventLocation", ViewBag.MeetingVenueList as SelectList, "")
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.C_What,"Description")
+            @Html.EditorFor(model => model.C_What)
+            @Html.ValidationMessageFor(model => model.C_What)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.C_How,"Major Activities")
+            @Html.TextAreaFor(model => model.C_How)
+            @Html.ValidationMessageFor(model => model.C_How)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.BeginTime,"Start Time")
+            @Html.DropDownListFor(model => model.BeginTime, ViewBag.TimeIncrementList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.BeginTime)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.EndTime,"End Time")
+            @Html.DropDownListFor(model => model.EndTime, ViewBag.TimeIncrementList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.EndTime)
+        </div>
+
+        @Html.HiddenFor(model => model.Status)
+        @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+</div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $("#EventLocation").change(function (event) {
+            var MinistryLocation = $('#EventLocation option:selected').text();
+            $("#C_Where").val(MinistryLocation);
+        });
+
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#Title").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the event title.");
+            }
+            else if ($("#C_Who").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the name of person in charge of event.");
+            }
+            else if ($("#C_Where").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the venue of the event.");
+            }
+            else if ($("#C_What").val() == 0) {
+                event.preventDefault();
+                alert("Please describe the event.");
+            }
+            else if ($("#C_How").val() == 0) {
+                event.preventDefault();
+                alert("Please list the major activities of the events.");
+            }
+            else if ($("#BeginTime").val() == 0) {
+                event.preventDefault();
+                alert("Please select a begin time");
+            }
+        });
+    });
+</script>

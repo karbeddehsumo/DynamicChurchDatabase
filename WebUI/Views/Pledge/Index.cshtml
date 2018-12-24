@@ -1,0 +1,25 @@
+﻿@model IEnumerable<Domain.pledge>
+
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+
+<div>
+<h2 class="center">Pledge Center</h2>
+
+    <div class="center">
+        @Ajax.ActionLink("Add Pledge", "Create", "Pledge", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("View Pledge", "Details", "Pledge", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" }, new {@id="pageSubTitle"})
+        @if(@ViewBag.Supervisor == true )
+        {
+            @Ajax.ActionLink("Member Pledge Entry", "MemberPledgeEnable", "Pledge", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" }, new {@id="pageSubTitle",@title="Allows member to enter pledge(s)."})
+        }
+            </div>
+  </div>
+<div id="RightPane" class="panel">
+@Html.Action("Details", "Pledge", new {bdate=@ViewBag.BeginDate,edate=@ViewBag.EndDate,code="CurrentPledges" })
+</div>
+
+

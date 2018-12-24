@@ -1,0 +1,44 @@
+﻿@model Domain.constant
+
+@{
+    ViewBag.Title = "Delete";
+    
+}
+
+<div id="AjaxFormPane">
+<h2>Delete Constant</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<table>
+
+    <tbody>
+            <tr>
+                <td>@Model.Category</td>
+                <td>@Model.ConstantName</td>
+                <td>@Model.Value1</td>
+                <td>@Model.Value2</td>
+                <td>@Model.Value3</td>
+                <td>@Model.SortOrder</td>
+                <td>@Model.Status</td>
+                <td>@Model.EnteredBy</td>
+                <td>@Model.DateEntered.ToShortDateString()</td>
+            </tr>
+    </tbody>
+</table>
+@using (Html.BeginForm()) {
+    <p>
+        <input id="constantID" name="constantID" type="hidden"  value="@ViewBag.ConstantID"/>
+     <input type="submit" value="Delete" /> <input id="CancelDeleteBtn" name="CancelDeleteBtn" type="button" value="Cancel Delete"/>
+    </p>
+}
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#CancelDeleteBtn').click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+    });
+</script>

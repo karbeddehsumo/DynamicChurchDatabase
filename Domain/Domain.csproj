@@ -1,0 +1,486 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{9F47AE29-1A4B-41CC-AFF6-22038D2ED6D9}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Domain</RootNamespace>
+    <AssemblyName>Domain</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <PublishUrl>publish\</PublishUrl>
+    <Install>true</Install>
+    <InstallFrom>Disk</InstallFrom>
+    <UpdateEnabled>false</UpdateEnabled>
+    <UpdateMode>Foreground</UpdateMode>
+    <UpdateInterval>7</UpdateInterval>
+    <UpdateIntervalUnits>Days</UpdateIntervalUnits>
+    <UpdatePeriodically>false</UpdatePeriodically>
+    <UpdateRequired>false</UpdateRequired>
+    <MapFileExtensions>true</MapFileExtensions>
+    <ApplicationRevision>0</ApplicationRevision>
+    <ApplicationVersion>1.0.0.%2a</ApplicationVersion>
+    <IsWebBootstrapper>false</IsWebBootstrapper>
+    <UseApplicationTrust>false</UseApplicationTrust>
+    <BootstrapperEnabled>true</BootstrapperEnabled>
+    <WebGreaseLibPath>..\packages\WebGrease.1.5.2\lib</WebGreaseLibPath>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Antlr3.Runtime">
+      <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\EntityFramework.5.0.0\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Web.Infrastructure, Version=1.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <Private>True</Private>
+      <HintPath>..\packages\Microsoft.Web.Infrastructure.1.0.0.0\lib\net40\Microsoft.Web.Infrastructure.dll</HintPath>
+    </Reference>
+    <Reference Include="Mvc.Mailer">
+      <HintPath>..\packages\MvcMailer.4.5\lib\45\Mvc.Mailer.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\packages\MySql.Data.6.7.9\lib\net45\MySql.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data.Entity.EF5, Version=6.8.3.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="MySql.Web, Version=6.10.6.0, Culture=neutral, PublicKeyToken=c5687fc88969c44d, processorArchitecture=MSIL" />
+    <Reference Include="Newtonsoft.Json, Version=4.5.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.5.0.8\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+    </Reference>
+    <Reference Include="Ninject.Web.Common">
+      <HintPath>..\packages\Ninject.Web.Common.3.2.3.0\lib\net45-full\Ninject.Web.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Data.Entity" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WebActivatorEx, Version=2.0.0.0, Culture=neutral, PublicKeyToken=7b26dc2a43f6a0d4, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\WebActivatorEx.2.0.5\lib\net40\WebActivatorEx.dll</HintPath>
+    </Reference>
+    <Reference Include="WebGrease">
+      <HintPath>..\packages\WebGrease.1.5.2\lib\WebGrease.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abstract\IActionItemRepository.cs" />
+    <Compile Include="Abstract\IAnnouncementRepository.cs" />
+    <Compile Include="Abstract\IAttendanceRepository.cs" />
+    <Compile Include="Abstract\IBankAccountRepository.cs" />
+    <Compile Include="Abstract\IBankBalanceRepository.cs" />
+    <Compile Include="Abstract\IBillRepository.cs" />
+    <Compile Include="Abstract\IBudgetItemRepository.cs" />
+    <Compile Include="Abstract\IBudgetRepository.cs" />
+    <Compile Include="Abstract\ICalendarRepository.cs" />
+    <Compile Include="Abstract\ICategoryRepository.cs" />
+    <Compile Include="Abstract\IChildParentRepository.cs" />
+    <Compile Include="Abstract\IConstantRepository.cs" />
+    <Compile Include="Abstract\IContributionRepository.cs" />
+    <Compile Include="Abstract\IDocumentRepository.cs" />
+    <Compile Include="Abstract\IListHeaderRepository.cs" />
+    <Compile Include="Abstract\IListtableRepository.cs" />
+    <Compile Include="Abstract\IListItemRepository.cs" />
+    <Compile Include="Abstract\IMeetingAgendaRepository.cs" />
+    <Compile Include="Abstract\IMeetingNotesRepository.cs" />
+    <Compile Include="Abstract\IMeetingRepository.cs" />
+    <Compile Include="Abstract\IPledgeRepository.cs" />
+    <Compile Include="Abstract\IProductDiscountRepository.cs" />
+    <Compile Include="Abstract\IProductRepository.cs" />
+    <Compile Include="Abstract\IProgramEventBudgetRepository.cs" />
+    <Compile Include="Abstract\IProgramEventRepository.cs" />
+    <Compile Include="Abstract\IExpenseRepository.cs" />
+    <Compile Include="Abstract\IMinistryExpenseRepository.cs" />
+    <Compile Include="Abstract\IFamilyRepository.cs" />
+    <Compile Include="Abstract\IGoalRepository.cs" />
+    <Compile Include="Abstract\IIncomeRepository.cs" />
+    <Compile Include="Abstract\IMinistryIncomeRepository.cs" />
+    <Compile Include="Abstract\IPropertyInventoryRepository.cs" />
+    <Compile Include="Abstract\ILocalProviderRepository.cs" />
+    <Compile Include="Abstract\IMemberRepository.cs" />
+    <Compile Include="Abstract\IMembershipProviderRepository.cs" />
+    <Compile Include="Abstract\IMinistryGroupRepository.cs" />
+    <Compile Include="Abstract\IMinistryMemberRepository.cs" />
+    <Compile Include="Abstract\IMinistryRepository.cs" />
+    <Compile Include="Abstract\IPayeeCategoryRepository.cs" />
+    <Compile Include="Abstract\IPayeeRepository.cs" />
+    <Compile Include="Abstract\IPictureRepository.cs" />
+    <Compile Include="Abstract\IPropertyRepository.cs" />
+    <Compile Include="Abstract\IResponsibilityRepository.cs" />
+    <Compile Include="Abstract\IRoleProviderRepository.cs" />
+    <Compile Include="Abstract\ISaleRepository.cs" />
+    <Compile Include="Abstract\ISaleItemRepository.cs" />
+    <Compile Include="Abstract\ISpouseRepository.cs" />
+    <Compile Include="Abstract\IStaffRepository.cs" />
+    <Compile Include="Abstract\IStoryRepository.cs" />
+    <Compile Include="Abstract\ISubCategoryItemRepository.cs" />
+    <Compile Include="Abstract\ISubCategoryRepository.cs" />
+    <Compile Include="Abstract\ISupervisorRepository.cs" />
+    <Compile Include="Abstract\ITaskRepository.cs" />
+    <Compile Include="Abstract\IVideoRepository.cs" />
+    <Compile Include="Abstract\IVisitorRepository.cs" />
+    <Compile Include="actionitem.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="announcement.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="attendance.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bankaccount.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bankbalance.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="bill.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="budget.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="budgetitem.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="calendar.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="category.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="childparent.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Class1.cs" />
+    <Compile Include="Concrete\EFActionItemRepository.cs" />
+    <Compile Include="Concrete\EFAnnouncementRepository.cs" />
+    <Compile Include="Concrete\EFAttendanceRepository.cs" />
+    <Compile Include="Concrete\EFBankAccountRepository.cs" />
+    <Compile Include="Concrete\EFBankBalanceRepository.cs" />
+    <Compile Include="Concrete\EFBillRepository.cs" />
+    <Compile Include="Concrete\EFBudgetItemRepository.cs" />
+    <Compile Include="Concrete\EFBudgetRepository.cs" />
+    <Compile Include="Concrete\EFCalendarRepository.cs" />
+    <Compile Include="Concrete\EFCategoryRepository.cs" />
+    <Compile Include="Concrete\EFChildParentRepository.cs" />
+    <Compile Include="Concrete\EFConstantRepository.cs" />
+    <Compile Include="Concrete\EFContributionRepository.cs" />
+    <Compile Include="Concrete\EFDocumentRepository.cs" />
+    <Compile Include="Concrete\EFListHeaderRepository.cs" />
+    <Compile Include="Concrete\EFListTableRepository.cs" />
+    <Compile Include="Concrete\EFListItemRepository.cs" />
+    <Compile Include="Concrete\EFMeetingAgendaRepository.cs" />
+    <Compile Include="Concrete\EFMeetingNotesRepository.cs" />
+    <Compile Include="Concrete\EFMeetingRepository.cs" />
+    <Compile Include="Concrete\EFPledgeRepository.cs" />
+    <Compile Include="Concrete\EFProductDiscountRepository.cs" />
+    <Compile Include="Concrete\EFProductRepository.cs" />
+    <Compile Include="Concrete\EFProgramEventBudgetRepository.cs" />
+    <Compile Include="Concrete\EFProgramEventRepository.cs" />
+    <Compile Include="Concrete\EFExpenseRepository.cs" />
+    <Compile Include="Concrete\EFMinistryExpenseRepository.cs" />
+    <Compile Include="Concrete\EFFamilyRepository.cs" />
+    <Compile Include="Concrete\EFGoalRepository.cs" />
+    <Compile Include="Concrete\EFIncomeRepository.cs" />
+    <Compile Include="Concrete\EFMinistryIncomeRepository.cs" />
+    <Compile Include="Concrete\EFPropertyInventoryRepository.cs" />
+    <Compile Include="Concrete\EFMemberRepository.cs" />
+    <Compile Include="Concrete\EFMinistryGroupRepository.cs" />
+    <Compile Include="Concrete\EFMinistryMemberRepository.cs" />
+    <Compile Include="Concrete\EFMinistryRepository.cs" />
+    <Compile Include="Concrete\EFPayeeCategoryRepository.cs" />
+    <Compile Include="Concrete\EFPayeeRepository.cs" />
+    <Compile Include="Concrete\EFPictureRepository.cs" />
+    <Compile Include="Concrete\EFPropertyRepository.cs" />
+    <Compile Include="Concrete\EFResponsibilityRepository.cs" />
+    <Compile Include="Concrete\EFSaleItemRepository.cs" />
+    <Compile Include="Concrete\EFSaleRepository.cs" />
+    <Compile Include="Concrete\EFSpouseRepository.cs" />
+    <Compile Include="Concrete\EFStaffRepository.cs" />
+    <Compile Include="Concrete\EFStoryRepository.cs" />
+    <Compile Include="Concrete\EFSubCategoryItemRepository.cs" />
+    <Compile Include="Concrete\EFSubCategoryRepository.cs" />
+    <Compile Include="Concrete\EFSupervisorRepository.cs" />
+    <Compile Include="Concrete\EFTaskRepository.cs" />
+    <Compile Include="Concrete\EFVideoRepository.cs" />
+    <Compile Include="Concrete\EFVisitorRepository.cs" />
+    <Compile Include="Concrete\EMembershipProviderRepository.cs" />
+    <Compile Include="Concrete\ELocalProviderRepository.cs" />
+    <Compile Include="Concrete\ERoleProviderRepository.cs" />
+    <Compile Include="constant.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="contribution.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="document.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="expense.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="family.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="goal.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="income.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="listheader.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="listitem.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="listtable.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="meeting.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="meetingagenda.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="meetingnote.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="member.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ministry.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ministryexpense.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ministrygroup.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ministryincome.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="ministrymember.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1ChurchDB_Model76.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1ChurchDB_Model76.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1ChurchDB_Model76.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Model1ChurchDB_Model76.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Model1ChurchDB_Model76.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="payee.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="payeecategory.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="picture.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="pledge.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="product.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="productdiscount.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="programevent.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="programeventbudget.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="programeventbudgetitem.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="property.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="propertyinventory.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="responsibility.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="role.cs">
+      <DependentUpon>UserDB_Model4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="sale.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="saleitem.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="spouse.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="staff.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="story.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="subcategory.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="subcategoryitem.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="supervisor.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="task.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="user.cs">
+      <DependentUpon>UserDB_Model4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserDB_Model4.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserDB_Model4.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserDB_Model4.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserDB_Model4.tt</DependentUpon>
+    </Compile>
+    <Compile Include="UserDB_Model4.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>UserDB_Model4.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="video.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+    <Compile Include="visitor.cs">
+      <DependentUpon>Model1ChurchDB_Model76.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.Config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="Model1ChurchDB_Model76.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>Model1ChurchDB_Model76.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="Model1ChurchDB_Model76.edmx.diagram">
+      <DependentUpon>Model1ChurchDB_Model76.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="UserDB_Model4.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>UserDB_Model4.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="UserDB_Model4.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UserDB_Model4.edmx</DependentUpon>
+      <LastGenOutput>UserDB_Model4.Context.cs</LastGenOutput>
+    </None>
+    <None Include="UserDB_Model4.edmx.diagram">
+      <DependentUpon>UserDB_Model4.edmx</DependentUpon>
+    </None>
+    <None Include="UserDB_Model4.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>UserDB_Model4.edmx</DependentUpon>
+      <LastGenOutput>UserDB_Model4.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
+    <BootstrapperPackage Include=".NETFramework,Version=v4.5">
+      <Visible>False</Visible>
+      <ProductName>Microsoft .NET Framework 4.5 %28x86 and x64%29</ProductName>
+      <Install>true</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Client.3.5">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1 Client Profile</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+    <BootstrapperPackage Include="Microsoft.Net.Framework.3.5.SP1">
+      <Visible>False</Visible>
+      <ProductName>.NET Framework 3.5 SP1</ProductName>
+      <Install>false</Install>
+    </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Model1ChurchDB_Model76.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1ChurchDB_Model76.edmx</DependentUpon>
+      <LastGenOutput>Model1ChurchDB_Model76.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Model1ChurchDB_Model76.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>Model1ChurchDB_Model76.edmx</DependentUpon>
+      <LastGenOutput>Model1ChurchDB_Model76.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

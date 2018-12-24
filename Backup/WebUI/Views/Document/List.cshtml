@@ -1,0 +1,65 @@
+﻿@model IEnumerable<Domain.document>
+
+@{
+    ViewBag.Title = "List";
+    
+}
+
+
+<div id="AjaxFormPane">
+    <div class="center">
+
+   @if (((ViewBag.Supervisor == true) || (ViewBag.Supervisor2 == true) || (ViewBag.Supervisor3 == true)) && (@ViewBag.Requestor == "Officer"))
+    {
+        @Ajax.ActionLink("Add Document", "Create", "Document", new {MinistryID=@ViewBag.MinistryID,CallerType="Officer"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane"}, new {@id="pageSubTitle"})
+    }
+    <br />
+
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <caption>Document List</caption>
+    <tr>
+        <th>
+            File Name
+        </th>
+        <th></th>
+        @if(@ViewBag.CanEdit == true)
+        {
+        <th></th>
+        <th></th>
+        }
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Title
+        </td>
+                <td>
+            @Html.ActionLink("View", "GetFileFromDisk", "Document", new {DocumentID=item.documentID},  new { target="_blank" })
+        </td>
+       @if (((ViewBag.Supervisor == true) || (ViewBag.Supervisor2 == true) || (ViewBag.Supervisor3 == true)) || (@ViewBag.Requestor == "Officer"))
+        {
+        <td>
+                @Ajax.ActionLink("Edit", "Edit", "Document", new {DocumentID=item.documentID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+        </td>
+        <td>
+            @Ajax.ActionLink("Delete", "Delete", "Document", new {DocumentID=item.documentID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane", Confirm="Do you want to delete this record?",HttpMethod="Post" })
+        </td>
+        }
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p>No documents found!</p>   
+}
+        </div>
+    </div>
+
+
+
+

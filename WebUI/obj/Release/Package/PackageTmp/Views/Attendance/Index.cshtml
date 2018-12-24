@@ -1,0 +1,20 @@
+﻿@model IEnumerable<Domain.attendance>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+<h2>Attendance Center</h2>
+
+
+<div>
+    <div>
+        @Ajax.ActionLink("New Attendance", "Create", "Attendance", new {calendarID=1}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+        @Ajax.ActionLink("View Attendance", "List", "Attendance", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+    </div>
+ <div id="RightPane" class="minorContent">
+    @Html.Action("List", "Attendance", new {EventDate=@ViewBag.BeginDate})
+ </div>
+</div>

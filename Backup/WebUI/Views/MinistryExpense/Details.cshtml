@@ -1,0 +1,58 @@
+﻿@model Domain.ministryexpense
+
+@{
+    ViewBag.Title = "Details";
+ 
+}
+
+<div class="center">
+<div id="AjaxFormPane">
+    <div class="center" style="color:red">@TempData["message2"]</div>
+<div class="center">
+    <strong class="center">Select dates and search</strong><br />
+        <label>Begin Date </label>
+        <input id="bDate" type="text"  class="datepicker" value="@ViewBag.BeginDate" style="width:100px;" />
+         <label>End Date </label>
+        <input id="eDate" type="text"  class="datepicker" value="@ViewBag.EndDate" style="width:100px;" />
+    <input id="submitAll2Click" name="submitAllClick" value="View All" type="submit"/>
+    <br />
+    <label>Category </label>
+    <input id="ministryID" name="ministryID" type="hidden" value="@ViewBag.MinistryID" />
+        @Html.DropDownList("CategorySearch", ViewBag.SubCategoryList as SelectList,"Select By Category...")
+
+</div>
+<div class="CalendarData center" >
+@Html.Action("List", "MinistryExpense", new {codeID=@ViewBag.MinistryID,bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate,SearchType="MinistrySearch" })
+</div>
+    </div>
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CategorySearch").change(function (event) {
+            var catid = $('#CategorySearch option:selected').val();
+            var ministryid = $('#ministryID').val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/MinistryExpense/List";
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID2: catid.toString(), codeID: ministryid.toString(), SearchType: "CategorySearch" }, function (data) { $(".CalendarData").html(data) });
+
+        });
+
+        $(document).on("click", "#submitAll2Click", function (event) {
+            var ministryid = $('#ministryID').val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/MinistryExpense/List";
+            $("#MinistrySearch").val("Select By Ministry...");
+            $("#CategorySearch").val("Select By Category...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: ministryid.toString(), SearchType: "MinistrySearch" }, function (data) { $(".CalendarData").html(data) });
+
+        });
+
+    });
+
+ </script>

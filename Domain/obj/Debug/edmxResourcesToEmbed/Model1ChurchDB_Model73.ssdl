@@ -1,0 +1,867 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="churchdatabaseModel.Store" Provider="MySql.Data.MySqlClient" ProviderManifestToken="5.6" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="actionitem">
+    <Key>
+      <PropertyRef Name="ActionItemID" />
+    </Key>
+    <Property Name="ActionItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentType" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ParentItemID" Type="int" Nullable="false" />
+    <Property Name="childItemID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="announcement">
+    <Key>
+      <PropertyRef Name="announcementID" />
+    </Key>
+    <Property Name="announcementID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ministryID" Type="int" Nullable="false" />
+    <Property Name="BeginDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" Nullable="false" />
+    <Property Name="Message" Type="varchar" MaxLength="2000" Nullable="false" />
+    <Property Name="DocumentID" Type="int" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+  </EntityType>
+  <EntityType Name="attendance">
+    <Key>
+      <PropertyRef Name="attendanceID" />
+    </Key>
+    <Property Name="attendanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="memberID" Type="int" Nullable="false" />
+    <Property Name="RollCall" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="calendarID" Type="int" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bankaccount">
+    <Key>
+      <PropertyRef Name="bankAccountID" />
+    </Key>
+    <Property Name="bankAccountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BankName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="AccountNumber" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="200" />
+    <Property Name="ControlName" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bankbalance">
+    <Key>
+      <PropertyRef Name="BankBalanceID" />
+    </Key>
+    <Property Name="BankBalanceID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BankAccountID" Type="int" Nullable="false" />
+    <Property Name="LastIncomeID" Type="int" Nullable="false" />
+    <Property Name="LastExpenseID" Type="int" Nullable="false" />
+    <Property Name="BeginDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" Nullable="false" />
+    <Property Name="BeginingBalance" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="RevenueAmount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="ExpenseAmount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="EndingBalance" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+  </EntityType>
+  <EntityType Name="bill">
+    <Key>
+      <PropertyRef Name="billID" />
+    </Key>
+    <Property Name="billID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="payeeID" Type="int" Nullable="false" />
+    <Property Name="PayeeName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="AccountNumber" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="TotalAmount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="AmountDue" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="DateDue" Type="date" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="200" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="budget">
+    <Key>
+      <PropertyRef Name="budgetID" />
+    </Key>
+    <Property Name="budgetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BudgetYear" Type="year" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="SubCategoryID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="200" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="budgetitem">
+    <Key>
+      <PropertyRef Name="parentItemID" />
+      <PropertyRef Name="childItemID" />
+    </Key>
+    <Property Name="parentItemID" Type="int" Nullable="false" />
+    <Property Name="childItemID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="calendar">
+    <Key>
+      <PropertyRef Name="calendarID" />
+    </Key>
+    <Property Name="calendarID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ministryID" Type="int" Nullable="false" />
+    <Property Name="EventType" Type="int" Nullable="false" />
+    <Property Name="CalendarDate" Type="date" Nullable="false" />
+    <Property Name="StartTime" Type="varchar" MaxLength="20" />
+    <Property Name="EndTime" Type="varchar" MaxLength="20" />
+    <Property Name="Location" Type="varchar" MaxLength="100" />
+    <Property Name="Description" Type="varchar" MaxLength="100" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Conductor" Type="varchar" MaxLength="100" />
+    <Property Name="PublicAccess" Type="bool" Nullable="false" />
+    <Property Name="DocumentID" Type="int" />
+    <Property Name="PictureID" Type="int" />
+    <Property Name="CalendarEndDate" Type="date" />
+    <Property Name="DisplayBanner" Type="bool" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="category">
+    <Key>
+      <PropertyRef Name="categoryID" />
+    </Key>
+    <Property Name="categoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CategoryName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+  </EntityType>
+  <EntityType Name="childparent">
+    <Key>
+      <PropertyRef Name="ChildParentID" />
+    </Key>
+    <Property Name="ChildParentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ChildID" Type="int" Nullable="false" />
+    <Property Name="ParentID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="constant">
+    <Key>
+      <PropertyRef Name="constantID" />
+    </Key>
+    <Property Name="constantID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Category" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ConstantName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Value1" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Value2" Type="varchar" MaxLength="100" />
+    <Property Name="Value3" Type="varchar" MaxLength="100" />
+    <Property Name="SortOrder" Type="int" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="contribution">
+    <Key>
+      <PropertyRef Name="contributionID" />
+    </Key>
+    <Property Name="contributionID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="memberID" Type="int" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="ContributionDate" Type="date" Nullable="false" />
+    <Property Name="CheckNumber" Type="varchar" MaxLength="20" />
+    <Property Name="subCategoryID" Type="int" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="document">
+    <Key>
+      <PropertyRef Name="documentID" />
+    </Key>
+    <Property Name="documentID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ministryID" Type="int" />
+    <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DocumentTypeID" Type="int" Nullable="false" />
+    <Property Name="ContentType" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ContentLength" Type="int" Nullable="false" />
+    <Property Name="SortOrder" Type="int" />
+    <Property Name="DateCreated" Type="date" />
+    <Property Name="Author" Type="varchar" MaxLength="100" />
+    <Property Name="Version" Type="varchar" MaxLength="50" />
+    <Property Name="FileName" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="TempFileName" Type="varchar" MaxLength="100" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="expense">
+    <Key>
+      <PropertyRef Name="expenseID" />
+    </Key>
+    <Property Name="expenseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subCategoryID" Type="int" Nullable="false" />
+    <Property Name="bankAccountID" Type="int" Nullable="false" />
+    <Property Name="Payee" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ExpenseDate" Type="date" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="CheckNumber" Type="varchar" MaxLength="20" />
+    <Property Name="Reconcile" Type="bool" />
+    <Property Name="Comment" Type="varchar" MaxLength="200" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="family">
+    <Key>
+      <PropertyRef Name="familyID" />
+    </Key>
+    <Property Name="familyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FamilyName" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Address" Type="varchar" MaxLength="100" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="State" Type="varchar" MaxLength="50" />
+    <Property Name="Zip" Type="varchar" MaxLength="20" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+    <Property Name="Address2" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="goal">
+    <Key>
+      <PropertyRef Name="goalID" />
+    </Key>
+    <Property Name="goalID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ministryID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="400" />
+    <Property Name="AssignedTo" Type="int" />
+    <Property Name="BeginDate" Type="date" />
+    <Property Name="EndDate" Type="date" />
+    <Property Name="CompletionRatio" Type="decimal" Precision="10" Scale="0" />
+    <Property Name="SupervisorComment" Type="varchar" MaxLength="600" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="400" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="income">
+    <Key>
+      <PropertyRef Name="incomeID" />
+    </Key>
+    <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="incomeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subCategoryID" Type="int" Nullable="false" />
+    <Property Name="bankAccountID" Type="int" Nullable="false" />
+    <Property Name="IncomeDate" Type="date" Nullable="false" />
+    <Property Name="CashAmount" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="CheckAmount" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="CoinAmount" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Comment" Type="varchar" MaxLength="200" />
+    <Property Name="Status" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="listheader">
+    <Key>
+      <PropertyRef Name="ListHeaderID" />
+    </Key>
+    <Property Name="ListHeaderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ListTableID" Type="int" Nullable="false" />
+    <Property Name="Type1" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Type2" Type="varchar" MaxLength="20" />
+    <Property Name="Type3" Type="varchar" MaxLength="20" />
+    <Property Name="Type4" Type="varchar" MaxLength="20" />
+    <Property Name="Type5" Type="varchar" MaxLength="20" />
+    <Property Name="Type6" Type="varchar" MaxLength="20" />
+    <Property Name="Type7" Type="varchar" MaxLength="20" />
+    <Property Name="Type8" Type="varchar" MaxLength="20" />
+    <Property Name="Type9" Type="varchar" MaxLength="20" />
+    <Property Name="Type10" Type="varchar" MaxLength="20" />
+    <Property Name="FieldName1" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="FieldName2" Type="varchar" MaxLength="50" />
+    <Property Name="FieldName3" Type="varchar" MaxLength="50" />
+    <Property Name="FieldName4" Type="varchar" MaxLength="50" />
+    <Property Name="FieldName5" Type="varchar" MaxLength="50" />
+    <Property Name="FieldName6" Type="varchar" MaxLength="50" />
+    <Property Name="FieldName7" Type="varchar" MaxLength="50" />
+    <Property Name="FieldName8" Type="varchar" MaxLength="50" />
+    <Property Name="FieldName9" Type="varchar" MaxLength="50" />
+    <Property Name="FieldName10" Type="varchar" MaxLength="50" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="listitem">
+    <Key>
+      <PropertyRef Name="listItemID" />
+    </Key>
+    <Property Name="listItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="listTableID" Type="int" Nullable="false" />
+    <Property Name="Value1" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Value2" Type="varchar" MaxLength="100" />
+    <Property Name="Value3" Type="varchar" MaxLength="100" />
+    <Property Name="Value4" Type="varchar" MaxLength="100" />
+    <Property Name="Value5" Type="varchar" MaxLength="100" />
+    <Property Name="Value6" Type="varchar" MaxLength="100" />
+    <Property Name="Value7" Type="varchar" MaxLength="100" />
+    <Property Name="Value8" Type="varchar" MaxLength="100" />
+    <Property Name="Value9" Type="varchar" MaxLength="100" />
+    <Property Name="Value10" Type="varchar" MaxLength="100" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="200" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="listtable">
+    <Key>
+      <PropertyRef Name="listTableID" />
+    </Key>
+    <Property Name="listTableID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ministryID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="DateCreated" Type="date" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+    <Property Name="DefaultOpen" Type="bool" />
+    <Property Name="IsPublic" Type="bool" />
+  </EntityType>
+  <EntityType Name="meeting">
+    <Key>
+      <PropertyRef Name="meetingID" />
+    </Key>
+    <Property Name="meetingID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="meetingDate" Type="date" Nullable="false" />
+    <Property Name="meetingVenue" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="StartTime" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EndTime" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="ministryID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="NextMeetingDate" Type="date" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CalendarID" Type="int" Nullable="false" />
+    <Property Name="DocumentID" Type="int" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+    <Property Name="Conductor" Type="varchar" MaxLength="100" />
+  </EntityType>
+  <EntityType Name="meetingagenda">
+    <Key>
+      <PropertyRef Name="meetingAgendaID" />
+    </Key>
+    <Property Name="meetingAgendaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="meetingID" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="400" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="TaskID" Type="int" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="meetingnote">
+    <Key>
+      <PropertyRef Name="meetingNoteID" />
+    </Key>
+    <Property Name="meetingNoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MeetingAgendaID" Type="int" Nullable="false" />
+    <Property Name="Note" Type="varchar" MaxLength="4000" Nullable="false" />
+    <Property Name="NoteDate" Type="date" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="member">
+    <Key>
+      <PropertyRef Name="memberID" />
+    </Key>
+    <Property Name="memberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="familyID" Type="int" />
+    <Property Name="FirstName" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="MiddleName" Type="varchar" MaxLength="200" />
+    <Property Name="LastName" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Suffix" Type="varchar" MaxLength="50" />
+    <Property Name="DOB" Type="date" Nullable="false" />
+    <Property Name="Gender" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="MembershipDate" Type="date" />
+    <Property Name="ChurchTitle" Type="varchar" MaxLength="200" />
+    <Property Name="ContactTypeID" Type="int" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="PhoneProviderID" Type="int" />
+    <Property Name="EmailAddress" Type="varchar" MaxLength="200" />
+    <Property Name="PictureID" Type="int" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ministry">
+    <Key>
+      <PropertyRef Name="ministryID" />
+    </Key>
+    <Property Name="ministryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MinistryName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="600" />
+    <Property Name="Contact" Type="varchar" MaxLength="200" />
+    <Property Name="ContactEmail" Type="varchar" MaxLength="100" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="100" />
+    <Property Name="BriefDescription" Type="varchar" MaxLength="500" />
+    <Property Name="PageStyleID" Type="int" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CodeDesc" Type="varchar" MaxLength="50" />
+    <Property Name="StoryCreateAccess" Type="bool" />
+    <Property Name="PictureCreateAccess" Type="bool" />
+    <Property Name="VideoCreateAccess" Type="bool" />
+    <Property Name="IsPublic" Type="bool" Nullable="false" />
+    <Property Name="DefaultMemberType" Type="varchar" MaxLength="50" />
+    <Property Name="IsGroupMinistry" Type="bool" />
+    <Property Name="GroupMinistryID" Type="int" />
+    <Property Name="PictureID" Type="int" />
+    <Property Name="MissionStatement" Type="varchar" MaxLength="2000" />
+    <Property Name="Title1" Type="varchar" MaxLength="100" />
+    <Property Name="Information1" Type="varchar" MaxLength="500" />
+    <Property Name="Title2" Type="varchar" MaxLength="100" />
+    <Property Name="Information2" Type="varchar" MaxLength="500" />
+    <Property Name="Title3" Type="varchar" MaxLength="100" />
+    <Property Name="Information3" Type="varchar" MaxLength="500" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ministryexpense">
+    <Key>
+      <PropertyRef Name="ministryExpenseID" />
+    </Key>
+    <Property Name="ministryExpenseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ministryID" Type="int" Nullable="false" />
+    <Property Name="subCategoryID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ExpenseDate" Type="date" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="CheckNumber" Type="varchar" MaxLength="20" />
+    <Property Name="Comment" Type="varchar" MaxLength="100" />
+    <Property Name="Reconcile" Type="bool" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ministrygroup">
+    <Key>
+      <PropertyRef Name="MinistryGroupID" />
+    </Key>
+    <Property Name="MinistryGroupID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ParentID" Type="int" Nullable="false" />
+    <Property Name="ChildID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ministryincome">
+    <Key>
+      <PropertyRef Name="ministryIncomeID" />
+    </Key>
+    <Property Name="ministryIncomeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ministryID" Type="int" Nullable="false" />
+    <Property Name="subCategoryID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="IncomeDate" Type="date" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="100" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="ministrymember">
+    <Key>
+      <PropertyRef Name="MinistryMemberID" />
+    </Key>
+    <Property Name="MinistryMemberID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ministryID" Type="int" Nullable="false" />
+    <Property Name="memberID" Type="int" Nullable="false" />
+    <Property Name="OfficeTitle" Type="varchar" MaxLength="100" />
+    <Property Name="SortOrder" Type="int" />
+    <Property Name="MembershipDate" Type="date" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="payee">
+    <Key>
+      <PropertyRef Name="payeeID" />
+    </Key>
+    <Property Name="payeeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="BankAccountID" Type="int" Nullable="false" />
+    <Property Name="SubCategoryID" Type="int" Nullable="false" />
+    <Property Name="AccountNumber" Type="varchar" MaxLength="50" />
+    <Property Name="PayeeName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="PhoneNumber" Type="varchar" MaxLength="50" />
+    <Property Name="Email" Type="varchar" MaxLength="50" />
+    <Property Name="URL" Type="varchar" MaxLength="200" />
+    <Property Name="Frequency" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="200" />
+    <Property Name="PayeeTypeID" Type="int" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="payeecategory">
+    <Key>
+      <PropertyRef Name="payeeID" />
+      <PropertyRef Name="categoryID" />
+    </Key>
+    <Property Name="payeeID" Type="int" Nullable="false" />
+    <Property Name="categoryID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="picture">
+    <Key>
+      <PropertyRef Name="pictureID" />
+    </Key>
+    <Property Name="pictureID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ministryID" Type="int" Nullable="false" />
+    <Property Name="PictureDate" Type="date" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="200" />
+    <Property Name="ImageData" Type="longblob" Nullable="false" />
+    <Property Name="ImageMimeType" Type="varchar" MaxLength="45" Nullable="false" />
+    <Property Name="PictureType" Type="varchar" MaxLength="20" />
+    <Property Name="IsPublic" Type="bool" />
+    <Property Name="GroupID" Type="int" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pledge">
+    <Key>
+      <PropertyRef Name="pledgeID" />
+    </Key>
+    <Property Name="pledgeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="memberID" Type="int" Nullable="false" />
+    <Property Name="FundID" Type="int" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="FundName" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="PledgeYear" Type="year" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="productID" />
+    </Key>
+    <Property Name="productID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Name" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="200" />
+    <Property Name="Price" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="categoryID" Type="int" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+    <Property Name="PictureID" Type="int" />
+    <Property Name="DocumentID" Type="int" />
+  </EntityType>
+  <EntityType Name="productdiscount">
+    <Key>
+      <PropertyRef Name="ProductDiscountID" />
+    </Key>
+    <Property Name="ProductDiscountID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="productID" Type="int" Nullable="false" />
+    <Property Name="Discount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="StartDate" Type="date" Nullable="false" />
+    <Property Name="EndDate" Type="date" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="programevent">
+    <Key>
+      <PropertyRef Name="programEventID" />
+    </Key>
+    <Property Name="programEventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="goalID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="_When" Type="date" Nullable="false" />
+    <Property Name="_Who" Type="int" Nullable="false" />
+    <Property Name="_Where" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="_What" Type="varchar" MaxLength="200" />
+    <Property Name="_How" Type="varchar" MaxLength="400" />
+    <Property Name="BeginTime" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EndTime" Type="varchar" MaxLength="20" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CalendarID" Type="int" Nullable="false" />
+    <Property Name="DocumentID" Type="int" />
+    <Property Name="EventEndDate" Type="date" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="programeventbudget">
+    <Key>
+      <PropertyRef Name="ProgramEventBudgetID" />
+    </Key>
+    <Property Name="ProgramEventBudgetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ProgramEventID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="Requestor" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="ProjectedTotalAmount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="ActualTotalAmount" Type="decimal" Precision="10" Scale="0" />
+    <Property Name="DueDate" Type="date" />
+    <Property Name="CheckNumber" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="200" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="programeventbudgetitem">
+    <Key>
+      <PropertyRef Name="ParentItemID" />
+      <PropertyRef Name="ChildItemID" />
+    </Key>
+    <Property Name="ParentItemID" Type="int" Nullable="false" />
+    <Property Name="ChildItemID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="property">
+    <Key>
+      <PropertyRef Name="propertyID" />
+    </Key>
+    <Property Name="propertyID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="200" />
+    <Property Name="subCategoryID" Type="int" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="200" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="PictureID" Type="int" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="propertyinventory">
+    <Key>
+      <PropertyRef Name="propertyInventoryID" />
+    </Key>
+    <Property Name="propertyInventoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="propertyID" Type="int" Nullable="false" />
+    <Property Name="purchaseDate" Type="date" />
+    <Property Name="Value" Type="decimal" Precision="10" Scale="2" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Location" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="AssignedTo" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Condition" Type="varchar" MaxLength="50" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="TagNumber" Type="varchar" MaxLength="100" />
+    <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="200" />
+    <Property Name="Comment" Type="varchar" MaxLength="200" />
+    <Property Name="PictureID" Type="int" />
+    <Property Name="DocumentID" Type="int" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="responsibility">
+    <Key>
+      <PropertyRef Name="responsibilityID" />
+    </Key>
+    <Property Name="responsibilityID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="staffID" Type="int" Nullable="false" />
+    <Property Name="DateCreated" Type="date" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="FullDescription" Type="varchar" MaxLength="400" />
+    <Property Name="BriefDescription" Type="varchar" MaxLength="200" />
+    <Property Name="Title" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="Type" Type="varchar" MaxLength="50" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sale">
+    <Key>
+      <PropertyRef Name="saleID" />
+    </Key>
+    <Property Name="saleID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="saleDate" Type="datetime" Precision="0" Nullable="false" />
+    <Property Name="saleAmount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="NumberProduct" Type="int" Nullable="false" />
+    <Property Name="Cashier" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="SubTotal" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Tax" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Total" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="CheckNumber" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="saleitem">
+    <Key>
+      <PropertyRef Name="SaleItemID" />
+    </Key>
+    <Property Name="SaleItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="saleID" Type="int" Nullable="false" />
+    <Property Name="productID" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Discount" Type="decimal" Precision="10" Scale="2" Nullable="false" />
+    <Property Name="Total" Type="decimal" Precision="10" Scale="0" Nullable="false" />
+    <Property Name="Comment" Type="varchar" MaxLength="100" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="spouse">
+    <Key>
+      <PropertyRef Name="SpouseID" />
+    </Key>
+    <Property Name="spouse1ID" Type="int" Nullable="false" />
+    <Property Name="spouse2ID" Type="int" Nullable="false" />
+    <Property Name="JointTithe" Type="bool" />
+    <Property Name="JointTitheTitle" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="SpouseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AnniversaryDate" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="staff">
+    <Key>
+      <PropertyRef Name="staffID" />
+    </Key>
+    <Property Name="staffID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+    <Property Name="Title" Type="varchar" MaxLength="100" />
+    <Property Name="HireDate" Type="date" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="pictureID" Type="int" />
+    <Property Name="SortOrder" Type="int" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="story">
+    <Key>
+      <PropertyRef Name="StoryID" />
+    </Key>
+    <Property Name="StoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MinistryID" Type="int" Nullable="false" />
+    <Property Name="Header" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="StoryLine" Type="varchar" MaxLength="2000" Nullable="false" />
+    <Property Name="PictureID" Type="int" />
+    <Property Name="VideoID" Type="int" />
+    <Property Name="StoryTypeID" Type="int" />
+    <Property Name="StoryDate" Type="date" Nullable="false" />
+    <Property Name="IsPublic" Type="bool" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="subcategory">
+    <Key>
+      <PropertyRef Name="subCategoryID" />
+    </Key>
+    <Property Name="subCategoryID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="SubCategoryName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="categoryID" Type="int" Nullable="false" />
+    <Property Name="bankAccountID" Type="int" Nullable="false" />
+    <Property Name="ShortTitle" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="subcategoryitem">
+    <Key>
+      <PropertyRef Name="ParentCategoryID" />
+      <PropertyRef Name="ChildCategoryID" />
+    </Key>
+    <Property Name="ParentCategoryID" Type="int" Nullable="false" />
+    <Property Name="ChildCategoryID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="supervisor">
+    <Key>
+      <PropertyRef Name="bossID" />
+      <PropertyRef Name="staffID" />
+    </Key>
+    <Property Name="bossID" Type="int" Nullable="false" />
+    <Property Name="staffID" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="task">
+    <Key>
+      <PropertyRef Name="taskID" />
+    </Key>
+    <Property Name="taskID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="goalID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="AssignTo" Type="int" Nullable="false" />
+    <Property Name="AssignDate" Type="date" Nullable="false" />
+    <Property Name="DueDate" Type="date" Nullable="false" />
+    <Property Name="CompletionRatio" Type="decimal" Precision="10" Scale="0" />
+    <Property Name="SupervisorComment" Type="varchar" MaxLength="2000" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="video">
+    <Key>
+      <PropertyRef Name="videoID" />
+    </Key>
+    <Property Name="videoID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ministryID" Type="int" Nullable="false" />
+    <Property Name="VideoTitle" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="VideoDate" Type="date" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="800" />
+    <Property Name="URL" Type="varchar" MaxLength="200" Nullable="false" />
+    <Property Name="VideoTypeID" Type="int" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityType Name="visitor">
+    <Key>
+      <PropertyRef Name="visitorID" />
+    </Key>
+    <Property Name="visitorID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Title" Type="int" />
+    <Property Name="FirstName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="LastName" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="subCategoryID" Type="int" Nullable="false" />
+    <Property Name="LastEventAttended" Type="int" />
+    <Property Name="EventDate" Type="date" />
+    <Property Name="phoneNumber" Type="varchar" MaxLength="50" />
+    <Property Name="PhoneProviderID" Type="int" />
+    <Property Name="Email" Type="varchar" MaxLength="100" />
+    <Property Name="BestContact" Type="int" />
+    <Property Name="Address" Type="varchar" MaxLength="100" />
+    <Property Name="City" Type="varchar" MaxLength="50" />
+    <Property Name="State" Type="varchar" MaxLength="20" />
+    <Property Name="Zip" Type="varchar" MaxLength="20" />
+    <Property Name="Comment" Type="varchar" MaxLength="200" />
+    <Property Name="Status" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="EnteredBy" Type="varchar" MaxLength="100" Nullable="false" />
+    <Property Name="DateEntered" Type="date" Nullable="false" />
+  </EntityType>
+  <EntityContainer Name="churchdatabaseModelStoreContainer">
+    <EntitySet Name="actionitem" EntityType="Self.actionitem" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="announcement" EntityType="Self.announcement" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="attendance" EntityType="Self.attendance" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="bankaccount" EntityType="Self.bankaccount" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="bankbalance" EntityType="Self.bankbalance" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="bill" EntityType="Self.bill" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="budget" EntityType="Self.budget" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="budgetitem" EntityType="Self.budgetitem" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="calendar" EntityType="Self.calendar" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="category" EntityType="Self.category" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="childparent" EntityType="Self.childparent" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="constant" EntityType="Self.constant" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="contribution" EntityType="Self.contribution" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="document" EntityType="Self.document" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="expense" EntityType="Self.expense" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="family" EntityType="Self.family" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="goal" EntityType="Self.goal" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="income" EntityType="Self.income" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="listheader" EntityType="Self.listheader" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="listitem" EntityType="Self.listitem" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="listtable" EntityType="Self.listtable" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="meeting" EntityType="Self.meeting" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="meetingagenda" EntityType="Self.meetingagenda" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="meetingnote" EntityType="Self.meetingnote" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="member" EntityType="Self.member" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="ministry" EntityType="Self.ministry" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="ministryexpense" EntityType="Self.ministryexpense" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="ministrygroup" EntityType="Self.ministrygroup" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="ministryincome" EntityType="Self.ministryincome" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="ministrymember" EntityType="Self.ministrymember" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="payee" EntityType="Self.payee" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="payeecategory" EntityType="Self.payeecategory" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="picture" EntityType="Self.picture" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="pledge" EntityType="Self.pledge" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="product" EntityType="Self.product" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="productdiscount" EntityType="Self.productdiscount" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="programevent" EntityType="Self.programevent" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="programeventbudget" EntityType="Self.programeventbudget" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="programeventbudgetitem" EntityType="Self.programeventbudgetitem" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="property" EntityType="Self.property" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="propertyinventory" EntityType="Self.propertyinventory" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="responsibility" EntityType="Self.responsibility" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="sale" EntityType="Self.sale" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="saleitem" EntityType="Self.saleitem" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="spouse" EntityType="Self.spouse" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="staff" EntityType="Self.staff" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="story" EntityType="Self.story" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="subcategory" EntityType="Self.subcategory" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="subcategoryitem" EntityType="Self.subcategoryitem" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="supervisor" EntityType="Self.supervisor" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="task" EntityType="Self.task" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="video" EntityType="Self.video" Schema="churchdatabase" store:Type="Tables" />
+    <EntitySet Name="visitor" EntityType="Self.visitor" Schema="churchdatabase" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

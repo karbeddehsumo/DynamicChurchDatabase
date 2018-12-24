@@ -1,0 +1,44 @@
+﻿@model IEnumerable<Domain.meetingagenda>
+
+<div id="MeetingAgendaPane">
+
+</div>
+<h2>Agenda List</h2>
+
+@if (@ViewBag.RecordCount > 0)
+{
+ 
+<table>
+    <caption>Meeting Agendas</caption>
+    <tr>
+        <th>
+            Agenda
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+    <td>
+        @Ajax.ActionLink(@item.Description, "Create", "MeetingNote", new {MeetingAgendaID=item.meetingAgendaID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MeetingAgendaPane2" })
+    </td>
+    <td>
+        @Ajax.ActionLink("Edit", "Edit", "MeetingAgenda", new {MeetingAgendaID=item.meetingAgendaID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MeetingAgendaPane" })
+    </td>
+    <td>
+        @Ajax.ActionLink("Delete ", "Delete", "MeetingAgenda", new {MeetingAgendaID=item.meetingAgendaID}, new AjaxOptions {HttpMethod = "Post",Confirm = "Are you sure you want to delete this record?", InsertionMode = InsertionMode.Replace, UpdateTargetId = "MeetingAgendaPane" })
+    </td>
+    </tr>
+}
+
+</table>
+    }
+else
+{
+ <p>No attendance added yet!</p>   
+}
+
+<div id="MeetingAgendaPane2">
+
+</div>

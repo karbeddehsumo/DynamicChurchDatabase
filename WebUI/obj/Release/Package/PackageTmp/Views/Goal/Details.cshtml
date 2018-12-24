@@ -1,0 +1,89 @@
+﻿@{
+    ViewBag.Title = "Details";
+}
+<script src="../../Scripts/jquery-ui-1.8.20.min.js"></script>
+<div id="AjaxFormPane" class="panel">
+    <h2 class="center">Ministry List</h2><br />
+    <div class="center" style="color:red">@TempData["message2"]</div>
+        <strong class="center">Select dates and search</strong>
+<div class="center">
+        <label>Begin Date </label>
+        <input id="bDate" type="text"  class="datepicker" value="@ViewBag.BeginDate" style="width:100px;" />
+         <label>End Date </label>
+        <input id="eDate" type="text"  class="datepicker" value="@ViewBag.EndDate" style="width:100px;" />
+    <input id="submitAllClick" name="submitAllClick" value="View All" type="submit"/><br />
+    </div>
+    <div class="center">
+          @Html.DropDownList("MinistrySearch", ViewBag.MinistryList as SelectList,"Select By Ministry...")
+    @Html.DropDownList("StartEndDateSearch", new SelectList(new [] {"Start Date Search", "End Date Search"}),"Select By Start-End Date") <br />
+    @Html.DropDownList("CompletionRatioSearch", ViewBag.CompletionRatioList2 as SelectList,"Select By Completion Ratio...")
+       @Html.DropDownList("StatusSearch", ViewBag.StatusList as SelectList,"Select By Status...")
+</div>
+
+<div class="GoalData center">
+@Html.Action("List", "Goal", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate })
+</div>
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        $("#MinistrySearch").change(function (event) {
+            var ministryid = $('#MinistrySearch option:selected').val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Goal/List";
+            $("#StartEndDateSearch").val("Select By Start-End Date");
+            $("#CompletionRatioSearch").val("Select By Start-End Date");
+            $("#StatusSearch").val("Select By Status...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: ministryid.toString(), SearchType: "MinistrySearch" }, function (data) { $(".GoalData").html(data) });
+        });
+        $("#StatusSearch").change(function (event) {
+            var status = $('#StatusSearch option:selected').val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Goal/List";
+            $("#MinistrySearch").val("Select By Ministry...");
+            $("#StartEndDateSearch").val("Select By Start-End Date");
+            $("#CompletionRatioSearch").val("Select By Start-End Date");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeName: status.toString(), SearchType: "StatusSearch" }, function (data) { $(".GoalData").html(data) });
+
+        });
+        $("#StartEndDateSearch").change(function (event) {
+            var StartEndDate = $('#StartEndDateSearch option:selected').Text();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Goal/List";
+            $("#MinistrySearch").val("Select By Ministry...");
+            $("#CompletionRatioSearch").val("Select By Start-End Date");
+            $("#StatusSearch").val("Select By Status...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeName: StartEndDate.toString(), SearchType: StartEndDate.toString() }, function (data) { $(".GoalData").html(data) });
+
+        });
+        $("#CompletionRatioSearch").change(function (event) {
+            var CompletionRatio = $('#CompletionRatioSearch option:selected').val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Goal/List";
+            $("#MinistrySearch").val("Select By Ministry...");
+            $("#StartEndDateSearch").val("Select By Start-End Date");
+            $("#StatusSearch").val("Select By Status...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeName: CompletionRatio.toString(), SearchType: "CompletionRatioSearch" }, function (data) { $(".GoalData").html(data) });
+
+        });
+        $(document).on("click", "#submitAllClick", function (event) {
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Goal/List";
+            $("#MinistrySearch").val("Select By Ministry...");
+            $("#StartEndDateSearch").val("Select By Start-End Date");
+            $("#CompletionRatioSearch").val("Select By Start-End Date");
+            $("#StatusSearch").val("Select By Status...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeName: status.toString() }, function (data) { $(".GoalData").html(data) });
+
+        });
+    });
+
+ </script>

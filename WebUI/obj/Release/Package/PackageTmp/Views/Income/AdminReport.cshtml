@@ -1,0 +1,56 @@
+﻿@{
+    ViewBag.Title = "AdminReport";
+}
+
+<h3>Finance Center</h3>
+
+<input id="ShowIncomeDetailButton" value="View income data" type="button" />
+    <input id="ShowExpenseDetaileButton" value="View expense data" type="button" />
+    <input id="ShowBudgetDetailButton" value="View budget data" type="button" />
+
+  <div id="IncomeDetailDiv">
+      @Html.Action("Details","Income")
+  </div>
+  <div id="ExpenseDegtailDiv">
+      @Html.Action("Details","Expense")
+  </div>
+  <div id="BudgetDetailDiv">
+      @Html.Action("AdminDetails","Budget")
+  </div>
+
+<script type="text/javascript">
+  $(document).ready(function () {
+
+      //Add income detail
+        $('#IncomeDetailDiv').hide();
+        $(document).on("click", "#ShowIncomeDetailButton", function (event) {
+            //close other divs
+            $('#ExpenseDegtailDiv').hide();
+            $('#BudgetDetailDiv').hide();
+
+            $("#IncomeDetailDiv").show();
+        });
+
+
+      //Add expense detail
+        $('#ExpenseDegtailDiv').hide();
+        $(document).on("click", "#ShowExpenseDetaileButton", function (event) {
+            //close other divs
+            $('#IncomeDetailDiv').hide();
+            $('#BudgetDetailDiv').hide();
+
+            $("#ExpenseDegtailDiv").show();
+        });
+
+      //Add budget detail
+        $('#BudgetDetailDiv').show();
+        $(document).on("click", "#ShowBudgetDetailButton", function (event) {
+            //close other divs
+            $('#ExpenseDegtailDiv').hide();
+            $('#IncomeDetailDiv').hide();
+
+            $("#BudgetDetailDiv").show();
+        });
+      
+    });
+</script>

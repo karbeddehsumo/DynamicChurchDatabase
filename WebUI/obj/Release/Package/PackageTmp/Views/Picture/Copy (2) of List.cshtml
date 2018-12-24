@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Domain.picture>
+
+@{
+    ViewBag.Title = "List";
+    
+}
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+<script src="../../Scripts/lightbox.min.js"></script>
+
+<div id="PictureListPane"></div>
+@if(@ViewBag.GroupPictures == true)
+{
+<div>
+    @if (@ViewBag.HasRecentPictures == true)
+    {
+     @Html.ActionLink("Recent Pictures","GroupSlider", "Picture", new {ministryID=@ViewBag.MinistryID,GroupID=0},  new { target="_blank" })<br />
+    }
+    @if (@ViewBag.HasGroupPictures == true)
+    {
+        foreach (Domain.picture p in @ViewBag.GroupPictureList)
+        {
+            @Ajax.ActionLink(p.GroupDescription, "GroupSlider", "Picture", new {ministryID=p.ministryID,GroupID=p.GroupID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "PictureListPane" })
+        }
+    }
+</div>
+}
+else
+{
+    
+<div  class="thumbnails clearfix">
+    @foreach(var p in @Model)
+    {
+        if (p.ImageData != null)
+        {
+            @Html.Partial("DisplayPictureLarge",p)        
+        if (@ViewBag.Supervisor == true)
+        {
+            @Ajax.ActionLink("Edit", "Edit", "Picture", new {PictureID=p.pictureID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "PictureListPane" }) 
+            @Ajax.ActionLink("Delete", "Delete", "Picture", new {PictureID=p.pictureID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "PictureListPane" })
+        }
+        }    
+        <br />
+    }
+</div>
+        
+}
+
+

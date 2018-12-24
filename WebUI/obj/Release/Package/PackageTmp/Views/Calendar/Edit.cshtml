@@ -1,0 +1,191 @@
+﻿@model Domain.calendar
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div id="AjaxFormPane" class="panel">
+    <h2 class="center">Edit Calendar</h2>
+    <div class="center" style="color:red">@TempData["message2"]</div>
+
+    <div class="center">
+@using (Html.BeginForm("Edit", "Calendar", new { }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit Calendar</legend>
+
+        @Html.HiddenFor(model => model.calendarID)
+
+        @Html.HiddenFor(model => model.ReturnMethod)
+        @Html.HiddenFor(model => model.ReturnBeginDate)
+        @Html.HiddenFor(model => model.ReturnEndDate)
+        @Html.HiddenFor(model => model.ReturnSearchType)
+        @Html.HiddenFor(model => model.ReturnCodeID)
+        @Html.HiddenFor(model => model.ReturnCodeName)
+        @Html.HiddenFor(model => model.ReturnCallerType)
+
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Title)
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.ministryID,"Ministry")
+            @Html.DropDownListFor(model => model.ministryID, ViewBag.MinistryList as SelectList, "Choose Ministry")
+            @Html.ValidationMessageFor(model => model.ministryID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.CalendarDate,"Begin Date")
+             @Html.TextBoxFor(model => model.CalendarDate, new { id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.CalendarDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.CalendarEndDate,"End Date")
+             @Html.TextBoxFor(model => model.CalendarEndDate, new { id = "datepicker2" })
+            @Html.ValidationMessageFor(model => model.CalendarEndDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.EventType,"Event type")
+           @Html.DropDownListFor(model => model.EventType, ViewBag.MinistryActivityList as SelectList, "Choose Event type")
+            @Html.ValidationMessageFor(model => model.EventType)
+        </div>
+        <!--
+        <div class="editor">
+            @Html.LabelFor(model => model.EventType,"Event type")
+            @Html.EditorFor(model => model.EventType)
+            @Html.ValidationMessageFor(model => model.EventType)
+        </div>
+
+            -->
+        <div class="editor">
+            @Html.LabelFor(model => model.StartTime,"Start Time")
+            @Html.DropDownListFor(model => model.StartTime, ViewBag.TimeIncrementList as SelectList, (string)@ViewBag.StartTime)
+            @Html.ValidationMessageFor(model => model.StartTime)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.EndTime,"End Time")
+            @Html.DropDownListFor(model => model.EndTime, ViewBag.TimeIncrementList as SelectList,(string) @ViewBag.EndTime)
+            @Html.ValidationMessageFor(model => model.EndTime)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Location)
+            @Html.EditorFor(model => model.Location)
+            @Html.ValidationMessageFor(model => model.Location)
+        </div>
+
+        <div class="editor">
+            @Html.Label("Location List")
+             @Html.DropDownList("EventLocation", ViewBag.MeetingVenueList as SelectList, "Choose Location")
+            </div>
+        
+        @if (@ViewBag.ReturnCallerType == "FixedBanner")
+        {
+            @Html.HiddenFor(model => model.Description)
+        }
+        else
+        {
+            <div class="editor">
+                @Html.LabelFor(model => model.Description)
+                @Html.EditorFor(model => model.Description)
+                @Html.ValidationMessageFor(model => model.Description)
+            </div>
+        }
+
+        <div class="editor">
+            @Html.LabelFor(model => model.PublicAccess,"Public Access")
+            @Html.DropDownListFor(model => model.PublicAccess, new[] { new SelectListItem() {Text = "Public", Value = bool.TrueString}, new SelectListItem() {Text = "Private", Value = bool.FalseString}             }, "Choose an option") 
+            @Html.ValidationMessageFor(model => model.PublicAccess)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Status)
+            @Html.DropDownListFor(model => model.Status, ViewBag.StatusList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+        @if (@ViewBag.Supervisor)
+        {
+                 <div class="editor">
+                    @Html.LabelFor(model => model.DisplayBanner,"Banner")
+                     @Html.DropDownListFor(model => model.DisplayBanner, new List<SelectListItem> { new SelectListItem{Text="Yes", Value="True"}, new SelectListItem{Text="Private", Value="No"}},"Display Banner?")
+                    @Html.ValidationMessageFor(model => model.DisplayBanner)
+                </div>            
+        }
+                <div class="editor">
+        <label>Upload Banner</label> 
+        <input id="files" type="file" name="files" />
+            </div>
+
+
+
+        @Html.HiddenFor(model => model.PictureID)
+
+        @Html.HiddenFor(model => model.EnteredBy)
+         @Html.HiddenFor(model => model.DateEntered)
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+</div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#Title").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the title.");
+            }
+            else if ($('#ministryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the ministry.");
+            }
+            else if ($('#EventType option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the event type.");
+            }
+            else if ($('#PublicAccess option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the public access.");
+            }
+
+        });
+        $("#ministryID").change(function (event) {
+            var ministryname = $('#ministryID option:selected').text();
+            var url = "/Calendar/MinistryActivity";
+            $.get(url, { MinistryName: ministryname.toString() }, function (data) { $("#MinistryEventType").html(data) });
+        });
+
+        $("#MinistryEventType").change(function (event) {
+            var MinistryEventType = $('#MinistryEventType option:selected').text();
+            $("#EventType").val(MinistryEventType);
+        });
+
+        $("#EventLocation").change(function (event) {
+            var MinistryLocation = $('#EventLocation option:selected').text();
+            $("#Location").val(MinistryLocation);
+        });
+    });
+</script>

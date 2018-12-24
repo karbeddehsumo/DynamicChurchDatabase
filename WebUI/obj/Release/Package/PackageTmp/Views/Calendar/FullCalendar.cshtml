@@ -1,0 +1,76 @@
+﻿    @model Domain.calendar
+          
+@{
+}
+
+
+<div class="jumbotron">
+    <h1>Event Calendar</h1>
+    <div id="calendar"></div>
+</div>
+
+@section scripts{
+
+    <script type="text/javascript">
+
+
+        $(document).ready(function () {
+            $('#calendar').fullCalendar({
+                theme: true,
+
+                //defaultView: 'agendaDay',
+                editable: false,
+                events: "/Calendar/GetEvents/"
+            });
+        });
+
+
+</script>
+    }
+
+<!--
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $("#calendar").fullCalendar({
+            header: {
+                left: "prev,next today",
+                center: "title",
+                right: "month,agendaWeek,agendaDay"
+            },
+            editable: true,
+            eventClick: function (i, evt, view) {
+
+            },
+            events: function (start, end, callback) {
+
+                $.ajax({
+                    type: "POST",    //WebMethods will not allow GET
+                    url: "/Calendar/GetEvents",   //url of a webmethod - example below
+                    data: "{}",  //this is what I use to pass who's calendar it is 
+                    contentType: "application/json; charset=utf-8",
+                    dataType: "json",
+                    success: function (doc) {
+                        var events = [];   //javascript event object created here
+                        var obj = $.parseJSON(doc.d);  //.net returns json wrapped in "d"
+                        $(obj.event).each(function () { //yours is obj.calevent                          
+                            events.push({
+                                title: $(this).attr('title'),  //your calevent object has identical parameters 'title', 'start', ect, so this will work
+                                start: $(this).attr('start'), // will be parsed into DateTime object    
+                                end: $(this).attr('end'),
+                                id: $(this).attr('id')
+                            });
+                        });
+                        callback(events);
+                    }
+                });
+
+            }
+
+        });
+
+    });
+</script>
+
+-->
+

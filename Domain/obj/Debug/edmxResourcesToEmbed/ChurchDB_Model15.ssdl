@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Model.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="__MigrationHistory">
+    <Key>
+      <PropertyRef Name="MigrationId" />
+    </Key>
+    <Property Name="MigrationId" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="Model" Type="varbinary(max)" Nullable="false" />
+    <Property Name="ProductVersion" Type="nvarchar" MaxLength="32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="budgets">
+    <Key>
+      <PropertyRef Name="budgetID" />
+    </Key>
+    <Property Name="budgetID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="eventID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="DueDate" Type="datetime" Nullable="false" />
+    <Property Name="EstimatedAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="ActualAmount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="Comment" Type="nvarchar(max)" />
+    <Property Name="EnteredBy" Type="nvarchar(max)" />
+    <Property Name="DateEntered" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="constants">
+    <Key>
+      <PropertyRef Name="constantID" />
+    </Key>
+    <Property Name="constantID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Category" Type="nvarchar(max)" />
+    <Property Name="ConstantName" Type="nvarchar(max)" />
+    <Property Name="Value1" Type="nvarchar(max)" />
+    <Property Name="Value2" Type="nvarchar(max)" />
+    <Property Name="Value3" Type="nvarchar(max)" />
+    <Property Name="SortOrder" Type="int" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="EnteredBy" Type="nvarchar(max)" />
+    <Property Name="DateEntered" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="expenses">
+    <Key>
+      <PropertyRef Name="expenseID" />
+    </Key>
+    <Property Name="expenseID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="subCategoryID" Type="int" Nullable="false" />
+    <Property Name="bankAccountID" Type="int" Nullable="false" />
+    <Property Name="Payee" Type="nvarchar(max)" />
+    <Property Name="PayeeID" Type="int" />
+    <Property Name="ExpenseDate" Type="datetime" Nullable="false" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="CheckNumber" Type="nvarchar(max)" />
+    <Property Name="Reconcile" Type="bit" />
+    <Property Name="MinistryID" Type="int" />
+    <Property Name="Comment" Type="nvarchar(max)" />
+    <Property Name="EnteredBy" Type="nvarchar(max)" />
+    <Property Name="DateEntered" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="listitems">
+    <Key>
+      <PropertyRef Name="listItemID" />
+    </Key>
+    <Property Name="listItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="listTableID" Type="int" Nullable="false" />
+    <Property Name="Name" Type="nvarchar(max)" />
+    <Property Name="Value1" Type="nvarchar(max)" />
+    <Property Name="Value2" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Value3" Type="int" Nullable="false" />
+    <Property Name="Value4" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar(max)" />
+    <Property Name="EnteredBy" Type="nvarchar(max)" />
+    <Property Name="DateEntered" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="listtables">
+    <Key>
+      <PropertyRef Name="listTableID" />
+    </Key>
+    <Property Name="listTableID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ministryID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="DateCreated" Type="datetime" Nullable="false" />
+    <Property Name="ListType" Type="nvarchar(max)" />
+    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="EnteredBy" Type="nvarchar(max)" />
+    <Property Name="DateEntered" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="meetingagendas">
+    <Key>
+      <PropertyRef Name="meetingAgendaID" />
+    </Key>
+    <Property Name="meetingAgendaID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="meetingID" Type="int" Nullable="false" />
+    <Property Name="Description" Type="nvarchar(max)" />
+    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="EnteredBy" Type="nvarchar(max)" />
+    <Property Name="DateEntered" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="meetingnotes">
+    <Key>
+      <PropertyRef Name="meetingNoteID" />
+    </Key>
+    <Property Name="meetingNoteID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="MeetingAgendaID" Type="int" Nullable="false" />
+    <Property Name="Note" Type="nvarchar(max)" />
+    <Property Name="NoteDate" Type="datetime" Nullable="false" />
+    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="EnteredBy" Type="nvarchar(max)" />
+    <Property Name="DateEntered" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="pledges">
+    <Key>
+      <PropertyRef Name="pledgeID" />
+    </Key>
+    <Property Name="pledgeID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="memberID" Type="int" Nullable="false" />
+    <Property Name="Type" Type="nvarchar(max)" />
+    <Property Name="FundName" Type="nvarchar(max)" />
+    <Property Name="Amount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="PledgeYear" Type="int" Nullable="false" />
+    <Property Name="EnteredBy" Type="nvarchar(max)" />
+    <Property Name="DateEntered" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="programevents">
+    <Key>
+      <PropertyRef Name="programEventID" />
+    </Key>
+    <Property Name="programEventID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="goalID" Type="int" Nullable="false" />
+    <Property Name="budgetID" Type="int" Nullable="false" />
+    <Property Name="Title" Type="nvarchar(max)" />
+    <Property Name="When" Type="datetime" Nullable="false" />
+    <Property Name="Who" Type="datetime" Nullable="false" />
+    <Property Name="Where" Type="nvarchar(max)" />
+    <Property Name="What" Type="nvarchar(max)" />
+    <Property Name="How" Type="nvarchar(max)" />
+    <Property Name="Status" Type="nvarchar(max)" />
+    <Property Name="EnteredBy" Type="nvarchar(max)" />
+    <Property Name="DateEntered" Type="datetime" Nullable="false" />
+  </EntityType>
+  <EntityType Name="saleitems">
+    <Key>
+      <PropertyRef Name="saleItemID" />
+    </Key>
+    <Property Name="saleItemID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="saleID" Type="int" Nullable="false" />
+    <Property Name="productID" Type="int" Nullable="false" />
+    <Property Name="Quantity" Type="int" Nullable="false" />
+    <Property Name="Discount" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Total" Type="decimal" Precision="18" Scale="2" Nullable="false" />
+    <Property Name="Comment" Type="nvarchar(max)" />
+  </EntityType>
+  <EntityContainer Name="ModelStoreContainer">
+    <EntitySet Name="__MigrationHistory" EntityType="Self.__MigrationHistory" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="budgets" EntityType="Self.budgets" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="constants" EntityType="Self.constants" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="expenses" EntityType="Self.expenses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="listitems" EntityType="Self.listitems" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="listtables" EntityType="Self.listtables" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="meetingagendas" EntityType="Self.meetingagendas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="meetingnotes" EntityType="Self.meetingnotes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="pledges" EntityType="Self.pledges" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="programevents" EntityType="Self.programevents" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="saleitems" EntityType="Self.saleitems" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

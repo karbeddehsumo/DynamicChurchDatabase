@@ -1,0 +1,54 @@
+﻿@model Domain.bill
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div class="panel">
+<h2 class="center">Bill Report</h2>
+    <div class="center">
+    <div class="editor">
+        <label>Begin Date </label>
+    <input id="bDate" type="text"  class="datepicker" value="@ViewBag.BeginDate"/>
+    </div>
+    <div class="editor">
+         <label>End Date </label>
+     <input id="eDate" type="text"  class="datepicker" value="@ViewBag.EndDate" />
+        </div>
+    <div class="editor">
+        <label>Payee</label>
+        @Html.DropDownList("BillPayeeSearch", ViewBag.PayeeList as SelectList,"Select by Bill Payee...")
+        </div>
+    <div style="float:right">
+    <input id="submitAllClick" name="submitAllClick" value="View All" type="submit"/><br />
+        </div>
+    </div>
+
+<div class="ContributionData center">
+@Html.Action("List", "Bill", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate })
+</div>
+    </div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        $("#BillPayeeSearch").change(function (event) {
+            var payeeid = $('#BillPayeeSearch option:selected').val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Bill/List";
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: payeeid.toString()}, function (data) { $(".ContributionData").html(data) });
+        });
+
+        $(document).on("click", "#submitAllClick", function (event) {
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Bill/List";
+            $("#BillPayeeSearch").val("Select By Bill Payee...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString()}, function (data) { $(".ContributionData").html(data) });
+        });
+    });
+
+ </script>

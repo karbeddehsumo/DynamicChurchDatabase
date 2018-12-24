@@ -1,0 +1,115 @@
+﻿@model Domain.pledge
+
+@{
+    ViewBag.Title = "Edit";
+    
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Edit", "Pledge", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center">Edit Pledge</h2>
+    @Html.ValidationSummary(true)
+    <div class="fieldset">
+    <form role="form" class="form-horizontal" >
+        <h2>Edit this pledge</h2>
+
+        @Html.HiddenFor(model => model.pledgeID)
+        @Html.HiddenFor(model => model.FundName)
+
+        @Html.HiddenFor(model => model.ReturnPledgeYear)
+        @Html.HiddenFor(model => model.ReturnSearchType)
+        @Html.HiddenFor(model => model.ReturnCodeID)
+        @Html.HiddenFor(model => model.ReturnCode)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.memberID,"Member")
+            @Html.DropDownListFor(model => model.memberID, ViewBag.MemberList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.memberID)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Type,"Period")
+            @Html.DropDownListFor(x => x.Type, ViewBag.PledgeTypeList as SelectList, "") 
+            @Html.ValidationMessageFor(model => model.Type)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FundID,"Fund")
+            @Html.DropDownListFor(model => model.FundID, ViewBag.MemberContributionTypeList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.FundID)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Amount)
+            @Html.EditorFor(model => model.Amount)
+            @Html.ValidationMessageFor(model => model.Amount)
+        </div>
+
+       <div class="form-group">
+            @Html.LabelFor(model => model.PledgeYear)
+             @Html.DropDownListFor(model => model.PledgeYear, ViewBag.PledgeYearList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.PledgeYear)
+        </div>
+
+        @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+        </form>
+    </div>
+}
+
+    </div>
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $("#Amount").change(function (event) {
+            this.value = this.value.replace(/,/g, "");
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#memberID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the member name.");
+            }
+
+            if ($('#Type option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the period.");
+            }
+            else if ($('#FundID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the fund name.");
+            }
+            else if ($("#Amount").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the amount.");
+            }
+            else if ($("#PledgeYear").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the year.");
+            }
+
+        });
+    });
+</script>

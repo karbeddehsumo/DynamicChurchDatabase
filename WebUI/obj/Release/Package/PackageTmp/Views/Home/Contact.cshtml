@@ -1,0 +1,136 @@
+﻿@{
+    ViewBag.Title = "Contact";
+            // Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="../../Scripts/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js" ></script>
+    <link rel="stylesheet" href="../../Content/Dreamweaver/FancyBox/source/jquery.fancybox.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="../../Content/Dreamweaver/FancyBox/source/jquery.fancybox.pack.js"></script>
+
+
+
+
+<h2 class="center">Contact US</h2>
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12 "><div class="panelSmall6">
+
+<iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d9391.835847975342!2d-84.37407278735398!3d33.66971612621623!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x88f5020b27e6d913%3A0x9e14978866b9a69d!2s461+School+Dr+SE%2C+Atlanta%2C+GA+30354!5e0!3m2!1sen!2sus!4v1456178233405" width="100%" height="300" frameborder="1" style="border:0" allowfullscreen></iframe>
+</div>
+    </div>
+        <div class="col-xs-12 col-sm-6 col-md-6">
+
+            <br />
+            <p class="center">Email Us</p>
+            <div class="col-xs-12 col-sm-12 col-md-12 "><div class="panelSmall" >
+        
+                <div id="emailReturnMsg" class="center" style="color:red">@TempData["ContactUsEmailReturnMsg"]</div>
+                @using (Ajax.BeginForm("ContactUs", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "emailReturnMsg" }))
+                { 
+                    <div class="row">
+                    <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                    <label  for="Name">*Name:</label>
+                    <div >
+                  <input id="Name" name="Name" type="text" required="required" placeholder="Full Name" style="width:100%" class="form-control">
+                        </div>
+                 </div>
+                 <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                    <label for="Email">Email:</label>
+                  <input id="Email"  name="Email" type="text" placeholder="Email address" style="width:100%" class="form-control" size="5" >
+                </div>
+                <div class="form-group col-xs-12 col-sm-12 col-md-12">
+                    <label for="Phone">*Phone #:</label>
+                  <input id="Phone" name="Phone" type="text" required="required" placeholder="Phone #" style="width:100%" class="form-control">
+                </div>
+                   <div class="form-group col-xs-12 col-sm-12 col-md-12">
+
+                       @Html.DropDownList("Subject", ViewBag.ContactUsList as SelectList, "Select Subject", new { required = "required",style="width:100%" })
+                       </div>
+                     <div class="form-group">
+                      <label for="Comment">*Message:</label>
+                      <textarea class="form-control" rows="5" id="Comment" required="required" name="Comment"></textarea>
+                    </div>
+              <div class="col-xs-12 col-sm-12 col-md-12">
+                  <p>*Required fields.</p>
+                 <p>Should we contact you? @Html.CheckBox("ContactMe", false)</p>
+                <button id="LoginSubmitBtn" type="submit" class="btn btn-success btn-sm">Send</button>
+                  </div>
+            </div>
+                }
+    </div>
+        </div>
+        </div>
+     <br />
+    <br />
+            <p class="center">Driving Direction</p>
+<div class="col-xs-12 col-sm-6 col-md-6"><div class="panelSmall">
+    <h3>International Christian Fellowship</h3>
+         <p style="font-family:Georgia; font-size:larger">Phone: 404-363-3300/Fax: 404-363-1730<br />
+     P. O. Box 82801<br />
+    461 School Street<br />
+    Atlanta, GA 30354</p>
+
+    <h3>Main Service Times</h3>
+     <p style="font-family:Georgia; font-size:larger">Sunday: 9:30 AM (Bible Study), 10:45 AM (Worship)<br />
+      Tuesday: 6:30 PM (Bible Study - Atlanta)<br />
+    Wednesday: 6:30 PM (Bible Study - Gwinnett)<br />
+
+    Children Church available every Sunday<br />
+
+    Youth Church second and fourth Sundays</p><br />
+    
+    <h3>Driving Directions</h3>
+
+    <h4>From I-285 East</h4>
+    <p style="padding:10px">Exit Jonesboro Road (Hwy 54) and turn right into parameter. 
+        Drive to second traffic light and turn left on School Street.
+        Church is one block on left.
+    </p>
+
+    <h4>From Atlanta (Downtown)</h4>
+    <p style="padding:10px">Drive I-75 South, exit Cleveland Avenue. Turn left over bridge. Stay on Cleveland Avenue and turn right onto Browns Mill Road.
+       Turn second left onto Humphries Drive. Come to elementary school and turn right to School Drive. Church is on right.
+    </p>
+
+</div>
+    </div>
+    </div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //$(".fancybox").fancybox();
+        $("a[rel='map']").fancybox({
+            type: "iframe",
+            width: '50%',
+            height: '50%'
+        });
+
+
+
+        $("#LoginSubmitBtn").click(function (event) {
+            if ($('#Subject option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select a subject.");
+            }
+            else if ($("#Name").val() == 0) {
+                event.preventDefault();
+                alert("Please enter your name.");
+            }
+            else if ($("#Phone").val() == 0) {
+                event.preventDefault();
+                alert("Please enter your phone number.");
+            }
+            else if ($("#Comment").val() == 0) {
+                event.preventDefault();
+                alert("Please enter your request message.");
+            }
+        });
+    });
+
+
+    $("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+
+ </script>
+

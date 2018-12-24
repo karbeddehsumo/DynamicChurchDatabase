@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Domain.video>
+
+<div id="myPane" class="center">
+    @if (((ViewBag.Supervisor == true) || (ViewBag.Supervisor2 == true)) && (@ViewBag.Requestor = true))
+    {
+        @Ajax.ActionLink("Add Video", "Create", "Video", new {ministryID=@ViewBag.MinistryID,CallerType="Officer"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane"}, new {@id="pageSubTitle"})
+    }
+@foreach(var item in Model)
+{
+    <!--
+    <a rel="video" class="fancybox.iframe" href="@item.URL"><img src="@item.URL" style="width:100%; height:300px;"/></a>
+        -->
+    <a rel='video' class="fancybox.iframe" href="@item.URL"><iframe style="width:100%; height:400px;" src="@item.URL" frameborder="0" allowfullscreen onplay="0"></iframe></a>
+
+}
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //$(".fancybox").fancybox();
+        $("a[rel='video']").fancybox({
+            type: "image",
+            width: '70%',
+            height: '70%'
+        });
+    });
+
+    $("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+
+ </script>
+

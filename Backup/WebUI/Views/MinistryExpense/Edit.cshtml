@@ -1,0 +1,113 @@
+﻿@model Domain.ministryexpense
+
+@{
+    ViewBag.Title = "Edit";
+    
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Edit", "MinistryExpense", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 id="FieldSetTopMenu">Edit Ministry Expense</h2>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit ministry expense here...</legend>
+
+        @Html.HiddenFor(model => model.ministryExpenseID)
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.ministryID)
+            @Html.ValidationMessageFor(model => model.ministryID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.subCategoryID,"Fund Type")
+            @Html.DropDownListFor(model => model.subCategoryID, ViewBag.SubCategoryList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.subCategoryID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Title)
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.ExpenseDate,"Date")
+            @Html.TextBoxFor(model => model.ExpenseDate, new { id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.ExpenseDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Amount)
+            @Html.EditorFor(model => model.Amount)
+            @Html.ValidationMessageFor(model => model.Amount)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.CheckNumber,"Check #")
+            @Html.EditorFor(model => model.CheckNumber)
+            @Html.ValidationMessageFor(model => model.CheckNumber)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Comment)
+            @Html.EditorFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Reconcile)
+            @Html.EditorFor(model => model.Reconcile)
+            @Html.ValidationMessageFor(model => model.Reconcile)
+        </div>
+
+         @Html.HiddenFor(model => model.EnteredBy)
+         @Html.HiddenFor(model => model.DateEntered)
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#subCategoryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the expense type.");
+            }
+            else if ($("#subCategoryID").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the  name.");
+            }
+            else if ($("#Title").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the title.");
+            }
+            else if ($("#Amount").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the amount.");
+            }
+
+        });
+    });
+</script>

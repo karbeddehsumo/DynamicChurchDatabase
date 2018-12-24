@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Domain.staff>
+
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+
+<div >
+<h2 class="center">Staff Center</h2>
+    <div class="center">
+        @Ajax.ActionLink("Add Staff", "Create", "Staff", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "StaffPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("Staff List", "Details", "Staff", new {code="Active"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "StaffPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("View Staff", "DisplayStaff", "Staff", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "StaffPane" }, new {@id="pageSubTitle"})    
+        </div>
+   
+<div id="StaffPane">
+@Html.Action("Details", "Staff", new {code="Active"})
+</div>
+     </div>
+

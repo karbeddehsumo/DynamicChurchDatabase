@@ -1,0 +1,315 @@
+﻿@model Domain.income
+
+<script src="../../Scripts/jquery-ui-1.8.20.min.js"></script>
+<div id="parentDiv" class="clearfix panel">
+<div id="AjaxFormPane">
+    <div id="TitleHeading" class="center" style="color:red">@TempData["message2"]</div>
+
+<div class="center">
+@using (Ajax.BeginForm("Create", "Income", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    @Html.AntiForgeryToken()
+        <h2 class="pageSubTitle center">Add Income</h2>
+<br />
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Add Income</legend>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+       <div class="editor">
+            @Html.HiddenFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.subCategoryID, "Fund")
+            @Html.DropDownListFor(model => model.subCategoryID, ViewBag.SubCategoryList as SelectList, "Select Income Type...")
+            @Html.ValidationMessageFor(model => model.subCategoryID)
+        </div>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.bankAccountID)
+            @Html.ValidationMessageFor(model => model.bankAccountID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.IncomeDate, "Date")
+            @Html.TextBoxFor(model => model.IncomeDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.IncomeDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.CashAmount, "Cash")
+            @Html.TextBoxFor(model => model.CashAmount, new { @placeholder = "$0.00" })
+            @Html.ValidationMessageFor(model => model.CashAmount)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.CheckAmount, "Check")
+            @Html.TextBoxFor(model => model.CheckAmount, new { @placeholder = "$0.00" })
+            @Html.ValidationMessageFor(model => model.CheckAmount)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.CoinAmount, "Coin")
+            @Html.TextBoxFor(model => model.CoinAmount, new { @placeholder = "$0.00" })
+            @Html.ValidationMessageFor(model => model.CoinAmount)
+        </div>
+
+        <div class="editor">
+            @Html.Label("Total")
+            @Html.TextBox("TotalAmount")
+            @Html.ValidationMessageFor(model => model.CoinAmount)
+        </div>
+
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Comment)
+            @Html.EditorFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+
+            @Html.HiddenFor(model => model.EnteredBy)
+            @Html.HiddenFor(model => model.DateEntered)
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+    @if (@ViewBag.RecordCount > 0)
+{
+            <div id="FieldSetSubMenu">
+     @using (Ajax.BeginForm("CommitIncome", "Income", new { }, new AjaxOptions
+     {
+         HttpMethod = "Post",
+         InsertionMode = InsertionMode.Replace,
+         UpdateTargetId = "TitleHeading"
+     }, new { @title = "Click to commit all income record to database." }))
+     {
+                                
+      <button id="CommitIncomeSubmitBtn" class="btn btn-default" type="submit">Commit Records</button>
+
+     }
+
+        </div>
+        
+<table id="IncomeTable" class="center">
+    <caption> @string.Format("Total: Cash {0:c}.....Check {1:c}.....Coin {2:c}.....Total {3:c}", @ViewBag.TotalCash, @ViewBag.TotalCheck, @ViewBag.TotalCoin, @ViewBag.TotalAmount)</caption>
+    <tr>
+        <th>
+            Date
+        </th>
+        <th>
+            Fund
+        </th>
+        <th>
+            Account
+        </th>
+        <th>
+            Cash
+        </th>
+        <th>
+            Check
+        </th>
+        <th>
+            Coin
+        </th>
+        <th>Total</th>
+        <th>
+            Comment
+        </th>
+       
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in @ViewBag.IncomeList)
+{
+    <tr>
+         <td style="margin-top:10px">
+            @item.IncomeDate.ToShortDateString()
+        </td>
+        <td>
+            @item.Title
+        </td>
+        <td>
+            @item.bankaccount.BankName
+        </td>
+
+        <td style="text-align:right">
+            @if (@item.CashAmount == null)
+            {
+                @item.CashAmount
+            }
+            else
+            {
+                @string.Format("{0:c}", @item.CashAmount)
+            }
+            
+        </td>
+        <td style="text-align:right">
+            @if (@item.CheckAmount == null)
+            {
+                @item.CheckAmount
+            }
+            else
+            {
+                @string.Format("{0:c}", @item.CheckAmount)
+            }
+        </td>
+        <td style="text-align:right">
+            @if (@item.CoinAmount == null)
+            {
+                @item.CoinAmount
+            }
+            else
+            {
+                @string.Format("{0:c}", @item.CoinAmount)
+            }
+        </td>
+        <td style="margin-top:10px">
+            @string.Format("{0:c}", @item.TotalIncome)
+        </td>
+        
+        <td>
+            @item.Comment
+        </td>
+        <td>
+            @Ajax.ActionLink("Edit", "Edit", "Income", new { IncomeID = item.incomeID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+        </td>
+        <td>
+            @Ajax.ActionLink("Delete", "Delete", "Income", new { IncomeID = item.incomeID }, new AjaxOptions { Confirm = "Do you want to delete this record?", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+        </td>
+    </tr>
+}
+
+</table>
+}
+    else
+    {
+ <p class="center">No income record found!</p>   
+}
+
+</div>
+</div>
+
+
+
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+           /* $("#Title").val("");
+            $("#CashAmount").val("");
+            $("#CheckAmount").val("");
+            $("#CoinAmount").val("");
+            $("#TotalAmount").val("");
+            $("#Comment").val("");
+            */
+        });
+
+
+
+        $("#TotalAmount").attr('readonly', true);
+       // $("#CashAmount").val("0.00");
+       // $("#CheckAmount").val("0.00");
+//$("#CoinAmount").val("0.00");
+
+        $("#CashAmount").change(function (event) {
+            var amount;
+
+             var cash =  parseFloat($("#CashAmount").val());
+             var check = parseFloat($("#CheckAmount").val());
+             var coin = parseFloat($("#CoinAmount").val());
+             if (isNaN(cash)) {
+                 cash = 0;
+             }
+             if (isNaN(check)) {
+                 check = 0;
+             }
+             if (isNaN(coin)) {
+                 coin = 0;
+             }
+             var total = cash + check + coin;
+             $("#TotalAmount").val(parseFloat(total.toFixed(2)));
+           // $("#TotalAmount").val(parseFloat($("#CashAmount").val()) + parseFloat($("#CheckAmount").val()) + parseFloat($("#CoinAmount").val()));
+        });
+
+        $("#CheckAmount").change(function (event) {
+            var amount;
+            this.value = this.value.replace(/,/g, "");
+
+            var cash = parseFloat($("#CashAmount").val());
+            var check = parseFloat($("#CheckAmount").val());
+            var coin = parseFloat($("#CoinAmount").val());
+            if (isNaN(cash)) {
+                cash = 0;
+            }
+            if (isNaN(check)) {
+                check = 0;
+            }
+            if (isNaN(coin)) {
+                coin = 0;
+            }
+            var total = cash + check + coin;
+            $("#TotalAmount").val(parseFloat(total.toFixed(2)));
+           // $("#TotalAmount").val(parseFloat($("#CashAmount").val()) + parseFloat($("#CheckAmount").val()) + parseFloat($("#CoinAmount").val()));
+        });
+
+        $("#CoinAmount").change(function (event) {
+            var amount;
+            this.value = this.value.replace(/,/g, "");
+            var cash = parseFloat($("#CashAmount").val());
+            var check = parseFloat($("#CheckAmount").val());
+            var coin = parseFloat($("#CoinAmount").val());
+            if (isNaN(cash)) {
+                cash = 0;
+            }
+            if (isNaN(check)) {
+                check = 0;
+            }
+            if (isNaN(coin)) {
+                coin = 0;
+            }
+            var total = cash + check + coin;
+            $("#TotalAmount").val(parseFloat(total.toFixed(2)));
+           // $("#TotalAmount").val(parseFloat($("#CashAmount").val()) + parseFloat($("#CheckAmount").val()) + parseFloat($("#CoinAmount").val()));
+        });
+
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#subCategoryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the fund type.");
+            }
+            else if ($("#TotalAmount").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the cash, check or coin amount.");
+            }
+        });
+
+        $('#CommitIncomeSubmitBtn').click(function (event) {
+            $("#IncomeTable").hide();
+        });
+
+    });
+</script>

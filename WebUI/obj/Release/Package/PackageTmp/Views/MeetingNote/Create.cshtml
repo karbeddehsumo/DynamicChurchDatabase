@@ -1,0 +1,69 @@
+﻿@model Domain.meetingnote
+
+@{
+    ViewBag.Title = "Create";
+    
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Create", "MeetingNote", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>@string.Format("Add {0} Notes",@ViewBag.Heading)</legend>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.MeetingAgendaID)
+            @Html.ValidationMessageFor(model => model.MeetingAgendaID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Note)
+            @Html.TextAreaFor(model => model.Note, new {cols="85", rows="22", wrap="virtual"})
+            @Html.ValidationMessageFor(model => model.Note)
+        </div>
+
+            @Html.HiddenFor(model => model.NoteDate)
+            @Html.HiddenFor(model => model.Status)
+            @Html.HiddenFor(model => model.EnteredBy)
+            @Html.HiddenFor(model => model.DateEntered)
+
+      <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+          <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#Note").val() == 0) {
+                event.preventDefault();
+                alert("Please enter meeting notes.");
+            }
+            else
+            {
+                event.preventDefault()
+                $("#AjaxFormPane").hide();
+            }
+
+        });
+    });
+</script>

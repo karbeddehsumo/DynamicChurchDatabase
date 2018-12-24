@@ -1,0 +1,245 @@
+﻿    <!DOCTYPE html>
+<html>
+<head>
+        <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css",
+                   "~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <!--
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+            <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css"/>
+        -->
+     <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+
+ <link href='http://fonts.googleapis.com/css?family=Arvo' rel='stylesheet' type='text/css'>
+ <link href='https://fonts.googleapis.com/css?family=Kaushan+Script' rel='stylesheet' type='text/css'>
+<!--Datepicker link-->
+    <link rel='stylesheet' type='text/css' href='http://code.jquery.com/ui/1.9.2/themes/base/jquery-ui.css'/>
+        <script type='text/javascript' src='script.js'></script>
+        <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.9.2/jquery-ui.min.js"></script>
+
+
+        @content.Script("modernizr-2.5.3.js", Url)
+        @Styles.Render("~/Content/fullcalendarcss")
+    @Scripts.Render("~/bundles/modernizr")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#datepicker').datepicker();
+            $("#tabs").tabs({
+               // event: "mouseover"
+            });
+            $('li').hover(function () {
+                $(this).find('ul>li').stop().fadeToggle(300);
+                
+            });
+            $('#navmenu input, #navmenu label').click(function (e) {
+                e.stopPropagation();
+            });
+            $('#navmenu input, #navmenu label').show(function (e) {
+                e.stopPropagation();
+            });
+        });
+    </script>
+
+    <link href="../../Content/DreamWeaver/css/styles.css" rel="stylesheet" type="text/css"/>
+    <link href='http://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet' type='text/css'>
+     <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400italic' rel='stylesheet' type='text/css'>
+
+    <link href='http://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet' type='text/css'>
+     <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Arvo:700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js" ></script>
+    <link rel="stylesheet" href="../../Content/Dreamweaver/FancyBox/source/jquery.fancybox.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="../../Content/Dreamweaver/FancyBox/source/jquery.fancybox.pack.js"></script>
+    
+</head>
+<body>
+    <div id="wrapper" class="container">
+<div class="row">
+        <div class="col-xs-4">
+    <a href="../Home/Index"><img src="../../Content/Dreamweaver/images/icf%20logo%20revised.jpg" width="380" height="340" class="img-responsive"/></a>
+        </div>
+<div class="col-xs-8 pager">
+    <div class="next">
+    @Html.Partial("_LogOnPartial")
+        </div>
+        </div>
+ </div>
+            
+<div class="row">
+    <div class="col-xs-12">
+<ul id="navmenu">
+<li>@Ajax.ActionLink("My Page", "MyPage", "Member", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+<li><a href="#">Finance</a>
+    <ul class="sub1">
+        <li>@Ajax.ActionLink("Income", "Index", "Income", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<span class="rarrow">&#x271d;</span>
+            <ul class="sub2">
+                <li>@Ajax.ActionLink("Create Income", "Create", "Income", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                <li>@Ajax.ActionLink("View Income", "Details", "Income", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+            </ul>
+        </li>
+        <li>@Ajax.ActionLink("Expense", "Index", "Expense", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<span class="rarrow">&#x271d;</span>
+            <ul class="sub2">
+                <li>@Ajax.ActionLink("Pay Expense", "Create", "Expense", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                <li>@Ajax.ActionLink("View Expense", "Details", "Expense", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                <li>@Ajax.ActionLink("Add Payee", "Create", "Payee", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                <li>@Ajax.ActionLink("Reconcile Checks", "ReconcileView", "Expense", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+            </ul>
+        </li>
+        <li>@Ajax.ActionLink("Budget", "Index", "Budget", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<span class="rarrow">&#x271d;</span>
+             <ul class="sub2">
+                <li>@Ajax.ActionLink("Add Income Budget", "Create", "Budget", new {BudgetType="Income"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                <li>@Ajax.ActionLink("Add Expense Budget", "Create", "Budget", new {BudgetType="Expense"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                <li>@Ajax.ActionLink("View Budget", "Details", "Budget", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                <li>@Ajax.ActionLink("View Category", "Details", "SubCategory", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                 </ul>
+        </li>
+        <li>@Ajax.ActionLink("Contribution", "Index", "Contribution", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<span class="rarrow">&#x271d;</span>
+            <ul class="sub2">
+               <li> @Ajax.ActionLink("Add Contribution", "CreateList", "Contribution", new {dDate=DateTime.Today.Date}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                <li>@Ajax.ActionLink("View Contribution", "Details", "Contribution", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                <li>@Ajax.ActionLink("View Pledge", "Index", "Pledge", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" }) </li>   
+
+            </ul>
+        </li>
+        <li>@Ajax.ActionLink("Bills", "Index", "Bill", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<span class="rarrow">&#x271d;</span>
+            <ul class="sub2">
+                    <li>@Ajax.ActionLink("Add Bill", "Create", "Bill", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                    <li>@Ajax.ActionLink("View Bills", "Details", "Bill", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                    <li>@Ajax.ActionLink("Payee", "Create", "Payee", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+            </ul>
+        </li>
+        <li>@Ajax.ActionLink("Banking", "Index", "BankAccount", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<span class="rarrow">&#x271d;</span>
+               <ul class="sub2">
+                    <li>@Ajax.ActionLink("New Bank Account", "Create", "BankAccount", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                    <li>@Ajax.ActionLink("View Bank Account", "List", "BankAccount", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+               </ul>
+        </li>
+        <li>@Ajax.ActionLink("Financial Summary", "AccountSummary", "Budget", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+
+    </ul>
+</li>
+
+<li>@Ajax.ActionLink("Ministries", "AdminPage", "Ministry", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+<li class="last"><a href="#">Admin</a>
+     <ul class="sub1">
+        <li>@Ajax.ActionLink("Member", "AdminPage", "Member", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<span class="rarrow">&#x271d;</span>
+            <ul class="sub2">
+                    <li>@Ajax.ActionLink("Add Member", "Create", "Member", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                    <li>@Ajax.ActionLink("View Member", "Details", "Member", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                   <li> @Ajax.ActionLink("View Family", "List", "Family", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+            </ul>
+        </li>
+        <li>@Ajax.ActionLink("Ministry", "AdminPage", "Ministry", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<span class="rarrow">&#x271d;</span>
+             <ul class="sub2">
+                    <li>@Ajax.ActionLink("Add Ministry", "Create", "Ministry", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                    <li>@Ajax.ActionLink("View Ministries", "Details", "Ministry", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                    <li> @Ajax.ActionLink("View Announcement", "Details", "Announcement", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                    <li> @Ajax.ActionLink("View DataTable", "Details", "ListTable", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+   
+                 <li>@Ajax.ActionLink("View Goals", "Index", "Goal", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                   <li> @Ajax.ActionLink("View Meetings", "Index", "Meeting", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                   <li> @Ajax.ActionLink("View Pictures", "Details", "Picture", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+            </ul>
+        </li>
+        <li>@Ajax.ActionLink("Calendar", "Index", "Calendar", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<span class="rarrow">&#x271d;</span>
+              <ul class="sub2">
+                     <li>@Ajax.ActionLink("New Calendar", "Create", "Calendar", new {MinistryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                     <li>@Ajax.ActionLink("View Calendar", "Details", "Calendar", new {MinistryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+              </ul>
+        </li>
+        <li>@Ajax.ActionLink("Property", "Index", "PropertyInventory", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<span class="rarrow">&#x271d;</span>
+               <ul class="sub2">
+                        <li>@Ajax.ActionLink("Add Property","Create","PropertyInventory", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                        <li>@Ajax.ActionLink("Property Group","PropertySummary","PropertyInventory", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                        <li>@Ajax.ActionLink("Property List","Details","PropertyInventory", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+            </ul>
+        </li>
+        <li>@Ajax.ActionLink("Documents", "Index", "Document", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<span class="rarrow">&#x271d;</span>
+              <ul class="sub2">
+                    <li>@Ajax.ActionLink("New Document", "Create", "Document", new {MinistryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                    <li>@Ajax.ActionLink("View Document", "Details", "Document", new {MinistryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+            </ul>
+        </li>
+        <li>@Ajax.ActionLink("Visitor", "Index", "Visitor", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<span class="rarrow">&#x271d;</span>
+             <ul class="sub2">
+                        <li>@Ajax.ActionLink("Add Visitor", "Create", "Visitor", new {ministryID=@ViewBag.MinistryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                        <li>@Ajax.ActionLink("View Visitor", "Details", "Visitor", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+
+            </ul>
+        </li>
+        <li>@Ajax.ActionLink("Staff", "Index", "Staff", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<span class="rarrow">&#x271d;</span>
+             <ul class="sub2">
+                        <li>@Ajax.ActionLink("Add Staff", "Create", "Staff", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                        <li>@Ajax.ActionLink("Staff List", "Details", "Staff", new {code="Active"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                        <li>@Ajax.ActionLink("View Staff", "DisplayStaff", "Staff", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>    
+
+            </ul>
+        </li>
+
+<li>@Ajax.ActionLink("Constant", "GetConstantMinc", "Constant", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<span class="rarrow">&#x271d;</span>
+             <ul class="sub2">
+                        <li>@Ajax.ActionLink("Add Constant", "Create", "Constant", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                        <li>@Ajax.ActionLink("View Constant", "Details", "Constant", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+                        <li>@Ajax.ActionLink("Update Constant", "GetConstantMisc", "Constant", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>    
+
+            </ul>
+        </li>
+
+    </ul>
+</li>
+
+
+</ul>
+</div>
+    
+</div>
+           
+        <div class="row">
+            <div class=" visible-md visible-lg">
+<div id="HomePages" >
+    <ul>
+<li>@Ajax.ActionLink("Videos", "HowToVideos", "Constant", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+<li>@Ajax.ActionLink("How to", "HowToInstructions", "Home",new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+</ul>
+</div>
+                </div>
+    </div>
+        
+<div id="contentwrapper" class="PanelScreen">
+@RenderBody()
+</div>
+<div id="footer">
+<p>Copyright 2015 - All Rights Reserved - International Christian Fellowship
+3076 Humphries Drive, SW, Atlanta, GA 300354 - icfm@gmail.com - (404) 363-3300
+</p>
+    
+<div> 
+    <a href="http://facebook.com/">
+    <img src="../../Content/DreamWeaver/images/facebook.png" width="64" height="64" alt=""/></a>
+  <img src="../../Content/DreamWeaver/images/twitter.png" width="64" height="64" alt=""/>
+    <img src="../../Content/DreamWeaver/images/youtube.png" width="64" height="64" alt=""/>
+</div>
+</div>
+
+</div>
+
+
+        @Scripts.Render("~/bundles/jquery",
+                    "~/bundles/jqueryui",
+                    "~/bundles/jqueryval")
+
+    @Scripts.Render("~/bundles/fullcalendarjs")
+    @Scripts.Render("~/bundles/bootstrap")
+
+
+    @RenderSection("scripts", required: false)
+</body>
+</html>
+
+

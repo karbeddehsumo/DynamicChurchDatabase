@@ -1,0 +1,30 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div>
+<h2 id="pageTitle" class="center">Expense Center</h2>
+
+    <div class="center">
+        @Ajax.ActionLink("Pay Expense", "Create", "Expense", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ExpensePane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("View Expense", "Details", "Expense", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ExpensePane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("Add Payee", "Create", "Payee", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ExpensePane" }, new {@id="pageSubTitle"})    
+        @Ajax.ActionLink("Reconcile Checks", "ReconcileView", "Expense", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ExpensePane" }, new {@id="pageSubTitle"})   
+    </div>
+</div>
+<div id="ExpensePane">
+@Html.Action("Details","Expense")
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+    });
+
+ </script>
+

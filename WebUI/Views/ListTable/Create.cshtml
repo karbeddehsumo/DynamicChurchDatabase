@@ -1,0 +1,77 @@
+﻿@model Domain.listtable
+
+@{
+    ViewBag.Title = "Create";
+    
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Create", "ListTable", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 id="FieldSetTopMenu">Create New Table</h2>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Add new table here...</legend>
+
+            @Html.HiddenFor(model => model.ministryID)
+            @Html.HiddenFor(model => model.DefaultOpen)
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Title)
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.DateCreated,"Date Created")
+             @Html.TextBoxFor(model => model.DateCreated, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.DateCreated)
+        </div>
+
+
+
+            @Html.HiddenFor(model => model.Status)
+            @Html.HiddenFor(model => model.EnteredBy)
+            @Html.HiddenFor(model => model.DateEntered)
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $("#familyID").change(function (event) {
+            var i = $("#familyID option:selected").text().indexOf('-');
+            $("#LastName").val($("#familyID option:selected").text().substring(0, i - 1));
+            $("#InterestAmount").val(parseFloat(($("#InterestRate").val() / 100) * $("#Amount").val()));
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#Title").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the table title.");
+            }
+        });
+    });
+</script>

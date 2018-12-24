@@ -1,0 +1,16 @@
+﻿         <div class="center">
+             @Ajax.ActionLink("Goal", "ListMinistry", "Goal", new {SearchType="MinistrySearch", codeID=@ViewBag.MinistryID, bDate="1/1/2015", eDate="1/1/2015" }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new {@id="pageSubTitle"})
+            @Ajax.ActionLink("Tasks", "List", "Task", new { bDate = DateTime.Today.ToShortDateString(), eDate = DateTime.Today.ToShortDateString(), SearchType = "GoalSearch", codeID = @ViewBag.GoalID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new {@id="pageSubTitle"})
+       </div> 
+        <div class="center">
+              @if ((@ViewBag.Supervisor == true) || (@ViewBag.Supervisor1 == true) || (@ViewBag.Supervisor==true))
+            {
+                @Ajax.ActionLink("Add New Action Item", "Create", "Task", new {goalID=@ViewBag.GoalID,parentTaskID=@ViewBag.ParentTaskID,Code="ActionItem"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ActionItemPane" }, new {@id="pageSubTitle"})
+              }
+      @Ajax.ActionLink("View Action Item", "ActionItemView", "Task", new {TaskID=@ViewBag.TaskID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ActionItemPane" }, new {@id="pageSubTitle"})
+
+ </div> 
+
+<div id="ActionItemPane">
+@Html.Action("ActionItemView", "Task", new {TaskID=@ViewBag.TaskID})
+</div>

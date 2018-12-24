@@ -1,0 +1,846 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="churchdatabaseModelStoreContainer" CdmEntityContainer="churchdatabaseEntities">
+    <EntitySetMapping Name="actionitems">
+      <EntityTypeMapping TypeName="churchdatabaseModel.actionitem">
+        <MappingFragment StoreEntitySet="actionitem">
+          <ScalarProperty Name="ActionItemID" ColumnName="ActionItemID" />
+          <ScalarProperty Name="ParentType" ColumnName="ParentType" />
+          <ScalarProperty Name="ParentItemID" ColumnName="ParentItemID" />
+          <ScalarProperty Name="childItemID" ColumnName="childItemID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="announcements">
+      <EntityTypeMapping TypeName="churchdatabaseModel.announcement">
+        <MappingFragment StoreEntitySet="announcement">
+          <ScalarProperty Name="announcementID" ColumnName="announcementID" />
+          <ScalarProperty Name="ministryID" ColumnName="ministryID" />
+          <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="Message" ColumnName="Message" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="attendances">
+      <EntityTypeMapping TypeName="churchdatabaseModel.attendance">
+        <MappingFragment StoreEntitySet="attendance">
+          <ScalarProperty Name="attendanceID" ColumnName="attendanceID" />
+          <ScalarProperty Name="memberID" ColumnName="memberID" />
+          <ScalarProperty Name="RollCall" ColumnName="RollCall" />
+          <ScalarProperty Name="calendarID" ColumnName="calendarID" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bankaccounts">
+      <EntityTypeMapping TypeName="churchdatabaseModel.bankaccount">
+        <MappingFragment StoreEntitySet="bankaccount">
+          <ScalarProperty Name="bankAccountID" ColumnName="bankAccountID" />
+          <ScalarProperty Name="BankName" ColumnName="BankName" />
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ControlName" ColumnName="ControlName" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bankbalances">
+      <EntityTypeMapping TypeName="churchdatabaseModel.bankbalance">
+        <MappingFragment StoreEntitySet="bankbalance">
+          <ScalarProperty Name="BankBalanceID" ColumnName="BankBalanceID" />
+          <ScalarProperty Name="BankAccountID" ColumnName="BankAccountID" />
+          <ScalarProperty Name="LastIncomeID" ColumnName="LastIncomeID" />
+          <ScalarProperty Name="LastExpenseID" ColumnName="LastExpenseID" />
+          <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="BeginingBalance" ColumnName="BeginingBalance" />
+          <ScalarProperty Name="RevenueAmount" ColumnName="RevenueAmount" />
+          <ScalarProperty Name="ExpenseAmount" ColumnName="ExpenseAmount" />
+          <ScalarProperty Name="EndingBalance" ColumnName="EndingBalance" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="bills">
+      <EntityTypeMapping TypeName="churchdatabaseModel.bill">
+        <MappingFragment StoreEntitySet="bill">
+          <ScalarProperty Name="billID" ColumnName="billID" />
+          <ScalarProperty Name="payeeID" ColumnName="payeeID" />
+          <ScalarProperty Name="PayeeName" ColumnName="PayeeName" />
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="TotalAmount" ColumnName="TotalAmount" />
+          <ScalarProperty Name="AmountDue" ColumnName="AmountDue" />
+          <ScalarProperty Name="DateDue" ColumnName="DateDue" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="budgets">
+      <EntityTypeMapping TypeName="churchdatabaseModel.budget">
+        <MappingFragment StoreEntitySet="budget">
+          <ScalarProperty Name="budgetID" ColumnName="budgetID" />
+          <ScalarProperty Name="BudgetYear" ColumnName="BudgetYear" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="budgetitems">
+      <EntityTypeMapping TypeName="churchdatabaseModel.budgetitem">
+        <MappingFragment StoreEntitySet="budgetitem">
+          <ScalarProperty Name="parentItemID" ColumnName="parentItemID" />
+          <ScalarProperty Name="childItemID" ColumnName="childItemID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="calendars">
+      <EntityTypeMapping TypeName="churchdatabaseModel.calendar">
+        <MappingFragment StoreEntitySet="calendar">
+          <ScalarProperty Name="calendarID" ColumnName="calendarID" />
+          <ScalarProperty Name="ministryID" ColumnName="ministryID" />
+          <ScalarProperty Name="EventType" ColumnName="EventType" />
+          <ScalarProperty Name="CalendarDate" ColumnName="CalendarDate" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Conductor" ColumnName="Conductor" />
+          <ScalarProperty Name="PublicAccess" ColumnName="PublicAccess" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="categories">
+      <EntityTypeMapping TypeName="churchdatabaseModel.category">
+        <MappingFragment StoreEntitySet="category">
+          <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+          <ScalarProperty Name="CategoryName" ColumnName="CategoryName" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="childparents">
+      <EntityTypeMapping TypeName="churchdatabaseModel.childparent">
+        <MappingFragment StoreEntitySet="childparent">
+          <ScalarProperty Name="ChildParentID" ColumnName="ChildParentID" />
+          <ScalarProperty Name="ChildID" ColumnName="ChildID" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="constants">
+      <EntityTypeMapping TypeName="churchdatabaseModel.constant">
+        <MappingFragment StoreEntitySet="constant">
+          <ScalarProperty Name="constantID" ColumnName="constantID" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="ConstantName" ColumnName="ConstantName" />
+          <ScalarProperty Name="Value1" ColumnName="Value1" />
+          <ScalarProperty Name="Value2" ColumnName="Value2" />
+          <ScalarProperty Name="Value3" ColumnName="Value3" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="contributions">
+      <EntityTypeMapping TypeName="churchdatabaseModel.contribution">
+        <MappingFragment StoreEntitySet="contribution">
+          <ScalarProperty Name="contributionID" ColumnName="contributionID" />
+          <ScalarProperty Name="memberID" ColumnName="memberID" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="ContributionDate" ColumnName="ContributionDate" />
+          <ScalarProperty Name="CheckNumber" ColumnName="CheckNumber" />
+          <ScalarProperty Name="subCategoryID" ColumnName="subCategoryID" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="documents">
+      <EntityTypeMapping TypeName="churchdatabaseModel.document">
+        <MappingFragment StoreEntitySet="document">
+          <ScalarProperty Name="documentID" ColumnName="documentID" />
+          <ScalarProperty Name="ministryID" ColumnName="ministryID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="DocumentType" ColumnName="DocumentType" />
+          <ScalarProperty Name="ContentType" ColumnName="ContentType" />
+          <ScalarProperty Name="ContentLength" ColumnName="ContentLength" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Author" ColumnName="Author" />
+          <ScalarProperty Name="Version" ColumnName="Version" />
+          <ScalarProperty Name="FileName" ColumnName="FileName" />
+          <ScalarProperty Name="TempFileName" ColumnName="TempFileName" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="expenses">
+      <EntityTypeMapping TypeName="churchdatabaseModel.expense">
+        <MappingFragment StoreEntitySet="expense">
+          <ScalarProperty Name="expenseID" ColumnName="expenseID" />
+          <ScalarProperty Name="subCategoryID" ColumnName="subCategoryID" />
+          <ScalarProperty Name="bankAccountID" ColumnName="bankAccountID" />
+          <ScalarProperty Name="Payee" ColumnName="Payee" />
+          <ScalarProperty Name="ExpenseDate" ColumnName="ExpenseDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CheckNumber" ColumnName="CheckNumber" />
+          <ScalarProperty Name="Reconcile" ColumnName="Reconcile" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="families">
+      <EntityTypeMapping TypeName="churchdatabaseModel.family">
+        <MappingFragment StoreEntitySet="family">
+          <ScalarProperty Name="familyID" ColumnName="familyID" />
+          <ScalarProperty Name="FamilyName" ColumnName="FamilyName" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+          <ScalarProperty Name="Address2" ColumnName="Address2" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="goals">
+      <EntityTypeMapping TypeName="churchdatabaseModel.goal">
+        <MappingFragment StoreEntitySet="goal">
+          <ScalarProperty Name="goalID" ColumnName="goalID" />
+          <ScalarProperty Name="ministryID" ColumnName="ministryID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+          <ScalarProperty Name="BeginDate" ColumnName="BeginDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="CompletionRatio" ColumnName="CompletionRatio" />
+          <ScalarProperty Name="SupervisorComment" ColumnName="SupervisorComment" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="incomes">
+      <EntityTypeMapping TypeName="churchdatabaseModel.income">
+        <MappingFragment StoreEntitySet="income">
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="incomeID" ColumnName="incomeID" />
+          <ScalarProperty Name="subCategoryID" ColumnName="subCategoryID" />
+          <ScalarProperty Name="bankAccountID" ColumnName="bankAccountID" />
+          <ScalarProperty Name="IncomeDate" ColumnName="IncomeDate" />
+          <ScalarProperty Name="CashAmount" ColumnName="CashAmount" />
+          <ScalarProperty Name="CheckAmount" ColumnName="CheckAmount" />
+          <ScalarProperty Name="CoinAmount" ColumnName="CoinAmount" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="listheaders">
+      <EntityTypeMapping TypeName="churchdatabaseModel.listheader">
+        <MappingFragment StoreEntitySet="listheader">
+          <ScalarProperty Name="ListHeaderID" ColumnName="ListHeaderID" />
+          <ScalarProperty Name="ListTableID" ColumnName="ListTableID" />
+          <ScalarProperty Name="Type1" ColumnName="Type1" />
+          <ScalarProperty Name="Type2" ColumnName="Type2" />
+          <ScalarProperty Name="Type3" ColumnName="Type3" />
+          <ScalarProperty Name="Type4" ColumnName="Type4" />
+          <ScalarProperty Name="Type5" ColumnName="Type5" />
+          <ScalarProperty Name="Type6" ColumnName="Type6" />
+          <ScalarProperty Name="Type7" ColumnName="Type7" />
+          <ScalarProperty Name="Type8" ColumnName="Type8" />
+          <ScalarProperty Name="Type9" ColumnName="Type9" />
+          <ScalarProperty Name="Type10" ColumnName="Type10" />
+          <ScalarProperty Name="FieldName1" ColumnName="FieldName1" />
+          <ScalarProperty Name="FieldName2" ColumnName="FieldName2" />
+          <ScalarProperty Name="FieldName3" ColumnName="FieldName3" />
+          <ScalarProperty Name="FieldName4" ColumnName="FieldName4" />
+          <ScalarProperty Name="FieldName5" ColumnName="FieldName5" />
+          <ScalarProperty Name="FieldName6" ColumnName="FieldName6" />
+          <ScalarProperty Name="FieldName7" ColumnName="FieldName7" />
+          <ScalarProperty Name="FieldName8" ColumnName="FieldName8" />
+          <ScalarProperty Name="FieldName9" ColumnName="FieldName9" />
+          <ScalarProperty Name="FieldName10" ColumnName="FieldName10" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="listitems">
+      <EntityTypeMapping TypeName="churchdatabaseModel.listitem">
+        <MappingFragment StoreEntitySet="listitem">
+          <ScalarProperty Name="listItemID" ColumnName="listItemID" />
+          <ScalarProperty Name="listTableID" ColumnName="listTableID" />
+          <ScalarProperty Name="Value1" ColumnName="Value1" />
+          <ScalarProperty Name="Value2" ColumnName="Value2" />
+          <ScalarProperty Name="Value3" ColumnName="Value3" />
+          <ScalarProperty Name="Value4" ColumnName="Value4" />
+          <ScalarProperty Name="Value5" ColumnName="Value5" />
+          <ScalarProperty Name="Value6" ColumnName="Value6" />
+          <ScalarProperty Name="Value7" ColumnName="Value7" />
+          <ScalarProperty Name="Value8" ColumnName="Value8" />
+          <ScalarProperty Name="Value9" ColumnName="Value9" />
+          <ScalarProperty Name="Value10" ColumnName="Value10" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="listtables">
+      <EntityTypeMapping TypeName="churchdatabaseModel.listtable">
+        <MappingFragment StoreEntitySet="listtable">
+          <ScalarProperty Name="listTableID" ColumnName="listTableID" />
+          <ScalarProperty Name="ministryID" ColumnName="ministryID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+          <ScalarProperty Name="DefaultOpen" ColumnName="DefaultOpen" />
+          <ScalarProperty Name="IsPublic" ColumnName="IsPublic" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="meetings">
+      <EntityTypeMapping TypeName="churchdatabaseModel.meeting">
+        <MappingFragment StoreEntitySet="meeting">
+          <ScalarProperty Name="meetingID" ColumnName="meetingID" />
+          <ScalarProperty Name="meetingDate" ColumnName="meetingDate" />
+          <ScalarProperty Name="meetingVenue" ColumnName="meetingVenue" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="ministryID" ColumnName="ministryID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="NextMeetingDate" ColumnName="NextMeetingDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CalendarID" ColumnName="CalendarID" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+          <ScalarProperty Name="Conductor" ColumnName="Conductor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="meetingagendas">
+      <EntityTypeMapping TypeName="churchdatabaseModel.meetingagenda">
+        <MappingFragment StoreEntitySet="meetingagenda">
+          <ScalarProperty Name="meetingAgendaID" ColumnName="meetingAgendaID" />
+          <ScalarProperty Name="meetingID" ColumnName="meetingID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="TaskID" ColumnName="TaskID" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="meetingnotes">
+      <EntityTypeMapping TypeName="churchdatabaseModel.meetingnote">
+        <MappingFragment StoreEntitySet="meetingnote">
+          <ScalarProperty Name="meetingNoteID" ColumnName="meetingNoteID" />
+          <ScalarProperty Name="MeetingAgendaID" ColumnName="MeetingAgendaID" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="NoteDate" ColumnName="NoteDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="members">
+      <EntityTypeMapping TypeName="churchdatabaseModel.member">
+        <MappingFragment StoreEntitySet="member">
+          <ScalarProperty Name="memberID" ColumnName="memberID" />
+          <ScalarProperty Name="familyID" ColumnName="familyID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="DOB" ColumnName="DOB" />
+          <ScalarProperty Name="Gender" ColumnName="Gender" />
+          <ScalarProperty Name="MembershipDate" ColumnName="MembershipDate" />
+          <ScalarProperty Name="ChurchTitle" ColumnName="ChurchTitle" />
+          <ScalarProperty Name="ContactTypeID" ColumnName="ContactTypeID" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="PhoneProviderID" ColumnName="PhoneProviderID" />
+          <ScalarProperty Name="DoNotText" ColumnName="DoNotText" />
+          <ScalarProperty Name="EmailAddress" ColumnName="EmailAddress" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ministries">
+      <EntityTypeMapping TypeName="churchdatabaseModel.ministry">
+        <MappingFragment StoreEntitySet="ministry">
+          <ScalarProperty Name="ministryID" ColumnName="ministryID" />
+          <ScalarProperty Name="MinistryName" ColumnName="MinistryName" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Contact" ColumnName="Contact" />
+          <ScalarProperty Name="ContactEmail" ColumnName="ContactEmail" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="BriefDescription" ColumnName="BriefDescription" />
+          <ScalarProperty Name="PageStyleID" ColumnName="PageStyleID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CodeDesc" ColumnName="CodeDesc" />
+          <ScalarProperty Name="StoryCreateAccess" ColumnName="StoryCreateAccess" />
+          <ScalarProperty Name="PictureCreateAccess" ColumnName="PictureCreateAccess" />
+          <ScalarProperty Name="VideoCreateAccess" ColumnName="VideoCreateAccess" />
+          <ScalarProperty Name="IsPublic" ColumnName="IsPublic" />
+          <ScalarProperty Name="DefaultMemberType" ColumnName="DefaultMemberType" />
+          <ScalarProperty Name="IsGroupMinistry" ColumnName="IsGroupMinistry" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ministryexpenses">
+      <EntityTypeMapping TypeName="churchdatabaseModel.ministryexpense">
+        <MappingFragment StoreEntitySet="ministryexpense">
+          <ScalarProperty Name="ministryExpenseID" ColumnName="ministryExpenseID" />
+          <ScalarProperty Name="ministryID" ColumnName="ministryID" />
+          <ScalarProperty Name="subCategoryID" ColumnName="subCategoryID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="ExpenseDate" ColumnName="ExpenseDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CheckNumber" ColumnName="CheckNumber" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Reconcile" ColumnName="Reconcile" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ministrygroups">
+      <EntityTypeMapping TypeName="churchdatabaseModel.ministrygroup">
+        <MappingFragment StoreEntitySet="ministrygroup">
+          <ScalarProperty Name="MinistryGroupID" ColumnName="MinistryGroupID" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+          <ScalarProperty Name="ChildID" ColumnName="ChildID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ministryincomes">
+      <EntityTypeMapping TypeName="churchdatabaseModel.ministryincome">
+        <MappingFragment StoreEntitySet="ministryincome">
+          <ScalarProperty Name="ministryIncomeID" ColumnName="ministryIncomeID" />
+          <ScalarProperty Name="ministryID" ColumnName="ministryID" />
+          <ScalarProperty Name="subCategoryID" ColumnName="subCategoryID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="IncomeDate" ColumnName="IncomeDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ministrymembers">
+      <EntityTypeMapping TypeName="churchdatabaseModel.ministrymember">
+        <MappingFragment StoreEntitySet="ministrymember">
+          <ScalarProperty Name="MinistryMemberID" ColumnName="MinistryMemberID" />
+          <ScalarProperty Name="ministryID" ColumnName="ministryID" />
+          <ScalarProperty Name="memberID" ColumnName="memberID" />
+          <ScalarProperty Name="OfficeTitle" ColumnName="OfficeTitle" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="MembershipDate" ColumnName="MembershipDate" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="payees">
+      <EntityTypeMapping TypeName="churchdatabaseModel.payee">
+        <MappingFragment StoreEntitySet="payee">
+          <ScalarProperty Name="payeeID" ColumnName="payeeID" />
+          <ScalarProperty Name="BankAccountID" ColumnName="BankAccountID" />
+          <ScalarProperty Name="SubCategoryID" ColumnName="SubCategoryID" />
+          <ScalarProperty Name="AccountNumber" ColumnName="AccountNumber" />
+          <ScalarProperty Name="PayeeName" ColumnName="PayeeName" />
+          <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="Frequency" ColumnName="Frequency" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PayeeTypeID" ColumnName="PayeeTypeID" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="payeecategories">
+      <EntityTypeMapping TypeName="churchdatabaseModel.payeecategory">
+        <MappingFragment StoreEntitySet="payeecategory">
+          <ScalarProperty Name="payeeID" ColumnName="payeeID" />
+          <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pictures">
+      <EntityTypeMapping TypeName="churchdatabaseModel.picture">
+        <MappingFragment StoreEntitySet="picture">
+          <ScalarProperty Name="pictureID" ColumnName="pictureID" />
+          <ScalarProperty Name="ministryID" ColumnName="ministryID" />
+          <ScalarProperty Name="PictureDate" ColumnName="PictureDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="ImageData" ColumnName="ImageData" />
+          <ScalarProperty Name="ImageMimeType" ColumnName="ImageMimeType" />
+          <ScalarProperty Name="PictureType" ColumnName="PictureType" />
+          <ScalarProperty Name="IsPublic" ColumnName="IsPublic" />
+          <ScalarProperty Name="GroupID" ColumnName="GroupID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pledges">
+      <EntityTypeMapping TypeName="churchdatabaseModel.pledge">
+        <MappingFragment StoreEntitySet="pledge">
+          <ScalarProperty Name="pledgeID" ColumnName="pledgeID" />
+          <ScalarProperty Name="memberID" ColumnName="memberID" />
+          <ScalarProperty Name="FundID" ColumnName="FundID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="FundName" ColumnName="FundName" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PledgeYear" ColumnName="PledgeYear" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="products">
+      <EntityTypeMapping TypeName="churchdatabaseModel.product">
+        <MappingFragment StoreEntitySet="product">
+          <ScalarProperty Name="productID" ColumnName="productID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Price" ColumnName="Price" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+          <ScalarProperty Name="PictureID" ColumnName="PictureID" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="productdiscounts">
+      <EntityTypeMapping TypeName="churchdatabaseModel.productdiscount">
+        <MappingFragment StoreEntitySet="productdiscount">
+          <ScalarProperty Name="ProductDiscountID" ColumnName="ProductDiscountID" />
+          <ScalarProperty Name="productID" ColumnName="productID" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="programevents">
+      <EntityTypeMapping TypeName="churchdatabaseModel.programevent">
+        <MappingFragment StoreEntitySet="programevent">
+          <ScalarProperty Name="programEventID" ColumnName="programEventID" />
+          <ScalarProperty Name="goalID" ColumnName="goalID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="C_When" ColumnName="_When" />
+          <ScalarProperty Name="C_Who" ColumnName="_Who" />
+          <ScalarProperty Name="C_Where" ColumnName="_Where" />
+          <ScalarProperty Name="C_What" ColumnName="_What" />
+          <ScalarProperty Name="C_How" ColumnName="_How" />
+          <ScalarProperty Name="BeginTime" ColumnName="BeginTime" />
+          <ScalarProperty Name="EndTime" ColumnName="EndTime" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="CalendarID" ColumnName="CalendarID" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="programeventbudgets">
+      <EntityTypeMapping TypeName="churchdatabaseModel.programeventbudget">
+        <MappingFragment StoreEntitySet="programeventbudget">
+          <ScalarProperty Name="ProgramEventBudgetID" ColumnName="ProgramEventBudgetID" />
+          <ScalarProperty Name="ProgramEventID" ColumnName="ProgramEventID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Requestor" ColumnName="Requestor" />
+          <ScalarProperty Name="ProjectedTotalAmount" ColumnName="ProjectedTotalAmount" />
+          <ScalarProperty Name="ActualTotalAmount" ColumnName="ActualTotalAmount" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="CheckNumber" ColumnName="CheckNumber" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="programeventbudgetitems">
+      <EntityTypeMapping TypeName="churchdatabaseModel.programeventbudgetitem">
+        <MappingFragment StoreEntitySet="programeventbudgetitem">
+          <ScalarProperty Name="ParentItemID" ColumnName="ParentItemID" />
+          <ScalarProperty Name="ChildItemID" ColumnName="ChildItemID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="properties">
+      <EntityTypeMapping TypeName="churchdatabaseModel.property">
+        <MappingFragment StoreEntitySet="property">
+          <ScalarProperty Name="propertyID" ColumnName="propertyID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="subCategoryID" ColumnName="subCategoryID" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="PictureID" ColumnName="PictureID" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="propertyinventories">
+      <EntityTypeMapping TypeName="churchdatabaseModel.propertyinventory">
+        <MappingFragment StoreEntitySet="propertyinventory">
+          <ScalarProperty Name="propertyInventoryID" ColumnName="propertyInventoryID" />
+          <ScalarProperty Name="propertyID" ColumnName="propertyID" />
+          <ScalarProperty Name="purchaseDate" ColumnName="purchaseDate" />
+          <ScalarProperty Name="Value" ColumnName="Value" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Location" ColumnName="Location" />
+          <ScalarProperty Name="AssignedTo" ColumnName="AssignedTo" />
+          <ScalarProperty Name="Condition" ColumnName="Condition" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="TagNumber" ColumnName="TagNumber" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="PictureID" ColumnName="PictureID" />
+          <ScalarProperty Name="DocumentID" ColumnName="DocumentID" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="responsibilities">
+      <EntityTypeMapping TypeName="churchdatabaseModel.responsibility">
+        <MappingFragment StoreEntitySet="responsibility">
+          <ScalarProperty Name="responsibilityID" ColumnName="responsibilityID" />
+          <ScalarProperty Name="staffID" ColumnName="staffID" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="FullDescription" ColumnName="FullDescription" />
+          <ScalarProperty Name="BriefDescription" ColumnName="BriefDescription" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="sales">
+      <EntityTypeMapping TypeName="churchdatabaseModel.sale">
+        <MappingFragment StoreEntitySet="sale">
+          <ScalarProperty Name="saleID" ColumnName="saleID" />
+          <ScalarProperty Name="saleDate" ColumnName="saleDate" />
+          <ScalarProperty Name="saleAmount" ColumnName="saleAmount" />
+          <ScalarProperty Name="NumberProduct" ColumnName="NumberProduct" />
+          <ScalarProperty Name="Cashier" ColumnName="Cashier" />
+          <ScalarProperty Name="SubTotal" ColumnName="SubTotal" />
+          <ScalarProperty Name="Tax" ColumnName="Tax" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="CheckNumber" ColumnName="CheckNumber" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="saleitems">
+      <EntityTypeMapping TypeName="churchdatabaseModel.saleitem">
+        <MappingFragment StoreEntitySet="saleitem">
+          <ScalarProperty Name="SaleItemID" ColumnName="SaleItemID" />
+          <ScalarProperty Name="saleID" ColumnName="saleID" />
+          <ScalarProperty Name="productID" ColumnName="productID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="spouses">
+      <EntityTypeMapping TypeName="churchdatabaseModel.spouse">
+        <MappingFragment StoreEntitySet="spouse">
+          <ScalarProperty Name="spouse1ID" ColumnName="spouse1ID" />
+          <ScalarProperty Name="spouse2ID" ColumnName="spouse2ID" />
+          <ScalarProperty Name="JointTithe" ColumnName="JointTithe" />
+          <ScalarProperty Name="JointTitheTitle" ColumnName="JointTitheTitle" />
+          <ScalarProperty Name="SpouseID" ColumnName="SpouseID" />
+          <ScalarProperty Name="AnniversaryDate" ColumnName="AnniversaryDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="staffs">
+      <EntityTypeMapping TypeName="churchdatabaseModel.staff">
+        <MappingFragment StoreEntitySet="staff">
+          <ScalarProperty Name="staffID" ColumnName="staffID" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="HireDate" ColumnName="HireDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="pictureID" ColumnName="pictureID" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="stories">
+      <EntityTypeMapping TypeName="churchdatabaseModel.story">
+        <MappingFragment StoreEntitySet="story">
+          <ScalarProperty Name="StoryID" ColumnName="StoryID" />
+          <ScalarProperty Name="MinistryID" ColumnName="MinistryID" />
+          <ScalarProperty Name="Header" ColumnName="Header" />
+          <ScalarProperty Name="StoryLine" ColumnName="StoryLine" />
+          <ScalarProperty Name="PictureID" ColumnName="PictureID" />
+          <ScalarProperty Name="VideoID" ColumnName="VideoID" />
+          <ScalarProperty Name="StoryTypeID" ColumnName="StoryTypeID" />
+          <ScalarProperty Name="StoryDate" ColumnName="StoryDate" />
+          <ScalarProperty Name="IsPublic" ColumnName="IsPublic" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="subcategories">
+      <EntityTypeMapping TypeName="churchdatabaseModel.subcategory">
+        <MappingFragment StoreEntitySet="subcategory">
+          <ScalarProperty Name="subCategoryID" ColumnName="subCategoryID" />
+          <ScalarProperty Name="SubCategoryName" ColumnName="SubCategoryName" />
+          <ScalarProperty Name="categoryID" ColumnName="categoryID" />
+          <ScalarProperty Name="bankAccountID" ColumnName="bankAccountID" />
+          <ScalarProperty Name="ShortTitle" ColumnName="ShortTitle" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="subcategoryitems">
+      <EntityTypeMapping TypeName="churchdatabaseModel.subcategoryitem">
+        <MappingFragment StoreEntitySet="subcategoryitem">
+          <ScalarProperty Name="ParentCategoryID" ColumnName="ParentCategoryID" />
+          <ScalarProperty Name="ChildCategoryID" ColumnName="ChildCategoryID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="supervisors">
+      <EntityTypeMapping TypeName="churchdatabaseModel.supervisor">
+        <MappingFragment StoreEntitySet="supervisor">
+          <ScalarProperty Name="bossID" ColumnName="bossID" />
+          <ScalarProperty Name="staffID" ColumnName="staffID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tasks">
+      <EntityTypeMapping TypeName="churchdatabaseModel.task">
+        <MappingFragment StoreEntitySet="task">
+          <ScalarProperty Name="taskID" ColumnName="taskID" />
+          <ScalarProperty Name="goalID" ColumnName="goalID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="AssignTo" ColumnName="AssignTo" />
+          <ScalarProperty Name="AssignDate" ColumnName="AssignDate" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="CompletionRatio" ColumnName="CompletionRatio" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="videos">
+      <EntityTypeMapping TypeName="churchdatabaseModel.video">
+        <MappingFragment StoreEntitySet="video">
+          <ScalarProperty Name="videoID" ColumnName="videoID" />
+          <ScalarProperty Name="ministryID" ColumnName="ministryID" />
+          <ScalarProperty Name="VideoTitle" ColumnName="VideoTitle" />
+          <ScalarProperty Name="VideoDate" ColumnName="VideoDate" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="URL" ColumnName="URL" />
+          <ScalarProperty Name="VideoTypeID" ColumnName="VideoTypeID" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="visitors">
+      <EntityTypeMapping TypeName="churchdatabaseModel.visitor">
+        <MappingFragment StoreEntitySet="visitor">
+          <ScalarProperty Name="visitorID" ColumnName="visitorID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+          <ScalarProperty Name="LastName" ColumnName="LastName" />
+          <ScalarProperty Name="subCategoryID" ColumnName="subCategoryID" />
+          <ScalarProperty Name="LastEventAttended" ColumnName="LastEventAttended" />
+          <ScalarProperty Name="EventDate" ColumnName="EventDate" />
+          <ScalarProperty Name="phoneNumber" ColumnName="phoneNumber" />
+          <ScalarProperty Name="Email" ColumnName="Email" />
+          <ScalarProperty Name="BestContact" ColumnName="BestContact" />
+          <ScalarProperty Name="Address" ColumnName="Address" />
+          <ScalarProperty Name="City" ColumnName="City" />
+          <ScalarProperty Name="State" ColumnName="State" />
+          <ScalarProperty Name="Zip" ColumnName="Zip" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

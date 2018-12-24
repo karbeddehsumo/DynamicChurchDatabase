@@ -1,0 +1,111 @@
+﻿@{
+    ViewBag.Title = "Detail";
+}
+
+<div class="menu">
+  <ul>
+    <li><a href="#">Finance</a>
+        <ul>
+            <li><a href="." class="BillClick">Billing</a></li>
+            <li><a>Income</a></li>
+            <li><a>Expense</a></li>
+            <li><a>Pledge</a></li>
+            <li><a>Budget</a></li>
+        </ul>
+    </li>
+    <li><a href="#">Ministry</a>
+        <ul>
+            <li><a>Education</a></li>
+            <li><a>Finance</a></li>
+            <li><a>Service</a></li>
+            <li><a>Evangelism & Outreach</a></li>
+            <li><a>Music</a></li>
+            <li><a>Small Groups</a></li>
+            <li><a>Budget</a></li>
+        </ul>
+    </li>
+    <li><a href="#">Admin</a>
+        <ul>
+            <li><a>Documents</a></li>
+            <li><a>Property</a></li>
+            <li><a>Visotors</a></li>
+            <li><a>Pictures & Vodeo</a></li>
+            <li><a></a></li>
+            <li><a></a></li>
+        </ul>
+    </li>
+    <li><a href="#">Member</a></li>
+    <li><a href="#">Gift Shop</a></li>
+  </ul>
+    </div>
+
+<div class="PaneCenter" style="background-color:pink;">
+    @Html.Action("Index","Bill")
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $("#tabs").tabs({
+            event: "mouseover"
+        }); 
+
+        $("a.BillClick").click(function (event) {
+            event.preventDefault();
+            var url = "/Bill/Index";
+            $.get(url, {}, function (data) { $(".PaneCenter").html(data) });
+        });
+
+        $("a.ConstantClick").click(function (event) {
+            event.preventDefault();
+            var url = "/Constant/Index";
+            $.get(url, {}, function (data) { $(".PaneCenter").html(data) });
+        });
+
+        $("a.CategoryClick").click(function (event) {
+            event.preventDefault();
+            var url = "/Category/Index";
+            $.get(url, {}, function (data) { $(".PaneCenter").html(data) });
+        });
+/*
+        $("a.BorrowerCreateClick").click(function (event) {
+            event.preventDefault();
+            var url = "/Borrower/Index";
+            $.get(url, {}, function (data) { $(".ContentPane").html(data) });
+        });
+
+        $("a.LoanClick").click(function (event) {
+            event.preventDefault();
+            var url = "/Loan/Index";
+            $.get(url, {}, function (data) { $(".ContentPane").html(data) });
+        });
+
+        $("a.ConstantClick").click(function (event) {
+            event.preventDefault();
+            var url = "/Constant/Index";
+            $.get(url, {}, function (data) { $(".ContentPane").html(data) });
+        });
+
+        $("a.SupervisorClick").click(function (event) {
+            event.preventDefault();
+            var url = "/Supervisor/Index";
+            $.get(url, {}, function (data) { $(".ContentPane").html(data) });
+        });
+
+        $("a.BankingClick").click(function (event) {
+            event.preventDefault();
+            var url = "/BankAccount/Index";
+            $.get(url, {}, function (data) { $(".ContentPane").html(data) });
+        });
+
+        $("a.ReportClick").click(function (event) {
+            event.preventDefault();
+            var bDate = $("#BeginDate").val()
+            var eDate = $("#EndDate").val()
+            var url = "/BankAccount/GroupDividendReport";
+            $.get(url, {bDate: bDate.toString(), eDate:eDate.toString()}, function (data) { $(".ContentPane").html(data) });
+        });
+        */
+    });
+
+  </script>
+

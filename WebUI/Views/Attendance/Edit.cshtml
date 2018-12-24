@@ -1,0 +1,79 @@
+﻿@model Domain.attendance
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Edit", "Announcement", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center-text">Create New Announcement</h2>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>attendance</legend>
+
+        @Html.HiddenFor(model => model.attendanceID)
+
+        <div class="editor">
+            @Html.LabelFor(model => model.memberID)
+            @Html.DropDownListFor(model => model.memberID, ViewBag.MemberList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.memberID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.RollCall)
+            @Html.TextBoxFor(model => model.RollCall, new { @Value = DateTime.Now.ToShortTimeString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.RollCall)
+        </div>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.calendarID)
+            @Html.ValidationMessageFor(model => model.calendarID)
+        </div>
+
+        <div class="editor">
+             @Html.LabelFor(model => model.EnteredBy,"Entered By")
+            @Html.TextBoxFor(model => model.EnteredBy, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.EnteredBy)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.DateEntered,"Date Entered")
+            @Html.TextBoxFor(model => model.DateEntered, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.DateEntered)
+        </div>
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#memberID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the member.");
+            }
+
+        });
+    });
+</script>

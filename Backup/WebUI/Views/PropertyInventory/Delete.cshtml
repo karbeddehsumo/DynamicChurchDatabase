@@ -1,0 +1,124 @@
+﻿@model Domain.propertyinventory
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+<div id="AjaxFormPane">
+<h2>Delete event Record</h2>
+
+<h3>Are you sure you want to delete this record?</h3>
+<table>
+    <tr>
+        <th>
+            property
+        </th>
+        <th>
+            purchase Date
+        </th>
+        <th>
+            Value
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Location
+        </th>
+        <th>
+            Assigned To
+        </th>
+        <th>
+            Condition
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Tag Number
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Comment
+        </th>
+        <th>
+            Entered By
+        </th>
+        <th>
+            Date Entered
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.propertyID)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.purchaseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Value)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Location)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.AssignedTo)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Condition)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.TagNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.EnteredBy)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.DateEntered)
+        </td>
+    </tr>
+
+
+</table>
+
+@using (Ajax.BeginForm("Delete", "PropertyInventory", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    <p>
+        <input id="PropertyInventoryID" name="PropertyInventoryID" type="hidden"  value="@ViewBag.PropertyInventoryID"/>
+     <input type="submit" value="Delete" /> <input id="CancelDeleteBtn" name="CancelDeleteBtn" type="button" value="Cancel Delete"/>
+    </p>
+}
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#CancelDeleteBtn').click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+    });
+</script>

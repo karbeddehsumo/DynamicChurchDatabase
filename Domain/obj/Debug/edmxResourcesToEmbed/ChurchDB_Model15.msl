@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="ModelStoreContainer" CdmEntityContainer="Entities">
+    <EntitySetMapping Name="C__MigrationHistory">
+      <EntityTypeMapping TypeName="Model.C__MigrationHistory">
+        <MappingFragment StoreEntitySet="__MigrationHistory">
+          <ScalarProperty Name="MigrationId" ColumnName="MigrationId" />
+          <ScalarProperty Name="Model" ColumnName="Model" />
+          <ScalarProperty Name="ProductVersion" ColumnName="ProductVersion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="budgets">
+      <EntityTypeMapping TypeName="Model.budget">
+        <MappingFragment StoreEntitySet="budgets">
+          <ScalarProperty Name="budgetID" ColumnName="budgetID" />
+          <ScalarProperty Name="eventID" ColumnName="eventID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="DueDate" ColumnName="DueDate" />
+          <ScalarProperty Name="EstimatedAmount" ColumnName="EstimatedAmount" />
+          <ScalarProperty Name="ActualAmount" ColumnName="ActualAmount" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="constants">
+      <EntityTypeMapping TypeName="Model.constant">
+        <MappingFragment StoreEntitySet="constants">
+          <ScalarProperty Name="constantID" ColumnName="constantID" />
+          <ScalarProperty Name="Category" ColumnName="Category" />
+          <ScalarProperty Name="ConstantName" ColumnName="ConstantName" />
+          <ScalarProperty Name="Value1" ColumnName="Value1" />
+          <ScalarProperty Name="Value2" ColumnName="Value2" />
+          <ScalarProperty Name="Value3" ColumnName="Value3" />
+          <ScalarProperty Name="SortOrder" ColumnName="SortOrder" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="expenses">
+      <EntityTypeMapping TypeName="Model.expens">
+        <MappingFragment StoreEntitySet="expenses">
+          <ScalarProperty Name="expenseID" ColumnName="expenseID" />
+          <ScalarProperty Name="subCategoryID" ColumnName="subCategoryID" />
+          <ScalarProperty Name="bankAccountID" ColumnName="bankAccountID" />
+          <ScalarProperty Name="Payee" ColumnName="Payee" />
+          <ScalarProperty Name="PayeeID" ColumnName="PayeeID" />
+          <ScalarProperty Name="ExpenseDate" ColumnName="ExpenseDate" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="CheckNumber" ColumnName="CheckNumber" />
+          <ScalarProperty Name="Reconcile" ColumnName="Reconcile" />
+          <ScalarProperty Name="MinistryID" ColumnName="MinistryID" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="listitems">
+      <EntityTypeMapping TypeName="Model.listitem">
+        <MappingFragment StoreEntitySet="listitems">
+          <ScalarProperty Name="listItemID" ColumnName="listItemID" />
+          <ScalarProperty Name="listTableID" ColumnName="listTableID" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Value1" ColumnName="Value1" />
+          <ScalarProperty Name="Value2" ColumnName="Value2" />
+          <ScalarProperty Name="Value3" ColumnName="Value3" />
+          <ScalarProperty Name="Value4" ColumnName="Value4" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="listtables">
+      <EntityTypeMapping TypeName="Model.listtable">
+        <MappingFragment StoreEntitySet="listtables">
+          <ScalarProperty Name="listTableID" ColumnName="listTableID" />
+          <ScalarProperty Name="ministryID" ColumnName="ministryID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="ListType" ColumnName="ListType" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="meetingagendas">
+      <EntityTypeMapping TypeName="Model.meetingagenda">
+        <MappingFragment StoreEntitySet="meetingagendas">
+          <ScalarProperty Name="meetingAgendaID" ColumnName="meetingAgendaID" />
+          <ScalarProperty Name="meetingID" ColumnName="meetingID" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="meetingnotes">
+      <EntityTypeMapping TypeName="Model.meetingnote">
+        <MappingFragment StoreEntitySet="meetingnotes">
+          <ScalarProperty Name="meetingNoteID" ColumnName="meetingNoteID" />
+          <ScalarProperty Name="MeetingAgendaID" ColumnName="MeetingAgendaID" />
+          <ScalarProperty Name="Note" ColumnName="Note" />
+          <ScalarProperty Name="NoteDate" ColumnName="NoteDate" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="pledges">
+      <EntityTypeMapping TypeName="Model.pledge">
+        <MappingFragment StoreEntitySet="pledges">
+          <ScalarProperty Name="pledgeID" ColumnName="pledgeID" />
+          <ScalarProperty Name="memberID" ColumnName="memberID" />
+          <ScalarProperty Name="Type" ColumnName="Type" />
+          <ScalarProperty Name="FundName" ColumnName="FundName" />
+          <ScalarProperty Name="Amount" ColumnName="Amount" />
+          <ScalarProperty Name="PledgeYear" ColumnName="PledgeYear" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="programevents">
+      <EntityTypeMapping TypeName="Model.programevent">
+        <MappingFragment StoreEntitySet="programevents">
+          <ScalarProperty Name="programEventID" ColumnName="programEventID" />
+          <ScalarProperty Name="goalID" ColumnName="goalID" />
+          <ScalarProperty Name="budgetID" ColumnName="budgetID" />
+          <ScalarProperty Name="Title" ColumnName="Title" />
+          <ScalarProperty Name="When" ColumnName="When" />
+          <ScalarProperty Name="Who" ColumnName="Who" />
+          <ScalarProperty Name="Where" ColumnName="Where" />
+          <ScalarProperty Name="What" ColumnName="What" />
+          <ScalarProperty Name="How" ColumnName="How" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="EnteredBy" ColumnName="EnteredBy" />
+          <ScalarProperty Name="DateEntered" ColumnName="DateEntered" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="saleitems">
+      <EntityTypeMapping TypeName="Model.saleitem">
+        <MappingFragment StoreEntitySet="saleitems">
+          <ScalarProperty Name="saleItemID" ColumnName="saleItemID" />
+          <ScalarProperty Name="saleID" ColumnName="saleID" />
+          <ScalarProperty Name="productID" ColumnName="productID" />
+          <ScalarProperty Name="Quantity" ColumnName="Quantity" />
+          <ScalarProperty Name="Discount" ColumnName="Discount" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

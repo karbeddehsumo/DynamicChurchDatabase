@@ -1,0 +1,26 @@
+﻿
+<div id="AttendanceList">
+    <label>List of Current Attendees</label>
+    @if (@ViewBag.AttendanceRecordCount > 0)
+    {
+    <table>
+        <tr><th>Name</th><th></th></tr>
+    @foreach (Domain.attendance a in @ViewBag.MeetingAttendees)
+    {
+        <tr>
+            <td>
+                @a.member.FullNameTitle
+            </td>
+            <td>
+               @Ajax.ActionLink("Delete", "Delete", "Attendance", new { AttandenceID = @a.attendanceID }, new AjaxOptions { HttpMethod = "Post", Confirm = "Are you sure you want to delete this record?", InsertionMode = InsertionMode.Replace, UpdateTargetId = "AttendanceList" })                
+            </td>
+        </tr>
+    }
+    </table>
+    }
+    else
+    {
+ <p>No attendance added yet!</p>   
+    }
+   
+</div>

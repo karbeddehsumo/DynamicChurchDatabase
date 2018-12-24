@@ -1,0 +1,265 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+     <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css",
+                   "~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+    <meta charset="utf-8">
+     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+
+    <link href="../../Content/DreamWeaver/css/styles.css" rel="stylesheet" type="text/css"/>
+
+    <link href='http://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet' type='text/css'>
+     <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Arvo:700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+    
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js" ></script>
+    <link rel="stylesheet" href="../../Content/Dreamweaver/FancyBox/source/jquery.fancybox.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="../../Content/Dreamweaver/FancyBox/source/jquery.fancybox.pack.js"></script>
+
+    <style>
+  .modal-header, h4, .close {
+      background-color: #5cb85c;
+      color:white !important;
+      text-align: center;
+      font-size: 30px;
+  }
+  .modal-footer {
+      background-color: #f9f9f9;
+  }
+  </style>
+    
+
+</head>
+<body id="body" >
+    <div id="wrapper" class="container">      
+<div class="row">
+        <div class="col-xs-4">
+    <a href="../Home/Index"><img src="../../Content/Dreamweaver/images/icf%20logo%20revised.jpg" width="380" height="340" /></a>
+        </div>
+<div class="col-xs-8 pager">
+    <div class="next">
+   @Html.Partial("_LogOnPartial")
+        </div>
+        </div>
+ </div>
+
+        <!-- Login Modal -->
+      <div class="modal fade center" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Login Modal content-->
+      <div class="modal-content">
+        @if (!Request.IsAuthenticated)
+        {
+            <div class="modal-header" style="padding:5px 10px;">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+              <h4><span class="glyphicon glyphicon-lock"></span> Login</h4>
+            </div>
+            <div class="modal-body" style="padding:5px 10px;">
+
+              <form role="form" action="@Url.Action("LogOnModal", "Account")" method="post" >
+                <div class="form-group">
+                  <label for="Email"><span class="glyphicon glyphicon-user"></span> Email</label>
+                  <input type="text" class="form-control" id="Email" name="Email" placeholder="Enter email">
+                </div>
+                <div class="form-group">
+                  <label for="Password"><span class="glyphicon glyphicon-eye-open"></span> Password</label>
+                  <input type="password" class="form-control" id="Password" name="Password" placeholder="Enter password">
+                </div>
+                <div class="checkbox">
+                  <label><input type="checkbox" value="" checked>Remember me</label>
+                </div>
+                  <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-off"></span> Login</button>
+              </form> 
+                 
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+              <!--<p>Not a member? <a href="#">Sign Up</a></p>-->
+              <p>Forgot <a href="#">Password?</a></p>
+            </div>
+        }
+        else
+        {
+            <div class="modal-header" style="padding:5px 10px;">
+              <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+              <h4><span class="glyphicon glyphicon-lock"></span> Log Off</h4>
+            </div>
+            <div class="modal-body" style="padding:5px 10px;">
+                <form role="form" action="@Url.Action("LogOff", "Account")" method="get" >
+                  <button type="submit" class="btn btn-success btn-block"><span class="glyphicon glyphicon-out"></span> Log off</button>
+              </form>  
+                 
+            </div>
+            <div class="modal-footer">
+              <button type="submit" class="btn btn-danger btn-default pull-right" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+               <!--<p>Not a member? <a href="#">Sign Up</a></p>-->
+            </div>            
+        }
+      </div>
+      
+    </div>
+  </div>
+
+
+        <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+        <a class="navbar-brand" href="#">ICF</a>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li class="active">@Ajax.ActionLink("Home", "Index", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "body" })</li>
+        <li>@Ajax.ActionLink("Ministries", "Ministries", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+        <li>@Ajax.ActionLink("Events", "Events", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+        <li>@Ajax.ActionLink("About Us", "About", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+        <li>@Ajax.ActionLink("Give", "Donation", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+        <li class="last">@Ajax.ActionLink("Contact Us", "Contact", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+          @if (Request.IsAuthenticated)
+          {
+        <li><a href="#" id="modalBtn"  data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Log off</a></li>
+          }
+          else
+          {
+        <li><a href="#" id="modalBtn2"  data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>              
+          }
+      </ul>
+    </div>
+  </div>
+</nav>
+        <!--
+<div id="topnav" class="row">
+    <div class="col-xs-12">
+<ul class="div.top-rounded">
+
+<li>@Ajax.ActionLink("Home", "Index", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "body" })</li>
+<li>@Ajax.ActionLink("Ministries", "Ministries", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+<li>@Ajax.ActionLink("Events", "Events", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+<li>@Ajax.ActionLink("About Us", "About", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+<li>@Ajax.ActionLink("Give", "Donation", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+<li class="last">@Ajax.ActionLink("Contact Us", "Contact", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+
+</ul>
+</div>
+    </div>
+            -->
+        <br />
+        <div class="row">
+            <div class="col-xs-12">
+<div id="HomePages" >
+    <ul>
+<li>@Ajax.ActionLink("Videos", "HowToVideos", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+<li>@Ajax.ActionLink("How to", "HowToInstructions", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+</ul>
+</div>
+                </div>
+    </div>
+
+<div id="banner"></div>
+<div id="contentwrapper">
+@RenderBody()
+</div>
+
+<div id="footer">
+<p>Copyright 2015 - All Rights Reserved - International Christian Fellowship
+3076 Humphries Drive, SW, Atlanta, GA 300354 - icfm@gmail.com - (404) 363-3300
+</p>
+<div> 
+    <a href="http://facebook.com/"><img src="../../Content/DreamWeaver/images/facebook.png" width="64" height="64" alt=""/></a>
+  <img src="../../Content/DreamWeaver/images/twitter.png" width="64" height="64" alt=""/><img src="../../Content/DreamWeaver/images/youtube.png" width="64" height="64" alt=""/>
+
+</div>
+</div>
+        </div>
+<div id="sitemap">
+    <div class=" row">
+       <div class="col-xs-12 col-sm-6 col-md-3 visible-md visible-lg">
+           <p><u>Contact Us</u></p>
+            <p>International Christian Fellowship<br />
+     P. O. Box 82801<br />
+    461 School Street<br />
+    Atlanta, GA 30354<br />
+    Phone: 404-363-3300<br />
+    Fax: 404-363-1730<br />
+    Email: icfministries@comcast.net
+           </div>
+               <div class="col-xs-12 col-sm-6 col-md-3 visible-md visible-lg">
+                   <p><u>About Us</u></p>
+                    @Ajax.ActionLink("Home", "Index", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "body" })<br />
+                    @Ajax.ActionLink("Ministries", "Ministries", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("Events", "Events", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("About Us", "About", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("Give", "Donation", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("Contact Us", "Contact", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("Staff", "DisplayStaff", "Staff", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+
+
+           </div>
+               <div class="col-xs-12 col-sm-6 col-md-3 visible-md visible-lg">
+                   <p><u>Ministries</u></p>
+                    @Ajax.ActionLink("Men", "GetMinistryByName", "Home",new{ministryName="Men"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("Women", "GetMinistryByName", "Home",new{ministryName="Women"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("Youth", "GetMinistryByName", "Home",new{ministryName="Youth"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("Children", "GetMinistryByName", "Home",new{ministryName="Children"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                     @Ajax.ActionLink("Seniors", "GetMinistryByName", "Home",new{ministryName="Seniors"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                  
+           </div>
+                       <div class="col-xs-12 col-sm-6 col-md-3 visible-md visible-lg">
+                   <p><u>Resources</u></p>
+                    @Ajax.ActionLink("Bible Studies", "GetMinistryByName", "Home",new{ministryName="Education"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "body" })<br />                  
+                    @Ajax.ActionLink("Prayer", "GetMinistryByName", "Home",new{ministryName="Prayer"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("Outreach", "GetMinistryByName", "Home",new{ministryName="Outreah"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("Evangelism", "GetMinistryByName", "Home",new{ministryName="evangelism"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+
+           </div>
+    </div>
+ </div>
+    
+         @Scripts.Render("~/bundles/jquery",
+                    "~/bundles/jqueryui",
+                    "~/bundles/jqueryval")
+         @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+ <script type="text/javascript">
+     $(document).ready(function () {
+         $("#myModal").modal('toggle');
+         $("#myModal").modal('show');
+         $("#myModal").modal('hide');
+
+           // $("#myBtn").click(function () {
+            $("#modalBtn").click(function () {
+                alert("Model Working");
+                $('#myModal').modal('show');
+            });
+            $("#modalBtn2").click(function () {
+                alert("Model Working");
+                $('#myModal').modal('show');
+            });
+        });
+    </script>
+</body>
+</html>
+
+

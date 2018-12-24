@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Domain.calendar>
+
+<div class="cycle-slideshow">
+    @foreach(var c in Model)
+    {
+        <a  href="@Url.Action("DisplayBannerCalendarEvent", "Calendar",new {calendarID=@c.calendarID})" title="@c.Description"><img alt="Image 1" width="200" src="@Url.Action("GetImageByID", "Picture",new {PictureID=@c.PictureID})" /></a>
+    }
+
+
+        </div>
+<!--
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
+<script src="http://malsup.github.com/jquery.cycle2.js"></script>
+
+    -->
+<script src="../../Scripts/ajax_googleapis.min.js"></script>
+<script src="../../Scripts/malsup.cycle2.js"></script>

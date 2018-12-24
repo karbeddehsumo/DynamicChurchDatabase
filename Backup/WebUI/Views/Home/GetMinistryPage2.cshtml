@@ -1,0 +1,148 @@
+﻿@model Domain.ministry
+
+@{
+    
+}
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+
+
+
+<div id="AllMinistriesMain" class="row">
+    <div  class="col-xs-12 col-sm-6 col-md-8">
+    <div class="panelSmall">
+    <div id="MinistryBanner" class="center TextImage">
+        <!--
+        <h2><span>@Model.MinistryName</span></h2>
+            -->
+        <img class="LargePortrait2" style="height:300px" src="@Url.Action("GetImageByID", "Picture",new {PictureID=@ViewBag.BannerID})" />
+    </div>
+@if (@ViewBag.IsPublic == false)
+{
+<div id="MinistrySubMenu" class="float-left center">
+@Ajax.ActionLink("News","LatestStories", "Story", new {ministryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MainSection" })
+@Ajax.ActionLink("Pictures","GroupSlider", "Picture", new {ministryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MainSection" })
+@Ajax.ActionLink("Videos","LatestVideo", "Video", new {ministryID=@Model.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MainSection" })
+
+@Ajax.ActionLink("Calendar","List", "Calendar", new {codeID=@Model.ministryID,SearchCode="Ministry",bDate=@ViewBag.CalendarBeginDate,eDate=@ViewBag.CalendarEndDate}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MainSection" })
+@Ajax.ActionLink("Announcements","MinistryGeneralAnnouncements", "Announcement", new {ministryID=@Model.ministryID,bDate=@ViewBag.AnnouncementBeginDate,eDate=@ViewBag.AnnouncementEndDate}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MainSection" })
+@Ajax.ActionLink("Data Tables","GetMinistryGeneralTables", "ListTable", new {ministryID=@Model.ministryID,canEdit=false}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MainSection" })
+@Ajax.ActionLink("Meetings","List", "Meeting", new {codeID=@Model.ministryID,SearchType="MinistrySearch",bDate=@ViewBag.CalendarBeginDate,eDate=@ViewBag.CalendarEndDate,canEdit=false}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MainSection" })
+
+@Ajax.ActionLink("Documents","List", "Document", new {MinistryID=@Model.ministryID,SearchType="MinistrySearch",bDate=@ViewBag.CalendarBeginDate,eDate=@ViewBag.CalendarEndDate,canEdit=false}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MainSection" })
+
+</div>
+}
+    <div id="MainSection">
+        @if (ViewBag.isCalendarBannerEvent == true)
+        {           
+            <div>
+                @if (@ViewBag.BannerEvent.picture != null){@Html.Partial("DisplayPictureLarge",(Domain.picture)@ViewBag.BannerEvent.picture)}
+                <h4>@string.Format("{0} ({1})",@ViewBag.BannerEvent.Title, @ViewBag.BannerEvent.EventTypeDesc) </h4>
+                     @string.Format("{0}",@ViewBag.BannerEvent.CalendarDate.ToString("D"))<br />
+                     @string.Format("Time: {0}-{1}",@ViewBag.BannerEvent.StartTime,@ViewBag.BannerEvent.EndTime)<br />
+                     @if (@ViewBag.BannerEvent.Location != null){@string.Format("Location: {0}",@ViewBag.BannerEvent.Location)}<br />
+    
+               @if (@ViewBag.BannerEvent.document != null)
+                {
+                    @Html.ActionLink("Document", "GetFileFromDisk", "Document", new {DocumentID=@ViewBag.BannerEvent.DocumentID},  new { target="_blank" })
+                }
+                @if(@Model.ministryID != null)
+                {
+                    @Html.Action("List", "Calendar", new {SearchCode = "Ministry",codeID=@Model.ministryID,bDate=@ViewBag.CalendarBeginDate,eDate=@ViewBag.CalendarEndDate})
+                }
+            </div>
+        }
+        else
+        {
+         if (@ViewBag.IsRental == true)
+         {
+              @Html.Action("RentalEmailDisplay", "PropertyInventory", new { ministryID = @Model.ministryID })             
+         }
+         else if (@ViewBag.IsPublic == true)
+         {
+              @Html.Action("List", "Calendar", new { codeID = @Model.ministryID, SearchCode = "Ministry", bDate = @ViewBag.CalendarBeginDate, eDate = @ViewBag.CalendarEndDate })
+         }
+         else
+         {
+             if (Model.PageStyle == "Story")
+             {
+                @Html.Action("LatestStories", "Story", new { MinistryID = @Model.ministryID })
+             }
+             else if (Model.PageStyle == "Picture")
+             {
+                @Html.Action("GroupSlider", "Picture", new { MinistryID = @Model.ministryID })
+             }
+             else if (Model.PageStyle == "Video")
+             {
+                @Html.Action("LatestVideo", "Video", new { MinistryID = @Model.ministryID })
+             }
+             else
+             {
+              @Html.Action("List", "Calendar", new { codeID = @Model.ministryID, SearchCode = "Ministry", bDate = @ViewBag.CalendarBeginDate, eDate = @ViewBag.CalendarEndDate })
+             }
+         }
+        }
+        </div>
+</div>
+</div>
+    <div id="MinistryHome" class="col-xs-12 col-sm-6 col-md-4">
+<div id="HomeMinistryList"  class="panelSmall2">
+<h4 class="smallbanner center">MINISTRIES</h4>
+   <input id="MinistryPageStyle" type="hidden" value="@Model.PageStyle" />
+    @if (@ViewBag.IsPublic == true)
+    {
+         foreach (var m in @ViewBag.PublicMinistryList)
+         {
+                 @Ajax.ActionLink((string)@m.Text, "GetMinistryPage", "Home", new { ministryID = @m.Value }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AllMinistriesMain" })
+         }      
+    }
+    else
+    {
+         foreach (var m in @ViewBag.MinistryList)
+         {
+                 @Ajax.ActionLink((string)@m.Text, "GetMinistryPage", "Home", new { ministryID = @m.Value }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AllMinistriesMain" })
+         }
+    }
+    </div>
+<div id="myCalendar" class="float-left">
+    <h4 class="smallbanner center">UPCOMING EVENTS</h4>
+    <ul  class="float-left list1">
+        
+        @foreach (var c in @ViewBag.CurrentCalendar)
+        {
+            <li><a href="#">
+                <b>@c.Title</b><br />
+                @string.Format("{0}: {1} {2}", @c.ministry.MinistryName, @c.CalendarDateTime, @c.Location)
+
+                </a></li>
+        }
+    </ul>
+        </div>
+@if ((@ViewBag.AnnouncementRecordCount > 0) && (@ViewBag.IsPublic == false))
+{
+<div id="myAnouncement" class="float-left">
+     <h4 class="smallbanner center">Announcements</h4>
+    @Html.Action("MinistryGeneralAnnouncements", "Announcement", new { ministryID = @Model.ministryID, bDate = @ViewBag.AnnouncementBeginDate, eDate = @ViewBag.AnnouncementEndDate })
+</div>
+}
+        </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+        $("#bPictureDate").datepicker();
+        $("#ePictureDate").datepicker();
+        var pageStyle = $("#MinistryPageStyle").val();
+        if (pageStyle == "Story")
+            {
+            var ministryid = $('#MinistryID').val();
+            var url = "/Picture/List";
+            $.get(url, { bDate: "1/1/2015", eDate: "1/1/2015", codeID: ministryid.toString(), SearchType: "MinistrySearch" }, function (data) { $("#MainSection").html(data) });
+        };
+
+    });
+
+ </script>

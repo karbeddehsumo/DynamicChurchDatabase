@@ -1,0 +1,73 @@
+﻿@model Domain.listtable
+
+@{
+    ViewBag.Title = "Details";
+   
+}
+
+<div id="AjaxFormPane" class="panel">
+    <h2 class="center">View Table Report</h2>
+    <div class="center" style="color:red">@TempData["message2"]</div>
+
+    <strong class="center">Select dates and search</strong><br />
+
+<div >
+    <div class="center">
+    <label>Begin Date </label>
+    <input id="bDate" type="text"  class="datepicker" value="@ViewBag.BeginDate" style="width:100px;" />
+     <label>End Date </label>
+     <input id="eDate" type="text"  class="datepicker" value="@ViewBag.EndDate" style="width:100px;" />
+         <input id="submitAllClick" name="submitAllClick" value="View All" type="submit"/><br />
+        </div>
+    <div class="center">
+        <label>Ministry</label>
+        @Html.DropDownList("MinistrySearch", ViewBag.MinistryList as SelectList,"")
+        <label>Status</label>
+        @Html.DropDownList("StatusSearch", ViewBag.StatusList as SelectList,"")
+        </div>
+</div>
+    <br />
+<div class="CalendarData">
+@Html.Action("List", "ListTable", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate })
+</div>
+
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+        $("#bDate").datepicker();
+        $("#eDate").datepicker();
+
+        $("#MinistrySearch").change(function (event) {
+            var ministryid = $('#MinistrySearch option:selected').val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/ListTable/List";
+            $("#StatusSearch").val("Select By Status...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: ministryid.toString(), SearchType: "MinistrySearch" }, function (data) { $(".CalendarData").html(data) });
+        });
+        $("#StatusSearch").change(function (event) {
+            var status = $('#StatusSearch option:selected').text();
+            var ministryid = $('#MinistrySearch option:selected').val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/ListTable/List";
+            $("#MinistrySearch").val("Select By Ministry...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), code: status.toString(), codeID2: ministryid.toString(), SearchType: "StatusSearch" }, function (data) { $(".CalendarData").html(data) });
+            
+        });
+        $(document).on("click", "#submitAllClick", function (event) {
+            var status = $('#StatusSearch option:selected').text();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/ListTable/List";
+            $("#MinistrySearch").val("Select By Ministry...");
+            $("#StatusSearch").val("Select By Status...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString()}, function (data) { $(".CalendarData").html(data) });
+
+        });
+    });
+
+ </script>

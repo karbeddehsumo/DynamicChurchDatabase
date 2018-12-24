@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Domain.budget>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div >
+<h2 id="pageTitle" class="center">Budget Center</h2>
+  
+    <div class="center">
+        @Ajax.ActionLink("Add Income Budget", "Create", "Budget", new {BudgetType="Income"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "BudgetCenterPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("Add Expense Budget", "Create", "Budget", new {BudgetType="Expense"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "BudgetCenterPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("View Budget", "Details", "Budget", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "BudgetCenterPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("View Category", "Details", "SubCategory", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "BudgetCenterPane" }, new {@id="pageSubTitle"})
+    </div>
+  </div>      
+ <div id="BudgetCenterPane" class="panel">
+     <h2 class="center">Income Budget</h2>
+    @Html.Action("IncomeBudgetList", "Budget", new {BudgetYear=@ViewBag.BudgetYear})
+     <br />
+     <h2 class="center">Expense Budget</h2>
+     @Html.Action("ExpenseBudgetList", "Budget", new {BudgetYear=@ViewBag.BudgetYear})
+ </div>

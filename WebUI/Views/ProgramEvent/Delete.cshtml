@@ -1,0 +1,32 @@
+﻿@model Domain.programevent
+
+@{
+    ViewBag.Title = "Delete";
+    
+}
+
+
+<div id="AjaxFormPane">
+<h2>Delete event Record</h2>
+
+<h3>Are you sure you want to delete this event?</h3>
+    @string.Format("{0} {1} {2}",@Model.Title,@Model.C_When.ToShortDateString(),@Model.C_Where)
+
+@using (Ajax.BeginForm("Delete", "ProgramEvent", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    <p>
+        <input id="ProgramEventID" name="ProgramEventID" type="hidden"  value="@ViewBag.ProgramEventID"/>
+     <input type="submit" value="Delete" /> <input id="CancelDeleteBtn" name="CancelDeleteBtn" type="button" value="Cancel Delete"/>
+    </p>
+}
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#CancelDeleteBtn').click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+    });
+</script>

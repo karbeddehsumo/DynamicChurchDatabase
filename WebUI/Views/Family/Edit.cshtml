@@ -1,0 +1,108 @@
+﻿@model Domain.family
+
+@{
+    ViewBag.Title = "Edit";
+}
+<link href="../../Content/themes/base/jquery.ui.datepicker.css" rel="stylesheet" />
+<div id="AjaxFormPane" class="panel">
+    <div class="center" style="color:red">@TempData["message2"]</div>
+    <h2 class="center">Edit Family</h2>
+    <div class="center">
+@using (Ajax.BeginForm("Edit", "Family", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit family record here...</legend>
+
+        @Html.HiddenFor(model => model.familyID)
+
+        <div class="editor">
+            @Html.LabelFor(model => model.FamilyName)
+            @Html.EditorFor(model => model.FamilyName)
+            @Html.ValidationMessageFor(model => model.FamilyName)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Address)
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Address2)
+            @Html.EditorFor(model => model.Address2)
+            @Html.ValidationMessageFor(model => model.Address2)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.City)
+            @Html.EditorFor(model => model.City)
+            @Html.ValidationMessageFor(model => model.City)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.State)
+            @Html.EditorFor(model => model.State)
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Zip)
+            @Html.EditorFor(model => model.Zip)
+            @Html.ValidationMessageFor(model => model.Zip)
+        </div>
+
+        <div class="editor">
+             @Html.LabelFor(model => model.Status)
+            @Html.DropDownListFor(model => model.Status, ViewBag.StatusList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.EnteredBy)
+            @Html.ValidationMessageFor(model => model.EnteredBy)
+        </div>
+
+        <div class="editor">
+           @Html.HiddenFor(model => model.DateEntered)
+            @Html.ValidationMessageFor(model => model.DateEntered)
+        </div>
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+</div>
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#FamilyName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the family name.");
+            }
+            else if ($("#Address").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the address.");
+            }
+            else if ($("#City").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the city.");
+            }
+            else if ($("#State").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the state.");
+            }
+        });
+    });
+</script>

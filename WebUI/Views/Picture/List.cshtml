@@ -1,0 +1,75 @@
+﻿@model IEnumerable<Domain.picture>
+
+@{
+    ViewBag.Title = "List";
+    
+}
+<script src="../../Scripts/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js" ></script>
+    <link rel="stylesheet" href="../../Content/Dreamweaver/FancyBox/source/jquery.fancybox.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="../../Content/Dreamweaver/FancyBox/source/jquery.fancybox.pack.js"></script>
+
+
+
+<div class="clearfix">
+@if(@ViewBag.GroupPictures == true)
+{
+<div>
+    @if (@ViewBag.HasRecentPictures == true)
+    {
+      @Html.ActionLink("Recent Pictures","GroupSlider", "Picture", new {ministryID=@ViewBag.MinistryID,GroupID=0}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "PictureListPane" })<br />
+
+    <!-- @Html.ActionLink("Recent Pictures","GroupSlider", "Picture", new {ministryID=@ViewBag.MinistryID,GroupID=0},  new { target="_blank" })<br /> -->
+    }
+    @if (@ViewBag.HasGroupPictures == true)
+    {
+        foreach (Domain.picture p in @ViewBag.GroupPictureList)
+        {
+            @Ajax.ActionLink(p.GroupDescription, "GroupSlider", "Picture", new {ministryID=p.ministryID,GroupID=p.GroupID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "PictureListPane" })
+        }
+    }
+</div>
+}
+else
+{
+
+<div  class=" clearfix">
+    @foreach(var p in @Model)
+    {
+        if (p.ImageData != null)
+        {
+            <div style="display:inline-block">
+           <a class="fancybox float-left" style="padding:4px;"  rel="GroupPic" href="@Url.Action("GetImageByID", "Picture",new {PictureID=@p.pictureID})" title="@p.Description"><img alt="Image 1" width="200" src="@Url.Action("GetImageByID", "Picture",new {PictureID=@p.pictureID})" /></a>      
+            @if (@ViewBag.Supervisor == true)
+            {
+                @Ajax.ActionLink("Delete", "Delete", "Picture", new {PictureID=p.pictureID}, new AjaxOptions {HttpMethod = "Post", Confirm = "Are you sure you want to delete this picture?", InsertionMode = InsertionMode.Replace, UpdateTargetId = "PictureListPane" })
+            }
+
+              </div>
+           
+   
+        }    
+        
+    }
+</div>
+     
+}
+</div>
+<div id="PictureListPane" class=" clearfix"></div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //$(".fancybox").fancybox();
+        $("a[rel='GroupPic']").fancybox({
+            type: "image",
+            width: '70%',
+            height: '70%'
+        });
+    });
+
+
+    $("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+
+ </script>

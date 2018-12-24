@@ -1,0 +1,131 @@
+﻿@model Domain.income
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+    <h2 class="pageSubTitle center">Edit Income</h2><br />
+    <div class="center">
+@using (Ajax.BeginForm("Edit", "Income", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit this income...</legend>
+
+        @Html.HiddenFor(model => model.Title)
+
+        @Html.HiddenFor(model => model.incomeID)
+         @Html.HiddenFor(model => model.bankAccountID)
+        @Html.HiddenFor(model => model.Status)
+
+        <div class="editor">
+            @Html.LabelFor(model => model.subCategoryID, "Fund")
+            @Html.DropDownListFor(model => model.subCategoryID, ViewBag.SubCategoryList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.subCategoryID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.IncomeDate, "Date")
+             @Html.TextBoxFor(model => model.IncomeDate, new { id = "datepicker4" })
+            @Html.ValidationMessageFor(model => model.IncomeDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.CashAmount, "Cash Amount")
+            @Html.EditorFor(model => model.CashAmount)
+            @Html.ValidationMessageFor(model => model.CashAmount)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.CheckAmount, "Check Amount")
+            @Html.EditorFor(model => model.CheckAmount)
+            @Html.ValidationMessageFor(model => model.CheckAmount)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.CoinAmount, "Coin amount")
+            @Html.EditorFor(model => model.CoinAmount)
+            @Html.ValidationMessageFor(model => model.CoinAmount)
+        </div>
+
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Comment)
+            @Html.EditorFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+        @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+
+        <p>
+            <input type="submit" value="Edit" />
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </p>
+    </fieldset>
+}
+        </div>
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker4').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#subCategoryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the fund type.");
+            }
+            else if ($("#Title").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the title.");
+            }
+            else if ($("#CashAmount").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the cash amount.");
+            }
+            else if ($("#CheckAmount").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the check amount.");
+            }
+            else if ($("#CoinAmount").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the coin amount.");
+            }
+        });
+
+        $(function () {
+            $("#CashAmount").each(function () {
+                this.value = this.value.replace(/,/g, "");
+            }).on('keyup', function () {
+                this.value = this.value.replace(/,/g, "");
+            });
+        });
+
+        $(function () {
+            $("#CheckAmount").each(function () {
+                this.value = this.value.replace(/,/g, "");
+            }).on('keyup', function () {
+                this.value = this.value.replace(/,/g, "");
+            });
+        });
+        $(function () {
+            $("#CoinAmount").each(function () {
+                this.value = this.value.replace(/,/g, "");
+            }).on('keyup', function () {
+                this.value = this.value.replace(/,/g, "");
+            });
+        });
+    });
+</script>

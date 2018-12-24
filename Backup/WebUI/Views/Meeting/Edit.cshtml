@@ -1,0 +1,142 @@
+﻿@model Domain.meeting
+
+@{
+    ViewBag.Title = "Edit";
+   
+}
+
+<div id="AjaxFormPane" >
+    <div id="FieldSetTopMenu" style="color:red">@TempData["message2"]</div>
+    <div class="center">
+@using (Html.BeginForm("Edit", "Meeting", new { }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center">Edit Meeting</h2>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit meeting here...</legend>
+
+        @Html.HiddenFor(model => model.meetingID)
+        @Html.HiddenFor(model => model.ministryID)
+
+        @Html.HiddenFor(model => model.ReturnBeginDate)
+        @Html.HiddenFor(model => model.ReturnEndDate)
+        @Html.HiddenFor(model => model.ReturnCallerType)
+        @Html.HiddenFor(model => model.ReturnSearchType)
+        @Html.HiddenFor(model => model.ReturnCodeID)
+        @Html.HiddenFor(model => model.ReturnCode)
+        @Html.HiddenFor(model => model.ReturnMethod)
+
+                <div class="editor">
+            @Html.LabelFor(model => model.Title,"Title")
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.ministryID,"Ministry")
+            @Html.TextBoxFor(model => model.ministry.MinistryName, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.ministryID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.meetingDate,"Date")
+            @Html.TextBoxFor(model => model.meetingDate, new {id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.meetingDate)
+        </div>
+
+        <div class="editor">
+             @Html.LabelFor(model => model.meetingVenue,"Venue")
+            @Html.DropDownListFor(model => model.meetingVenue, ViewBag.MeetingVenueList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.meetingVenue)
+        </div>
+
+        <div class="editor">
+           @Html.LabelFor(model => model.StartTime,"Start Time")
+            @Html.DropDownListFor(model => model.StartTime, ViewBag.TimeIncrementList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.StartTime)
+        </div>
+
+        <div class="editor">
+           @Html.LabelFor(model => model.EndTime,"End Time")
+            @Html.DropDownListFor(model => model.EndTime, ViewBag.TimeIncrementList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.EndTime)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Conductor)
+            @Html.EditorFor(model => model.Conductor)
+            @Html.ValidationMessageFor(model => model.Conductor)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.NextMeetingDate,"Next Meeting")
+            @Html.TextBoxFor(model => model.NextMeetingDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker2" })
+            @Html.ValidationMessageFor(model => model.NextMeetingDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Status)
+             @Html.DropDownListFor(model => model.Status, ViewBag.StatusList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor">
+        <label>Upload Image</label> 
+        <input id="files" type="file" name="files"  />
+            </div>
+
+         @Html.HiddenFor(model => model.EnteredBy)
+         @Html.HiddenFor(model => model.DateEntered)
+
+      <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+          <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+</div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#ministryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the ministry.");
+            }
+            else if ($('#StartTime option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the meeting start time.");
+            }
+            else if ($('#EndTime option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the meeting End time.");
+            }
+            else if ($("#meetingVenue").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the meeting venue.");
+            }
+            else if ($("#Title").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the meeting title.");
+            }
+            else if ($("#Host").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the meeting host name.");
+            }
+
+        });
+    });
+</script>

@@ -1,0 +1,40 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+            <meta name="viewport" content="width=device-width" />
+    <link href="@Url.Content("~/Content/themes/base/jquery-ui.css")" rel="stylesheet" type="text/css"/>
+
+        @content.Script("jquery-1.7.1.min.js", Url)
+    @content.Script("jquery-ui-1.8.20.min.js", Url)
+
+        @content.Script("modernizr-2.5.3.js", Url)
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#datepicker').datepicker();
+            $('#datepicker2').datepicker();
+           $("#tabs").tabs({
+                event: "mouseover"
+            });
+            
+        });
+    </script>
+        <meta charset="utf-8">
+    <link href="../../Content/DreamWeaver/css/styles.css" rel="stylesheet" type="text/css"/>
+    <link href='http://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet' type='text/css'>
+     <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400italic' rel='stylesheet' type='text/css'>
+
+</head>
+<body>
+        <div id="contentwrapper">
+            @RenderBody()
+        </div>
+            @content.Script("jquery.validate.min.js", Url)
+        @content.Script("jquery.validate.unobtrusive.min.js", Url)
+        @content.Script("myScriptFile.js", Url)
+
+        @RenderSection("scripts", required: false)
+</body>
+</html>

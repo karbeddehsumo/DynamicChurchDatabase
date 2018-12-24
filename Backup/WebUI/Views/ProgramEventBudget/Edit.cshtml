@@ -1,0 +1,130 @@
+﻿@model Domain.programeventbudget
+
+@{
+    ViewBag.Title = "Edit";
+  
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Create", "Ministry", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center-text">Create New Ministry</h2>
+    @Html.ValidationSummary(true)    <fieldset>
+        <legend>programeventbudget</legend>
+
+        @Html.HiddenFor(model => model.ProgramEventBudgetID)
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.ProgramEventID)
+            @Html.ValidationMessageFor(model => model.ProgramEventID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Title)
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Requestor,"Payee")
+            @Html.TextBoxFor(model => model.Requestor, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.Requestor)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.ProjectedTotalAmount,"Amount Received")
+            @Html.TextBoxFor(model => model.ProjectedTotalAmount, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.ProjectedTotalAmount)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.ActualTotalAmount,"Amount Spent")
+            @Html.EditorFor(model => model.ActualTotalAmount)
+            @Html.ValidationMessageFor(model => model.ActualTotalAmount)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.DueDate)
+            @Html.TextBoxFor(model => model.DueDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.DueDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.CheckNumber,"Check #")
+            @Html.EditorFor(model => model.CheckNumber)
+            @Html.ValidationMessageFor(model => model.CheckNumber)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Status)
+            @Html.DropDownListFor(model => model.Status, ViewBag.StatusList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Comment)
+            @Html.EditorFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+          <div class="editor">
+            @Html.LabelFor(model => model.EnteredBy,"Entered By")
+            @Html.TextBoxFor(model => model.EnteredBy, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.EnteredBy)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.DateEntered,"Date Entered")
+            @Html.TextBoxFor(model => model.DateEntered, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.DateEntered)
+        </div>
+
+               <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+                   <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#subCategoryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the property category.");
+            }
+            else if ($("#Title").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the property Title.");
+            }
+            else if ($("#Requestor").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the payee.");
+            }
+            else if ($("#ActualTotalAmount").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the amount spent.");
+            }
+           
+        });
+    });
+</script>
+

@@ -1,0 +1,69 @@
+﻿
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+
+@using (Ajax.BeginForm("UpdateUserRole", "Member", new { }, new AjaxOptions
+{
+    HttpMethod = "Post",
+    InsertionMode = InsertionMode.Replace,
+    UpdateTargetId = "familyroster"
+}))
+{
+    <!--
+ <div class="clearfix panel">
+
+            <div class="float-left">
+    
+                                 <label>Choose member to update role</label><br />
+                                 @Html.ListBox("MembrList", ViewBag.MemberList as SelectList,  new {@class="myListBox",size=40,selectionmode=1 })
+                             <input id="memberID" name="memberID"  type="hidden" />
+                            <input id="roleID" name="roleID"  type="hidden" />
+                </div>
+     <div class="inner-div">
+            <div class="float-left">
+                            <label>Select Role</label>
+                            @Html.DropDownList("RoleList", ViewBag.RoleList as SelectList, "")
+                         <input id="UserRoleSubmitBtn" type="submit" value="Update Member Role" title="Select member, role and update." /><br />
+                         <div id="MemberRoleListDiv" ></div>
+                    </div>
+                    </div>
+     </div>
+        -->
+    <div class="panel">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-4">
+    
+                                 <label>Choose and update role</label><br />
+                                 @Html.ListBox("MembrList", ViewBag.MemberList as SelectList,  new {@class="myListBox",size=40,selectionmode=1 })
+                             <input id="memberID" name="memberID"  type="hidden" />
+                            <input id="roleID" name="roleID"  type="hidden" />
+                </div>
+
+            <div class="col-xs-12 col-sm-12 col-md-6 col-md-offset-2">
+                            <label>Select Role</label>
+                            @Html.DropDownList("RoleList", ViewBag.RoleList as SelectList, "")
+                         <input id="UserRoleSubmitBtn" type="submit" value="Update Member Role" title="Select member, role and update." /><br />
+                         <div id="MemberRoleListDiv" ></div>
+                    </div>
+     </div>
+        </div>
+
+}
+        
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(document).on("change", "#MembrList", function (event) {
+            $("#memberID").val($(this).val());
+        });
+        $(document).on("change", "#RoleList", function (event) {
+            $("#roleID").val($(this).val());
+            var roleid = $('#RoleList option:selected').val();
+            var url = "/Member/GetMemberRoleList";
+            $.get(url, { roleID: roleid.toString() }, function (data) { $("#MemberRoleListDiv").html(data) });
+        });
+
+    });
+</script>

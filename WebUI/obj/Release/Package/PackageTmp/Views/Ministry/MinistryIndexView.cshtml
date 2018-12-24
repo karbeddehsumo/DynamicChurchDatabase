@@ -1,0 +1,89 @@
+﻿@model Domain.ministry
+
+<div id="AjaxFormPane">
+<fieldset>
+
+    <div class="display-label">MinistryName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MinistryName)
+    </div>
+
+    <div class="display-label">Description</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+    <div class="display-label">Contact</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Contact)
+    </div>
+
+    <div class="display-label">ContactEmail</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.ContactEmail)
+    </div>
+
+    <div class="display-label">PhoneNumber</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PhoneNumber)
+    </div>
+
+    <div class="display-label">BriefDescription</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.BriefDescription)
+    </div>
+
+    <div class="display-label">PageStyleID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PageStyleID)
+    </div>
+
+    <div class="display-label">Status</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Status)
+    </div>
+
+    <div class="display-label">CodeDesc</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CodeDesc)
+    </div>
+
+    <div class="display-label">StoryCreateAccess</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StoryCreateAccess)
+    </div>
+
+    <div class="display-label">PictureCreateAccess</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PictureCreateAccess)
+    </div>
+
+    <div class="display-label">VideoCreateAccess</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.VideoCreateAccess)
+    </div>
+
+    <div class="display-label">IsPublic</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.IsPublic)
+    </div>
+
+    <div class="display-label">DefaultMemberType</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DefaultMemberType)
+    </div>
+
+    <div class="display-label">EnteredBy</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EnteredBy)
+    </div>
+
+    <div class="display-label">DateEntered</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateEntered)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Back to List", "MinistryPage", new {ministryID=Model.ministryID})
+</p>
+    </div>

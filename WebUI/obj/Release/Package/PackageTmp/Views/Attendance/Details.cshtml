@@ -1,0 +1,64 @@
+﻿@model Domain.attendance
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<h2 class="center-text">View Attendance Report</h2>
+<br />
+
+<div>
+
+<div class="float-left">
+    <div style="margin-top:10px">
+        <strong class="float-left">Ministry</strong>
+        @Html.DropDownList("MinistrySearch", ViewBag.MinistryList as SelectList,"")
+    </div>
+
+    <div style="margin-top:10px">
+        <strong class="float-left">Calendar</strong>
+        @Html.DropDownList("CalendarSearch", ViewBag.CalendarList as SelectList,"")
+    </div>
+
+        <div style="margin-top:10px">
+        <strong class="float-left">Calendar</strong>
+        @Html.DropDownList("MemberSearch", ViewBag.MemberList as SelectList,"")
+    </div>
+</div>
+
+    </div>
+
+<br />
+<br />
+
+<div class="AttendanceData">
+@Html.Action("List", "Attendance", new {EventDate=@ViewBag.BeginDate})
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        $("#MinistrySearch").change(function (event) {
+            var ministryid = $('#MinistrySearch option:selected').val();
+            var url = "/Attendance/MinistryCalendar";
+            $.get(url, { ministryID: ministryid.toString() }, function (data) { $(".AttendanceData").html(data) });
+        });
+
+        $("#CalendarSearch").change(function (event) {
+            var calendarid = $('#CalendarSearch option:selected').val();
+            var url = "/Attendance/List";
+            $.get(url, { code: 'CalendarSearch', codeID: calendarid.toString() }, function (data) { $(".AttendanceData").html(data) });
+        });
+
+        $("#MemberSearch").change(function (event) {
+            var memberid = $('#MemberSearch option:selected').val();
+            var url = "/Attendance/List";
+            $.get(url, { code: 'MemberSearch', codeID: memberid.toString() }, function (data) { $(".AttendanceData").html(data) });
+        });
+    });
+
+ </script>

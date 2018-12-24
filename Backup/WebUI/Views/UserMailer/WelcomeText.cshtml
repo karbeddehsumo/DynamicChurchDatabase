@@ -1,0 +1,10 @@
+@{
+    Layout = "~/Views/UserMailer/_LayoutText.cshtml";
+}
+
+Hi @ViewBag.Name,<br />
+Welcome to @ViewBag.ChurchName website!
+Please using your phone number as the user name and this temporary password (@ViewBag.Password) to login.
+<br />
+Management<br />
+<a href="http://" + "@ViewBag.Church_URL">@ViewBag.Church_URL</a>

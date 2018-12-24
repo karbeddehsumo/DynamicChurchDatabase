@@ -1,0 +1,88 @@
+﻿
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+<div class="clearfix">
+<h2 id="pageTitle" class="center">Member Center</h2>
+
+    <div class="center">
+@Ajax.ActionLink("Add Member", "Create", "Member", new { }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AdminMemberPaneDiv" }, new { @class="buttonClick", @id="pageSubTitle"})
+@Ajax.ActionLink("Edit Member", "EditActiveMember", "Member", new { }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AdminMemberPaneDiv" }, new { @class="buttonClick", @id="pageSubTitle"})
+
+@Ajax.ActionLink("Member List", "Details", "Member", new {bdate=@ViewBag.BeginDate,edate=@ViewBag.EndDate,code="ActiveMemberSearch"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "memberTopPane" }, new { @class="buttonClick", @id="pageSubTitle" })
+<a href="#" id="ShowMemberStatusUpdateButton"class="pageSubTitle2" >Update Member Status</a>
+</div>
+   <div id="memberTopPane" class="panel float-left">
+<div id="MemberListDiv" class="float-left">
+    <span>Select to edit member record</span><br />
+@Html.ListBox("MemberList", ViewBag.MemberList as SelectList, new {@class="myListBox"})
+</div>
+<div id="AdminMemberPaneDiv" class="float-left center"></div>
+<div id="MemberListAllDiv" class="float-left">
+    <span>Select to edit member record</span><br />
+@Html.ListBox("MemberAllList", ViewBag.MemberListAll as SelectList, new {@class="myListBox",size=40,selectionmode=1 })<br />
+    <input type="button" id="ActivateStatus" value="Active"/>
+    <input type="button" id="DeActivateStatus" value="Not Active"/>
+    <div id="returnString"></div>
+</div>
+
+
+        </div>
+    </div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //select first record
+        $('#MemberList option:first-child').attr("selected", "selected");
+        //$("#MemberList option:first-child").trigger('click');
+        $("#MemberList").click();
+
+        $(document).on("change", "#MemberList", function (event) {
+            $('#MemberListAllDiv').hide();
+            $('#MemberListDiv').show();
+            $('#AdminMemberPaneDiv').show();
+            var memberid = $('#MemberList option:selected').val();
+            // var url = "/Member/AdminMemberPage";
+            var url = "/Member/Edit";
+            $.get(url, { memberID: memberid.toString() }, function (data) { $("#AdminMemberPaneDiv").html(data) });
+        });
+
+        //Edit Family
+        $('#MemberListDiv').show();
+        $('#MemberListAllDiv').hide();
+        $(document).on("click", "#ShowEditMemberButton", function (event) {
+            //close other divs
+            $('#AdminMemberPaneDiv').hide();
+            $('#MemberListDiv').hide();
+            $('#MemberListAllDiv').hide();
+
+            $("#MemberListDiv").show();
+        });
+
+        $('.buttonClick').click(function () {
+            $('#AdminMemberPaneDiv').show();
+            $('#MemberListDiv').hide();
+            $('#MemberListAllDiv').hide();
+        });
+
+        $(document).on("click", "#ShowMemberStatusUpdateButton", function (event) {
+            //close other divs
+            $('#AdminMemberPaneDiv').hide();
+            $('#MemberListDiv').hide();
+            $('#MemberListAllDiv').hide();
+
+            $("#MemberListAllDiv").show();
+        });
+
+        $(document).on("click", "#ActivateStatus", function (event) {
+            var memberid = $('#MemberAllList option:selected').val();
+            var url = "/Member/UpdateStatus";
+            $.get(url, { memberID: memberid.toString(), status: "Active" }, function (data) { $("#returnString").html(data) });
+        });
+
+        $(document).on("click", "#DeActivateStatus", function (event) {
+            var memberid = $('#MemberAllList option:selected').val();
+            var url = "/Member/UpdateStatus";
+            $.get(url, { memberID: memberid.toString(), status: "Inactive" }, function (data) { $("#returnString").html(data) });
+        });
+    });
+
+ </script>

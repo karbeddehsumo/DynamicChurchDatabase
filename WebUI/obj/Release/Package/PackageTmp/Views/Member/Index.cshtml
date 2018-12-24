@@ -1,0 +1,19 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div>
+<h2 id="pageTitle">Member Center</h2>
+
+    <div class="center">
+        @Ajax.ActionLink("Add Member", "Create", "Member", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("View Member", "Details", "Member", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("View Family", "List", "Family", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" }, new {@id="pageSubTitle"})
+    </div>
+
+<div id="RightPane" class="center">    
+@Html.Action("List", "Member", new {bdate=@ViewBag.BeginDate,edate=@ViewBag.EndDate,code="ActiveMemberSearch" })
+</div>
+    </div>

@@ -1,0 +1,26 @@
+﻿@model Domain.category
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Views/Shared/Layout2.cshtml";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>category</legend>
+
+    <div class="display-label">CategoryName</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CategoryName)
+    </div>
+
+    <div class="display-label">Status</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Status)
+    </div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.categoryID }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

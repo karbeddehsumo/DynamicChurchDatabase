@@ -1,0 +1,91 @@
+﻿@model Domain.responsibility
+
+@{
+    ViewBag.Title = "Create";
+  
+}
+
+<div id="AjaxFormPane" class="panel">
+    <h2 class="center">Add Responsiblilty</h2>
+    <div class="center-" style="color:red">@TempData["message2"]</div>
+
+    <div class="center">
+@using (Ajax.BeginForm("Create", "Responsibility", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+   
+    @Html.ValidationSummary(true)    
+        <fieldset>
+        <legend>Add staff responsibility here...</legend>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.staffID)
+            @Html.ValidationMessageFor(model => model.staffID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.DateCreated,"Date")
+            @Html.TextBoxFor(model => model.DateCreated, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.DateCreated)
+        </div>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+                        <div class="editor">
+            @Html.LabelFor(model => model.BriefDescription)
+            @Html.EditorFor(model => model.BriefDescription)
+            @Html.ValidationMessageFor(model => model.BriefDescription)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.FullDescription)
+            @Html.EditorFor(model => model.FullDescription)
+            @Html.ValidationMessageFor(model => model.FullDescription)
+        </div>
+
+
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Title)
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+            @Html.HiddenFor(model => model.EnteredBy)
+            @Html.HiddenFor(model => model.DateEntered)
+
+               <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+</div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#Title").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the title of the responsibility.");
+            }
+            else if ($("#Description").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the descrption of the responsibility.");
+            }
+        });
+    });
+</script>

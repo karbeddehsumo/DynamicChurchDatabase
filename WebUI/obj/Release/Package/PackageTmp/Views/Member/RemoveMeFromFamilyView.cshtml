@@ -1,0 +1,48 @@
+﻿<script src="../../Scripts/jquery-ui-1.8.20.min.js"></script>
+<link href="../../Content/themes/base/jquery.ui.datepicker.css" rel="stylesheet" />
+
+    @using (Ajax.BeginForm("RemoveMeFromFamily", "Family", new { }, new AjaxOptions
+    {
+        HttpMethod = "Post",
+        InsertionMode = InsertionMode.Replace,
+        UpdateTargetId = "familyroster"
+    }))
+    {
+                    <fieldset>
+                                 <legend>Create My Own Family Record</legend><br />
+         <input id="memberID" name="memberID"  type="hidden" value="@ViewBag.MemberID"/>
+        <div class="editor">
+        <label>Address</label>
+        <input id="Address" name="Address"  type="text"/><br />
+            </div>
+        <div class="editor">
+        <label>Address2</label>
+        <input id="Address2" name="Address2"  type="text"/><br />
+             </div>
+        <div class="editor">
+        <label>City</label>
+        <input id="City" name="City"  type="text"/><br />
+             </div>
+        <div class="editor">
+        <label>State</label>
+        <input id="State" name="State"  type="text"/><br />
+             </div>
+        <div class="editor">
+        <label>Zip</label>
+        <input id="Zip" name="Zip"  type="text"/>
+             </div>
+        <div class="float-right">
+    <input id="RemoveMeFromFamilySubmitBtn" type="submit" value="Add" />
+            </div>
+</fieldset>
+    }
+        
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $(document).on("click", "#RemoveMeFromFamilySubmitBtn", function (event) {
+            $("#RevmoveMeFromFamilyDiv").hide();
+        });
+    });
+</script>

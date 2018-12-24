@@ -1,0 +1,80 @@
+﻿@model Domain.calendar
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<h2>View Calendar Report</h2>
+
+
+
+        <label>Begin Date </label>
+    <input id="bDateCalendar" type="text"  class="datepicker" value="@ViewBag.BeginDate" style="width:100px;" />
+
+    
+         <label>End Date </label>
+     <input id="eDateCalendar" type="text"  class="datepicker" value="@ViewBag.EndDate" style="width:100px;" /><br />
+
+        @Html.DropDownList("MinistrySearch", ViewBag.MinistryList as SelectList,"Select By Ministry")
+
+        @Html.DropDownList("StatusSearch", ViewBag.StatusList as SelectList,"Select By Status")
+
+        @Html.DropDownList("ActivitySearch", ViewBag.MinistryActivityList as SelectList,"Select By Event")
+
+<input id="submitAllClick" name="submitAllClick" value="View All" type="submit"/>
+
+
+<div class="CalendarData">
+@Html.Action("ListAdmin", "Calendar", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate })
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#bDateCalendar").datepicker();
+        $("#eDateCalendar").datepicker();
+
+        
+
+        // $("#MinistrySearch").change(function (event) {
+        $(document).on("change", "#MinistrySearch", function (event) {
+            var ministryid = $('#MinistrySearch option:selected').val();
+            var bdate = $("#bDateCalendar").val();
+            var edate = $("#eDateCalendar").val();
+            var url = "/Calendar/ListAdmin";
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: ministryid.toString(), SearchType: "MinistrySearch" }, function (data) { $(".CalendarData").html(data) });
+        });
+        // $("#StatusSearch").change(function (event) {
+        $(document).on("change", "#StatusSearch", function (event) {
+            var status = $('#StatusSearch option:selected').val();
+            var bdate = $("#bDateCalendar").val();
+            var edate = $("#eDateCalendar").val();
+            var url = "/Calendar/ListAdmin";
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: status.toString(), SearchType: "StatusSearch" }, function (data) { $(".CalendarData").html(data) });
+            
+        });
+        // $("#MinistryActivitySearch").change(function (event) {
+        $(document).on("change", "#ActivitySearch", function (event) {
+            var ActivityName = $('#ActivitySearch option:selected').Text();
+            var bdate = $("#bDateCalendar").val();
+            var edate = $("#eDateCalendar").val();
+            var url = "/Calendar/ListAdmin";
+            alert("Event Selected");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeName: ActivityName.toString(), SearchType: "EventTypeSearch" }, function (data) { $(".CalendarData").html(data) });
+
+        });
+
+        $(document).on("click", "#submitAllClick", function (event) {
+            var bdate = $("#bDateCalendar").val();
+            var edate = $("#eDateCalendar").val();
+            var url = "/Calendar/ListAdmin";
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), SearchType: "" }, function (data) { $(".CalendarData").html(data) });
+
+        });
+
+
+    });
+
+ </script>

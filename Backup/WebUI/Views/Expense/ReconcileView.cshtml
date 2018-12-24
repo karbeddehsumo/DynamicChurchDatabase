@@ -1,0 +1,23 @@
+﻿
+<div class="panel">
+<h2 class="center">Bank Reconcile</h2>
+<div class="editor center">
+    <label>Bank Account</label>
+    @Html.DropDownList("BankListClick",ViewBag.BankAccountList as SelectList,"Select Bank Account...")
+       
+</div>
+<br />
+<div id="ReconcileViewPane" class="center"></div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#BankListClick").change(function (event) {
+            var bankid = $('#BankListClick option:selected').val()
+            var url = "/Expense/ReconcileCheck";
+            $.get(url, { bankID: bankid.toString(), flag: false }, function (data) { $("#ReconcileViewPane").html(data) });
+        });
+
+    });
+</script>

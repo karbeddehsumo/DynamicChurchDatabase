@@ -1,0 +1,175 @@
+﻿@model Domain.listheader
+
+@{
+    ViewBag.Title = "Create";
+    
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Create", "ListHeader", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center-text">Create New Header</h2>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Add table header here...</legend>
+
+        @Html.HiddenFor(model => model.ministryID)
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.ListTableID)
+            @Html.ValidationMessageFor(model => model.ListTableID)
+        </div>
+
+          <div class="editor">
+            @Html.LabelFor(model => model.TableName,"Table Name")
+            @Html.EditorFor(model => model.TableName) 
+            @Html.ValidationMessageFor(model => model.TableName)
+        </div>
+        <p>Enter column name and datatype</p>
+        <div class="editor">
+            @Html.LabelFor(model => model.Type1,"Column 1")
+            @Html.EditorFor(model => model.FieldName1)
+            @Html.ValidationMessageFor(model => model.Type1)
+        </div>
+        <div class="editor">
+            <Label>Data Type</Label>
+            @Html.DropDownListFor(model => model.Type1, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type2,"Comumn 2")
+            @Html.EditorFor(model => model.FieldName2)
+            @Html.ValidationMessageFor(model => model.Type2)
+        </div>
+
+        <div class="editor">
+            <Label>Data Type</Label>
+            @Html.DropDownListFor(model => model.Type2, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type3,"Column3")
+            @Html.EditorFor(model => model.FieldName3)
+            @Html.ValidationMessageFor(model => model.Type3)
+        </div>
+
+        <div class="editor">
+            <Label>Data Type</Label>
+            @Html.DropDownListFor(model => model.Type3, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type4,"Column 4")
+            @Html.EditorFor(model => model.FieldName4)
+            @Html.ValidationMessageFor(model => model.Type4)
+        </div>
+
+        <div class="editor">
+            <Label>Data Type</Label>
+            @Html.DropDownListFor(model => model.Type4, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type5,"Column 5")
+            @Html.EditorFor(model => model.FieldName5)
+            @Html.ValidationMessageFor(model => model.Type5)
+        </div>
+
+        <div class="editor">
+            <Label>Data Type</Label>
+            @Html.DropDownListFor(model => model.Type5, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type6,"Column 6")
+            @Html.EditorFor(model => model.FieldName6)
+            @Html.ValidationMessageFor(model => model.Type6)
+        </div>
+
+        <div class="editor">
+            <Label>Data Type</Label>
+            @Html.DropDownListFor(model => model.Type6, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type7,"Column 7")
+            @Html.EditorFor(model => model.FieldName7)
+            @Html.ValidationMessageFor(model => model.Type7)
+        </div>
+
+        <div class="editor">
+            <Label>Data Type</Label>
+            @Html.DropDownListFor(model => model.Type7, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type8,"Column 8")
+            @Html.EditorFor(model => model.FieldName8)
+            @Html.ValidationMessageFor(model => model.Type8)
+        </div>
+
+        <div class="editor">
+            <Label>Data Type</Label>
+            @Html.DropDownListFor(model => model.Type8, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type9,"Column 9")
+            @Html.EditorFor(model => model.FieldName9)
+            @Html.ValidationMessageFor(model => model.Type9)
+        </div>
+
+        <div class="editor">
+            <Label>Data Type</Label>
+            @Html.DropDownListFor(model => model.Type9, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type10,"Column 10")
+            @Html.EditorFor(model => model.FieldName10)
+            @Html.ValidationMessageFor(model => model.Type10)
+        </div>
+
+        <div class="editor">
+            <Label>Data Type</Label>
+            @Html.DropDownListFor(model => model.Type10, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+        </div>
+
+            @Html.HiddenFor(model => model.EnteredBy)
+            @Html.HiddenFor(model => model.DateEntered)
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#TableName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the table name.");
+            }
+        });
+    });
+</script>

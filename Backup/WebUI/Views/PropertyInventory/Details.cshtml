@@ -1,0 +1,73 @@
+﻿@model Domain.propertyinventory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+<div id="AjaxFormPane" class="panel">
+    <h2 class="center">Property List</h2>
+        <p class="center">Select your search</p>
+<div class="center">
+    @Html.DropDownList("AssignedToSearch", ViewBag.AssignedToList as SelectList, "Choose Assigned To...")
+    @Html.DropDownList("LocationSearch", ViewBag.PropertyLocationList as SelectList, "Choose Location...")<br />
+    @Html.DropDownList("ConditionSearch", ViewBag.PropertyConditionList as SelectList, "Choose Condition...")
+     @Html.DropDownList("StatusSearch", ViewBag.StatusList as SelectList, "Choose Status...")
+</div>
+
+    <div id="DataPane" >
+    @Html.Action("List", "PropertyInventory", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+</div>
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(document).on("change", "#AssignedToSearch", function (event) {
+            event.preventDefault();
+            var code = $("#AssignedToSearch option:selected").text();
+            var url = "/PropertyInventory/List";
+            $("#LocationSearch").val("Choose Location...");
+            $("#ConditionSearch").val("Choose Condition...");
+            $("#StatusSearch").val("Choose Status...");
+
+            $.get(url, { bDate: "1/1/2015", eDate: "1/1/2015", SearchType: "AssignedToSearch", code: code.toString() }, function (data) { $("#DataPane").html(data) });
+
+        });
+
+
+        $(document).on("change", "#LocationSearch", function (event) {
+            event.preventDefault();
+            var code = $("#LocationSearch option:selected").text();
+            var url = "/PropertyInventory/List";
+            $("#AssignedToSearch").val("Choose Assigned To...");
+            $("#ConditionSearch").val("Choose Condition...");
+            $("#StatusSearch").val("Choose Status...");
+            $.get(url, { bDate: "1/1/2015", eDate: "1/1/2015", SearchType: "LocationSearch", code: code.toString() }, function (data) { $("#DataPane").html(data) });
+
+        });
+
+
+        $(document).on("change", "#ConditionSearch", function (event) {
+            event.preventDefault();
+            var code = $("#ConditionSearch option:selected").text();
+            var url = "/PropertyInventory/List";
+            $("#AssignedToSearch").val("Choose Assigned To...");
+            $("#LocationSearch").val("Choose Location...");
+            $("#StatusSearch").val("Choose Status...");
+            $.get(url, { bDate: "1/1/2015", eDate: "1/1/2015", SearchType: "ConditionSearch", code: code.toString() }, function (data) { $("#DataPane").html(data) });
+
+        });
+
+        $(document).on("change", "#StatusSearch", function (event) {
+            event.preventDefault();
+            var code = $("#StatusSearch option:selected").text();
+            var url = "/PropertyInventory/List";
+            $("#AssignedToSearch").val("Choose Assigned To...");
+            $("#LocationSearch").val("Choose Location...");
+            $("#ConditionSearch").val("Choose Condition...");
+            $.get(url, { bDate: "1/1/2015", eDate: "1/1/2015", SearchType: "StatusSearch", code: code.toString() }, function (data) { $("#DataPane").html(data) });
+
+        });
+    });
+</script>

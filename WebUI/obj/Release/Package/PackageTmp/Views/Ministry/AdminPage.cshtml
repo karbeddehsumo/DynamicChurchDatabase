@@ -1,0 +1,54 @@
+﻿@model WebUI.Models.LogOnModel
+
+@{
+    ViewBag.Title = "AdminPage";
+}
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+
+<div>
+<h2 id="pageTitle" class="center">Ministry Center</h2>
+    <div class="center">
+@Ajax.ActionLink("Add Ministry", "Create", "Ministry", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AdminMinistryPane" }, new {@id="pageSubTitle",@title="Add new ministry"})
+@Ajax.ActionLink("Edit Ministries", "Details", "Ministry", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AdminMinistryPane" }, new {@id="pageSubTitle",@title="Edit ministry data"})
+@Ajax.ActionLink("View Goals", "Index", "Goal", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AdminMinistryPane" }, new {@id="pageSubTitle",@title="View ministry goals"})
+@Ajax.ActionLink("View Meetings", "Index", "Meeting", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AdminMinistryPane" }, new {@id="pageSubTitle",@title="View ministry meetings"})
+@Ajax.ActionLink("View Announcement", "Index", "Announcement", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AdminMinistryPane" }, new {@id="pageSubTitle",@title="View ministry announcements"})
+        </div>
+        </div>
+<div id="AdminMinistryPane" class="panel center">
+
+    @if(@ViewBag.Page == "Meeting")
+    {      
+        @Html.Action("Index","Meeting")
+    }
+    else if(@ViewBag.Page == "Announcement")
+    {
+        @Html.Action("Index","Announcement")
+    }
+    else
+    {
+        <span>Select to view ministry</span><br />
+        @Html.ListBox("MinistryList", ViewBag.MinistryList as SelectList, new {@class="myListBox",size=40,selectionmode=1 })
+    }
+</div>
+<div id="AjaxFormPanex"></div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(document).on("change", "#MinistryList", function (event) {
+            var ministryid = $('#MinistryList option:selected').val();
+            var url = "/Ministry/MinistryPage";
+            window.location.assign(url + "?ministryID=" + ministryid.toString());
+        });
+/*
+        $(document).on("change", "#MinistryList", function (event) {
+            var ministryid = $('#MinistryList option:selected').val();
+            var url = "/Ministry/MinistryPage";
+            $.get(url, { ministryID: ministryid.toString() }, function (data) { $("#AjaxFormPanex").html(data) });
+        });        
+*/
+    });
+
+ </script>

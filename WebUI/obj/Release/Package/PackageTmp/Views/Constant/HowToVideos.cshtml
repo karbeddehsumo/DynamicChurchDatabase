@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "HowToVideos";
+}
+
+<div class="panel">
+<h2 class="center">Watch How-To Videos</h2>
+   
+    <div>
+<h2 id="pageTitle">Video Center</h2>
+        <p class="center">Select video type</p>
+    <div class="center">
+        @Ajax.ActionLink("Membership", "GetVideos", "Constant", new {VideoType="Membership"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" }, new {@id="pageSubTitle", @style="color:maroon"})
+        @Ajax.ActionLink("Admin", "GetVideos", "Constant", new {VideoType="Admin"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" }, new {@id="pageSubTitle", @style="color:maroon"})
+        @Ajax.ActionLink("Finance", "GetVideos", "Constant", new {VideoType="Finance"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" }, new {@id="pageSubTitle", @style="color:maroon"})
+        @Ajax.ActionLink("Misc", "GetVideos", "Constant", new {VideoType="Misc"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" }, new {@id="pageSubTitle", @style="color:maroon"})
+
+    </div>
+
+<div id="RightPane" class="center">    
+@Html.Action("GetVideos", "Constant", new {VideoType="Misc"})
+</div>
+    </div>
+    </div>
+

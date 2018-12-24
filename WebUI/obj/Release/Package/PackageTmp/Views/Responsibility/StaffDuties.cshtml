@@ -1,0 +1,10 @@
+﻿@model IEnumerable<Domain.responsibility>
+
+<div id="StaffDutiesPane"></div>
+@foreach(Domain.responsibility r in @Model)
+{
+   @Html.Action("Edit", "Responsibility", new {ResponsibilityID=@r.responsibilityID})
+
+    <br />
+}
+

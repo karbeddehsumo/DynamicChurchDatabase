@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Domain.story>
+
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+<div id="myPane" class="center">
+    @if (((ViewBag.Supervisor == true) || (ViewBag.Supervisor2 == true)) && (@ViewBag.Requestor == "Officer"))
+    {
+        @Ajax.ActionLink("Add News", "Create", "Story", new {MinistryID=@ViewBag.MinistryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane"}, new {@id="pageSubTitle"})
+    }
+@foreach(Domain.story s in @Model)
+{
+        if (s.picture != null){@Html.Partial("DisplayPictureLarge",s.picture)}
+        <p class="StoryTitle center">@s.Header</p>
+        <p class="story"><b>@string.Format("Date: {0} ",@s.StoryDate.ToString("dddd d MMM yyyy"))</b></p>
+        <p class="story">@s.StoryLine<span>&#8224;</span>
+            
+    @if ((ViewBag.Supervisor == true) || (ViewBag.Supervisor2 == true))
+    {
+        @Ajax.ActionLink("Edit", "Edit", "Story", new {StoryID=@s.StoryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane"})
+    }
+
+            
+   </p>
+    <hr />
+
+}
+  
+    </div>  
+
+

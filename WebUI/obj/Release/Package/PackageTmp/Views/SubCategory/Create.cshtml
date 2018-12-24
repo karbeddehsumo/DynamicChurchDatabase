@@ -1,0 +1,116 @@
+﻿@model Domain.subcategory
+
+@{
+    ViewBag.Title = "Create";
+    
+}
+
+<div id="AjaxFormPane">
+    <div class="center" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Create", "SubCategory", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Create New Category</legend>
+        <div class="editor">
+            @Html.LabelFor(model => model.SubCategoryName, "Parent Category*")
+            @Html.DropDownList("SubCategoryParentID", ViewBag.SubCategoryList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.SubCategoryName)
+        </div>
+        <br />
+        <div class="editor">
+            @Html.LabelFor(model => model.SubCategoryName,"Category")
+            @Html.EditorFor(model => model.SubCategoryName)
+            @Html.ValidationMessageFor(model => model.SubCategoryName)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.ShortTitle,"Short Title")
+            @Html.EditorFor(model => model.ShortTitle)
+            @Html.ValidationMessageFor(model => model.ShortTitle)
+        </div>
+
+        <div class="editor">
+            @Html.Label("Category Type")
+            @Html.TextBoxFor(model => model.CategoryType, new { @readonly = "readonly" })
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.bankAccountID,"Bank Account")
+            @Html.DropDownListFor(model => model.bankAccountID, ViewBag.BankAccountList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.bankAccountID)
+        </div>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+        @Html.HiddenFor(model => model.categoryID)
+        @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+
+        <p>* Select parent category when creating child category</p>
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $("#ButtonClick").click(function (event) {
+            if ($("#SubCategoryParentID").val().length == 0) {
+                if ($('#categoryID option:selected').val().length == 0) {
+                    event.preventDefault();
+                    alert("Please select the category type.");
+                }
+                else if ($('#bankAccountID option:selected').val().length == 0) {
+                    event.preventDefault();
+                    alert("Please select the bank account.");
+                }
+            }
+            else if ($("#SubCategoryName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the category name.");
+            }
+            else if ($("#ShortTitle").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the category short title.");
+            }
+        });
+
+        $("#SubCategoryParentID").change(function (event) {
+            if ($("#SubCategoryParentID").val().length > 0) {
+              //  event.preventDefault();
+                $("#categoryID").val(""); //set to null
+                $("#bankAccountID").val("");
+                $('#categoryID').attr("readonly", true);
+                $('#bankAccountID').attr("readonly", true);
+
+                $('#categoryID').attr("disabled", true);
+                $('#bankAccountID').attr("disabled", true);
+            }
+            else
+            {
+                $('#categoryID').attr("readonly", false);
+                $('#bankAccountID').attr("readonly", false);
+
+                $('#categoryID').attr("disabled", false);
+                $('#bankAccountID').attr("disabled", false);
+            }
+        });
+    });
+</script>
+

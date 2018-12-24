@@ -1,0 +1,26 @@
+﻿@model IEnumerable<Domain.visitor>
+
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+
+<div>
+<h2 class="center">Visitor Center</h2>
+    <div class="center">
+        @Ajax.ActionLink("Add Visitor", "Create", "Visitor", new {ministryID=@ViewBag.MinistryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("View Visitor", "Details", "Visitor", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new {@id="pageSubTitle"})
+        </div>
+<div id="AjaxFormPane">
+@Html.Action("Details", "Visitor")
+</div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+    });
+
+ </script>

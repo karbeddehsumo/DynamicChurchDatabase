@@ -1,0 +1,13 @@
+﻿@model Domain.constant
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2 class="center-text">Constant</h2>
+        @Ajax.ActionLink("New Constant", "Create", "Constant", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ConstantPane" })
+        @Ajax.ActionLink("View Constants", "List", "Constant", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ConstantPane" })
+
+<div id="ConstantPane">
+@Html.Action("Details","Constant")
+</div>

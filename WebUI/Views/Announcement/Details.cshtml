@@ -1,0 +1,71 @@
+﻿@model Domain.announcement
+
+@{
+    ViewBag.Title = "Details";
+}
+<script src="../../Scripts/jquery-ui-1.8.20.min.js"></script>
+
+
+<div id="AjaxFormPane" class="panel">
+    <div class="center">
+         <strong>Select Dates and search</strong><br />
+        <label>Begin Date </label>
+    <input id="bDate" type="text"  class="datepicker" value="@ViewBag.BeginDate" style="width:100px;" />
+         <label>End Date </label>
+     <input id="eDate" type="text"  class="datepicker" value="@ViewBag.EndDate"  style="width:100px;" />
+ 
+        <button id="DateSearch" name="DateSearch" type="button" class="btn btn-default">Close</button>
+        <input id="CallerType" name="CallerType" type="hidden" value="@ViewBag.CallerType" />
+        @if (@ViewBag.CallerType == "Ministry")
+        {
+            <!--
+             @Html.DropDownList("MinistrySearch", ViewBag.MinistryList as SelectList)
+                -->
+        }
+        else
+        {
+            @Html.DropDownList("MinistrySearch", ViewBag.MinistryList as SelectList,"Select By Ministry...")
+        }
+
+        <input id="ministryID" type="hidden" value="@ViewBag.MinistryID"/>
+        </div>
+    <br />
+<div class="AnnouncementeData">
+     @if (@ViewBag.CallerType == "Ministry")
+        {
+         @Html.Action("List", "Announcement", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate,SearchCode="MinistrySearch",codeID=@ViewBag.MinistryID,CallerType="Ministry"})
+     }
+    else
+    {
+                 @Html.Action("List", "Announcement", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate })
+     }
+</div>
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        $("#MinistrySearch").change(function (event) {
+            var categoryid = $("#ministryID").val();//$('#MinistrySearch option:selected').val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Announcement/List";
+            $.get(url, { SearchCode: 'MinistrySearch', bDate: bdate.toString(), eDate: edate.toString(), codeID: categoryid.toString, CallerType: "Ministry" }, function (data) { $(".AnnouncementeData").html(data) });
+        });
+
+        $("#DateSearch").click(function (event) {
+            var categoryid = $("#ministryID").val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Announcement/List";
+            $("#MinistrySearch").val("Search By Ministry...");
+            //$.get(url, {bDate: bdate.toString(), eDate: edate.toString()}, function (data) { $(".AnnouncementeData").html(data) });
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: categoryid.toString(), CallerType: "Officer" }, function (data) { $(".AnnouncementeData").html(data) });
+
+        });
+
+    });
+
+ </script>

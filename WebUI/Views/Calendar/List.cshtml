@@ -1,0 +1,42 @@
+﻿@model IEnumerable<Domain.calendar>
+
+@{
+    ViewBag.Title = "List";
+}
+<div id="myPane" >
+    @if (((ViewBag.Supervisor == true) || (ViewBag.Supervisor2 == true)) && (@ViewBag.Requestor=="Officer"))
+    {
+        @Ajax.ActionLink("Add Calendar", "Create", "Calendar", new {ministryID=@ViewBag.MinistryID,CallerType="Officer"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane"}, new {@id="pageSubTitle"})
+    }
+    <br />
+    <div class="center myCalendar collapse in alert alert-warning">
+    
+
+@if (@ViewBag.RecordCount > 0)
+{
+foreach (var item in Model) 
+{
+         <strong>@string.Format("{0} ({1})",@item.Title,@item.EventTypeDesc) </strong><br />  
+             if (@item.ministry != null)
+         {
+             <p style="font-style:italic">@string.Format("Ministry: {0}",@item.ministry.MinistryName)</p>     
+         }           
+         @string.Format("{0}",@item.CalendarDate.ToString("D"))<br />
+         @string.Format("Time: {0}-{1}",@item.StartTime,@item.EndTime)<br />
+         @string.Format("Location: {0}",@item.Location)<br />
+
+    if (((ViewBag.Supervisor == true) || (ViewBag.Supervisor2 == true)) && (@ViewBag.Requestor == "Officer"))
+         {
+            @Ajax.ActionLink("Edit", "Edit", "Calendar", new {CalendarID=item.calendarID,ReturnBeginDate="1/1/2015",ReturnEndDate="1/1/2015"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane"})
+         }
+             <hr />
+
+
+ }
+
+}
+</div></div>
+
+
+
+

@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Domain.ministry>
+
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+
+<div class="cycle-slideshow">
+@foreach (var c in @Model)
+{
+    if(c.PictureID != null)
+    {
+        <a  href="@Url.Action("GetMinistryPage", "Home",new {ministryID=@c.ministryID})" title="@c.Description"><img alt="Image 1" width="200" src="@Url.Action("GetImageByID", "Picture",new {PictureID=@c.PictureID})" /></a>
+    }
+}
+
+    </div>
+
+<script src="../../Scripts/ajax_googleapis.min.js"></script>
+<script src="../../Scripts/malsup.cycle2.js"></script>

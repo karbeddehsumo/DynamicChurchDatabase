@@ -1,0 +1,3 @@
+﻿@model Domain.listtable
+
+  @Html.Action("List","ListItem", new {ListTableID=@Model.listTableID,canEdit=@ViewBag.CanEdit})

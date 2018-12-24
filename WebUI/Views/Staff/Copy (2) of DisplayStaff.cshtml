@@ -1,0 +1,61 @@
+﻿@model IEnumerable<Domain.staff>
+
+@{
+    ViewBag.Title = "DisplayStaff";
+}
+<!--
+@foreach(Domain.staff item in @Model)
+{
+    <br />
+    <div class="staffInfo clearfix">
+        <div class="Pic">
+             @if (@item.picture != null)
+            {
+                <img class="Portrait-medium" align="left" src="@Url.Action("GetImageByID", "Picture",new {PictureID=@item.picture.pictureID})" />
+                 <strong>@string.Format("{0}",@item.FullNameTitle)</strong>          
+            }
+            </div>
+        <div class="desc">
+           @if (@item.mainResponsibility != null)
+            {
+            @string.Format("{0}",@item.mainResponsibility.Title)
+          }
+
+            <p>
+            @if (@item.mainResponsibility != null)
+            {
+            @item.mainResponsibility.BriefDescription
+            }
+            </p>
+   </div>
+</div>
+}
+    -->
+<div class="panel">
+@foreach(Domain.staff item in @Model)
+{
+    <br />
+    <div class="staffInfo clearfix">
+        <div class="Pic float-left" style="width:180px">
+             @if (@item.picture != null)
+            {
+                <img class="Portrait-medium" src="@Url.Action("GetImageByID", "Picture",new {PictureID=@item.picture.pictureID})" />
+                 <strong style="font-size:small; color:black;text-align:center;">@string.Format("{0}",@item.FullNameTitle)</strong>          
+            }
+            </div>
+        <div class="desc fllat-left" style="width:300px">
+           @if (@item.mainResponsibility != null)
+            {
+            <strong>@string.Format("{0}",@item.mainResponsibility.Title)</strong>
+          }
+
+            <p>
+            @if (@item.mainResponsibility != null)
+            {
+            @item.mainResponsibility.BriefDescription
+            }
+            </p>
+   </div>
+</div>
+}
+    </div>

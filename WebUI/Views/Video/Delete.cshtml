@@ -1,0 +1,80 @@
+﻿@model Domain.video
+
+@{
+    ViewBag.Title = "Delete";
+ 
+}
+
+
+<div id="AjaxFormPane">
+<h2>Delete Video Record</h2>
+
+<h3>Are you sure you want to delete this record?</h3>
+<table>
+    <tr>
+        <th>
+            ministryID
+        </th>
+        <th>
+            VideoTitle
+        </th>
+        <th>
+            VideoDate
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            EnteredBy
+        </th>
+        <th>
+            DateEntered
+        </th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.ministryID)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.VideoTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.VideoDate)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Description)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.EnteredBy)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.DateEntered)
+        </td>
+    </tr>
+
+</table>
+@using (Ajax.BeginForm("Delete", "Video", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    <p>
+        <input id="VideoID" name="VideoID" type="hidden"  value="@ViewBag.VideoID"/>
+     <input type="submit" value="Delete" /> <input id="CancelDeleteBtn" name="CancelDeleteBtn" type="button" value="Cancel Delete"/>
+    </p>
+}
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#CancelDeleteBtn').click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+    });
+</script>

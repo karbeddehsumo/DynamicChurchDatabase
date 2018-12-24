@@ -1,0 +1,20 @@
+﻿@{
+    ViewBag.Title = "Index";
+    
+}
+
+
+
+<h2>Category & Subcategory</h2>
+
+
+<div>
+    <div>
+        @Ajax.ActionLink("New Category", "Create", "subCategory", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "SubCategoryIndexPane" })
+        @Ajax.ActionLink("View Category", "List", "SubCategory", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "SubCategoryIndexPane" })
+         @Ajax.ActionLink("Details Category", "Details", "SubCategory", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "SubCategoryIndexPane" })  
+         </div>
+ <div id="SubCategoryIndexPane">
+    @Html.Action("List","SubCategory")
+ </div>
+</div>

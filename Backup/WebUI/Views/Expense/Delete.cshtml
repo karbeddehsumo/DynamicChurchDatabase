@@ -1,0 +1,198 @@
+﻿@model Domain.expense
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<div id="AjaxFormPane">
+
+<h3>Are you sure you want to delete this record?</h3>
+<p>@string.Format("{0:c} {1} payment to {2}",@Model.Amount,@Model.subcategory.SubCategoryName,@Model.Payee)</p>
+<!--
+    <table>
+    <tr>
+        <th>
+            subCategoryID
+        </th>
+        <th>
+            bankAccountID
+        </th>
+        <th>
+            Payee
+        </th>
+        <th>
+            ExpenseDate
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            CheckNumber
+        </th>
+        <td>
+            Status
+        </td>
+        <th>
+            Reconcile
+        </th>
+        <th>
+            Comment
+        </th>
+        <th>
+            EnteredBy
+        </th>
+        <th>
+            DateEntered
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.subCategoryID)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.bankAccountID)
+        </td>
+        <td>
+           @Html.DisplayFor(model => model.Payee)
+        </td>
+
+        <td>
+            @Html.DisplayFor(model => model.ExpenseDate)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.CheckNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Reconcile)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.EnteredBy)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.DateEntered)
+        </td>
+
+    </tr>
+</table>
+    -->
+@using (Ajax.BeginForm("Delete", "Expense", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    <p>
+        <input id="ExpenseID" name="ExpenseID" type="hidden"  value="@ViewBag.ExpenseID"/>
+     <input type="submit" value="Delete" /> <input id="CancelDeleteBtn" name="CancelDeleteBtn" type="button" value="Cancel Delete"/>
+    </p>
+}
+    @Html.Action("GetCurrentBankBalance","BankBalance")
+
+<table>
+    <tr>
+        <th>Payee</th>
+        <th>Due Date</th>
+        <th>Amount</th>
+        <th>Total</th>
+    </tr>
+@foreach(Domain.bill i in  @ViewBag.PendingBills)
+{
+    <tr>
+        <td>
+        @Ajax.ActionLink(@i.PayeeName, "Create", "Expense", new {payeeID=@i.payeeID, Amount=@i.TotalAmount}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+    </td>
+        <td>
+            @i.DateDue.ToShortDateString()
+        </td>
+        <td style="text-align:right">
+            @string.Format("{0:c}",@i.AmountDue)
+        </td>
+        <td style="text-align:right">
+            @string.Format("{0:c}",@i.TotalAmount)
+        </td>
+    </tr>
+}
+    </table>
+
+<table>
+    <tr>
+
+        <th>
+            Date
+        </th>
+        <th>
+            Payee
+        </th>
+        <th>
+            Fund
+        </th>
+        <th>
+            Account
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Check
+        </th>
+        <th>
+            Comment
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+@foreach (Domain.expense item in @ViewBag.PendingExpenses)
+{
+<tr>
+        <td>
+            @item.ExpenseDate.ToShortDateString()
+        </td>
+        <td>
+            @item.Payee
+        </td>
+        <td>
+            @item.subcategory.SubCategoryName
+        </td>
+        <td>
+            @item.bankaccount.BankName
+        </td>
+           
+        <td>
+            @string.Format("{0:c}",@item.Amount)
+        </td>
+        <td>
+            @item.CheckNumber
+        </td>
+        <td>
+            @item.Comment
+        </td>
+
+                    <td>
+                    @Ajax.ActionLink("Edit", "Edit", "Expense", new {ExpenseID=item.expenseID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+            </td>
+            <td>
+                @Ajax.ActionLink("Delete", "Delete", "Expense", new {ExpenseID=item.expenseID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+            </td>
+
+    </tr> 
+}
+    </table>
+
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#CancelDeleteBtn').click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+    });
+</script>

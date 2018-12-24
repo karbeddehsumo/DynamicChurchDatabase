@@ -1,0 +1,69 @@
+﻿@model IEnumerable<Domain.ministryincome>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<div class="center">
+<div id="myTablePane">
+
+@if (@ViewBag.RecordCount > 0)
+{
+   
+<table>
+     <caption>@ViewBag.Heading</caption>
+    <tr>
+        
+        <th>
+            Fund
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Comment
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FundTitle)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td style="margin-top:10px">
+            @item.IncomeDate.ToShortDateString()
+        </td>
+        <td style="text-align:right">
+            @string.Format("{0:c}",@item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+                @Ajax.ActionLink("Edit", "Edit", "MinistryIncome", new {MinistryIncomeID=item.ministryIncomeID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myTablePane" })
+        </td>
+        <td>
+            @Ajax.ActionLink("Delete", "Delete", "MinistryIncome", new {MinistryIncomeID=item.ministryIncomeID}, new AjaxOptions { HttpMethod = "Post", Confirm = "Are you sure you want to delete this ministry income record?",  InsertionMode = InsertionMode.Replace, UpdateTargetId = "myTablePane" })
+        </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p class="center">No ministry income records found!</p>   
+}
+    </div>
+    </div>

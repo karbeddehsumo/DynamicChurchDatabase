@@ -1,0 +1,166 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+
+<div class="body">
+    <header class="mainheader">
+        
+        <nav>
+            <ul>
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Ministries</a></li>
+                <li><a href="#">Direstions</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
+        </nav>
+        <br />
+        <div class="menu">
+            <ul>
+                <li class="active"><a href="#">Home</a></li>
+                <li><a href="#">Ministries</a>
+                <ul>
+                    <li><a>Education</a></li>
+                    <li><a>Music</a></li>
+                    <li><a>Finance</a></li>
+                </ul>
+                    </li>
+                <li><a href="#">Direstions</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">About Us</a></li>
+            </ul>
+        </div>
+    </header>
+    <div class="mainContent">
+        <div class="content">
+            <article class="topcontent">
+                <header>
+                    <h2><a href="#" title="first post">God's Plan for You!</a></h2>
+                </header>
+                <footer>
+                    <p class="post-info">This post is written by Gbegbe Fumbah</p>
+                </footer>
+                <section>
+                    <p>All power is given unto me in heaven and in earth. 19 Go ye therefore, and teach all nations, 
+                        baptizing them in the name of the Father, and of the Son, and of the Holy Ghost: 20 teaching 
+                        them to observe all things whatsoever I have commanded you: and, lo, I am with you alway, 
+                        even unto the end of the world. Amen.</p>
+                </section>
+            </article>
+            <article class="bottomcontent">
+                <header>
+                    <h2><a href="#" title="first post">God's Love</a></h2>
+                </header>
+                <footer>
+                    <p class="post-info">Message of Jesus Christ the son of God...</p>
+                </footer>
+                <section>
+                    <p>John 3:16King James Version (KJV)
+                    For God so loved the world, that he gave his only begotten Son, that whosoever believeth in him should not perish, but have </p>
+                </section>
+            </article>
+        </div>
+
+    </div>
+    <div class="top-sidebar">
+        <article>
+            <h2>Upcoming Events</h2>
+            <ul>
+                <li>11-08 - Thanksgiving Day Feeding</li>
+                <li>12-24 - Christmas Eve Service</li>
+                <li>12-31 - Watch Night Service</li>
+            </ul>
+            <p></p>
+        </article>
+    </div>
+    <div class="middle-sidebar">
+        <article>
+            <h2>Salvation</h2>
+            <p>Believe on the Lord Jesus Christ and thy should be saved...</p>
+            <p></p>
+        </article>
+    </div>
+    <div class="bottom-sidebar">
+        <article>
+            <h2>Community Services</h2>
+            <p>Friday, Nov. 7 - 3-9 PM - Food Distribution</p>
+        </article>
+    </div>
+    <footer class="mainfooter">
+        <p>copyright &copy:  <a href="#" title="ICF Ministries">icfministries-atlanta-org</a> </p>
+    </footer>
+</div> 
+    
+
+
+
+<script type="text/javascript">
+    $(function () {
+        $("#tabs").tabs({
+            event: "mouseover"
+        }); 
+
+        $("a.BillClick").click(function (event) {
+            event.preventDefault();
+            var url = "/Bill/Index";
+            $.get(url, {}, function (data) { $(".PaneCenter").html(data) });
+        });
+
+        $("a.ConstantClick").click(function (event) {
+            event.preventDefault();
+            alert("constant clicked");
+            var url = "/Constant/Index";
+            $.get(url, {}, function (data) { $(".PaneCenter").html(data) });
+        });
+
+        $("a.CategoryClick").click(function (event) {
+            event.preventDefault();
+            alert("Category clicked");
+            var url = "/Category/Index";
+            $.get(url, {}, function (data) { $(".PaneCenter").html(data) });
+        });
+/*
+        $("a.BorrowerCreateClick").click(function (event) {
+            event.preventDefault();
+            var url = "/Borrower/Index";
+            $.get(url, {}, function (data) { $(".ContentPane").html(data) });
+        });
+
+        $("a.LoanClick").click(function (event) {
+            event.preventDefault();
+            var url = "/Loan/Index";
+            $.get(url, {}, function (data) { $(".ContentPane").html(data) });
+        });
+
+        $("a.ConstantClick").click(function (event) {
+            event.preventDefault();
+            var url = "/Constant/Index";
+            $.get(url, {}, function (data) { $(".ContentPane").html(data) });
+        });
+
+        $("a.SupervisorClick").click(function (event) {
+            event.preventDefault();
+            var url = "/Supervisor/Index";
+            $.get(url, {}, function (data) { $(".ContentPane").html(data) });
+        });
+
+        $("a.BankingClick").click(function (event) {
+            event.preventDefault();
+            var url = "/BankAccount/Index";
+            $.get(url, {}, function (data) { $(".ContentPane").html(data) });
+        });
+
+        $("a.ReportClick").click(function (event) {
+            event.preventDefault();
+            var bDate = $("#BeginDate").val()
+            var eDate = $("#EndDate").val()
+            var url = "/BankAccount/GroupDividendReport";
+            $.get(url, {bDate: bDate.toString(), eDate:eDate.toString()}, function (data) { $(".ContentPane").html(data) });
+        });
+        */
+    });
+
+  </script>

@@ -1,0 +1,52 @@
+﻿@model Domain.listheader
+
+@{
+    ViewBag.Title = "List";
+    
+}
+
+<div>
+<div id="TopPane">
+
+</div>
+<table>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.FieldName1)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.FieldName2)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.FieldName3)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.FieldName4)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.FieldName5)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.FieldName6)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.FieldName7)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.FieldName8)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.FieldName9)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.FieldName10)
+        </td>
+        <td>
+                @Ajax.ActionLink("Edit", "Edit", "ListHeader", new {ListHeaderID=@Model.ListHeaderID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+        </td>
+    </tr>
+
+</table>
+    </div>
+

@@ -1,0 +1,5 @@
+﻿@{
+    ViewBag.Title = "MinistryMember";
+}
+
+@Html.ListBox("MemberRoster", @ViewBag.MemberRoster as SelectList,new {@class="myListBox",size=40,selectionmode=1 })<br />

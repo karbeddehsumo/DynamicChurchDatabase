@@ -1,0 +1,27 @@
+﻿@model List<string>
+
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <thead>
+        <tr>
+            <th>User Name</th>
+        </tr>
+    </thead>
+    <tbody>
+
+@foreach(string user in @Model)
+{
+    <tr>
+        <td>
+            @user
+        </td>
+    </tr>
+}
+        </tbody>
+    </table>
+}
+else
+{
+    <p>No user assigned this role</p>
+}

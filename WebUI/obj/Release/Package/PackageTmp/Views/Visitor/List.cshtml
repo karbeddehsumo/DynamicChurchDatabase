@@ -1,0 +1,77 @@
+﻿@model IEnumerable<Domain.visitor>
+
+@{
+    ViewBag.Title = "List";
+    
+}
+
+<div id="AjaxFormPane" >
+    <div class="center" style="color:red">@TempData["message2"]</div>
+
+<div class="slider">
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <caption>Visitor List</caption>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Address
+        </th>
+        <th>
+            Last Event
+        </th>
+        <th>
+            phone #
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Comment
+        </th>
+       
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @string.Format("{0} {1} {2}",@item.Title2,@item.FirstName,@item.LastName)
+        </td>
+        <td>
+            @string.Format("{0} {1} {2} {3}",@item.Address,@item.City,@item.State,@item.Zip)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.LastEventName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.phoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+        <td>
+            @item.Comment
+        </td>
+         <td>
+             @Ajax.ActionLink("Edit", "Edit", "Visitor", new {VisitorID=item.visitorID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+        </td>
+        <td>
+             @Ajax.ActionLink("Delete", "Delete", "Visitor", new {VisitorID=item.visitorID}, new AjaxOptions {Confirm="Do you want to delete this record?",HttpMethod="Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+        </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p>No visitor record found!</p>   
+}
+    </div>
+</div>
+

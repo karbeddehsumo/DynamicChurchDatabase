@@ -1,0 +1,126 @@
+﻿@model Domain.property
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Create", "Property", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    @Html.AntiForgeryToken() 
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Create property</legend>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Title)
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Description)
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.subCategoryID,"Category")
+            @Html.DropDownListFor(model => model.subCategoryID, ViewBag.PropertyCategoryList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.subCategoryID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Comment)
+            @Html.EditorFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.EnteredBy,"Entered By")
+            @Html.TextBoxFor(model => model.EnteredBy, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.EnteredBy)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.DateEntered,"Date Entered")
+            @Html.TextBoxFor(model => model.DateEntered, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.DateEntered)
+        </div>
+
+               <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+                   <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+    
+    
+
+}
+            @using (Ajax.BeginForm("AddConstant", "Constant", new { @aCategory = "Property Category" }, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "familyroster"
+            }))
+            {
+                    
+                                 <label>Add Property Type</label>
+                             <input id="value1" name="value1"  type="text"/>
+                                 <input id="familyID" type="submit" value="Add" />
+
+            }
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#subCategoryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the property category.");
+            }
+            else if ($("#Title").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the property Title.");
+            }
+
+        });
+
+        $(document).on("click", "#subCategoryID", function (event) {
+            $.ajax({
+                url: '@Url.Action("RefreshViewBag", "Constant", new {SearchString="Property Category&I"})',
+                type: 'POST',
+                // data: JSON.stringify(appointment),
+                dataType: 'json',
+                processData: false,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    var result = '';
+                    for (var i = 0, iL = data.length; i < iL; i++) {
+                        result += '<option value="' + data[i].Value + '">' + data[i].Text + '</option>';
+                    }
+                    $("#subCategoryID").html(result);
+                },
+            });
+         });
+    });
+</script>

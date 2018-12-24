@@ -1,0 +1,54 @@
+﻿@model Domain.responsibility
+
+@{
+    ViewBag.Title = "Details";
+ 
+}
+
+
+<div class="panel">
+<h2 class="center">View Staff Responisbility Report</h2>
+
+<div class="center">
+
+<div class="float-left">
+    <div style="margin-top:10px">
+        <strong class="float-left">Staff</strong>
+        @Html.DropDownList("StaffSearch", ViewBag.StaffList as SelectList,"")
+    </div>
+</div>
+
+    <div class="float-left">
+    <div style="margin-top:10px">
+        <strong class="float-left">Status</strong>
+        @Html.DropDownList("StatusSearch", ViewBag.StatusList as SelectList,"")
+    </div>
+</div>
+
+    </div>
+     
+<div class="CalendarData center">
+@Html.Action("List", "Responsibility", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate })
+</div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        $("#StaffSearch").change(function (event) {
+            var staffid = $('#StaffSearch option:selected').val();
+            var url = "/Responsibility/List";
+            $.get(url, { codeID: staffid.toString(), SearchType: "StaffSearch" }, function (data) { $(".CalendarData").html(data) });
+        });
+
+        $("#StatusSearch").change(function (event) {
+            var status = $('#StatusSearch option:selected').text();
+            var url = "/Responsibility/List";
+            $.get(url, { code: status.toString(), SearchType: "StatusSearch" }, function (data) { $(".CalendarData").html(data) });
+
+        });
+
+    });
+
+ </script>

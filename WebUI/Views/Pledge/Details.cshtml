@@ -1,0 +1,87 @@
+﻿@model Domain.pledge
+
+@{
+    ViewBag.Title = "Details";
+    
+}
+
+
+
+
+<div id="AjaxFormPane">
+    <h2 class="center">View Pledge Report</h2>
+        <div class="center">
+    <div class="editor">
+        <label>Year</label>
+        @Html.DropDownList("PledgeYear", ViewBag.PledgeYearList as SelectList,"")
+        </div>
+   
+
+<div class="editor">
+        <label>Category</label>
+        @Html.DropDownList("CategoryListSearch", ViewBag.MemberContributionTypeList as SelectList,"Select by Category...")
+</div>
+
+    <div class="editor">
+        <label>Member</label>
+        @Html.DropDownList("MemberListSearch",ViewBag.MemberList as SelectList,"Select by Member...")
+</div>
+
+<div class="float-right">
+<input id="submitAllClick" name="submitAllClick" value="View All" type="submit"/><br />
+    </div>
+        </div>
+
+<div class="PledgeData center">
+@Html.Action("ListDetail", "Pledge", new {pledgeYear=@ViewBag.PledgeYear,SearchType="DateRangeSearch" })
+</div>
+    </div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CategoryListSearch").change(function (event) {
+            var categoryid = $('#CategoryListSearch option:selected').val();
+            var memberid = $('#MemberListSearch option:selected').val();
+            var year = $('#PledgeYear option:selected').val();
+            var url = "/Pledge/ListDetail";
+            $("#MemberListSearch").val("Select By Member...");
+            if ($('#CategoryListSearch option:selected').val().length != 0) {
+                $.get(url, { SearchType: 'CategorySearch', pledgeYear: year.toString(), codeID: categoryid.toString() }, function (data) { $(".PledgeData").html(data) });
+            }
+            else if ($('#MemberListSearch option:selected').val().length != 0) {
+                $.get(url, { SearchType: 'MemberSearch', pledgeYear: year.toString(), codeID: memberid.toString() }, function (data) { $(".PledgeData").html(data) });
+            }
+            else {
+                $.get(url, { SearchType: 'DateRangeSearch', pledgeYear: year.toString() }, function (data) { $(".PledgeData").html(data) });
+            }
+        });
+        $("#MemberListSearch").change(function (event) {
+            var categoryid = $('#CategoryListSearch option:selected').val();
+            var memberid = $('#MemberListSearch option:selected').val();
+            var year = $('#PledgeYear option:selected').val();
+            var url = "/Pledge/ListDetail";
+            $("#CategoryListSearch").val("Select By Category...");
+            if ($('#CategoryListSearch option:selected').val().length != 0) {
+                $.get(url, { SearchType: 'CategorySearch', pledgeYear: year.toString(), codeID: categoryid.toString() }, function (data) { $(".PledgeData").html(data) });
+            }
+            else if ($('#MemberListSearch option:selected').val().length != 0) {
+                $.get(url, { SearchType: 'MemberSearch', pledgeYear: year.toString(), codeID: memberid.toString() }, function (data) { $(".PledgeData").html(data) });
+            }
+            else {
+                $.get(url, { SearchType: 'DateRangeSearch', pledgeYear: year.toString() }, function (data) { $(".PledgeData").html(data) });
+            }
+        });
+
+        $(document).on("click", "#submitAllClick", function (event) {
+            var year = $('#PledgeYear option:selected').val();
+            $("#MemberListSearch").val("Select By Member...");
+            $("#CategoryListSearch").val("Select By Category...");
+            var url = "/Pledge/ListDetail";
+            $.get(url, { SearchType: 'DateRangeSearch', pledgeYear: year.toString() }, function (data) { $(".PledgeData").html(data) });
+        });
+
+    });
+
+ </script>

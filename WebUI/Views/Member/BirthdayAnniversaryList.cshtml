@@ -1,0 +1,31 @@
+﻿@model IEnumerable<Domain.member>
+
+@if (@ViewBag.RecordCount > 0)
+{
+    if (@ViewBag.FieldName == "Birthdate")
+        {
+          <h3 class="center">Upcoming Birthdays...</h3>
+        }
+        else if (@ViewBag.FieldName == "Wedding Anniversary")
+        {
+            <h3 class="center">Upcoming Anniversaries...</h3>        
+        }
+        <div class="center">
+        <ul id="newspaper-list" class="b">
+            @foreach (var item in Model) 
+            {
+               <li>
+                @if (@ViewBag.FieldName == "Birthdate")
+                {
+                 @string.Format("{0}...{1}",@item.FullNameTitle, @item.DOB.Date.ToString("MMM d"))
+                }
+                else if (@ViewBag.FieldName == "Wedding Anniversary")
+                {
+                    @string.Format("{0}...{1} @ {2} years",@item.spouse.JointTitheTitle,@item.spouse.AnniversaryDate.Date.ToString("MMM d"),DateTime.Today.Year-@item.spouse.AnniversaryDate.Year)
+                }
+                   </li>
+            }
+        </ul>
+            </div>
+        <br />
+}

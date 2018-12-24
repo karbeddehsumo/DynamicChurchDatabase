@@ -1,0 +1,129 @@
+﻿@model Domain.bill
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Edit", "Bill", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    @Html.AntiForgeryToken()
+            
+    @Html.ValidationSummary(true)
+     <div class="fieldset">
+    <form role="form" class="form-horizontal" >
+        <h2>Edit Bill Here...</h2>
+        @Html.HiddenFor(model => model.billID)
+
+        @Html.HiddenFor(model => model.ReturnBeginDate)
+        @Html.HiddenFor(model => model.ReturnEndDate)
+        @Html.HiddenFor(model => model.ReturnBillID)
+        @Html.HiddenFor(model => model.ReturnType)
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.payeeID,"Payee")
+            @Html.DropDownListFor(model => model.payeeID, ViewBag.PayeeList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.payeeID)
+        </div>
+
+        <div class="form-group">
+            @Html.HiddenFor(model => model.PayeeName)
+            @Html.ValidationMessageFor(model => model.PayeeName)
+        </div>
+
+       <div class="form-group">
+            @Html.LabelFor(model => model.AccountNumber,"Account Number")
+            @Html.EditorFor(model => model.AccountNumber)
+            @Html.ValidationMessageFor(model => model.AccountNumber)
+        </div>
+
+                <div class="form-group">
+            @Html.LabelFor(model => model.AmountDue,"Amount Due")
+            @Html.EditorFor(model => model.AmountDue)
+            @Html.ValidationMessageFor(model => model.AmountDue)
+        </div>
+
+       <div class="form-group">
+            @Html.LabelFor(model => model.TotalAmount,"Total Amount")
+            @Html.EditorFor(model => model.TotalAmount)
+            @Html.ValidationMessageFor(model => model.TotalAmount)
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateDue,"Due Date")
+           @Html.TextBoxFor(model => model.DateDue, new { id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.DateDue)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comment)
+            @Html.EditorFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+          <div class="form-group">
+            @Html.LabelFor(model => model.Status)
+            @Html.EditorFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+        @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+        </form>
+    </div>
+}
+    </div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $(function () {
+            $("#AmountDue").each(function () {
+                this.value = this.value.replace(/,/g, "");
+            }).on('keyup', function () {
+                this.value = this.value.replace(/,/g, "");
+            });
+        });
+
+        $(function () {
+            $("#TotalAmount").each(function () {
+                this.value = this.value.replace(/,/g, "");
+            }).on('keyup', function () {
+                this.value = this.value.replace(/,/g, "");
+            });
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#payeeID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the payee.");
+            }
+            else if ($("#TotalAmount").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the total amount.");
+            }
+            else if ($("#AmountDue").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the amount due.");
+            }
+        });
+    });
+</script>

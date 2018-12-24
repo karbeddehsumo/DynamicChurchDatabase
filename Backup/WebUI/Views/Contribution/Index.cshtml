@@ -1,0 +1,22 @@
+﻿@model Domain.contribution
+
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+
+<div >
+<h2 id="pageTitle" class="center">Member Contribution Center</h2>
+
+
+    <div class="center">
+        @Ajax.ActionLink("Add Contribution", "CreateList", "Contribution", new {dDate=@ViewBag.BeginDate}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("View Contribution", "Details", "Contribution", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("View Pledge", "Index", "Pledge", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" }, new {@id="pageSubTitle"})    
+</div>
+    </div>
+<div id="RightPane" class="panel">
+    @Html.Action("CreateList", "Contribution", new {dDate=@ViewBag.BeginDate})
+</div>
+

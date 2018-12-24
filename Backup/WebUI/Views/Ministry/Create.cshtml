@@ -1,0 +1,123 @@
+﻿@model Domain.ministry
+
+
+<div id="AjaxFormPane" class="panel">
+    <div class="center" style="color:red">@TempData["message2"]</div>
+
+    <div class="center">
+@using (Ajax.BeginForm("Create", "Ministry", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    @Html.AntiForgeryToken()
+            <h2 class="center">Add Ministry</h2>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Add new ministry...</legend>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.MinistryName,"Name")
+            @Html.EditorFor(model => model.MinistryName)
+            @Html.ValidationMessageFor(model => model.MinistryName)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Description)
+            @Html.TextAreaFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Contact,"Contact")
+            @Html.EditorFor(model => model.Contact)
+            @Html.ValidationMessageFor(model => model.Contact)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.ContactEmail,"Email")
+            @Html.EditorFor(model => model.ContactEmail)
+            @Html.ValidationMessageFor(model => model.ContactEmail)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.PhoneNumber,"Phone")
+            @Html.EditorFor(model => model.PhoneNumber)
+            @Html.ValidationMessageFor(model => model.PhoneNumber)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.GroupMinistryID,"Parent Ministy (Optional)")
+            @Html.DropDownListFor(model => model.GroupMinistryID, ViewBag.GroupMinistryList as SelectList, "") 
+            @Html.ValidationMessageFor(model => model.GroupMinistryID)
+        </div>
+
+         @Html.HiddenFor(model => model.BriefDescription)
+         @Html.HiddenFor(model => model.PageStyleID)
+         @Html.HiddenFor(model => model.CodeDesc)
+         @Html.HiddenFor(model => model.StoryCreateAccess)
+         @Html.HiddenFor(model => model.PictureCreateAccess)
+         @Html.HiddenFor(model => model.VideoCreateAccess)
+         @Html.HiddenFor(model => model.IsPublic)
+         @Html.HiddenFor(model => model.DefaultMemberType)
+         @Html.HiddenFor(model => model.IsGroupMinistry)
+
+        @Html.HiddenFor(model => model.PictureID)
+        @Html.HiddenFor(model => model.Title1)
+        @Html.HiddenFor(model => model.Title2)
+        @Html.HiddenFor(model => model.Title3)
+        @Html.HiddenFor(model => model.Information1)
+        @Html.HiddenFor(model => model.Information2)
+        @Html.HiddenFor(model => model.Information3)
+        @Html.HiddenFor(model => model.MissionStatement)
+
+        @Html.HiddenFor(model => model.Vision)
+        @Html.HiddenFor(model => model.DisplayBanner)
+
+        @Html.HiddenFor(model => model.Status)
+        @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+
+        <div id="FieldSetSubMenu">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+    </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#MinistryName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the ministry name.");
+            }
+            else if ($("#Description").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the ministry description.");
+            }
+            else if ($("#Contact").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the name of the ministry contact person.");
+            }
+            else if ($("#ContactEmail").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the ministry email address.");
+            }
+            else if ($("#PhoneNumber").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the ministry phone number.");
+            }
+
+        });
+    });
+</script>

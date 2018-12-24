@@ -1,0 +1,92 @@
+﻿@model IEnumerable<Domain.saleitem>
+
+@{
+    ViewBag.Title = "List";
+    
+}
+
+<div>
+<div id="TopPane">
+
+</div>
+
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <tr>
+        <th>
+            saleID
+        </th>
+        <th>
+            product
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Discount
+        </th>
+        <th>
+            Total
+        </th>
+        <th>
+            Comment
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Entered By
+        </th>
+        <th>
+            Date Entered
+        </th>
+        <th></th>
+         <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.saleID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.productID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Discount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Total)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnteredBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateEntered)
+        </td>
+                  <td>
+                    @Ajax.ActionLink("Edit", "Edit", "SaleItem", new {SaleItemID=item.SaleItemID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+            </td>
+            <td>
+                @Ajax.ActionLink("Delete", "Delete", "SaleItem", new {SaleItemID=item.SaleItemID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+            </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p>No sale item added yet!</p>   
+}
+</div>

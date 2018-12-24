@@ -1,0 +1,66 @@
+﻿@model Domain.budget
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<h2 class="center">View Budget Report</h2>
+<div class="center">
+<label>Select Budget to View</label>
+<input id="ShowIncomeBudgetButton" value="Income" type="button" />
+<input id="ShowExpenseBudgetButton" value="Expense" type="button" />
+
+    <label>Year</label>
+    @Html.DropDownList("BudgetSearch", ViewBag.BudgetYearList as SelectList,"Select Budget Year...")
+    </div>
+<div id="IncomeBudgetDiv" class="IncomeBudgetData center">
+@Html.Action("IncomeBudgetList", "Budget", new {BudgetYear=@ViewBag.BudgetYear})
+    <br />
+</div>
+
+<div id="ExpenseBudgetDiv" class="ExpenseBudgetData">
+    <br />
+@Html.Action("ExpenseBudgetList", "Budget", new {BudgetYear=@ViewBag.BudgetYear})
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        //Add income detail
+        $('#IncomeBudgetDiv').show();
+        $(document).on("click", "#ShowIncomeBudgetButton", function (event) {
+            //close other divs
+            $('#ExpenseBudgetDiv').hide();
+
+            $("#IncomeBudgetDiv").show();
+        });
+
+
+        //Add expense detail
+        $('#ExpenseBudgetDiv').hide();
+        $(document).on("click", "#ShowExpenseBudgetButton", function (event) {
+            //close other divs
+            $('#IncomeBudgetDiv').hide();
+
+            $("#ExpenseBudgetDiv").show();
+        });
+
+
+        // $("#BudgetSearch").change(function (event) {
+        $(document).on("change", "#BudgetSearch", function (event) {
+            var budgetyear = $('#BudgetSearch option:selected').val();
+            var url = "/Budget/IncomeBudgetList";
+            $.get(url, { BudgetYear: budgetyear.toString() }, function (data) { $(".IncomeBudgetData").html(data) });
+
+            var url = "/Budget/ExpenseBudgetList";
+            $.get(url, { BudgetYear: budgetyear.toString() }, function (data) { $(".ExpenseBudgetList").html(data) });
+        });
+
+
+    });
+
+ </script>

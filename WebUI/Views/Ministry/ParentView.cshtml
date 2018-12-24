@@ -1,0 +1,104 @@
+﻿@{
+    ViewBag.Title = "MinistryChildParentView";
+}
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+<div id="AjaxFormPane" class="panel">
+    <div class="clearfix">   
+        <input id="ministryID" name="ministryID" value="@ViewBag.MinistryID"  type="hidden"/>
+         <div id="ParentRosterID" class="float-left">
+             <p>Parent List</p>
+         @Html.ListBox("ParentList", ViewBag.ParentChildList as SelectList, new {@class="myListBox2",size=40,selectionmode=1 })
+             <br />
+          <input id="RemoveParent" type="button" value="Remove" title="Remove parents" />
+         <input id="EmailAllParents" type="button" value="Email All"  title="Emaill all parents"/>
+         <input id="EmailSelectedParent" type="button" value="Email Selected" title="Email selected parents"/>
+                          </div>
+         <div class="float-left">
+         <p>Select Student to Add Parent</p>
+         @Html.ListBox("MemberRoster2", ViewBag.MemberRoster as SelectList, new {@class="myListBox2",size=40,selectionmode=1 })
+        
+         <div id="ChildParentListDiv" class="float-left">
+             <p>Select Parent(s)</p>
+        @Html.ListBox("ChildParentList", new SelectList(new[] { "Choose" }), new {@class="myListBox2",size=40,selectionmode=1 })
+       
+         @using (Ajax.BeginForm("AddChildParent", "Member", new {}, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "ParentRosterID"
+            }))
+            {
+         <div style="display:inline-block">
+                    
+                                
+                             <input id="parentID" name="parentID"  type="hidden"/> 
+                             <input id="childID" name="childID"  type="hidden"/>
+                            <input id="ministryID3" name="ministryID3" value="@ViewBag.MinistryID"  type="hidden"/>
+                                 <input id="ChildParentButSubmitton" type="submit" value="Add" />
+                                 <input class="closeAllDiv" value="Close" type="button" />
+             </div>
+            }
+                  </div>
+</div> 
+        </div> 
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#membershipDate').not('.hasDatePicker').datepicker();
+
+
+        $(document).on("change", "#MemberList", function (event) {
+            var id = $('#MemberList option:selected').val();
+            $("#memberID").val(id);
+        });
+
+        $("#ChildParentListDiv").hide();
+        $(document).on("change", "#MemberRoster2", function (event) {
+            $("#childID").val($('#MemberRoster2 option:selected').val());
+            $.getJSON("/Member/GetFamilyMemberList", { MemberID: $('#MemberRoster2 option:selected').val() }, function (data) {
+                $('#ChildParentList').empty();
+                var markup = '';
+                for (var x = 0; x < data.length; x++) {
+                    markup += '<option value="' + data[x].Value + '">' + data[x].Text + '</option>';
+                }
+                $('#ChildParentList').html(markup).show();
+                $("#ChildParentListDiv").show();
+            });
+        });
+
+
+        $(document).on("change", "#ChildParentList", function (event) {
+            $("#parentID").val($('#ChildParentList option:selected').val());
+        });
+
+        $(document).on("click", "#EmailAllParents", function (event) {
+            alert("Email all parents");
+            var ministryID = $("#ministryID").val();
+            var url = "/Member/EmailDialog";
+            $.get(url, { ministryID: ministryID.toString(), RecipientType: "MinistryChildParents" }, function (data) { $("#AjaxFormPane").html(data) });
+        });
+
+        $(document).on("click", "#EmailSelectedParent", function (event) {
+            var ministryID = $("#ministryID").val();
+            $("#parentID").val($('#ChildParentList option:selected').val());
+
+            var array = [];
+            $('#ChildParentList :selected').each(function (i, selected) {
+                array[i] = $(selected).text();
+            });
+
+            var url = "/Member/EmailDialog";
+            $.get(url, { memberID: array, RecipientType: "SelectedChildParents" }, function (data) { $("#AjaxFormPane").html(data) });
+        });
+
+        $(document).on("click", "#RemoveParent", function (event) {
+            var childID = $('#ParentList option:selected').val();
+            var ministryID = $("#ministryID").val();
+            var url = "/Ministry/RemoveParent";
+            $.get(url, { childID: childID.toString(), MinistryID: ministryID.toString() }, function (data) { $("#AjaxFormPane").html(data) });
+        });
+    });
+</script>

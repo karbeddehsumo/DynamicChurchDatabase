@@ -1,0 +1,72 @@
+﻿@model Domain.programeventbudget
+
+@{
+    ViewBag.Title = "Details";
+   
+}
+
+
+
+<h2 class="center-text">View Event Budget Report</h2>
+<br />
+
+<div>
+
+   <div class="float-left">
+        <p class="float-left">Begin Date </p>
+    <input id="bDate" type="text"  class="datepicker" value="@ViewBag.BeginDate" style="width:100px;" />
+        </div>
+    
+    <div class="float-left" style="padding-left:5px;">
+         <p class="float-left">End Date </p>
+     <input id="eDate" type="text"  class="datepicker" value="@ViewBag.EndDate" style="width:100px;" />
+        </div>
+
+
+<div class="float-left">
+    <div style="margin-top:10px">
+        <strong class="float-left">Event</strong>
+        @Html.DropDownList("EventSearch", ViewBag.EventBudgetList as SelectList,"")
+    </div>
+</div>
+
+    <div class="float-left">
+    <div style="margin-top:10px">
+        <strong class="float-left">Status</strong>
+        @Html.DropDownList("StatusSearch", ViewBag.StatusList as SelectList,"")
+    </div>
+</div>
+
+    </div>
+
+<br />
+<br />
+
+<div class="CalendarData">
+@Html.Action("List", "ProgramEventBudget", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate })
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        $("#EventSearch").change(function (event) {
+            var eventid = $('#EventSearch option:selected').val();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/ProgramEventBudget/List";
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: eventid.toString(), SearchType: "EventSearch" }, function (data) { $(".CalendarData").html(data) });
+        });
+        $("#StatusSearch").change(function (event) {
+            var status = $('#StatusSearch option:selected').text();
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/ProgramEventBudget/List";
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), code: status.toString(), SearchType: "StatusSearch" }, function (data) { $(".CalendarData").html(data) });
+
+        });
+
+    });
+
+ </script>

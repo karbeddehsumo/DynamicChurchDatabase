@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Domain.budget>
+
+@{
+    ViewBag.Title = "Budget";
+}
+
+  
+<div id="TopPane" class="slider center">
+
+@if (@ViewBag.RecordCount > 0)
+{
+  
+<table>
+    <caption>@ViewBag.Headering</caption>
+    <tr>
+        <th>
+            Category
+        </th>
+         <th>
+            Proposed Amount
+        </th>
+        <th>
+            Actual Amount
+        </th>
+        <th>
+            Ratio (%)
+        </th>
+        <th>
+            Comment
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            <!--@Html.DisplayFor(modelItem => item.subcategory.SubCategoryName)
+            @Html.ActionLink(@item.subcategory.SubCategoryName, "BudgetCategoryDetails", "Budget", new { categoryID = @item.subcategory.categoryID, CategoryType = @item.subcategory.subCategoryID }, new {@style="text-decoration:none;"})
+                -->
+            @Ajax.ActionLink(@item.subcategory.SubCategoryName, "BudgetCategoryDetails", "Budget", new {SubCategoryID = @item.subcategory.subCategoryID, categoryID = @item.subcategory.categoryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "BudgetCenterPane" }, new {@style="text-decoration:none;background-color:gainsboro;color:black;"})
+        </td>
+        <td style="text-align:right">
+            @string.Format("{0:c}",@item.Amount)
+        </td>
+        <td style="text-align:right">
+            @string.Format("{0:c}",@item.TotalActualAmount)
+        </td >
+        <td style="text-align:right">
+            @string.Format("{0:0.0%}",@item.Ratio)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+
+              <td>
+                     @Ajax.ActionLink("Edit", "Edit", "Budget", new {BudgetID=item.budgetID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+                </td>
+                <td>
+                    @Ajax.ActionLink("Delete", "Delete", "Budget", new {BudgetID=item.budgetID}, new AjaxOptions {Confirm = "Do you want to delete this record?", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+                </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p>No budget added yet!</p>   
+}
+</div>

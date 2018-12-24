@@ -1,0 +1,34 @@
+﻿@{
+    ViewBag.Title = "AdminReport";
+}
+
+<h2>AdminReport</h2>
+
+<div id="tabs">
+  <ul>
+    <li><a href="#tabs-1">Income</a></li>
+    <li><a href="#tabs-2">Expense</a></li>
+    <li><a href="#tabs-3">Budget</a></li>
+  </ul>
+  <div id="tabs-1">
+      @Html.Action("Details","Income")
+  </div>
+  <div id="tabs-2">
+      @Html.Action("Details","Expense")
+  </div>
+  <div id="tabs-3">
+      @Html.Action("AdminDetails","Budget")
+  </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        $("#tabs").tabs({collapsible:true, event: "click", disable: false, heightstyle: "content"});
+
+    });
+
+ </script>

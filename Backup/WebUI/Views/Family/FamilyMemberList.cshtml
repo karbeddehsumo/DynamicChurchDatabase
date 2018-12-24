@@ -1,0 +1,32 @@
+﻿@model IEnumerable<Domain.member>
+
+<div id="FamilyMemberPane" class="center">
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <caption>@ViewBag.Heading</caption>
+    <thead>
+        <tr>
+            <th>Name</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model) {
+            <tr>
+        <td>
+            @item.FullNameTitle
+        </td>
+                </tr>
+        }
+    </tbody>
+</table>
+}
+else
+{
+ <p>No family member record found!</p>   
+}
+    <br />
+    <div class="center">@Ajax.ActionLink("Return", "List", "Family", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "FamilyMemberPane" })</div>
+
+    </div>
+

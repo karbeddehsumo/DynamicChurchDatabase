@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Domain.saleitem>
+
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+
+
+<h2 class="center-text">Sale Item Center</h2>
+<br />
+
+    <div>
+        @Ajax.ActionLink("Add Sale Item", "Create", "SaleItem", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+        @Ajax.ActionLink("View Sale Items", "Details", "SaleItem", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+    </div>
+
+<div id="RightPane">
+@Html.Action("List", "SaleItem", new {})
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+    });
+
+ </script>

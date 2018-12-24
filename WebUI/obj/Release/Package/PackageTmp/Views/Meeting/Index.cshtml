@@ -1,0 +1,16 @@
+﻿@{
+    ViewBag.Title = "Index";
+    
+}
+
+<div>
+<h3 class="center">Meeting Center</h3>
+    <div class="center">
+        @Ajax.ActionLink("New Meeting", "Create", "Meeting", new {MinistryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MeetingPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("View Meetings", "Details", "Meeting", new {ministryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MeetingPane" }, new {@id="pageSubTitle"})
+    </div>
+ <div id="MeetingPane">
+    @Html.Action("Details", "Meeting", new {ministryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType})
+ </div>
+    </div>
+

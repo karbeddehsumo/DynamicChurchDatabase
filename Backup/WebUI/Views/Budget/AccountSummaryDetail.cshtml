@@ -1,0 +1,111 @@
+﻿
+
+<div class="center">
+    <h3></h3>
+    <table>
+        <caption>@ViewBag.Title</caption>
+        <thead>
+            <tr>
+                <th>Total Income</th>
+                <th>Total Expense</th>
+                <th>Total Net Amt</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.IncomeTotal)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.ExpenseTotal)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.NetTotal)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+<br />
+<div class="center">
+    <table>
+        <caption>Monthly Account Summary (MTD)</caption>
+        <thead>
+        <tr>
+            <th>Month</th>
+            <th>Income Amount</th>
+            <th>Expense Amount</th>
+            <th>Net Amount</th>
+        </tr>
+            </thead>
+        <tbody>
+            
+             <tr>
+                <td>January</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.IncomeJan)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.ExpenseJan)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.NetJan)</td>
+            </tr>
+             <tr>
+                <td>February</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.IncomeFeb)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.ExpenseFeb)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.NetFeb)</td>
+            </tr>
+             <tr>
+                <td>March</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.IncomeMar)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.ExpenseMar)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.NetMar)</td>
+            </tr>
+             <tr>
+                <td>April</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.IncomeApr)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.ExpenseApr)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.NetApr)</td>
+            </tr>
+            <tr>
+                <td>May</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.IncomeMay)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.ExpenseMay)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.NetMay)</td>
+            </tr>
+             <tr>
+                <td>June</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.IncomeJun)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.ExpenseJun)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.NetJun)</td>
+            </tr>
+             <tr>
+                <td>July</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.IncomeJul)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.ExpenseJul)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.NetJul)</td>
+            </tr>
+             <tr>
+                <td>August</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.IncomeAug)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.ExpenseAug)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.NetAug)</td>
+            </tr>
+             <tr>
+                <td>September</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.IncomeSept)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.ExpenseSept)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.NetSept)</td>
+            </tr>
+             <tr>
+                <td>October</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.IncomeOct)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.ExpenseOct)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.NetOct)</td>
+            </tr>
+             <tr>
+                <td>November</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.IncomeNov)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.ExpenseNov)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.NetNov)</td>
+            </tr>
+             <tr>
+                <td>December</td>
+                <td style="text-align:right" >@string.Format("{0:c}",@ViewBag.IncomeDec)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.ExpenseDec)</td>
+                <td style="text-align:right">@string.Format("{0:c}",@ViewBag.NetDec)</td>
+            </tr>
+        </tbody>
+    </table>
+</div>

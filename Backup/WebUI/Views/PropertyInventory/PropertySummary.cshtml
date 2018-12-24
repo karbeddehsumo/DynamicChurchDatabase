@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Domain.constant>
+
+    
+<div id="formSubmitButton" class="panel">
+    <div class="center">
+        <h2 class="center">Property Group Quantity</h2>
+    <div class="slider">
+<table>
+    <caption>Property Type Group</caption>
+    <tr>
+        <th>
+            Property
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+
+        <td>
+             @if(@item.SortOrder > 0)
+            {
+               @Ajax.ActionLink(@item.Value1,"PropertyInventoryCategoryList","PropertyInventory", new {categoryID=@item.constantID,PropertyName=@item.Value1}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "formSubmitButton" })
+             }
+            else
+            {
+                 @Html.DisplayFor(modelItem => item.Value1)
+             }
+        </td>
+        <td style="text-align:right">
+            @Html.DisplayFor(modelItem => item.SortOrder)
+        </td>
+        <td>
+            @if(@item.SortOrder == 0)
+            {
+                @Ajax.ActionLink("Delete", "Delete", "Constant", new {constantID=@item.constantID}, new AjaxOptions {HttpMethod = "Post", Confirm = "Are you sure you want to delete this property category?", InsertionMode = InsertionMode.Replace, UpdateTargetId = "formSubmitButton" })
+            }
+            else
+            {
+                
+            }
+        </td>
+
+    </tr>
+}
+
+</table>
+        </div>
+        </div>
+</div>
+

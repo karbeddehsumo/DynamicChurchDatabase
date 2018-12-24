@@ -1,0 +1,313 @@
+﻿@{
+    ViewBag.Title = "Dynamic Church Database";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<!--
+<div class="3box123">
+    <div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+ @Html.Action("SlideShow","Home")
+</div>
+</div>
+<div id="main-content" class="row">
+<div class="col-xs-12 col-sm-8 col-md-8">
+    <div class="panelPlain">
+<h1>Welcome</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit. Etiam tempor. Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam. Maecenas fermentum consequat mi. Donec fermentum. Pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque. Aliquam faucibus, elit ut dictum aliquet, felis nisl adipiscing sapien, sed malesuada diam lacus eget erat. Cras mollis scelerisque nunc. Nullam arcu. Aliquam consequat. Curabitur augue lorem, dapibus quis, laoreet et, pretium ac, nisi. Aenean magna nisl, mollis quis, molestie eu, feugiat in, orci. In hac habitasse platea dictumst.</p>
+<img src="../../Content/DreamWeaver/images/church3.jpg" class="img-responsive" />
+<h2>This is the congregation at Fort Street</h2>
+<p>Vivamus commodo, augue et laoreet euismod, sem sapien tempor dolor, ac egestas sem ligula quis lacus. Donec vestibulum tortor ac lacus. Sed posuere vestibulum nisl. Curabitur eleifend fermentum justo. Nullam imperdiet. Integer sit amet mauris imperdiet risus sollicitudin rutrum. Ut vitae turpis. Nulla facilisi. Quisque tortor velit, scelerisque et, facilisis vel, tempor sed, urna. Vivamus nulla elit, vestibulum eget, semper et, scelerisque eget, lacus. Pellentesque viverra purus. Quisque elit. Donec ut dolor.
+
+Duis volutpat elit et erat. In at nulla at nisl condimentum aliquet. Quisque elementum pharetra lacus. Nunc gravida arcu eget nunc. Nulla iaculis egestas magna. Aliquam erat volutpat. Sed pellentesque orci. Etiam lacus lorem, iaculis sit amet, pharetra quis, imperdiet sit amet, lectus. Integer quis elit ac mi aliquam pretium. Nullam mauris orci, porttitor eget, sollicitudin non, vulputate id, risus. Donec varius enim nec sem. Nam aliquam lacinia enim. Quisque eget lorem eu purus dignissim ultricies. Fusce porttitor hendrerit ante. Mauris urna diam, cursus id, mattis eget, tempus sit amet, risus. Curabitur eu felis. Sed eu mi. Nullam lectus mauris, luctus a, mattis ac, tempus non, leo. Cras mi nulla, rhoncus id, laoreet ut, ultricies id, odio.</p>
+</div>
+    </div>
+<div class="col-xs-12 col-sm-4 col-md-4">
+    <div class="panelPlain2">
+<h2>The Ark Landed in the Year 2006</h2>
+<img  src="../../Content/DreamWeaver/images/church4.jpg" class="img-responsive"/>
+<p>Donec imperdiet. Vestibulum auctor tortor at orci. Integer semper, nisi eget suscipit eleifend, erat nisl hendrerit justo, eget vestibulum lorem justo ac leo. Integer sem velit, pharetra in, fringilla eu, fermentum id, felis. Vestibulum sed felis. In elit. Praesent et pede vel ante dapibus condimentum. Donec magna. Quisque id risus. Mauris vulputate pellentesque leo. Duis vulputate, ligula at venenatis tincidunt, orci nunc interdum leo, ac egestas elit sem ut lacus. Etiam non diam quis arcu egestas commodo. Curabitur nec massa ac massa gravida condimentum. Aenean id libero. Pellentesque vitae tellus. Fusce lectus est, accumsan ac, bibendum sed, porta eget, augue. Etiam faucibus. Quisque tempus purus eu ante.</p>
+
+<p>Vestibulum sapien nisl, ornare auctor, consectetuer quis, posuere tristique, odio. Fusce ultrices ullamcorper odio. Ut augue nulla, interdum at, adipiscing non, tristique eget, neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut pede est, condiment. </p>
+
+</div>
+
+</div>
+
+</div>
+<div id="main-content-bottom" >
+        <div class="row">
+            @if ((@ViewBag.HasFixedBanner1 == true) && (@ViewBag.DisplayFixedBanner == true))
+            {
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                    <a class="img-thumbnail"  href="@Url.Action("GetMinistryPage2", "Home", new { CalendarBannerID = @ViewBag.FixedBanner1.calendarID })" title="Description"><img alt="Image 1"  class="img-responsive" src="@Url.Action("GetImageByID", "Picture", new { PictureID = @ViewBag.FixedBanner1.PictureID })" /></a>
+            </div>
+            }
+            @if ((@ViewBag.HasFixedBanner2 == true) && (@ViewBag.DisplayFixedBanner == true))
+            {
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <a class="img-thumbnail"  href="@Url.Action("GetMinistryPage2", "Home", new { CalendarBannerID = @ViewBag.FixedBanner2.calendarID })" title="Description"><img alt="Image 1"  class="img-responsive" src="@Url.Action("GetImageByID", "Picture", new { PictureID = @ViewBag.FixedBanner2.PictureID })" /></a>
+            </div>
+            }
+           @if ((@ViewBag.HasFixedBanner3 == true) && (@ViewBag.DisplayFixedBanner == true))
+            {
+            <div class="col-xs-12 col-sm-4 col-md-4">  
+                <a class="img-thumbnail" href="@Url.Action("GetMinistryPage2", "Home", new { CalendarBannerID = @ViewBag.FixedBanner3.calendarID })" title="Description"><img alt="Image 1"  class="img-responsive" src="@Url.Action("GetImageByID", "Picture", new { PictureID = @ViewBag.FixedBanner3.PictureID })" /></a>
+            </div>
+            }
+            
+        
+    
+            </div>
+        </div>
+</div>
+    -->
+<!--
+<div class="4box-1-21">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+             @Html.Action("SlideShow","Home")
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-8">
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                 <div class="panelPlain">
+<h1>Welcome</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit. Etiam tempor. Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam. Maecenas fermentum consequat mi. Donec fermentum. Pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque. Aliquam faucibus, elit ut dictum aliquet, felis nisl adipiscing sapien, sed malesuada diam lacus eget erat. Cras mollis scelerisque nunc. Nullam arcu. Aliquam consequat. Curabitur augue lorem, dapibus quis, laoreet et, pretium ac, nisi. Aenean magna nisl, mollis quis, molestie eu, feugiat in, orci. In hac habitasse platea dictumst.</p>
+<img src="../../Content/DreamWeaver/images/church3.jpg" class="img-responsive" />
+<h2>This is the congregation at Fort Street</h2>
+<p>Vivamus commodo, augue et laoreet euismod, sem sapien tempor dolor, ac egestas sem ligula quis lacus. Donec vestibulum tortor ac lacus. Sed posuere vestibulum nisl. Curabitur eleifend fermentum justo. Nullam imperdiet. Integer sit amet mauris imperdiet risus sollicitudin rutrum. Ut vitae turpis. Nulla facilisi. Quisque tortor velit, scelerisque et, facilisis vel, tempor sed, urna. Vivamus nulla elit, vestibulum eget, semper et, scelerisque eget, lacus. Pellentesque viverra purus. Quisque elit. Donec ut dolor.
+
+Duis volutpat elit et erat. In at nulla at nisl condimentum aliquet. Quisque elementum pharetra lacus. Nunc gravida arcu eget nunc. Nulla iaculis egestas magna. Aliquam erat volutpat. Sed pellentesque orci. Etiam lacus lorem, iaculis sit amet, pharetra quis, imperdiet sit amet, lectus. Integer quis elit ac mi aliquam pretium. Nullam mauris orci, porttitor eget, sollicitudin non, vulputate id, risus. Donec varius enim nec sem. Nam aliquam lacinia enim. Quisque eget lorem eu purus dignissim ultricies. Fusce porttitor hendrerit ante. Mauris urna diam, cursus id, mattis eget, tempus sit amet, risus. Curabitur eu felis. Sed eu mi. Nullam lectus mauris, luctus a, mattis ac, tempus non, leo. Cras mi nulla, rhoncus id, laoreet ut, ultricies id, odio.</p>
+</div>
+            </div>
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <div id="main-content-bottom" >
+                 <div class="row">
+            @if ((@ViewBag.HasFixedBanner1 == true) && (@ViewBag.DisplayFixedBanner == true))
+            {
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                    <a class="img-thumbnail"  href="@Url.Action("GetMinistryPage2", "Home", new { CalendarBannerID = @ViewBag.FixedBanner1.calendarID })" title="Description"><img alt="Image 1"  class="img-responsive" src="@Url.Action("GetImageByID", "Picture", new { PictureID = @ViewBag.FixedBanner1.PictureID })" /></a>
+            </div>
+            }
+            @if ((@ViewBag.HasFixedBanner2 == true) && (@ViewBag.DisplayFixedBanner == true))
+            {
+            <div class="col-xs-12 col-sm-4 col-md-4">
+                <a class="img-thumbnail"  href="@Url.Action("GetMinistryPage2", "Home", new { CalendarBannerID = @ViewBag.FixedBanner2.calendarID })" title="Description"><img alt="Image 1"  class="img-responsive" src="@Url.Action("GetImageByID", "Picture", new { PictureID = @ViewBag.FixedBanner2.PictureID })" /></a>
+            </div>
+            }
+           @if ((@ViewBag.HasFixedBanner3 == true) && (@ViewBag.DisplayFixedBanner == true))
+            {
+            <div class="col-xs-12 col-sm-4 col-md-4">  
+                <a class="img-thumbnail" href="@Url.Action("GetMinistryPage2", "Home", new { CalendarBannerID = @ViewBag.FixedBanner3.calendarID })" title="Description"><img alt="Image 1"  class="img-responsive" src="@Url.Action("GetImageByID", "Picture", new { PictureID = @ViewBag.FixedBanner3.PictureID })" /></a>
+            </div>
+            }
+            
+        
+    
+            </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-4">
+                <div class="panelPlain2">
+<h2>The Ark Landed in the Year 2006</h2>
+<img  src="../../Content/DreamWeaver/images/church4.jpg" class="img-responsive"/>
+<p>Donec imperdiet. Vestibulum auctor tortor at orci. Integer semper, nisi eget suscipit eleifend, erat nisl hendrerit justo, eget vestibulum lorem justo ac leo. Integer sem velit, pharetra in, fringilla eu, fermentum id, felis. Vestibulum sed felis. In elit. Praesent et pede vel ante dapibus condimentum. Donec magna. Quisque id risus. Mauris vulputate pellentesque leo. Duis vulputate, ligula at venenatis tincidunt, orci nunc interdum leo, ac egestas elit sem ut lacus. Etiam non diam quis arcu egestas commodo. Curabitur nec massa ac massa gravida condimentum. Aenean id libero. Pellentesque vitae tellus. Fusce lectus est, accumsan ac, bibendum sed, porta eget, augue. Etiam faucibus. Quisque tempus purus eu ante.</p>
+
+<p>Vestibulum sapien nisl, ornare auctor, consectetuer quis, posuere tristique, odio. Fusce ultrices ullamcorper odio. Ut augue nulla, interdum at, adipiscing non, tristique eget, neque. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Ut pede est, condiment. </p>
+
+</div>
+        </div>
+    </div>
+</div>
+-->
+<!--
+
+<div class="row">
+    <div class="col-xs-12 col-sm-12 col-md-8">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            @Html.Action("SlideShow","Home")
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="panelPlain">
+<h1>Welcome</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit. Etiam tempor. Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam. Maecenas fermentum consequat mi. Donec fermentum. Pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque. Aliquam faucibus, elit ut dictum aliquet, felis nisl adipiscing sapien, sed malesuada diam lacus eget erat. Cras mollis scelerisque nunc. Nullam arcu. Aliquam consequat. Curabitur augue lorem, dapibus quis, laoreet et, pretium ac, nisi. Aenean magna nisl, mollis quis, molestie eu, feugiat in, orci. In hac habitasse platea dictumst.</p>
+<img src="../../Content/DreamWeaver/images/church3.jpg" class="img-responsive" />
+<h2>This is the congregation at Fort Street</h2>
+<p>Vivamus commodo, augue et laoreet euismod, sem sapien tempor dolor, ac egestas sem ligula quis lacus. Donec vestibulum tortor ac lacus. Sed posuere vestibulum nisl. Curabitur eleifend fermentum justo. Nullam imperdiet. Integer sit amet mauris imperdiet risus sollicitudin rutrum. Ut vitae turpis. Nulla facilisi. Quisque tortor velit, scelerisque et, facilisis vel, tempor sed, urna. Vivamus nulla elit, vestibulum eget, semper et, scelerisque eget, lacus. Pellentesque viverra purus. Quisque elit. Donec ut dolor.
+
+Duis volutpat elit et erat. In at nulla at nisl condimentum aliquet. Quisque elementum pharetra lacus. Nunc gravida arcu eget nunc. Nulla iaculis egestas magna. Aliquam erat volutpat. Sed pellentesque orci. Etiam lacus lorem, iaculis sit amet, pharetra quis, imperdiet sit amet, lectus. Integer quis elit ac mi aliquam pretium. Nullam mauris orci, porttitor eget, sollicitudin non, vulputate id, risus. Donec varius enim nec sem. Nam aliquam lacinia enim. Quisque eget lorem eu purus dignissim ultricies. Fusce porttitor hendrerit ante. Mauris urna diam, cursus id, mattis eget, tempus sit amet, risus. Curabitur eu felis. Sed eu mi. Nullam lectus mauris, luctus a, mattis ac, tempus non, leo. Cras mi nulla, rhoncus id, laoreet ut, ultricies id, odio.</p>
+</div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4">
+        <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="panelPlain2">
+<h2>The Ark Landed in the Year 2006</h2>
+<img  src="../../Content/DreamWeaver/images/church4.jpg" class="img-responsive"/>
+<p>Donec imperdiet. Vestibulum auctor tortor at orci. Integer semper, nisi eget suscipit eleifend, erat nisl hendrerit justo, eget vestibulum lorem justo ac leo. Integer sem velit, pharetra in, fringilla eu, fermentum id, felis. Vestibulum sed felis. In elit. Praesent et pede vel ante dapibus condimentum. Donec magna. Quisque id risus. Mauris vulputate pellentesque leo. Duis vulputate, ligula at venenatis tincidunt, orci nunc interdum leo, ac egestas elit sem ut lacus. Etiam non diam quis arcu egestas commodo.</p>
+
+
+</div>
+        </div>
+    
+        <div class="col-xs-12 col-sm-12 col-md-12">
+  
+            <div id="main-content-bottom" >
+                 <div class="row">
+            @if ((@ViewBag.HasFixedBanner1 == true) && (@ViewBag.DisplayFixedBanner == true))
+            {
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                    <a class="img-thumbnail"  href="@Url.Action("GetMinistryPage2", "Home", new { CalendarBannerID = @ViewBag.FixedBanner1.calendarID })" title="Description"><img alt="Image 1"  class="img-responsive" src="@Url.Action("GetImageByID", "Picture", new { PictureID = @ViewBag.FixedBanner1.PictureID })" /></a>
+            </div>
+            }
+            @if ((@ViewBag.HasFixedBanner2 == true) && (@ViewBag.DisplayFixedBanner == true))
+            {
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <a class="img-thumbnail"  href="@Url.Action("GetMinistryPage2", "Home", new { CalendarBannerID = @ViewBag.FixedBanner2.calendarID })" title="Description"><img alt="Image 1"  class="img-responsive" src="@Url.Action("GetImageByID", "Picture", new { PictureID = @ViewBag.FixedBanner2.PictureID })" /></a>
+            </div>
+            }
+           @if ((@ViewBag.HasFixedBanner3 == true) && (@ViewBag.DisplayFixedBanner == true))
+            {
+            <div class="col-xs-12 col-sm-12 col-md-12">  
+                <a class="img-thumbnail" href="@Url.Action("GetMinistryPage2", "Home", new { CalendarBannerID = @ViewBag.FixedBanner3.calendarID })" title="Description"><img alt="Image 1"  class="img-responsive" src="@Url.Action("GetImageByID", "Picture", new { PictureID = @ViewBag.FixedBanner3.PictureID })" /></a>
+            </div>
+            }
+            
+        
+    
+            </div>
+                </div>
+        </div>
+        </div>
+    </div>
+</div>
+
+-->
+<!--
+<div class="row no-gutter">
+    <div class="col-xs-12 col-sm-12 col-md-8">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            @Html.Action("SlideShow","Home")
+        </div>
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="panelPlain">
+<h1>Welcome</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit. Etiam tempor. Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam. Maecenas fermentum consequat mi. Donec fermentum. Pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque. Aliquam faucibus, elit ut dictum aliquet, felis nisl adipiscing sapien, sed malesuada diam lacus eget erat. Cras mollis scelerisque nunc. Nullam arcu. Aliquam consequat. Curabitur augue lorem, dapibus quis, laoreet et, pretium ac, nisi. Aenean magna nisl, mollis quis, molestie eu, feugiat in, orci. In hac habitasse platea dictumst.</p>
+<img src="../../Content/DreamWeaver/images/church3.jpg" class="img-responsive" />
+<h2>This is the congregation at Fort Street</h2>
+<p>Vivamus commodo, augue et laoreet euismod, sem sapien tempor dolor, ac egestas sem ligula quis lacus. Donec vestibulum tortor ac lacus. Sed posuere vestibulum nisl. Curabitur eleifend fermentum justo. Nullam imperdiet. Integer sit amet mauris imperdiet risus sollicitudin rutrum. Ut vitae turpis. Nulla facilisi. Quisque tortor velit, scelerisque et, facilisis vel, tempor sed, urna. Vivamus nulla elit, vestibulum eget, semper et, scelerisque eget, lacus. Pellentesque viverra purus. Quisque elit. Donec ut dolor.
+
+Duis volutpat elit et erat. In at nulla at nisl condimentum aliquet. Quisque elementum pharetra lacus. Nunc gravida arcu eget nunc. Nulla iaculis egestas magna. Aliquam erat volutpat. Sed pellentesque orci. Etiam lacus lorem, iaculis sit amet, pharetra quis, imperdiet sit amet, lectus. Integer quis elit ac mi aliquam pretium. Nullam mauris orci, porttitor eget, sollicitudin non, vulputate id, risus. Donec varius enim nec sem. Nam aliquam lacinia enim. Quisque eget lorem eu purus dignissim ultricies. Fusce porttitor hendrerit ante. Mauris urna diam, cursus id, mattis eget, tempus sit amet, risus. Curabitur eu felis. Sed eu mi. Nullam lectus mauris, luctus a, mattis ac, tempus non, leo. Cras mi nulla, rhoncus id, laoreet ut, ultricies id, odio.</p>
+</div>
+        </div>
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-4">
+
+        <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12">
+            <div class="panelPlain2">
+<h2>The Ark Landed in the Year 2006</h2>
+<img  src="../../Content/DreamWeaver/images/church4.jpg" class="img-responsive"/>
+<p>Donec imperdiet. Vestibulum auctor tortor at orci. Integer semper, nisi eget suscipit eleifend, erat nisl hendrerit justo, eget vestibulum lorem justo ac leo. Integer sem velit, pharetra in, fringilla eu, fermentum id, felis. Vestibulum sed felis. In elit. Praesent et pede vel ante dapibus condimentum. Donec magna. Quisque id risus. Mauris vulputate pellentesque leo. Duis vulputate, ligula at venenatis tincidunt, orci nunc interdum leo, ac egestas elit sem ut lacus. Etiam non diam quis arcu egestas commodo.</p>
+</div>
+        </div>  
+        <div class="col-xs-12 col-sm-12 col-md-12">
+ 
+            <div id="main-content-bottom" >
+                 <div class="row no-gutter">
+            @if ((@ViewBag.HasFixedBanner1 == true) && (@ViewBag.DisplayFixedBanner == true))
+            {
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                    <a class="img-thumbnail"  href="@Url.Action("GetMinistryPage2", "Home", new { CalendarBannerID = @ViewBag.FixedBanner1.calendarID })" title="Description"><img alt="Image 1"  class="img-responsive" src="@Url.Action("GetImageByID", "Picture", new { PictureID = @ViewBag.FixedBanner1.PictureID })" /></a>
+            </div>
+            }
+            @if ((@ViewBag.HasFixedBanner2 == true) && (@ViewBag.DisplayFixedBanner == true))
+            {
+            <div class="col-xs-12 col-sm-12 col-md-12">
+                <a class="img-thumbnail"  href="@Url.Action("GetMinistryPage2", "Home", new { CalendarBannerID = @ViewBag.FixedBanner2.calendarID })" title="Description"><img alt="Image 1"  class="img-responsive" src="@Url.Action("GetImageByID", "Picture", new { PictureID = @ViewBag.FixedBanner2.PictureID })" /></a>
+            </div>
+            }
+           @if ((@ViewBag.HasFixedBanner3 == true) && (@ViewBag.DisplayFixedBanner == true))
+            {
+            <div class="col-xs-12 col-sm-12 col-md-12">  
+                <a class="img-thumbnail" href="@Url.Action("GetMinistryPage2", "Home", new { CalendarBannerID = @ViewBag.FixedBanner3.calendarID })" title="Description"><img alt="Image 1"  class="img-responsive" src="@Url.Action("GetImageByID", "Picture", new { PictureID = @ViewBag.FixedBanner3.PictureID })" /></a>
+            </div>
+            }
+            
+        
+    
+            </div>
+                </div>
+        </div>
+
+        </div>
+
+    </div>
+</div>
+-->
+<div class="row no-gutter">
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-sm-12">
+        @Html.Action("SlideShow","Home")
+                </div>
+            <div class="col-sm-12 visible-sm visible-md visible-lg">
+        <div class="panelPlain">
+<h1>Welcome</h1>
+<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Curabitur pretium tincidunt lacus. Nulla gravida orci a odio. Nullam varius, turpis et commodo pharetra, est eros bibendum elit, nec luctus magna felis sollicitudin mauris. Integer in mauris eu nibh euismod gravida. Duis ac tellus et risus vulputate vehicula. Donec lobortis risus a elit. Etiam tempor. Ut ullamcorper, ligula eu tempor congue, eros est euismod turpis, id tincidunt sapien risus a quam. Maecenas fermentum consequat mi. Donec fermentum. Pellentesque malesuada nulla a mi. Duis sapien sem, aliquet nec, commodo eget, consequat quis, neque. Aliquam faucibus, elit ut dictum aliquet, felis nisl adipiscing sapien, sed malesuada diam lacus eget erat. Cras mollis scelerisque nunc. Nullam arcu. Aliquam consequat. Curabitur augue lorem, dapibus quis, laoreet et, pretium ac, nisi. Aenean magna nisl, mollis quis, molestie eu, feugiat in, orci. In hac habitasse platea dictumst.</p>
+<img src="../../Content/DreamWeaver/images/church3.jpg" class="img-responsive" />
+<h2>This is the congregation at Fort Street</h2>
+<p>Vivamus commodo, augue et laoreet euismod, sem sapien tempor dolor, ac egestas sem ligula quis lacus. Donec vestibulum tortor ac lacus. Sed posuere vestibulum nisl. Curabitur eleifend fermentum justo. Nullam imperdiet. Integer sit amet mauris imperdiet risus sollicitudin rutrum. Ut vitae turpis. Nulla facilisi. Quisque tortor velit, scelerisque et, facilisis vel, tempor sed, urna. Vivamus nulla elit, vestibulum eget, semper et, scelerisque eget, lacus. Pellentesque viverra purus. Quisque elit. Donec ut dolor.
+
+Duis volutpat elit et erat. In at nulla at nisl condimentum aliquet. Quisque elementum pharetra lacus. Nunc gravida arcu eget nunc. Nulla iaculis egestas magna. Aliquam erat volutpat. Sed pellentesque orci. Etiam lacus lorem, iaculis sit amet, pharetra quis, imperdiet sit amet, lectus. Integer quis elit ac mi aliquam pretium. Nullam mauris orci, porttitor eget, sollicitudin non, vulputate id, risus. Donec varius enim nec sem. Nam aliquam lacinia enim. Quisque eget lorem eu purus dignissim ultricies. Fusce porttitor hendrerit ante. Mauris urna diam, cursus id, mattis eget, tempus sit amet, risus. Curabitur eu felis. Sed eu mi. Nullam lectus mauris, luctus a, mattis ac, tempus non, leo. Cras mi nulla, rhoncus id, laoreet ut, ultricies id, odio.</p>
+</div>
+                </div>
+            </div>
+    </div>
+    <div class="col-md-4">
+        <div class="row">
+   
+            <div class="col-sm-12">
+                    <iframe width="100%" height="100%" src="https://www.youtube.com/embed/0CgX2AfL1Xo?rel=0&autoplay=1&loop=0&wmode=opaque" frameborder="0" allowfullscreen></iframe>           
+
+            </div>
+       
+            <div class="col-sm-12 visible-sm visible-md visible-lg">
+         <div class="panelPlain2">
+<h2>The Ark Landed in the Year 2006</h2>
+<img  src="../../Content/DreamWeaver/images/church4.jpg" class="img-responsive"/>
+<p>Donec imperdiet. Vestibulum auctor tortor at orci. Integer semper, nisi eget suscipit eleifend, erat nisl hendrerit justo, eget vestibulum lorem justo ac leo. Integer sem velit, pharetra in, fringilla eu, fermentum id, felis. Vestibulum sed felis. In elit. Praesent et pede vel ante dapibus condimentum. Donec magna. Quisque id risus. Mauris vulputate pellentesque leo. Duis vulputate, ligula at venenatis tincidunt, orci nunc interdum leo, ac egestas elit sem ut lacus. Etiam non diam quis arcu egestas commodo.</p>
+</div>
+                </div>
+            <div class="col-sm-12">
+            <div id="main-content-bottom" >
+                 <div class="row no-gutter">
+            @if ((@ViewBag.HasFixedBanner1 == true) && (@ViewBag.DisplayFixedBanner == true))
+            {
+            <div class="col-xs-12 col-sm-6 col-md-12">
+                    <a class="img-thumbnail"  href="@Url.Action("GetMinistryPage2", "Home", new { CalendarBannerID = @ViewBag.FixedBanner1.calendarID })" title="Description"><img alt="Image 1"  class="img-responsive" src="@Url.Action("GetImageByID", "Picture", new { PictureID = @ViewBag.FixedBanner1.PictureID })" /></a>
+            </div>
+            }
+            @if ((@ViewBag.HasFixedBanner2 == true) && (@ViewBag.DisplayFixedBanner == true))
+            {
+            <div class="col-xs-12 col-sm-6 col-md-12">
+                <a class="img-thumbnail"  href="@Url.Action("GetMinistryPage2", "Home", new { CalendarBannerID = @ViewBag.FixedBanner2.calendarID })" title="Description"><img alt="Image 1"  class="img-responsive" src="@Url.Action("GetImageByID", "Picture", new { PictureID = @ViewBag.FixedBanner2.PictureID })" /></a>
+            </div>
+            }
+           @if ((@ViewBag.HasFixedBanner3 == true) && (@ViewBag.DisplayFixedBanner == true))
+            {
+            <div class="col-xs-12 col-sm-6 col-md-12">  
+                <a class="img-thumbnail" href="@Url.Action("GetMinistryPage2", "Home", new { CalendarBannerID = @ViewBag.FixedBanner3.calendarID })" title="Description"><img alt="Image 1"  class="img-responsive" src="@Url.Action("GetImageByID", "Picture", new { PictureID = @ViewBag.FixedBanner3.PictureID })" /></a>
+            </div>
+            }
+            
+        
+    
+            </div>
+    </div>
+                </div>
+
+            </div>
+</div>
+    </div>

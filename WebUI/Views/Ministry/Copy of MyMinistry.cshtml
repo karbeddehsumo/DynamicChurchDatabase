@@ -1,0 +1,16 @@
+﻿@model  IEnumerable<Domain.ministry>
+
+
+
+<div class="center">
+    <h2>My Ministries</h2>
+    <ul>
+        
+@foreach(var i in @Model)
+{
+    <li>
+         <p style="font-size:larger;">@Html.ActionLink(@i.MinistryName,"MinistryPage","Ministry", new {ministryID=@i.ministryID,code="MyMinistry"},null)</p>
+        </li>
+}
+    </ul>
+    </div>

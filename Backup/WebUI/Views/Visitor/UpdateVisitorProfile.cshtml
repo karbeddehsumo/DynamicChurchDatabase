@@ -1,0 +1,81 @@
+﻿@model Domain.visitor
+
+<div class="center">
+    <h2 class="center">Update My Profile</h2>
+     @using (Ajax.BeginForm("UpdateVisitor", "Home", new {}, new AjaxOptions
+     {
+         HttpMethod = "Post",
+         InsertionMode = InsertionMode.Replace,
+         UpdateTargetId = "familyroster"
+     }))
+     {
+         <strong>@ViewBag.Heading</strong>
+            <fieldset>
+                <legend></legend>
+            <div class="editor">
+            @Html.LabelFor(model => model.FirstName, "First Name")
+            @Html.TextBoxFor(model => model.FirstName, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.FirstName)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.LastName, "Last Name")
+            @Html.TextBoxFor(model => model.LastName, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.LastName)
+        </div>
+                 <div class="editor">
+            @Html.LabelFor(model => model.phoneNumber, "Phone #")
+            @Html.EditorFor(model => model.phoneNumber)
+            @Html.ValidationMessageFor(model => model.phoneNumber)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.PhoneProviderID, "Phone Provider (Needed for texting)")
+            @Html.DropDownListFor(model => model.PhoneProviderID, ViewBag.CellProviderList as SelectList, "Choose Phone Provider")
+            @Html.ValidationMessageFor(model => model.PhoneProviderID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Email)
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Address)
+            @Html.EditorFor(model => model.Address)
+            @Html.ValidationMessageFor(model => model.Address)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Address2)
+            @Html.EditorFor(model => model.Address2)
+            @Html.ValidationMessageFor(model => model.Address2)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.City)
+            @Html.EditorFor(model => model.City)
+            @Html.ValidationMessageFor(model => model.City)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.State)
+            @Html.EditorFor(model => model.State)
+            @Html.ValidationMessageFor(model => model.State)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Zip)
+            @Html.EditorFor(model => model.Zip)
+            @Html.ValidationMessageFor(model => model.Zip)
+        </div>
+            </fieldset>
+         <div class="float-right">
+                                 <input id="PledgeEnableSubmitID" type="submit" value="Submit" />
+             </div>
+
+     }
+        
+        </div>
+

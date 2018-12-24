@@ -1,0 +1,100 @@
+﻿@model Domain.constant
+
+@{
+    ViewBag.Title = "Edit";
+    
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Edit", "Constant", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center-text">Edit Constant</h2>
+<br />
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>constant</legend>
+
+        @Html.HiddenFor(model => model.constantID)
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Category)
+            @Html.EditorFor(model => model.Category)
+            @Html.ValidationMessageFor(model => model.Category)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.ConstantName,"Name")
+            @Html.EditorFor(model => model.ConstantName)
+            @Html.ValidationMessageFor(model => model.ConstantName)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Value1)
+            @Html.EditorFor(model => model.Value1)
+            @Html.ValidationMessageFor(model => model.Value1)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Value2)
+            @Html.EditorFor(model => model.Value2)
+            @Html.ValidationMessageFor(model => model.Value2)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Value3)
+            @Html.EditorFor(model => model.Value3)
+            @Html.ValidationMessageFor(model => model.Value3)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.SortOrder,"Sort Order")
+            @Html.DropDownListFor(model => model.SortOrder, new SelectList(new[] { "0", "1", "2", "3", "4", "5", "6" }))
+            @Html.ValidationMessageFor(model => model.SortOrder)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Status)
+            @Html.EditorFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+       @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#Category").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the category.");
+            }
+            else if ($("#ConstantName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the constant name.");
+            }
+            else if ($("#Value1").val() == 0) {
+                event.preventDefault();
+                alert("Please enter value1.");
+            }
+        });
+    });
+</script>

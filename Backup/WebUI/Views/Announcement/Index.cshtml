@@ -1,0 +1,18 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div id="FieldSetTopMenu">
+<h2 class="center">Announcement Center</h2>
+
+        @Ajax.ActionLink("Add Announcement", "Create", "Announcement", new {MinistryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AnnouncementPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("View Announcements", "Details", "Announcement", new {MinistryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AnnouncementPane" }, new {@id="pageSubTitle"})
+</div>       
+     <div id="AnnouncementPane">
+      @Html.Action("Details", "Announcement", new {MinistryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType})
+        </div>
+ 
+       

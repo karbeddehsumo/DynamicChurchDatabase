@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Domain.picture>
+
+@{
+    ViewBag.Title = "GroupSlider";
+}
+
+
+<script src="../../Scripts/jquery-1.7.1.js"></script>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js" ></script>
+    <link rel="stylesheet" href="../../Content/Dreamweaver/FancyBox/source/jquery.fancybox.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="../../Content/Dreamweaver/FancyBox/source/jquery.fancybox.pack.js"></script>
+
+
+<div id="myPane"  class=" clearfix center">
+    @if (((@ViewBag.Supervisor == true) || (@ViewBag.Supervisor2 == true)) && (@ViewBag.Requestor=="Officer"))
+    {
+        @Ajax.ActionLink("Add Picture", "Create", "Picture", new {MinistryID=@ViewBag.MinistryID}, new AjaxOptions {InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane" })
+    }
+    @foreach(var p in @Model)
+    {
+        if (p.ImageData != null)
+        {
+                   
+           <a class="fancybox float-left" style="padding:4px;"  rel="GroupPic2" href="@Url.Action("GetImageByID", "Picture",new {PictureID=@p.pictureID})" title="@p.Description"><img alt="Image 1" style="width:100%;height:300px" class="img-responsive" src="@Url.Action("GetImageByID", "Picture",new {PictureID=@p.pictureID})" /></a>
+            
+        }    
+        
+    }
+</div>
+
+
+    
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //$(".fancybox").fancybox();
+        $("a[rel='GroupPic2']").fancybox({
+            type: "image",
+            width: '70%',
+            height: '70%'
+        });
+    });
+
+
+    $("a[href$='.jpg'],a[href$='.png'],a[href$='.gif']").fancybox();
+
+ </script>

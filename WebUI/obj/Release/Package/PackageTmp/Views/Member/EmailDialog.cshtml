@@ -1,0 +1,100 @@
+﻿@model WebUI.Models.EmailModel
+
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+<div id="AjaxFormPane" class="center">
+    <div class="center" style="color:red">@TempData["message2"]</div>
+@using (Html.BeginForm("EmailDialog", "Member", new { ReturnUrl = @ViewBag.ReturnUrl }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+     @Html.AntiForgeryToken()
+    <fieldset>
+        <legend>Send Email</legend>
+        @if (@ViewBag.SimpleForm == false)
+        {
+            <div class="editor">
+                @Html.LabelFor(m => m.FromName, "Name")
+                @Html.EditorFor(m => m.FromName)
+                </div>
+                <div class="editor">
+                @Html.LabelFor(m => m.FromEmail, "From")
+                @Html.EditorFor(m => m.FromEmail)
+                </div>
+        }
+        else
+        {
+            @Html.HiddenFor(m => m.FromName)
+            @Html.HiddenFor(m => m.FromEmail)
+        }
+         <div class="editor">
+                @Html.LabelFor(m => m.To)
+                 @Html.TextBoxFor(m => m.To, new { @readonly = "readonly", @Value = @ViewBag.RecipientType })          
+         </div>
+        
+                     <div class="editor">
+                @Html.LabelFor(m => m.Subject)
+                @Html.EditorFor(m => m.Subject)
+         </div>
+                     <div class="editor">
+            <label>Choose Attachment(s)</label>
+            <input id="files" type="file" name="files" multiple />
+         </div>
+     <div class="editor">
+                @Html.LabelFor(m => m.MinistryID, "Ministry")
+                @if (@ViewBag.RecipientType == "Ministry")
+                {
+                    <input type="hidden" name="MinistryID" value="@ViewBag.MinistryID" />
+                    if (@ViewBag.MinistryID == 0)
+                    {
+                        @Html.DropDownListFor(m => m.MinistryID, ViewBag.MinistryList as SelectList, "") <br />
+                    }
+                }
+                else if (@ViewBag.RecipientType == "Member")
+                {
+                    <input type="hidden" name="MemberID" value="@ViewBag.MemberID" />                   
+                }
+         
+         
+         </div>
+
+       <div class="editor">
+             @Html.LabelFor(m => m.EmailMessage, "Email Message")
+             @Html.TextAreaFor(m => m.EmailMessage, new { cols = 160, rows = 30, placeholder = "Your email message goes here.." })
+        </div>
+        <!--
+           <div class="editor">
+             @Html.LabelFor(m => m.TextMessage, "Text Message")
+             @Html.TextAreaFor(m => m.TextMessage, new { cols = 100, rows = 10, placeholder = "Your text message goes here.." })
+        </div>
+            -->
+        @Html.HiddenFor(m => m.TextMessage)
+        @Html.HiddenFor(m => m.SenderCode)
+        </fieldset>
+            <div>
+                <input id="cancelButton" type="button" value="Cancel" />
+                <input id="submitButton" type="submit" value="Send"/>
+            </div>
+
+}
+
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#submitButton').click(function (event) {
+            if ($("#Subject").val() == 0) {
+                event.preventDefault();
+                alert("Please enter subject.");
+            }
+            else if (($("#EmailMessage").val() == 0) && ($("#TextMessage").val() == 0)) {
+                event.preventDefault();
+                if ($("#TextMessage").val() == 0)
+                {
+                    alert("Please enter email or text message.");
+                }
+            }
+        });
+    });
+</script>
+
+
+   

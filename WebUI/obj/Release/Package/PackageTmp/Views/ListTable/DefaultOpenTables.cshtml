@@ -1,0 +1,21 @@
+﻿@model IEnumerable<Domain.listtable>
+
+@Html.Action("List", "ListTable", new {codeID=@ViewBag.ministryID,SearchType="MinistrySearch",bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+
+
+@foreach(Domain.listtable l in @Model)
+{
+    if (l.IsPublic == @ViewBag.AccessTypePublic)
+    {
+        @Html.Action("Display", "ListTable", new {ListTableID=l.listTableID}) <br />
+    }
+    else if (l.IsPublic == @ViewBag.AccessTypeMembersOnly || (@ViewBag.Supervisor == true) || (@ViewBag.WebMaster == true))
+    {
+        
+    }
+    else if ((l.IsPublic == @ViewBag.AccessTypeOfficersOnly) || (@ViewBag.Supervisor == true) || (@ViewBag.WebMaster == true) || (@ViewBag.Supervisor2 == true))
+    {
+        @Html.Action("Display", "ListTable", new {ListTableID=l.listTableID}) <br />
+    }
+
+}

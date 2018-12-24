@@ -1,0 +1,74 @@
+﻿@model Domain.calendar
+<div class="panel">
+    <div class="center">
+<fieldset>
+    <legend>calendar</legend>
+
+    <div class="display-label">ministry</div>
+    <div class="display-field">
+        @Model.ministry.MinistryName
+    </div>
+
+    <div class="display-label">Event Type</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EventType)
+    </div>
+
+    
+    <div class="display-label">Title</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Title)
+    </div>
+
+    <div class="display-label">Calendar Date</div>
+    <div class="display-field">
+        @Model.CalendarDate.ToString("D")
+    </div>
+
+    <div class="display-label">Start Time</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StartTime)
+    </div>
+
+    <div class="display-label">End Time</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EndTime)
+    </div>
+
+    <div class="display-label">Location</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Location)
+    </div>
+
+    <div class="display-label">Description</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Description)
+    </div>
+
+
+    <div class="display-label">Contact</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Conductor)
+    </div>
+
+    <div class="display-label">Public Access</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PublicAccess)
+    </div>
+
+    <div class="display-label">Document</div>
+    <div class="display-field">
+        @if (@Model.document != null)
+            {
+              @Html.ActionLink("Document", "GetFileFromDisk", "Document", new {DocumentID=@Model.DocumentID},  new { target="_blank" })
+            }
+    </div>
+
+    <div class="display-label">Calendar Date Time</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.CalendarDateTime)
+    </div>
+</fieldset>
+    </div>
+    </div>
+

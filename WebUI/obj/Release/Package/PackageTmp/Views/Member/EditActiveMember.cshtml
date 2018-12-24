@@ -1,0 +1,34 @@
+﻿<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+
+<div class="clearfix panel">
+<div class="float-left" >
+    <b>Select member to edit record</b><br />
+@Html.ListBox("MemberList", ViewBag.MemberList as SelectList, new {@class="myListBox",size=40,selectionmode=1 })
+    </div>
+    <div class="inner-div2">
+<div id="ActiveMember" class="float-left" ></div>
+            <input id="DefaultMemberID" type="hidden" value="@ViewBag.DefaultmemberID"/>
+        </div>
+
+    </div>
+    
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //set member listbox default value
+        var defaultID = $("#DefaultMemberID").val()
+        //$("#MemberListBox option").eq(n).attr('selected', 'selected')
+        $("#MemberList option[value='" + defaultID + "']").attr("selected", true);
+        var url = "/Member/Edit";
+        $.get(url, { memberID: defaultID.toString() }, function (data) { $("#ActiveMember").html(data) });
+
+        $(document).on("change", "#MemberList", function (event) {
+            var memberid = $('#MemberList option:selected').val();
+            var url = "/Member/Edit";
+            $.get(url, { memberID: memberid.toString() }, function (data) { $("#ActiveMember").html(data) });
+        });
+
+    });
+
+ </script>

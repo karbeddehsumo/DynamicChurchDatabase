@@ -1,0 +1,5 @@
+﻿@{
+    ViewBag.Title = "AddChildParent";
+}
+
+@Html.ListBox("ParentList", ViewBag.ParentChildList as SelectList, new {@class="myListBox",size=10,selectionmode=1 })

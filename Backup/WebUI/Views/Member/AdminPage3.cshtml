@@ -1,0 +1,13 @@
+﻿@model Domain.member
+
+@{
+    ViewBag.Title = "AdminPage";
+    
+    
+}
+
+<h2>Member</h2>
+      @Ajax.ActionLink("Add Member", "Create", "Member", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ajaxcontent" })
+     <div>@Html.ListBox("MemberList",ViewBag.MemberList as SelectList, new {@class="myListBox",size=40,selectionmode=1 })</div> 
+      <div id="ajaxcontent"></div> 
+

@@ -1,0 +1,174 @@
+﻿@model Domain.listheader
+
+@{
+    ViewBag.Title = "Edit";
+    
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Edit", "ListHeader", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center-text">Edit Table Header</h2>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit table header here</legend>
+
+        @Html.HiddenFor(model => model.ListHeaderID)
+        @Html.HiddenFor(model => model.ListTableID)
+
+        <div class="editor">
+            @Html.LabelFor(model => model.FieldName1)
+            @Html.EditorFor(model => model.FieldName1)
+            @Html.ValidationMessageFor(model => model.FieldName1)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type1)
+            @Html.DropDownListFor(model => model.Type1, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+            @Html.ValidationMessageFor(model => model.Type1)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.FieldName2)
+            @Html.EditorFor(model => model.FieldName2)
+            @Html.ValidationMessageFor(model => model.FieldName2)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type2)
+            @Html.DropDownListFor(model => model.Type2, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+            @Html.ValidationMessageFor(model => model.Type2)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.FieldName3)
+            @Html.EditorFor(model => model.FieldName3)
+            @Html.ValidationMessageFor(model => model.FieldName3)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type3)
+            @Html.DropDownListFor(model => model.Type3, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+            @Html.ValidationMessageFor(model => model.Type3)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.FieldName4)
+            @Html.EditorFor(model => model.FieldName4)
+            @Html.ValidationMessageFor(model => model.FieldName4)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type4)
+            @Html.DropDownListFor(model => model.Type4, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+            @Html.ValidationMessageFor(model => model.Type4)
+        </div>
+
+                <div class="editor">
+            @Html.LabelFor(model => model.FieldName5)
+            @Html.EditorFor(model => model.FieldName5)
+            @Html.ValidationMessageFor(model => model.FieldName5)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type5)
+            @Html.DropDownListFor(model => model.Type5, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+            @Html.ValidationMessageFor(model => model.Type5)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.FieldName6)
+            @Html.EditorFor(model => model.FieldName6)
+            @Html.ValidationMessageFor(model => model.FieldName6)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type6)
+             @Html.DropDownListFor(model => model.Type6, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+            @Html.ValidationMessageFor(model => model.Type6)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.FieldName7)
+            @Html.EditorFor(model => model.FieldName7)
+            @Html.ValidationMessageFor(model => model.FieldName7)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type7)
+             @Html.DropDownListFor(model => model.Type7, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+            @Html.ValidationMessageFor(model => model.Type7)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.FieldName8)
+            @Html.EditorFor(model => model.FieldName8)
+            @Html.ValidationMessageFor(model => model.FieldName8)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type8)
+             @Html.DropDownListFor(model => model.Type8, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+            @Html.ValidationMessageFor(model => model.Type8)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.FieldName9)
+            @Html.EditorFor(model => model.FieldName9)
+            @Html.ValidationMessageFor(model => model.FieldName9)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type9)
+             @Html.DropDownListFor(model => model.Type9, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+            @Html.ValidationMessageFor(model => model.Type9)
+        </div>
+
+                <div class="editor">
+            @Html.LabelFor(model => model.FieldName10)
+            @Html.EditorFor(model => model.FieldName10)
+            @Html.ValidationMessageFor(model => model.FieldName10)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Type10)
+             @Html.DropDownListFor(model => model.Type10, new SelectList(new [] {"Text", "Integer","Money","Date"}),"Choose") 
+            @Html.ValidationMessageFor(model => model.Type10)
+        </div>
+
+        @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+           
+        });
+    });
+</script>
+

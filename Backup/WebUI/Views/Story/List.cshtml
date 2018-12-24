@@ -1,0 +1,35 @@
+﻿@model IEnumerable<Domain.story>
+
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+
+
+
+
+<div class="panel clearfix">
+    <h2 class="center">Story Center</h2>
+@Ajax.ActionLink("Add Story", "Create", "Story", new {MinistryID=@ViewBag.MinistryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "CreateStoryPane" })
+<div class="float-left"><div class="inner-div">
+@Html.ListBox("ListStories", ViewBag.StoryList as SelectList, new {@class="myListBox2",size=20,selectionmode=1 })
+</div></div>
+<div class="float-left">
+<div id="CreateStoryPane"  style="width:500px"></div>
+    </div>
+    </div>
+
+
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(document).on("click", "#ListStories", function (event) {
+            var id = $('#ListStories option:selected').val();
+            var url = "/Story/DisplayStory";
+            $.get(url, { storyID: id.toString() }, function (data) { $("#CreateStoryPane").html(data) });
+        });
+
+
+    });
+
+ </script>

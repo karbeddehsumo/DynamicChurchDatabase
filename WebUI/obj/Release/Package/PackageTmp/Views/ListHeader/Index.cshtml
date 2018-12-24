@@ -1,0 +1,30 @@
+﻿@model IEnumerable<Domain.listheader>
+
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+
+
+<h2 class="center-text">Ministry Center</h2>
+<br />
+
+    <div>
+        @Ajax.ActionLink("Add Table Header", "Create", "ListHeader", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+        @Ajax.ActionLink("View Table Headers", "Details", "ListHeader", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+    </div>
+
+<div id="RightPane">
+@Html.Action("List", "ListHeader", new {Status="Active" })
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+    });
+
+ </script>
+

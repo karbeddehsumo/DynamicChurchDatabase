@@ -1,0 +1,41 @@
+﻿
+<input id="ShowIncomeBudgetButton" value="View income budget data" type="button" />
+<input id="ShowExpenseBudgetButton" value="View expense budget data" type="button" />
+
+<div id="IncomeBudgetDiv" >
+@Html.Action("IncomeBudgetListAdmin","Budget", new {BudgetYear=@ViewBag.Year})
+    </div>
+
+<div id="ExpenseBudgetDiv">
+@Html.Action("ExpenseBudgetListAdmin","Budget", new {BudgetYear=@ViewBag.Year})
+
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //Add income detail
+        $('#IncomeBudgetDiv').show();
+        $(document).on("click", "#ShowIncomeBudgetButton", function (event) {
+            //close other divs
+            $('#ExpenseBudgetDiv').hide();
+
+            $("#IncomeBudgetDiv").show();
+        });
+
+
+        //Add expense detail
+        $('#ExpenseBudgetDiv').hide();
+        $(document).on("click", "#ShowExpenseBudgetButton", function (event) {
+            //close other divs
+            $('#IncomeBudgetDiv').hide();
+
+            $("#ExpenseBudgetDiv").show();
+        });
+
+
+
+    });
+
+ </script>

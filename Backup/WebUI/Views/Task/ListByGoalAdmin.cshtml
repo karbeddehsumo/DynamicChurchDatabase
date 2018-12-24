@@ -1,0 +1,51 @@
+﻿@model IEnumerable<Domain.task>
+
+<p>@ViewBag.Heading </p>
+<table>
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Assign To
+        </th>
+        <th>
+            AssignDate
+        </th>
+        <th>
+            DueDate
+        </th>
+        <th>
+            Completion Ratio(%)
+        </th>
+        <th>
+            Status
+        </th>
+        
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.member.FullNameTitle)
+        </td>
+        <td>
+            @string.Format("{0}",@item.AssignDate.ToShortDateString())
+        </td>
+        <td>
+             @string.Format("{0}",@item.DueDate.ToShortDateString())
+        </td>
+        <td>
+             @string.Format("{0}",@item.CompletionRatio)
+        </td>
+        <td>
+             @Html.DisplayFor(modelItem => item.Status)
+        </td>
+    </tr>
+}
+
+</table>
+

@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Domain.announcement>
+
+
+<div id="myAnouncement"> 
+@if(@ViewBag.RecordCount > 0)
+{
+    <h3>@ViewBag.Heading</h3>
+  foreach(var i in @Model)
+  {
+       <strong>@i.Title</strong>
+       <p style="font-style:italic">@string.Format("Ministry: {0}",@i.ministry.MinistryName);</p>
+       <p>@i.Message</p>
+    <br />
+   }
+}
+
+</div>

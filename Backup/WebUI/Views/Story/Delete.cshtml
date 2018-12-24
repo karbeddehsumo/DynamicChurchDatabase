@@ -1,0 +1,82 @@
+﻿@model Domain.story
+
+@{
+    ViewBag.Title = "Delete";
+}
+<!--
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>story</legend>
+
+    <div class="display-label">MinistryID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.MinistryID)
+    </div>
+
+    <div class="display-label">Header</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.Header)
+    </div>
+
+    <div class="display-label">StoryLine</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StoryLine)
+    </div>
+
+    <div class="display-label">PictureID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.PictureID)
+    </div>
+
+    <div class="display-label">StoryTypeID</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StoryTypeID)
+    </div>
+
+    <div class="display-label">StoryDate</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.StoryDate)
+    </div>
+
+    <div class="display-label">EnteredBy</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.EnteredBy)
+    </div>
+
+    <div class="display-label">DateEntered</div>
+    <div class="display-field">
+        @Html.DisplayFor(model => model.DateEntered)
+    </div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+-->
+<div id="AjaxFormPane">
+
+<h3>Are you sure you want to delete this record?</h3>
+<p>@string.Format("Story title: {0}",@Model.Header)</p>
+
+@using (Ajax.BeginForm("Delete", "Story", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    <p>
+        <input id="StoryID" name="StoryID" type="hidden"  value="@ViewBag.StoryID"/>
+     <input type="submit" value="Delete" /> <input id="CancelDeleteBtn" name="CancelDeleteBtn" type="button" value="Cancel Delete"/>
+    </p>
+}
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#CancelDeleteBtn').click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+    });
+</script>

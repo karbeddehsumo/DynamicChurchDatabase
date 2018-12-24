@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Domain.meetingagenda>
+
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <caption>List of Agenda</caption>
+@foreach (var item in Model)
+{
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Description)
+        </td>
+         <td>
+                @Ajax.ActionLink("Edit", "Edit", "MeetingAgenda", new { MeetingAgendaID = item.meetingAgendaID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AddAgendaPane" })
+        </td>
+        <td>
+            @Ajax.ActionLink("Delete", "Delete", "MeetingAgenda", new { MeetingAgendaID = item.meetingAgendaID }, new AjaxOptions { HttpMethod = "Post", Confirm = "Are you sure you want to delete this record?", InsertionMode = InsertionMode.Replace, UpdateTargetId = "AddAgendaPane" })
+        </td>
+        <td>
+            @if (@item.HasNotes == false)
+            {
+              @Ajax.ActionLink("Add Notes", "Create", "MeetingNote", new { MeetingAgendaID = item.meetingAgendaID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AddAgendaPane2" })
+            }
+            else
+            {
+              @Ajax.ActionLink("Edit Notes", "Edit", "MeetingNote", new { MeetingAgendaID = item.meetingAgendaID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AddAgendaPane2" })                
+            }
+        </td>
+        <td>
+            @if(@item.TaskID > 0)
+            {
+              @Ajax.ActionLink("Action Item", "Create", "Task", new { goalID = item.task.goalID, parentTaskID = item.TaskID,ActionItemCode=@ViewBag.TaskActionItemCode,Code = "Goal"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AddAgendaPane2" })
+            }
+            else
+            {
+              @Ajax.ActionLink("Action Item", "Create", "Task", new { goalID = @item.meetingAgendaID, parentTaskID = @item.meetingAgendaID, ActionItemCode = @ViewBag.AgendaActionItemCode, Code = "Agenda" }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AddAgendaPane2" })                
+            }
+        </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p>No attendance added yet!</p>   
+}

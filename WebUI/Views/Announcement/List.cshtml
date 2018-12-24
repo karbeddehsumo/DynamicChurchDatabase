@@ -1,0 +1,89 @@
+﻿@model IEnumerable<Domain.announcement>
+
+@{
+    ViewBag.Title = "List";
+}
+<div id="AjaxFormPane" class="slider">
+
+
+
+@if (@ViewBag.RecordCount > 0)
+{
+    if (@ViewBag.ReportType == "Summary")
+    {
+        foreach (var item in Model) 
+        {
+     
+                 <h4>@string.Format("{0})",@item.Title) </h4>
+                 @string.Format("{0}",@item.AnnouncementDate)<br />
+                 @string.Format("{0}",@item.Message)<br />
+                 @string.Format("{0}",@item.ministry.MinistryName)<br />
+     
+                     <hr />
+                 <br />
+
+         }
+    }
+    else{
+<table>
+    <tr>
+        <th>
+            Ministry
+        </th>
+                <th>
+            Title
+        </th>
+        <th>
+            Date
+        </th>
+
+        <th>
+            Message
+        </th>
+        <th>
+            Document
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td style="vertical-align:top">
+            @Html.DisplayFor(modelItem => item.ministry.MinistryName)
+        </td>
+         <td style="vertical-align:top">
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td style="vertical-align:top">
+            @Html.DisplayFor(modelItem => item.AnnouncementDate)
+        </td>
+        <td style="vertical-align:top">
+            @Html.DisplayFor(modelItem => item.Message)
+        </td>
+         <td style="vertical-align:top">
+          @if (@item.DocumentID != null)
+            {
+              @Html.ActionLink("Document", "GetFileFromDisk", "Document", new {DocumentID=@item.DocumentID},  new { target="_blank" })
+            }
+        </td>
+
+              <td style="vertical-align:top">
+                     @Ajax.ActionLink("Edit", "Edit", "Announcement", new {AnnouncementID=item.announcementID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+                </td>
+                <td style="vertical-align:top">
+                    @Ajax.ActionLink("Delete", "Delete", "Announcement", new {AnnouncementID=item.announcementID,CallerType=@ViewBag.CallerType}, new AjaxOptions {Confirm="Do you want to delete this record?",HttpMethod="Post",  InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+                </td>
+    </tr>
+}
+
+</table>
+}
+}
+else
+{
+ <p>No announcement record found!</p>   
+}
+
+
+</div>

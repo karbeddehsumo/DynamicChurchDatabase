@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Domain.bankbalance>
+
+@{
+    ViewBag.Title = "List";
+}
+<div>
+<div id="TopPane">
+
+</div>
+
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <tr>
+        <th>
+            BankAccountID
+        </th>
+        <th>
+            BeginDate
+        </th>
+        <th>
+            EndDate
+        </th>
+        <th>
+            BeginingBalance
+        </th>
+        <th>
+            RevenueAmount
+        </th>
+        <th>
+            ExpenseAmount
+        </th>
+        <th>
+            EndingBalance
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.BankAccountID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BeginDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BeginingBalance)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.RevenueAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ExpenseAmount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EndingBalance)
+        </td>
+            <td>
+                    @Ajax.ActionLink("Edit", "Edit", "BankBalance", new {BankBalanceID=item.BankBalanceID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+            </td>
+            <td>
+                @Ajax.ActionLink("Delete", "Delete", "BankBalance", new {BankBalanceID=item.BankBalanceID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+            </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p>No responsibility added yet!</p>   
+}
+</div>
+

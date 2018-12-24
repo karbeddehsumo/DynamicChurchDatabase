@@ -1,0 +1,91 @@
+﻿@model Domain.picture
+
+@{
+    ViewBag.Title = "Create";
+    
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Html.BeginForm("Create", "Picture", new {}, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center-text">Create New Picture</h2>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Add picture here...</legend>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.ministryID)
+            @Html.ValidationMessageFor(model => model.ministryID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.PictureDate)
+            @Html.TextBoxFor(model => model.PictureDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.PictureDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Description)
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+         @Html.HiddenFor(model => model.ImageMimeType)
+
+        <div class="editor">
+        <label>Upload File</label> 
+        <input id="files" type="file" name="files" multiple />
+            </div>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor">
+             @Html.HiddenFor(model => model.EnteredBy)
+            @Html.ValidationMessageFor(model => model.EnteredBy)
+        </div>
+
+        <div class="editor">
+           @Html.HiddenFor(model => model.DateEntered)
+            @Html.ValidationMessageFor(model => model.DateEntered)
+        </div>
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $("#familyID").change(function (event) {
+            var i = $("#familyID option:selected").text().indexOf('-');
+            $("#LastName").val($("#familyID option:selected").text().substring(0, i - 1));
+            $("#InterestAmount").val(parseFloat(($("#InterestRate").val() / 100) * $("#Amount").val()));
+        });
+
+        $('#ButtonClick').click(function (event) {
+
+        });
+    });
+</script>

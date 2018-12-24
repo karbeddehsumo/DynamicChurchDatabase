@@ -1,0 +1,69 @@
+﻿@model Domain.propertyinventory
+
+@{
+    ViewBag.Title = "Details";
+}
+
+
+
+<h2 class="center-text">View Property Inventory Report</h2>
+<br />
+
+<div>
+
+<div class="float-left">
+    <div style="margin-top:10px">
+        <strong class="float-left">Assigned To</strong>
+        @Html.DropDownList("AssignedToSearch", ViewBag.AssignedToList as SelectList,"")
+    </div>
+</div>
+
+    <div class="float-left">
+    <div style="margin-top:10px">
+        <strong class="float-left">Location</strong>
+        @Html.DropDownList("LocationSearch", ViewBag.PropertyLocationList as SelectList,"")
+    </div>
+</div>
+
+    <div class="float-left">
+    <div style="margin-top:10px">
+        <strong class="float-left">Status</strong>
+        @Html.DropDownList("StatusSearch", ViewBag.StatusList as SelectList,"")
+    </div>
+</div>
+
+    </div>
+
+<br />
+<br />
+
+<div class="CalendarData">
+@Html.Action("List", "PropertyInventory", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate })
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        $("#AssignedToSearch").change(function (event) {
+            var assignedTo = $('#AssignedToSearch option:selected').text();
+            var url = "/PropertyInventory/List";
+            $.get(url, { code: assignedTo.toString(), SearchType: "AssignedToSearch" }, function (data) { $(".CalendarData").html(data) });
+        });
+
+        $("#LocationSearch").change(function (event) {
+            var location = $('#LocationSearch option:selected').text();
+            var url = "/PropertyInventory/List";
+            $.get(url, { code: location.toString(), SearchType: "LocationSearch" }, function (data) { $(".CalendarData").html(data) });
+        });
+        $("#StatusSearch").change(function (event) {
+            var status = $('#StatusSearch option:selected').text();
+            var url = "/ProgramEventBudget/List";
+            $.get(url, { code: status.toString(), SearchType: "StatusSearch" }, function (data) { $(".CalendarData").html(data) });
+
+        });
+
+    });
+
+ </script>

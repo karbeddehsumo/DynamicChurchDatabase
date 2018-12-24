@@ -1,0 +1,105 @@
+﻿@model Domain.product
+
+@{
+    ViewBag.Title = "Edit";
+    
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Edit", "Product", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center-text">Edit product here...</h2>    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>product</legend>
+
+        @Html.HiddenFor(model => model.productID)
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Name)
+            @Html.EditorFor(model => model.Name)
+            @Html.ValidationMessageFor(model => model.Name)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Description)
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Price)
+            @Html.EditorFor(model => model.Price)
+            @Html.ValidationMessageFor(model => model.Price)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Quantity)
+            @Html.EditorFor(model => model.Quantity)
+            @Html.ValidationMessageFor(model => model.Quantity)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.categoryID,"Category")
+            @Html.DropDownListFor(model => model.categoryID, ViewBag.ProductCategoryList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.categoryID)
+        </div>
+
+              <div class="editor">
+            @Html.LabelFor(model => model.EnteredBy,"Entered By")
+            @Html.TextBoxFor(model => model.EnteredBy, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.EnteredBy)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.DateEntered,"Date Entered")
+            @Html.TextBoxFor(model => model.DateEntered, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.DateEntered)
+        </div>
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#Name").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the product name.");
+            }
+            else if ($("#Price").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the product price.");
+            }
+            else if ($("#Quantity").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the product quantity.");
+            }
+            else if ($('#categoryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the product category.");
+            }
+
+        });
+    });
+</script>

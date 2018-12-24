@@ -1,0 +1,43 @@
+﻿<div class="row">
+    <div class="panel">
+    <div class="col-xs-4">
+    <span>Select to edit member record</span><br />
+@Html.ListBox("MemberAllList", ViewBag.MemberListAll as SelectList, new {@class="myListBox",size=40,selectionmode=1 })
+        </div>
+    <div class="col-xs-8">
+        <div class="center">
+        <strong class="center">Update Member Status</strong>
+    <div class="float-left">
+    <input type="button" id="ActivateStatus" value="Make Active"/>
+    <input type="button" id="DeActivateStatus" value="Make Not Active"/>
+    <div id="returnString"></div>
+        </div>
+        </div>
+        </div>
+</div>
+    </div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        //select first record
+        $('#MemberList option:first-child').attr("selected", "selected");
+        //$("#MemberList option:first-child").trigger('click');
+        $("#MemberList").click();
+
+
+        $(document).on("click", "#ActivateStatus", function (event) {
+            var memberid = $('#MemberAllList option:selected').val();
+            var url = "/Member/UpdateStatus";
+            $.get(url, { memberID: memberid.toString(), status: "Active" }, function (data) { $("#returnString").html(data) });
+        });
+
+        $(document).on("click", "#DeActivateStatus", function (event) {
+            var memberid = $('#MemberAllList option:selected').val();
+            var url = "/Member/UpdateStatus";
+            $.get(url, { memberID: memberid.toString(), status: "Inactive" }, function (data) { $("#returnString").html(data) });
+        });
+    });
+
+ </script>

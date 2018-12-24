@@ -1,0 +1,125 @@
+﻿@model IEnumerable<Domain.expense>
+
+@{
+    ViewBag.Title = "List";
+}
+
+
+<div id="AjaxFormPane">
+<h3 class="center">@string.Format("Total Expense: {0:c}",@ViewBag.TotalExpense)</h3>
+@if (@ViewBag.RecordCount > 0)
+{
+    if(@ViewBag.ReportType == "Summary")
+    {
+       <table>
+    <tr>
+         <th>
+            Date
+        </th>
+        <th>
+            Payee
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Fund
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td style="margin-top:10px">
+            @item.ExpenseDate.ToShortDateString()
+        </td>
+        <td>
+            @item.Payee
+        </td>
+        
+        <td style="text-align:right">
+            @string.Format("{0:c}",@item.Amount)
+        </td>
+        <td>
+            @item.subcategory.SubCategoryName
+        </td>
+    </tr>
+}
+</table> 
+    }
+    else
+    {
+<table>
+    <tr>
+         <th>
+            Date
+        </th>
+        <th>
+            Payee
+        </th>
+        <th>
+            Fund
+        </th>
+        <th>
+            Account
+        </th>
+        
+
+        <th>
+            Amount
+        </th>
+        <th>
+            Check
+        </th>
+        <th>
+            Comment
+        </th>
+        @if (@ViewBag.Supervisor1 == true)
+        {
+            <th></th>
+        }
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td style="margin-top:10px">
+            @item.ExpenseDate.ToShortDateString()
+        </td>
+        <td>
+            @item.Payee
+        </td>
+        <td>
+            @item.subcategory.SubCategoryName
+        </td>
+        <td>
+            @item.bankaccount.BankName
+        </td>
+        
+
+        
+        <td style="text-align:right">
+            @string.Format("{0:c}",@item.Amount)
+        </td>
+        <td>
+            @item.CheckNumber
+        </td>
+        <td>
+            @item.Comment
+        </td>
+        @if (@ViewBag.Supervisor1 == true)
+        {
+            <td>
+            @Ajax.ActionLink("Edit", "Edit", "Expense", new {ExpenseID=item.expenseID,RequestType="CommittedUpdate"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })  
+                </td>               
+        }
+
+    </tr>
+}
+</table>
+}
+}
+else
+{
+ <p>No expend record found!</p>   
+}
+</div>
+

@@ -1,0 +1,18 @@
+﻿@model IEnumerable<Domain.video>
+
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+
+<div class="panel">
+    <div>
+<h2 class="center">Video Center</h2>
+        @Ajax.ActionLink("Add Video", "Create", "Video", new {MinistryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "VideoPane" }, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("View Video", "Details", "Video", new {MinistryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "VideoPane" }, new {@id="pageSubTitle"})
+</div>
+<div id="VideoPane">
+@Html.Action("Details", "Video", new {MinistryID=@ViewBag.MinistryID,CallerType=@ViewBag.CallerType})
+</div>
+</div>

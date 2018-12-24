@@ -1,0 +1,347 @@
+﻿@model Domain.propertyinventory
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div id="AjaxFormPane" class="panel">
+    <h2 class="center">Add Property</h2>
+    <div class="center" style="color:red">@TempData["message2"]</div>
+
+    <div class="center">
+@using (Ajax.BeginForm("Create", "PropertyInventory", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+         
+    @Html.ValidationSummary(true)    
+        <fieldset>
+        <legend>Add property</legend>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.propertyID,"Category")
+            @Html.DropDownListFor(model => model.propertyID, ViewBag.PropertyCategoryList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.propertyID)
+        </div>
+
+            <div class="editor">
+            @Html.LabelFor(model => model.Title)
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.purchaseDate,"Date")
+            @Html.TextBoxFor(model => model.purchaseDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.purchaseDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Quantity)
+            @Html.EditorFor(model => model.Quantity)
+            @Html.ValidationMessageFor(model => model.Quantity)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Value,"Value ($)")
+            @Html.EditorFor(model => model.Value)
+            @Html.ValidationMessageFor(model => model.Value)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Location)
+            @Html.DropDownListFor(model => model.Location, ViewBag.PropertyLocationList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Location)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.AssignedTo,"Assigned To")
+            @Html.DropDownListFor(model => model.AssignedTo, ViewBag.AssignedToList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.AssignedTo)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Condition)
+            @Html.DropDownListFor(model => model.Condition, ViewBag.PropertyConditionList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Condition)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.TagNumber,"Tag #")
+            @Html.EditorFor(model => model.TagNumber)
+            @Html.ValidationMessageFor(model => model.TagNumber)
+        </div>
+
+        
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Description)
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Comment)
+            @Html.EditorFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+            @Html.HiddenFor(model => model.PictureID)
+            @Html.HiddenFor(model => model.Status)
+            @Html.HiddenFor(model => model.EnteredBy)
+            @Html.HiddenFor(model => model.DateEntered)
+
+
+               <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+        </div>
+    <div id="FieldSetSubMenu">
+    <a href="#" id="ShowConditionTypeButton" class="mybutton">Add Condition Type</a>
+    <a href="#" id="ShowAssignToButton" class="mybutton">Add assigned to</a>
+    <a href="#" id="ShowLocationButton" class="mybutton">Add location</a>
+    <a href="#" id="ShowCategoryTypeButton" class="mybutton">Add property category</a>
+
+    <div id="PropertyConditionDiv" class="center">
+     @using (Ajax.BeginForm("AddConstant", "Constant", new { @aCategory = "Property Condition" }, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "familyroster"
+            }))
+            {
+                    
+                                 <label>Add Property Condition</label>
+                             <input id="value1" name="value1" class="constantValue"  type="text"/>
+                                 <input id="PropertyConditionSubmit" type="submit" value="Add" />
+
+            }
+        </div>
+    <div id="PropertyAssinToDiv" class="center">
+@using (Ajax.BeginForm("AddConstant", "Constant", new { @aCategory = "Property AssignedTo" }, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "familyroster"
+            }))
+            {
+                    
+                                 <label>Add Person Property Assigned To</label>
+                             <input id="value1" name="value1" class="constantValue"  type="text"/>
+                                 <input id="AssignToSubmit" type="submit" value="Add" />
+
+            }
+        </div>
+
+    <div id="PropertyLocationDiv" class="center">
+    @using (Ajax.BeginForm("AddConstant", "Constant", new { @aCategory = "Property Location" }, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "familyroster"
+            }))
+            {
+                    
+                                 <label>Add Property Location</label>
+                             <input id="value1" name="value1" class="constantValue" type="text"/>
+                                 <input id="LocationSubmit" type="submit" value="Add" />
+
+            }
+
+        </div>
+    <div id="PropertyCategoryDiv" class="center">
+ @using (Ajax.BeginForm("AddConstant", "Constant", new { @aCategory = "Property Category" }, new AjaxOptions
+            {
+                HttpMethod = "Post",
+                InsertionMode = InsertionMode.Replace,
+                UpdateTargetId = "familyroster"
+            }))
+            {
+                    
+                                 <label>Add Property Category</label>
+                             <input id="value1" name="value1" class="constantValue"  type="text"/>
+                                 <input id="CategorySubmit" type="submit" value="Add" />
+
+            }
+        </div>
+        </div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#propertyID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the property category.");
+            }
+           else if ($('#Condition option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the property condition.");
+            }
+           else if ($('#AssignedTo option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the person property assigned to.");
+            }
+            else if ($("#Quantity").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the property quantity.");
+            }
+            else if ($("#Location").val() == 0) {
+                event.preventDefault();
+                alert("Please select the property location.");
+            }
+            else if ($("#Title").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the title of the property.");
+            }
+        });
+
+        //Property condition
+        $('#PropertyConditionDiv').hide();
+        $(document).on("click", "#ShowConditionTypeButton", function (event) {
+            //close other divs
+            $('#PropertyAssinToDiv').hide();
+            $('#PropertyLocationDiv').hide();
+            $('#PropertyCategoryDiv').hide();
+
+            $(".constantValue").val("")
+            $('#PropertyConditionDiv').hide();
+            $("#PropertyConditionDiv").show();
+        });
+        $(document).on("click", "#PropertyConditionSubmit", function (event) {
+            $("#PropertyConditionDiv").hide();
+        });
+
+        //Assigned To
+        $('#PropertyAssinToDiv').hide();
+        $(document).on("click", "#ShowAssignToButton", function (event) {
+            //close other divs
+            $('#PropertyConditionDiv').hide();
+            $('#PropertyLocationDiv').hide();
+            $('#PropertyCategoryDiv').hide();
+
+            $(".constantValue").val("")
+            $('#PropertyAssinToDiv').hide();
+            $("#PropertyAssinToDiv").show();
+        });
+        $(document).on("click", "#AssignToSubmit", function (event) {
+            $("#PropertyAssinToDiv").hide();
+        });
+        //Property location
+        $('#PropertyLocationDiv').hide();
+        $(document).on("click", "#ShowLocationButton", function (event) {
+            //close other divs
+            $('#PropertyAssinToDiv').hide();
+            $('#PropertyConditionDiv').hide();
+            $('#PropertyCategoryDiv').hide();
+
+            $(".constantValue").val("")
+            $('#PropertyLocationDiv').hide();
+            $("#PropertyLocationDiv").show();
+        });
+        $(document).on("click", "#LocationSubmit", function (event) {
+            $("#PropertyLocationDiv").hide();
+        });
+
+        $('#PropertyCategoryDiv').hide();
+        $(document).on("click", "#ShowCategoryTypeButton", function (event) {
+            //close other divs
+            $('#PropertyAssinToDiv').hide();
+            $('#PropertyLocationDiv').hide();
+            $('#PropertyConditionDiv').hide();
+
+            $(".constantValue").val("")
+            $('#PropertyCategoryDiv').hide();
+            $("#PropertyCategoryDiv").show();
+        });
+        $(document).on("click", "#CategorySubmit", function (event) {
+            $("#PropertyCategoryDiv").hide();
+        });
+
+        
+        $(document).on("click", "#propertyIDx", function (event) {
+            $.ajax({
+                url: '@Url.Action("RefreshViewBag", "Constant", new {SearchString="Property Category&S"})',
+                type: 'POST',
+                // data: JSON.stringify(appointment),
+                dataType: 'json',
+                processData: false,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    var result = '';
+                    for (var i = 0, iL = data.length; i < iL; i++) {
+                        result += '<option value="' + data[i].Value + '">' + data[i].Text + '</option>';
+                    }
+                    $("#propertyID").html(result);
+                },
+            });
+        });
+
+        $(document).on("click", "#Locationx", function (event) {
+            $.ajax({
+                url: '@Url.Action("RefreshViewBag", "Constant", new {SearchString="Property Location&S"})',
+                type: 'POST',
+                // data: JSON.stringify(appointment),
+                dataType: 'json',
+                processData: false,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    var result = '';
+                    for (var i = 0, iL = data.length; i < iL; i++) {
+                        result += '<option value="' + data[i].Value + '">' + data[i].Text + '</option>';
+                    }
+                    $("#Location").html(result);
+                },
+            });
+         });
+
+        $(document).on("click", "#AssignedTox", function (event) {
+            $.ajax({
+                url: '@Url.Action("RefreshViewBag", "Constant", new {SearchString="Property AssignedTo&S"})',
+                type: 'POST',
+                // data: JSON.stringify(appointment),
+                dataType: 'json',
+                processData: false,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    var result = '';
+                    for (var i = 0, iL = data.length; i < iL; i++) {
+                        result += '<option value="' + data[i].Value + '">' + data[i].Text + '</option>';
+                    }
+                    $("#AssignedTo").html(result);
+                },
+            });
+        });
+
+        $(document).on("click", "#Conditionx", function (event) {
+            $.ajax({
+                url: '@Url.Action("RefreshViewBag", "Constant", new {SearchString="Property Condition&S"})',
+                type: 'POST',
+                // data: JSON.stringify(appointment),
+                dataType: 'json',
+                processData: false,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    var result = '';
+                    for (var i = 0, iL = data.length; i < iL; i++) {
+                        result += '<option value="' + data[i].Value + '">' + data[i].Text + '</option>';
+                    }
+                    $("#Condition").html(result);
+                },
+            });
+         });
+    });
+</script>

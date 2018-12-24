@@ -1,0 +1,104 @@
+﻿@model IEnumerable<Domain.member>
+
+@{
+    ViewBag.Title = "List";
+}
+
+
+<div id="TopPane" class="slider">
+
+<div id="resultPane"></div>
+
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <caption>@ViewBag.Heading</caption>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>@ViewBag.FieldName</th>
+            @if (@ViewBag.FieldName == "Married Couple")
+            {
+                <th>
+                    Anniversary
+                </th>
+                <th>Joint Tithing</th>
+                <th></th>
+            }
+        </tr>
+
+    </thead>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+        @if ((@ViewBag.FieldName == "Wedding Anniversary") || (@ViewBag.FieldName == "Married Couple"))
+        {
+            @item.spouse.JointTitheTitle
+        }
+        else if (@ViewBag.FieldName == "Address")
+        {
+            @item.LastName
+        }
+        else
+        {
+            @string.Format("{0}",@item.FullNameLastFirstMiddle)
+        }
+        </td>
+        <td>
+        @if (@ViewBag.FieldName == "General")
+        {
+            @item.PhoneList
+        }
+        else if (@ViewBag.FieldName == "Married Couple")
+        {
+            @item.PhoneList
+        }
+        else if (@ViewBag.FieldName == "Birthdate")
+        {
+            @item.DOB.Date.ToString("MMM d")
+        }
+        else if (@ViewBag.FieldName == "Wedding Anniversary")
+        {
+            @string.Format("{0} @ {1} years",@item.spouse.AnniversaryDate.Date.ToString("MMM d"),DateTime.Today.Year-@item.spouse.AnniversaryDate.Year)
+        }
+        else if (@ViewBag.FieldName == "Email")
+        {
+            @item.EmailAddress
+        }
+        else if (@ViewBag.FieldName == "Address")
+        {
+            @item.family.FullAddress
+        }
+        else
+        {
+            @item.PhoneNumber
+        }
+            </td>
+
+         @if (@ViewBag.FieldName == "Married Couple")
+        {
+                     <td>
+            @item.spouse.AnniversaryDate.ToString("m")
+                                 </td>
+             
+                 if(@item.spouse.JointTithe == true)
+                 {
+                     <td>Yes</td>
+                 }
+                 else
+                 {
+                     <td>No</td>
+                 }
+           
+             <td>
+                    @Ajax.ActionLink("Delete", "DeleteSpouse", "Member", new {spouseID=item.spouse.SpouseID}, new AjaxOptions {Confirm = "Do you want to null this marriage?", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "resultPane" })
+             </td>
+        }
+
+     </tr>
+}
+
+</table>
+}
+
+</div>

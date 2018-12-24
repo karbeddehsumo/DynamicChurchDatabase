@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Domain.task>
+
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+
+<div>
+<h2 class="center">Staff Center</h2>
+
+    <div>
+        @Ajax.ActionLink("Add Task", "Create", "Task", new {goalID=@ViewBag.GoalID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+        @Ajax.ActionLink("View Tasks", "Details", "Task", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+    </div>
+
+<div id="RightPane">
+@Html.Action("List", "Task", new {})
+</div>
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+    });
+
+ </script>

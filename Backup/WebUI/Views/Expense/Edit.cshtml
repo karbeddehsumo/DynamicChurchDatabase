@@ -1,0 +1,243 @@
+﻿@model Domain.expense
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div id="AjaxFormPane" >
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+<div class="center">
+@using (Ajax.BeginForm("Edit", "Expense", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center">Edit Expense</h2>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>expense</legend>
+
+        @Html.HiddenFor(model => model.expenseID)
+
+        <div class="editor">
+            @Html.LabelFor(model => model.subCategoryID, "Expense Type")
+            @Html.DropDownListFor(model => model.subCategoryID, ViewBag.SubCategoryList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.subCategoryID)
+        </div>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.bankAccountID)
+            @Html.ValidationMessageFor(model => model.bankAccountID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Payee)
+            @Html.EditorFor(model => model.Payee)
+            @Html.ValidationMessageFor(model => model.Payee)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.ExpenseDate, "Date")
+            @Html.TextBoxFor(model => model.ExpenseDate, new { id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.ExpenseDate)
+        </div>
+        <input id="RequestType" name="RequestType" type="hidden" value="@ViewBag.RequestType"/>
+        @if (@ViewBag.RequestType == "CommittedUpdate")
+        {
+            <div class="editor">
+            @Html.LabelFor(model => model.Amount)
+            @Html.TextBoxFor(model => model.Amount, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.Amount)
+                </div>
+        }
+        else
+        {
+            <div class="editor">
+                @Html.LabelFor(model => model.Amount)
+                @Html.EditorFor(model => model.Amount)
+                @Html.ValidationMessageFor(model => model.Amount)
+            </div>
+        }
+        <div class="editor">
+            @Html.LabelFor(model => model.CheckNumber, "Check Number")
+            @Html.EditorFor(model => model.CheckNumber)
+            @Html.ValidationMessageFor(model => model.CheckNumber)
+        </div>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.Reconcile)
+            @Html.ValidationMessageFor(model => model.Reconcile)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Comment)
+            @Html.EditorFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+        <div class="editor">
+             @Html.LabelFor(model => model.Status)
+            @Html.EditorFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.EnteredBy, "Entered By")
+            @Html.TextBoxFor(model => model.EnteredBy, new { @readonly = "readonly" })
+           @Html.ValidationMessageFor(model => model.EnteredBy)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.DateEntered, "Date Entered")
+            @Html.TextBoxFor(model => model.DateEntered, new { @readonly = "readonly" })
+            @Html.ValidationMessageFor(model => model.DateEntered)
+        </div>
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+    </div>
+@if (@ViewBag.RequestType != "CommittedUpdate")
+{
+    <div class="center">
+  @Html.Action("GetCurrentBankBalance", "BankBalance")
+ </div>
+    <div class="center">
+<table>
+    <caption>Current Bills</caption>
+    <tr>
+        <th>Payee</th>
+        <th>Due Date</th>
+        <th>Amount</th>
+        <th>Total</th>
+    </tr>
+@foreach (Domain.bill i in @ViewBag.PendingBills)
+{
+    <tr>
+        <td>
+        @Ajax.ActionLink(@i.PayeeName, "Create", "Expense", new { payeeID = @i.payeeID, Amount = @i.TotalAmount }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+    </td>
+        <td>
+            @i.DateDue.ToShortDateString()
+        </td>
+        <td style="text-align:right">
+            @string.Format("{0:c}", @i.AmountDue)
+        </td>
+        <td style="text-align:right">
+            @string.Format("{0:c}", @i.TotalAmount)
+        </td>
+    </tr>
+}
+    </table>
+</div>
+   <div class="center">
+<table>
+    <tr>
+
+        <th>
+            Date
+        </th>
+        <th>
+            Payee
+        </th>
+        <th>
+            Fund
+        </th>
+        <th>
+            Account
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Check
+        </th>
+        <th>
+            Comment
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+@foreach (Domain.expense item in @ViewBag.PendingExpenses)
+{
+<tr>
+        <td>
+            @item.ExpenseDate.ToShortDateString()
+        </td>
+        <td>
+            @item.Payee
+        </td>
+        <td>
+            @item.subcategory.SubCategoryName
+        </td>
+        <td>
+            @item.bankaccount.BankName
+        </td>
+           
+        <td>
+            @string.Format("{0:c}", @item.Amount)
+        </td>
+        <td>
+            @item.CheckNumber
+        </td>
+        <td>
+            @item.Comment
+        </td>
+
+                    <td>
+                    @Ajax.ActionLink("Edit", "Edit", "Expense", new { ExpenseID = item.expenseID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+            </td>
+            <td>
+                @Ajax.ActionLink("Delete", "Delete", "Expense", new { ExpenseID = item.expenseID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+            </td>
+
+    </tr> 
+}
+    </table>
+</div>
+}
+    </div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $(function () {
+            $("#Amount").each(function () {
+                this.value = this.value.replace(/,/g, "");
+            }).on('keyup', function () {
+                this.value = this.value.replace(/,/g, "");
+            });
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#subCategoryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the expense type.");
+            }
+            else if ($("#Payee").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the payee.");
+            }
+            else if ($("#Amount").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the amount.");
+            }
+            else if ($("#Amount").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the amount.");
+            }
+        });
+    });
+</script>

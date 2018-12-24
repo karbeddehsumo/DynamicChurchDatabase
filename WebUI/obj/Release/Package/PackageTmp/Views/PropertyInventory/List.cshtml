@@ -1,0 +1,80 @@
+﻿@model IEnumerable<Domain.propertyinventory>
+
+@{
+    ViewBag.Title = "List";
+}
+
+
+<div id="AjaxFormPane" class="center">
+
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <caption>Property List</caption>
+    <tr>
+        <th>
+            Title
+        </th>
+         <th>
+            Assigned To
+        </th>
+        <th>
+            Quantity
+        </th>
+        <th>
+            Location
+        </th>
+        <th>
+            Condition
+        </th>
+        <th>
+            Tag#
+        </th>
+        <th>
+            Comment
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AssignedTo)
+        </td>
+        <td style="text-align:right">
+            @Html.DisplayFor(modelItem => item.Quantity)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Location)
+        </td>
+        
+        <td>
+            @Html.DisplayFor(modelItem => item.Condition)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.TagNumber)
+        </td>
+
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        <td>
+            @Ajax.ActionLink("Edit", "Edit", "PropertyInventory", new {PropertyInventoryID=item.propertyInventoryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+            @Ajax.ActionLink("Delete", "Delete", "PropertyInventory", new {PropertyInventoryID=item.propertyInventoryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane", Confirm="Do you want to delete this record?",HttpMethod="Post" })
+        </td>
+        
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p>No property found!</p>   
+}
+</div>
+
+

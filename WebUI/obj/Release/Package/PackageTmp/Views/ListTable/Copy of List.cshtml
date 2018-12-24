@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Domain.listtable>
+
+@{
+    ViewBag.Title = "List";
+    
+}
+
+<div id="TablePane" class="slider">
+@Ajax.ActionLink("Add Table", "Create", "ListTable", new {ministryID=@ViewBag.MinistryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TablePane" })
+
+
+    <p>List of tables</p>
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+
+
+@foreach (var item in Model) {
+  @Ajax.ActionLink(string.Format("{0}",@item.Title), "List", "ListItem", new {ListTableID=@item.listTableID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TablePane" })<br />
+}
+
+</table>
+}
+else
+{
+ <p>No tables added yet!</p>   
+}
+</div>
+

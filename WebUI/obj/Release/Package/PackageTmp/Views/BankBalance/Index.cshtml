@@ -1,0 +1,17 @@
+﻿@model IEnumerable<Domain.bankbalance>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Banking Balance Center</h2>
+
+<div>
+    <div>
+        @Ajax.ActionLink("New Bank Balance", "Create", "BankBalance", new {BankAccount=1}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+        @Ajax.ActionLink("View Bank Balance", "List", "BankBalance", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+    </div>
+ <div id="RightPane" class="minorContent">
+    @Html.Action("List","BankBalance")
+ </div>
+</div>

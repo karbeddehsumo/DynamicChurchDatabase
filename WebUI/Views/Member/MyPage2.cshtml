@@ -1,0 +1,61 @@
+﻿@model Domain.member
+
+@{
+    ViewBag.Title = "MyPage";
+     Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+<h2 class="center">My Page</h2>
+@Html.ActionLink("Change Password","ChangePassword","Account")
+<div class="row">
+<div id="myPage-leftpane" class="col-xs-12 col-sm-6 col-md-8">
+    <div class="panelSmall clearfix">
+        <Label>My Information</Label>
+               
+
+@Html.Action("MemberDataView","Member")
+
+@Html.Action("ListMember", "Pledge", new {memberID=@Model.memberID})
+
+<div id="MyPagePledge">
+@if (@ViewBag.IsMemberPledgeEntry == "Enable")
+{
+    @Html.Action("Create", "Pledge", new {memberID=@Model.memberID,Year=@ViewBag.MemberPledgeYear})    
+}
+</div>
+<br />
+  @Html.Action("List", "Contribution", new {bDate=@ViewBag.BDate,eDate=@ViewBag.EDate,SearchType="MemberSearch",codeID=@ViewBag.MemberID,CallingMethod="MyPage"})
+    </div>
+
+</div>
+    
+<div id="myPage-rightpane" class="col-xs-12 col-sm-6 col-md-4">
+    <div class="panelSmall2">
+<div class="center">
+    <img class="Portrait-medium" src="@Url.Action("GetMemberImageByID", "Picture",new {memberID=@Model.memberID})" />         
+</div>
+     <p class="center">@Model.FullNameTitle</p>
+@Html.Action("MyMinistry","Ministry")
+<br />
+<div class="center">
+<h2>@Html.ActionLink("View all ministries", "MinistryViewAll", "Ministry", new { },null)</h2>
+        </div>
+<div>
+    <strong class="label label-info center" style="font-size:large">Upcoming Events...</strong>
+@Html.Action("List", "Calendar", new {bDate=@ViewBag.CalendarStartDate,eDate=@ViewBag.CalendarEndDate})
+</div>
+<div>
+    <strong class="label label-success center" style="font-size:large">Announcements</strong>
+    @Html.Action("MyAnnouncement", "Announcement", new {bDate=@ViewBag.CalendarStartDate,eDate=@ViewBag.CalendarEndDate})
+</div>
+<div>
+ <a href="../Story/ChurchNewsPaper2" title="Church Newsletter" ><img src="../../Content/Dreamweaver/images/newspaper-icon.jpg" />Newsletter</a>
+    
+</div>
+</div>
+</div>
+        
+</div>
+
+    

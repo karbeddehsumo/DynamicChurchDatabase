@@ -1,0 +1,34 @@
+﻿
+<script src="../../Scripts/jquery-ui-1.8.20.min.js"></script>
+
+<div class="panel">
+<h2 class="center">Member List</h2><br />
+    <div class="editor center">
+        <label>Category</label>
+        @Html.DropDownList("MemberListSearch", ViewBag.MemberCategoryList as SelectList,"Select Members by Category...")
+        </div>
+
+<div class="IncomeData center">
+    @Html.Action("List", "Member", new {categoryType="Upcoming Birthdays", Date=@ViewBag.BeginDate })
+</div>
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        $("#memberCategoryDiv").show();
+
+        $(document).on("change", "#MemberListSearch", function (event) {
+            var categoryid = $('#MemberListSearch option:selected').val();
+            var category = $('#MemberListSearch option:selected').text();
+            var url = "/Member/List";
+            $.get(url, { Date: "1/1/2015", codeID: categoryid.toString(), categoryType: category.toString() }, function (data) { $(".IncomeData").html(data) });
+
+        });
+
+
+    });
+
+ </script>

@@ -1,0 +1,257 @@
+﻿@model Domain.payee
+
+@{
+    ViewBag.Title = "Create";
+    
+}
+
+
+<div id="AjaxFormPane" class="panel">
+    <div class="center" style="color:red">@TempData["message2"]</div>
+
+ <div class="center"><input id="ShowPayeeTypeButton" value="Add payee type" type="button" /></div>
+    <div id="PayeeTypeDiv" class="center">
+     @using (Ajax.BeginForm("AddConstant", "Constant", new { @aCategory = "Payee Type" }, new AjaxOptions
+     {
+         HttpMethod = "Post",
+         InsertionMode = InsertionMode.Replace,
+         UpdateTargetId = "familyroster"
+     }, new { @title = "Add Payee Classification Type" }))
+     {
+                    
+                                 <label>Add Payee Type</label>
+                             <input id="value1" name="value1"  type="text"/>
+                                 <input id="PayeeTypeSubmitID" type="submit" value="Add" />
+                                 <input id="closeSubmitButton" type="button" value="Close"/>
+
+     }
+                </div>
+    <div class="center">
+@using (Ajax.BeginForm("Create", "Payee", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center">Add Payee</h2>
+<br />
+
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Add new payee...</legend>
+        @Html.HiddenFor(model => model.BankAccountID)
+
+        <div class="editor">
+            @Html.LabelFor(model => model.SubCategoryID, "Category")
+            @Html.DropDownListFor(model => model.SubCategoryID, ViewBag.SubCategoryList as SelectList, "Select Fund Category...")
+            @Html.ValidationMessageFor(model => model.SubCategoryID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.PayeeTypeID, "Payee Type")
+            @Html.DropDownListFor(model => model.PayeeTypeID, ViewBag.PayeeTypeList as SelectList, "Select Payee Type...")
+            @Html.ValidationMessageFor(model => model.PayeeTypeID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.AccountNumber, "Account Number")
+            @Html.EditorFor(model => model.AccountNumber)
+            @Html.ValidationMessageFor(model => model.AccountNumber)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.PayeeName, "Payee Name")
+            @Html.EditorFor(model => model.PayeeName)
+            @Html.ValidationMessageFor(model => model.PayeeName)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.PhoneNumber, "Phone Number")
+            @Html.EditorFor(model => model.PhoneNumber)
+            @Html.ValidationMessageFor(model => model.PhoneNumber)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Email)
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.URL)
+            @Html.EditorFor(model => model.URL)
+            @Html.ValidationMessageFor(model => model.URL)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Frequency)
+            @Html.DropDownListFor(model => model.Frequency, ViewBag.FrequencyList as SelectList, "Select Payment Frequency...")
+            @Html.ValidationMessageFor(model => model.Frequency)
+        </div>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Description)
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+        @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+    
+   
+
+
+}
+        </div>
+    <div class="center">
+@if (ViewBag.RecordCount > 0)
+   {
+        <table>
+            <caption>Active Payee List</caption>
+            
+    <tr>
+        <th>
+            Payee
+        </th>
+        <th>
+            Account #
+        </th>
+        <th>
+            Phone #
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Category
+        </th>
+        <th>
+            Frequency
+        </th>
+        <th>
+            Description
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in @ViewBag.PayeeList)
+{
+    <tr>
+         <td>
+            @item.PayeeName
+        </td>
+        <td>
+            @item.AccountNumber
+        </td>
+        <td>
+            @item.PhoneNumber
+        </td>
+        <td>
+            @item.Email
+        </td>
+        <td>
+            @item.subcategory.SubCategoryName
+        </td>
+        <td>
+            @item.Frequency
+        </td>
+        <td>
+            @item.Description
+        </td>
+        <td>    
+            @Ajax.ActionLink("Edit", "Edit", "Payee", new { PayeeID = item.payeeID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+            </td>
+        <td>
+            @Ajax.ActionLink("Delete", "Delete", "Payee", new { PayeeID = item.payeeID }, new AjaxOptions {Confirm = "Do you want to delete this record?", HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+        </td>
+    </tr>
+}
+
+</table>
+   }
+   else
+   {
+  <p>No payee entered yet.</p>
+   }
+        </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        //fund type
+        $('#PayeeTypeDiv').hide();
+        $(document).on("click", "#ShowPayeeTypeButton", function (event) {
+            $('#PayeeTypeDiv').hide();
+            $("#value1").val("")
+            $("#PayeeTypeDiv").show();
+        });
+        $(document).on("click", "#PayeeTypeSubmitID", function (event) {
+            $("#PayeeTypeDiv").hide();
+        });
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $("#closeSubmitButton").click(function (event) {
+            $("#PayeeTypeDiv").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#SubCategoryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the category.");
+            }
+            else if ($('#PayeeTypeID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the payee type.");
+            }
+            else if ($("#AccountNumber").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the account number.");
+            }
+            else if ($("#PayeeName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the payee name.");
+            }
+            else if ($("#PayeeName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the payee name.");
+            }
+            else if ($('#Frequency option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the frequency.");
+            }
+        });
+
+        $(document).on("click", "#PayeeTypeID", function (event) {
+            $.ajax({
+                url: '@Url.Action("RefreshViewBag", "Constant", new { SearchString = "Payee Type&Z" })',
+                type: 'POST',
+                // data: JSON.stringify(appointment),
+                dataType: 'json',
+                processData: false,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    var result = '';
+                    for (var i = 0, iL = data.length; i < iL; i++) {
+                        result += '<option value="' + data[i].Value + '">' + data[i].Text + '</option>';
+                    }
+                    $("#PayeeTypeID").html(result);
+                },
+            });
+         });
+
+    });
+</script>

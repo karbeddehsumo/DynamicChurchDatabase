@@ -1,0 +1,92 @@
+﻿@model Domain.bankbalance
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Create", "BankBalance", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new {@class="center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h2 class="center-text">Create New Bank Balance</h2>
+<br />
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Add bank balance...</legend>
+
+        <div class="editor-label">
+            @Html.HiddenFor(model => model.BankAccountID)
+            @Html.ValidationMessageFor(model => model.BankAccountID)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BeginDate)
+            @Html.TextBoxFor(model => model.BeginDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.BeginDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EndDate)
+            @Html.TextBoxFor(model => model.EndDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker2" })
+            @Html.ValidationMessageFor(model => model.EndDate)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.BeginingBalance)
+            @Html.EditorFor(model => model.BeginingBalance)
+            @Html.ValidationMessageFor(model => model.BeginingBalance)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.RevenueAmount)
+            @Html.EditorFor(model => model.RevenueAmount)
+            @Html.ValidationMessageFor(model => model.RevenueAmount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.ExpenseAmount)
+            @Html.EditorFor(model => model.ExpenseAmount)
+            @Html.ValidationMessageFor(model => model.ExpenseAmount)
+        </div>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.EndingBalance)
+            @Html.EditorFor(model => model.EndingBalance)
+            @Html.ValidationMessageFor(model => model.EndingBalance)
+        </div>
+      <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+          <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+    </div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#BankName").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the bank name.");
+            }
+            else if ($("#AccountNumber").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the bank account number (i.e. xxxxxxxxx285).");
+            }
+        });
+
+    });
+</script>

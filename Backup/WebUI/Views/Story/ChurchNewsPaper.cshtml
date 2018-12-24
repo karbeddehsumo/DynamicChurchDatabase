@@ -1,0 +1,36 @@
+﻿@model IEnumerable<Domain.story>
+
+@{
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+<script src="../../Scripts/jquery-1.7.1.min.js"></script>
+<div class="panel">
+    <div id="returnMyPage" class="center">@Html.ActionLink("Return to My Page", "MyPage2", "Member")</div>
+<div id="NewspaperBanner" class="bottom-rounded">
+    <h2 id="NewspaperTitle">@ViewBag.NewsPaperTitle</h2>
+    <h3 class="center">@ViewBag.TodayDate</h3><br />
+</div>
+<div class="row">
+    <div class="col-xs-12 col-sm-6 col-md-4">
+        @Html.Action("BirthdayAnniversaryList", "Member", new {Date=@ViewBag.TodayDate,categoryType="Upcoming Birthdays"})
+        @Html.Action("BirthdayAnniversaryList", "Member", new {Date=@ViewBag.TodayDate,categoryType="Wedding Anniversary"})
+        <br />
+        <strong class="label label-success center" style="font-size:large">Announcements</strong>
+        @Html.Action("GeneralAnnouncement", "Announcement")
+        <strong class="label label-info center" style="font-size:large">Upcoming Calendar</strong>
+        @Html.Action("List", "Calendar", new {bDate=@ViewBag.BeginDate2,eDate=@ViewBag.EndDate2})
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-8">
+       <div id="newspaper-rightpane" class="center">
+        @foreach(Domain.story s in @Model)
+        {
+           <br /><br />
+        if (s.picture != null){@Html.Partial("DisplayPictureLarge",s.picture)}
+        <strong class="StoryTitle center">@s.Header</strong>
+        <span id="StoryDate"><b>@string.Format("Date: {0} ",@s.StoryDate.ToString("dddd d MMM yyyy"))</b></span>
+        <p id="StoryLine">@s.StoryLine<span>&#8224;</span></p>
+        }
+    </div>
+    </div>
+</div>
+    </div>

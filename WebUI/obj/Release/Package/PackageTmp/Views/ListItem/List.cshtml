@@ -1,0 +1,372 @@
+﻿@model IEnumerable<Domain.listitem>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<div id="AjaxFormPane">
+<div id="ListItemPane"></div>
+<table>
+    <caption style="text-align:center">@ViewBag.TableName</caption>
+    <thead>
+        <tr>
+            @if (@ViewBag.Header.FieldName1 != "")
+           {
+           <th  style="width:10%;text-align:center;">@ViewBag.Header.FieldName1</th>
+            }
+
+            @if (@ViewBag.Header.FieldName2 != "")
+           {
+            <th  style="width:10%;text-align:center;">@ViewBag.Header.FieldName2</th>
+            }
+            @if (@ViewBag.Header.FieldName3 != "")
+           {
+            <th  style="width:10%;text-align:center;">@ViewBag.Header.FieldName3</th>
+            }
+
+            @if (@ViewBag.Header.FieldName4 != "")
+           {
+            <th  style="width:10%;text-align:center;">@ViewBag.Header.FieldName4</th>
+            }
+        @if (@ViewBag.Header.FieldName5 != "")
+        {
+            <th  style="width:10%;text-align:center;">@ViewBag.Header.FieldName5</th>
+        }
+            @if (@ViewBag.Header.FieldName6 != "")
+           {
+            <th  style="width:10%;text-align:center;">@ViewBag.Header.FieldName6</th>
+            }
+        @if (@ViewBag.Header.FieldName7 != "")
+           {
+            <th  style="width:10%;text-align:center;">@ViewBag.Header.FieldName7</th>
+        }
+       @if (@ViewBag.Header.FieldName8 != "")
+           {
+            <th  style="width:10%;text-align:center;">@ViewBag.Header.FieldName8</th>
+       }
+
+       @if (@ViewBag.Header.FieldName9 != "")
+       {
+            <th  style="width:10%;text-align:center;">@ViewBag.Header.FieldName9</th>
+       }
+       @if (@ViewBag.Header.FieldName10 != "")
+       {
+             <th  style="width:10%;text-align:center;">@ViewBag.Header.FieldName10</th>
+       }
+       @if (@ViewBag.HasComment == true)
+       {
+            <th  style="width:10%;text-align:center;">Comment</th>
+       }
+            @if ((@ViewBag.Supervisor == true) || (@ViewBag.CanEdit == true))
+        {
+            <th  style="width:10%;text-align:center;"></th>
+            }
+        </tr>
+    </thead>
+
+@foreach (var item in Model) {
+    <tr>
+        @if (@ViewBag.Header.FieldName1 != "")
+           {
+                if (@ViewBag.Header.Type1 == "Date")
+                {
+                    <td>
+                        @string.Format("{0:MMMM dd}",@item.Value1)
+                    </td>
+                }
+                else if (@ViewBag.Header.Type1 == "Money")
+                {
+                    <td style="text-align:right">
+                        @string.Format("${0:c}",@item.Value1)
+                    </td>
+                }
+                else if (@ViewBag.Header.Type1 == "Integer")
+                {
+                    <td style="text-align:right">
+                        @string.Format(@item.Value1)
+                    </td>
+                }
+            else
+                {
+            <td>
+                @Html.DisplayFor(modelItem => item.Value1)
+            </td>
+            }
+        }
+
+        @if (@ViewBag.Header.FieldName2 != "")
+           {
+             if (@ViewBag.Header.Type2 == "Date")
+                {
+                    <td>
+                       @string.Format("{0}",Convert.ToDateTime(@item.Value2).ToString("MMMM d yyyy"))
+                    </td>
+                }
+                 else if (@ViewBag.Header.Type2 == "Money")
+                {
+                    <td style="text-align:right">
+                        @string.Format("${0:c}",@item.Value2)
+                    </td>
+                }
+                else if (@ViewBag.Header.Type2 == "Integer")
+                {
+                    <td style="text-align:right">
+                        @string.Format(@item.Value2)
+                    </td>
+                }
+            else
+                {
+        <td>
+            @Html.DisplayFor(modelItem => item.Value2)
+        </td>
+        }
+        }
+
+        @if (@ViewBag.Header.FieldName3 != "")
+           {
+             if (@ViewBag.Header.Type3 == "Date")
+                {
+                    <td>
+                        @string.Format("{0}",Convert.ToDateTime(@item.Value3).ToString("MMMM d yyyy"))
+                    </td>
+                }
+                 else if (@ViewBag.Header.Type3 == "Money")
+                {
+                    <td style="text-align:right">
+                        @string.Format("${0:c}",@item.Value3)
+                    </td>
+                }
+                else if (@ViewBag.Header.Type3 == "Integer")
+                {
+                    <td style="text-align:right">
+                        @string.Format(@item.Value3)
+                    </td>
+                }
+            else
+                {
+        <td>
+            @Html.DisplayFor(modelItem => item.Value3)
+        </td>
+        }
+            
+        }
+
+        @if (@ViewBag.Header.FieldName4 != "")
+           {
+             if (@ViewBag.Header.Type4 == "Date")
+                {
+                    <td>
+                         @string.Format("{0}",Convert.ToDateTime(@item.Value4).ToString("MMMM d yyyy"))
+                    </td>
+                }
+                 else if (@ViewBag.Header.Type4 == "Money")
+                {
+                    <td style="text-align:right">
+                        @string.Format("${0:c}",@item.Value4)
+                    </td>
+                }
+                else if (@ViewBag.Header.Type4 == "Integer")
+                {
+                    <td style="text-align:right">
+                        @string.Format(@item.Value4)
+                    </td>
+                }
+            else
+                {
+        <td>
+            @Html.DisplayFor(modelItem => item.Value4)
+        </td>
+        }
+        }
+
+        @if (@ViewBag.Header.FieldName5 != "")
+           {
+             if (@ViewBag.Header.Type5 == "Date")
+                {
+                    <td>
+                        @string.Format("{0}",Convert.ToDateTime(@item.Value5).ToString("MMMM d yyyy"))
+                    </td>
+                }
+                 else if (@ViewBag.Header.Type5 == "Money")
+                {
+                    <td style="text-align:right">
+                        @string.Format("${0:c}",@item.Value5)
+                    </td>
+                }
+                else if (@ViewBag.Header.Type5 == "Integer")
+                {
+                    <td style="text-align:right">
+                        @string.Format(@item.Value5)
+                    </td>
+                }
+            else
+                {
+        <td>
+            @Html.DisplayFor(modelItem => item.Value5)
+        </td>
+        }
+        }
+
+        @if (@ViewBag.Header.FieldName6 != "")
+           {
+             if (@ViewBag.Header.Type6 == "Date")
+                {
+                    <td>
+                         @string.Format("{0}",Convert.ToDateTime(@item.Value6).ToString("MMMM d yyyy"))
+                    </td>
+                }
+                 else if (@ViewBag.Header.Type6 == "Money")
+                {
+                    <td style="text-align:right">
+                        @string.Format("${0:c}",@item.Value6)
+                    </td>
+                }
+                else if (@ViewBag.Header.Type6 == "Integer")
+                {
+                    <td style="text-align:right">
+                        @string.Format(@item.Value6)
+                    </td>
+                }
+            else
+                {
+        <td>
+            @Html.DisplayFor(modelItem => item.Value6)
+        </td>
+        }
+        }
+
+        @if (@ViewBag.Header.FieldName7 != "")
+           {
+             if (@ViewBag.Header.Type7 == "Date")
+                {
+                    <td>
+                         @string.Format("{0}",Convert.ToDateTime(@item.Value7).ToString("MMMM d yyyy"))
+                    </td>
+                }
+                 else if (@ViewBag.Header.Type7 == "Money")
+                {
+                    <td style="text-align:right">
+                        @string.Format("${0:c}",@item.Value7)
+                    </td>
+                }
+                else if (@ViewBag.Header.Type7 == "Integer")
+                {
+                    <td style="text-align:right">
+                        @string.Format(@item.Value7)
+                    </td>
+                }
+            else
+                {
+        <td>
+            @Html.DisplayFor(modelItem => item.Value7)
+        </td>
+        }
+        
+        }
+
+        @if (@ViewBag.Header.FieldName8 != "")
+           {
+             if (@ViewBag.Header.Type8 == "Date")
+                {
+                    <td>
+                         @string.Format("{0}",Convert.ToDateTime(@item.Value8).ToString("MMMM d yyyy"))
+                    </td>
+                }
+                 else if (@ViewBag.Header.Type8 == "Money")
+                {
+                    <td style="text-align:right">
+                        @string.Format("${0:c}",@item.Value8)
+                    </td>
+                }
+                else if (@ViewBag.Header.Type8 == "Integer")
+                {
+                    <td style="text-align:right">
+                        @string.Format(@item.Value8)
+                    </td>
+                }
+            else
+                {
+        <td>
+            @Html.DisplayFor(modelItem => item.Value8)
+        </td>
+        }
+        }
+
+
+        @if (@ViewBag.Header.FieldName9 != "")
+           {
+             if (@ViewBag.Header.Type9 == "Date")
+                {
+                    <td>
+                         @string.Format("{0}",Convert.ToDateTime(@item.Value9).ToString("MMMM d yyyy"))
+                    </td>
+                }
+                 else if (@ViewBag.Header.Type9 == "Money")
+                {
+                    <td style="text-align:right">
+                        @string.Format("${0:c}",@item.Value9)
+                    </td>
+                }
+                else if (@ViewBag.Header.Type9 == "Integer")
+                {
+                    <td style="text-align:right">
+                        @string.Format(@item.Value9)
+                    </td>
+                }
+            else
+                {
+        <td>
+            @Html.DisplayFor(modelItem => item.Value9)
+        </td>
+        }
+        }
+
+        @if (@ViewBag.Header.FieldName10 != "")
+           {
+             if (@ViewBag.Header.Type10 == "Date")
+                {
+                    <td>
+                         @string.Format("{0}",Convert.ToDateTime(@item.Value10).ToString("MMMM d yyyy"))
+                    </td>
+                }
+                 else if (@ViewBag.Header.Type10 == "Money")
+                {
+                    <td style="text-align:right">
+                        @string.Format("${0:c}",@item.Value10)
+                    </td>
+                }
+                else if (@ViewBag.Header.Type10 == "Integer")
+                {
+                    <td style="text-align:right">
+                        @string.Format(@item.Value10)
+                    </td>
+                }
+            else
+                {
+        <td>
+            @Html.DisplayFor(modelItem => item.Value10)
+        </td>
+        }
+        }
+        @if (@ViewBag.HasComment == true)
+       {        
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+        }
+        @if ((@ViewBag.Supervisor == true) || (@ViewBag.CanEdit == true))
+        {
+            <td>
+                    @Ajax.ActionLink("Edit", "Edit", "ListItem", new {ListItemID=item.listItemID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ListItemPane" })
+                @Ajax.ActionLink("Delete", "Delete", "ListItem", new {ListItemID=item.listItemID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane", Confirm = "Do you want to delete this record?",HttpMethod = "Post" })
+            </td>
+        }
+    </tr>
+   
+
+}
+
+
+</table>
+
+    </div>

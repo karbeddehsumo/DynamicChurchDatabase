@@ -1,0 +1,25 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+<h2>Payee Center</h2>
+
+    <div>
+        @Ajax.ActionLink("Add Payee", "Create", "Payee", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane2" })
+        @Ajax.ActionLink("View Payee", "List", "Payee", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane2" })
+    </div>
+        <div id="RightPane2">
+        @Html.Action("List", "Payee", new { })
+        </div>
+ 
+       
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+    });
+    </script>
+

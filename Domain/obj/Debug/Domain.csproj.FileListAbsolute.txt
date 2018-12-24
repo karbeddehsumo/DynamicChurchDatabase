@@ -1,0 +1,41 @@
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Domain.dll.config
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Domain.dll
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Domain.pdb
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Antlr3.Runtime.dll
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\EntityFramework.dll
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Mvc.Mailer.dll
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Newtonsoft.Json.dll
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Ninject.dll
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Ninject.Web.Common.dll
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\WebActivatorEx.dll
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\WebGrease.dll
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Antlr3.Runtime.pdb
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\EntityFramework.xml
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Newtonsoft.Json.xml
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Ninject.xml
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Ninject.Web.Common.xml
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\obj\Debug\Domain.dll
+C:\Users\Fumbah Software\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\obj\Debug\Domain.pdb
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Domain.dll.config
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Domain.dll
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Domain.pdb
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Antlr3.Runtime.dll
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\EntityFramework.dll
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Microsoft.Web.Infrastructure.dll
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Mvc.Mailer.dll
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\MySql.Data.dll
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\MySql.Data.Entity.dll
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Newtonsoft.Json.dll
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Ninject.dll
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Ninject.Web.Common.dll
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\WebActivatorEx.dll
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\WebGrease.dll
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Antlr3.Runtime.pdb
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\EntityFramework.xml
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Newtonsoft.Json.xml
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Ninject.xml
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\bin\Debug\Ninject.Web.Common.xml
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\obj\Debug\Domain.csprojResolveAssemblyReference.cache
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\obj\Debug\Domain.dll
+C:\Users\fumba\Documents\Visual Studio 2012\Projects\ChurchDatabase\Domain\obj\Debug\Domain.pdb

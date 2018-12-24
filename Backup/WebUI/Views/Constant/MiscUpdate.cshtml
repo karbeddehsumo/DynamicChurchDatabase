@@ -1,0 +1,68 @@
+﻿@model Domain.constant
+
+<div>
+
+     @using (Ajax.BeginForm("UpConstant", "Constant", new { @aCategory = Model.Category }, new AjaxOptions
+     {
+         HttpMethod = "Post",
+         InsertionMode = InsertionMode.Replace,
+         UpdateTargetId = "familyroster"
+     }))
+     {
+                  <div style="display:inline-block">
+                      @Html.LabelFor(model => model.Category,Model.Category) (@Html.LabelFor(model => model.ConstantName,Model.ConstantName))
+            @Html.HiddenFor(model => model.Category)
+            @Html.HiddenFor(model => model.ConstantName)
+           @Html.HiddenFor(model => model.SortOrder)
+         
+
+        @if (@ViewBag.Value1 == true)
+        {
+        <div class="form-group">
+            <label style="color:red">Update this Value</label>
+            @Html.EditorFor(model => model.Value1)
+            @Html.ValidationMessageFor(model => model.Value1)
+        </div>
+        }
+     else
+     {
+            @Html.HiddenFor(model => model.Value1)
+        }
+
+         @if (@ViewBag.Value2 == true)
+        {
+        <div class="form-group">
+            <label style="color:red">Update this Value</label>
+            @Html.EditorFor(model => model.Value2)
+            @Html.ValidationMessageFor(model => model.Value2)
+        </div>
+     }
+     else{
+             @Html.HiddenFor(model => model.Value2)
+         }
+
+          @if (@ViewBag.Value3 == true)
+        {
+        <div class="form-group">
+            <label style="color:red">Update this Value</label>
+            @Html.EditorFor(model => model.Value3)
+            @Html.ValidationMessageFor(model => model.Value3)
+        </div>
+     }
+     else{
+              @Html.HiddenFor(model => model.Value3)
+          }
+       <input type="submit" value="Update" />
+
+         @Html.HiddenFor(model => model.Status)
+       @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+
+         
+             </div>
+     }
+        
+        </div>
+
+
+

@@ -1,0 +1,80 @@
+﻿@model Domain.meetingnote
+
+@{
+    ViewBag.Title = "Edit";
+    
+}
+
+<div id="AjaxFormPane">
+    <div class="center-text" style="color:red">@TempData["message2"]</div>
+
+
+@using (Ajax.BeginForm("Edit", "MeetingNote", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }, new { @class = "center border", @style = "padding-left:60px;width:90%;" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>@string.Format("Edit Notes:({0}) ",@ViewBag.Heading)</legend>
+
+        @Html.HiddenFor(model => model.meetingNoteID)
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.MeetingAgendaID)
+            @Html.ValidationMessageFor(model => model.MeetingAgendaID)
+        </div>
+
+        <div class="editor">
+            @Html.TextAreaFor(model => model.Note, new {cols="85", rows="22", wrap="virtual"})
+            @Html.ValidationMessageFor(model => model.Note)
+        </div>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.NoteDate)
+            @Html.ValidationMessageFor(model => model.NoteDate)
+        </div>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.Status)
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.EnteredBy)
+            @Html.ValidationMessageFor(model => model.EnteredBy)
+        </div>
+
+        <div class="editor">
+            @Html.HiddenFor(model => model.DateEntered)
+            @Html.ValidationMessageFor(model => model.DateEntered)
+        </div>
+
+       <div id="formSubmitButton">
+            <input id="ButtonClick" type="submit" value="Save" />
+           <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($("#Note").val() == 0) {
+                event.preventDefault();
+                alert("Please enter meeting notes.");
+            }
+
+        });
+    });
+</script>

@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Domain.announcement>
+
+<div id="myPane" >
+    @if (((ViewBag.Supervisor == true) || (ViewBag.Supervisor2 == true)) && (@ViewBag.Requestor=="Officer"))
+    {
+        @Ajax.ActionLink("Add Announcement", "Create", "Announcement", new {ministryID=@ViewBag.MinistryID,CallerType="Officer"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane"}, new {@id="pageSubTitle"})
+    }
+@if (@ViewBag.RecordCount > 0)
+{
+    <h3>@ViewBag.Heading</h3>
+  foreach(var i in @Model)
+  {
+      <div id="myAnouncement">
+       <strong>@i.Title - @string.Format("(Posted: {0})",@i.DateEntered.ToString("ddd MMM d"))</strong>
+          <p style="font-style:italic">@string.Format("Ministry: {0}",@i.ministry.MinistryName);</p>
+
+       <p>@i.Message
+           @if (((ViewBag.Supervisor == true) || (ViewBag.Supervisor2 == true)) && (@ViewBag.Requestor == "Officer"))
+         {
+            @Ajax.ActionLink("Edit", "Edit", "Announcement", new {AnnouncementID=@i.announcementID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane"})
+         }
+       </p>
+          </div>
+    <br />
+   }
+}
+</div>
+
+

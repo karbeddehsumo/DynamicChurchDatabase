@@ -1,0 +1,54 @@
+﻿@model IEnumerable<Domain.pledge>
+<div>
+<h3 class="center">Pledges</h3>
+    <div class="center">
+     @if(@ViewBag.RecordCount > 0)
+     {
+<table class="table table-striped table-hover table-condensed">
+    <caption>My Pledges</caption>
+    <tr>
+        <th>
+            Fund
+        </th>
+         <th>
+            Type
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            Year
+        </th>
+        <th>
+           Percent Paid
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FundName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td style="text-align:right">
+            @string.Format("{0:c}",@item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PledgeYear)
+        </td>
+        <td style="text-align:right">
+            @string.Format("{0:p2}",@item.RatioCompleted)
+        </td>
+    </tr>
+}
+
+</table>
+     }
+    else
+    {
+         <p>No pledges added yet</p>
+     }
+        </div>
+</div>

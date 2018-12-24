@@ -1,0 +1,43 @@
+﻿@model Domain.constant
+
+@{
+    ViewBag.Title = "Details";
+    
+}
+
+
+<div id="AjaxFormPane" class="panel">
+<div class="center">
+    <strong class="center">Select your search</strong>
+    @Html.DropDownList("CategorySearch", ViewBag.CategoryList as SelectList, "Choose Category...")
+     @Html.DropDownList("Status", ViewBag.StatusList as SelectList, "Choose Status...")
+</div>
+
+    <div id="DataPane">
+    @Html.Action("List", "Constant", new {})
+</div>
+    </div>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $(document).on("change", "#CategorySearch", function (event) {
+            var code = $("#CategorySearch option:selected").text();
+            var url = "/Constant/List";
+            $("#Status").val("Choose Status...");
+
+            $.get(url, { SearchType: "CategorySearch", codeName: code.toString() }, function (data) { $("#DataPane").html(data) });
+
+        });
+
+
+        $(document).on("change", "#Status", function (event) {
+            var code = $("#Status option:selected").text();
+            var url = "/Constant/List";
+            $("#CategorySearch").val("Choose Category...");
+            $.get(url, { SearchType: "StatusSearch", codeName: code.toString() }, function (data) { $("#DataPane").html(data) });
+
+        });
+
+    });
+</script>

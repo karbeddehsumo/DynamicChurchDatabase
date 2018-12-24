@@ -1,0 +1,29 @@
+﻿@model IEnumerable<Domain.programeventbudget>
+
+@{
+    ViewBag.Title = "Index";
+    
+}
+
+
+
+<h2 class="center-text">Event Budget Center</h2>
+<br />
+
+    <div>
+        @Ajax.ActionLink("Add Event Budget", "Create", "ProgramEventBudget", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+        @Ajax.ActionLink("View Event Budget", "Details", "ProgramEventBudget", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "RightPane" })
+    </div>
+
+<div id="RightPane">
+@Html.Action("List", "ProgramEventBudget", new {})
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+    });
+
+ </script>

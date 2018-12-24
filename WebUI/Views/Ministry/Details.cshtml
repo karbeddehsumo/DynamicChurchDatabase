@@ -1,0 +1,34 @@
+﻿@model Domain.ministry
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<div id="AjaxFormPane"  class="panel">
+
+<h2 class="center">Ministry List</h2>
+
+<div class="center">
+@Html.DropDownList("MinistrySearch", ViewBag.StatusList as SelectList,"Select Ministry By Status...")
+</div>
+
+<div class="MinistryData">
+@Html.Action("List", "Ministry", new {status="Active"})
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        $("#MinistrySearch").change(function (event) {
+            var status = $('#MinistrySearch option:selected').val();
+            var url = "/Ministry/List";
+            $.get(url, { Status: status.toString() }, function (data) { $(".MinistryData").html(data) });
+        });
+
+    });
+
+ </script>

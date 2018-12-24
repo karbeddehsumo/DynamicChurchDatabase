@@ -1,0 +1,41 @@
+﻿@model IEnumerable<Domain.video>
+
+@{
+    ViewBag.Title = "List";
+    
+}
+
+
+<div id="AjaxFormPane">
+
+@if (@ViewBag.RecordCount > 0)
+{
+
+<table>
+
+
+@foreach (var item in Model) {
+    <tr>
+
+        <td>
+            @Ajax.ActionLink(@item.VideoTitle, "DisplayVideo", "Video", new {url=item.URL}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+        </td>
+            <td>
+                @Ajax.ActionLink("Edit", "Edit", "Video", new {VideoID=item.videoID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+            </td>
+            <td>
+                @Ajax.ActionLink("Delete", "Delete", "Video", new {VideoID=item.videoID,CallerType=@ViewBag.CallerType}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane", Confirm="Do you want to delete this record?", HttpMethod="Post" })
+            </td>
+    </tr>
+}
+
+</table>
+ 
+}
+else
+{
+ <p>No video added yet!</p>   
+}
+</div>
+
+

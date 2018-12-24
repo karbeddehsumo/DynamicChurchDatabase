@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Domain.pledge>
+
+@{
+    ViewBag.Title = "List";
+    
+}
+
+<div id="AjaxFormPane">
+<div class="center">
+
+</div>
+
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <tr>
+        <th>
+            memberID
+        </th>
+        <th>
+            Type
+        </th>
+        <th>
+            FundName
+        </th>
+        <th>
+            Amount
+        </th>
+        <th>
+            PledgeYear
+        </th>
+        <th>
+            EnteredBy
+        </th>
+        <th>
+            DateEntered
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.memberID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Type)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FundName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PledgeYear)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnteredBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateEntered)
+        </td>
+               <td>
+                     @Ajax.ActionLink("Edit", "Edit", "Pledge", new {PledgeID=item.pledgeID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+                </td>
+                <td>
+                    @Ajax.ActionLink("Delete", "Delete", "Pledge", new {PledgeID=item.pledgeID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+                </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+<p>No pledges added yet</p>
+}
+</div>
+

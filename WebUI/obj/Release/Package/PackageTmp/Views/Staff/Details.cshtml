@@ -1,0 +1,35 @@
+﻿@model Domain.staff
+
+@{
+    ViewBag.Title = "Details";
+  
+}
+
+
+<div id="AjaxFormPane" class="panel">
+<h2 class="center">Staff List</h2><br />
+<div class="center">
+        @Html.DropDownList("StatusSearch", ViewBag.StatusList as SelectList,"Search Staff By Status...")
+    </div>
+
+
+
+<div class="CalendarData center">
+@Html.Action("List", "Staff", new {code="Active"})
+</div>
+</div>
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+
+        $("#StatusSearch").change(function (event) {
+            var status = $('#StatusSearch option:selected').val();
+            var url = "/Staff/List";
+            $.get(url, { code: status.toString() }, function (data) { $(".CalendarData").html(data) });
+
+        });
+
+    });
+
+ </script>

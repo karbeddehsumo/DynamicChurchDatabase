@@ -1,0 +1,57 @@
+﻿@model IEnumerable<Domain.ministry>
+
+@{
+    ViewBag.Title = "List";
+}
+
+
+<div id="AjaxFormPane" class="slider">
+
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <tr>
+        <th>
+            Ministry
+        </th>
+        <th>
+            Contact
+        </th>
+        <th>
+            Email
+        </th> 
+        <th>Parent</th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MinistryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contact)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactEmail)
+        </td>
+       
+        <td>@Html.DisplayFor(modelItem => item.ParentMinistryName)</td>
+            <td>
+                    @Ajax.ActionLink("Edit", "Edit", "Ministry", new {MinistryID=item.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+            </td>
+                <td>
+        @Ajax.ActionLink("Delete", "Delete", "Ministry", new { MinistryID = item.ministryID }, new AjaxOptions { HttpMethod = "Post", Confirm = "Are you sure you want to delete this ministry?", InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+        </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p>No ministry record found!</p>   
+}
+</div>
+

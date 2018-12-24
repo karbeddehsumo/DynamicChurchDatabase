@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Domain.listtable>
+
+@{
+    ViewBag.Title = "List";
+    
+}
+
+<div id="myPane">
+<table>
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>View</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach(Domain.listtable item in @Model)
+{
+    <tr>
+        <td>
+            @item.Title
+        </td>
+        <td>
+             @Ajax.ActionLink("View", "List", "ListItem", new { ListTableID = @item.listTableID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane" })
+        </td>
+        <td>
+            @Ajax.ActionLink("Edit", "Edit", "ListTable", new {ListTableID = @item.listTableID}, new AjaxOptions {InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane" })
+        </td>
+                <td>
+            @Ajax.ActionLink("Delete", "Delete", "ListTable", new {ListTableID = @item.listTableID}, new AjaxOptions { Confirm = "Do you want to delete this datatable?",HttpMethod = "Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane" })
+        </td>
+    </tr>
+}
+        </tbody>
+    </table>
+    </div>
+
+@Ajax.ActionLink("Add Table", "Create", "ListHeader", new {ministryID=@ViewBag.MinistryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane" })
+
+
+
+<!--
+
+<div class="clearfix">
+    <h2 class="center">Table Center</h2>
+@Ajax.ActionLink("Add Table", "Create", "ListHeader", new {ministryID=@ViewBag.MinistryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "CreateListHeaderPane" })
+<div class="float-left"><div class="inner-div">
+@Html.ListBox("ListTables", ViewBag.ListTypeTable as SelectList, new {@class="myListBox2"})
+</div></div>
+<div class="float-left">
+<div id="CreateListHeaderPane"  style="width:500px"></div>
+    </div>
+    </div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(document).on("click", "#ListTables", function (event) {
+            var id = $('#ListTables option:selected').val();
+            var url = "/ListItem/Create";
+            $.get(url, { ListTableID: id.toString() }, function (data) { $("#CreateListHeaderPane").html(data) });
+        });
+
+
+    });
+
+ </script>
+
+-->

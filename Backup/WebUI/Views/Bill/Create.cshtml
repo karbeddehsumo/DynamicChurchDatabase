@@ -1,0 +1,178 @@
+﻿@model Domain.bill
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<div id="AjaxFormPane" class="panel">
+    <div class="row">
+    <div class="col-xs-12 col-sm-4 col-md-4">
+        @Html.ListBox("PayeeListBox", ViewBag.PayeeList as SelectList, new { @class = "myListBox2",size=32,selectionmode=1  })
+    </div>
+    <div class="col-xs-12 col-sm-6 col-md-6">
+        @using (Ajax.BeginForm("Create", "Bill", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    <h2 class="center">Add Bills</h2>
+          @Html.HiddenFor(model => model.payeeID)
+    <div class="fieldset">
+    <form role="form" class="form-horizontal" >
+        <h2>Add Bill</h2>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.PayeeName,"Payee")
+            @Html.ValidationMessageFor(model => model.PayeeName)
+            @Html.TextBox("PayeeDescription","", new {@readonly = "readonly"})
+        </div>
+
+       <div class="form-group">
+            @Html.HiddenFor(model => model.AccountNumber)
+            @Html.ValidationMessageFor(model => model.AccountNumber)
+        </div>
+
+                    <div class="form-group">
+            @Html.LabelFor(model => model.AmountDue,"Amount Due")
+            @Html.EditorFor(model => model.AmountDue)
+            @Html.ValidationMessageFor(model => model.AmountDue)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.TotalAmount,"Total Amount")
+            @Html.EditorFor(model => model.TotalAmount)
+            @Html.ValidationMessageFor(model => model.TotalAmount)
+        </div>
+
+
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.DateDue,"Due Date")
+            @Html.TextBoxFor(model => model.DateDue, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.DateDue)
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comment)
+            @Html.EditorFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+        @Html.HiddenFor(model => model.Status)
+        @Html.HiddenFor(model => model.EnteredBy)
+        @Html.HiddenFor(model => model.DateEntered)
+
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+        </form>
+    </div>
+    <div class="center" style="color:red">@TempData["message2"]</div>
+
+}
+ 
+    </div>
+    </div>
+    <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-8 col-sm-offset-2 col-md-offset-2"></div>
+       <div class="slider2 center">
+    @if (@ViewBag.BillRecordCount > 0)
+    {
+        <table>
+            <thead>
+                <tr>
+                    <th>Payee</th>
+                    <th>Account #</th>
+                    <th>Amount Due</th>
+                    <th>Total Amount</th>
+                    <th>Date Due</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach(var item in @ViewBag.CurrentBills)
+                {
+                    <tr>
+                    <td>
+                        @item.PayeeName
+                    </td>
+                    <td>
+                        @item.AccountNumber
+                    </td>
+                     <td style="text-align:right">
+                       @string.Format("{0:c}",@item.AmountDue)
+                    </td>
+                        <td style="text-align:right">
+                       @string.Format("{0:c}",@item.TotalAmount)
+                    </td>
+                    <td style="text-align:right">
+                        @string.Format("{0}",@item.DateDue.ToShortDateString())
+                    </td>
+                   <td>
+                         @Ajax.ActionLink("Edit", "Edit", "Bill", new {BillID=item.billID,ReturnBeginDate="1/1/2015",ReturnEndDate="1/1/2015"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+                    </td>
+                    <td>
+                        @Ajax.ActionLink("Delete", "Delete", "Bill", new {BillID=item.billID,ReturnBeginDate="1/1/2015",ReturnEndDate="1/1/2015"}, new AjaxOptions {Confirm="Do you want to delete this record?",HttpMethod="Post",  InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+                    </td>
+
+                        </tr>
+                }
+            </tbody>
+        </table>
+    }
+        </div>
+</div>
+</div>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $("#PayeeListBox option").click(function () {
+            var _this = $(this);
+            $("#payeeID").val($(this).val())
+            $("#PayeeDescription").val("");
+            $("#PayeeDescription").val($("#PayeeListBox option:selected").text());
+        });
+
+        $(function () {
+            $("#AmountDue").each(function () {
+                this.value = this.value.replace(/,/g, "");
+            }).on('keyup', function () {
+                this.value = this.value.replace(/,/g, "");
+            });
+        });
+
+        $(function () {
+            $("#TotalAmount").each(function () {
+                this.value = this.value.replace(/,/g, "");
+            }).on('keyup', function () {
+                this.value = this.value.replace(/,/g, "");
+            });
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#PayeeDescription').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the payee.");
+            }
+            else if ($("#TotalAmount").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the total amount.");
+            }
+            else if ($("#AmountDue").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the amount due.");
+            }
+        });
+    });
+</script>

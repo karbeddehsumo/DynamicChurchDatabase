@@ -1,0 +1,65 @@
+﻿ @model WebUI.Models.LogOnModel
+
+@{
+
+ }
+
+@Html.ValidationSummary(true, "Login was unsuccessful. Please correct the errors and try again.")
+<div class="center" style="color:red">@TempData["message"]</div>
+
+    <div id="LoginDiv">
+        <div class="center" style="color:red">@TempData["message5"]</div>
+@using (Html.BeginForm()) {
+
+        <fieldset class="logon">
+            <legend></legend>
+            <div class="form-group">
+                <label for="email">User Name</label>
+                @Html.TextBoxFor(m => m.Email, new {@style="width:180px;height:30px;"})
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+            <div class="form-group">
+                <label for="Password">Password</label>
+                @Html.PasswordFor(m => m.Password, new { @style = "width:180px;height:30px;" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+            <div>
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe)
+                <button type="submit" class="btn btn-default btn-sm"  id="logonbutton">Log</button>
+            </div>
+                </fieldset>
+
+
+}
+    </div>
+
+<!--
+    <div id="LoginDiv">
+@using (Html.BeginForm()) {
+
+        <fieldset>
+            <legend></legend>
+            <div class="editor2">
+                @Html.LabelFor(m => m.Email,"Email")
+                @Html.TextBoxFor(m => m.Email, new {@style="width:180px;height:20px;"})
+                @Html.ValidationMessageFor(m => m.Email)
+            </div>
+
+            <div class="editor2">
+                @Html.LabelFor(m => m.Password)
+                @Html.PasswordFor(m => m.Password, new { @style = "width:180px;height:20px;" })
+                @Html.ValidationMessageFor(m => m.Password)
+            </div>
+
+            <div>
+                @Html.CheckBoxFor(m => m.RememberMe)
+                @Html.LabelFor(m => m.RememberMe)
+                <input type="submit" value="Log On" id="logonbutton" />
+            </div>
+                </fieldset>
+
+
+}
+    </div>
+-->

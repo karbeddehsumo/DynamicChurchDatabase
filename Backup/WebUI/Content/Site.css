@@ -1,0 +1,710 @@
+﻿/*----------------------------------------------------------
+The base color for this template is #5c87b2. If you'd like
+to use a different color start by replacing all instances of
+#5c87b2 with your new color.
+----------------------------------------------------------*/
+/*
+body {
+    background-color:none;
+    font-size: .85em;
+    font-family: "Trebuchet MS", Verdana, Helvetica, Sans-Serif;
+    margin: 0;
+    padding: 0;
+    color: #696969;
+}
+*/
+body {font-family:Arial; background-image:url(../images/crosses%20large.jpg); background-repeat:no-repeat; background-attachment:fixed; background-size:100%;}
+#wrapper {width: 900px; margin: 0px auto; padding:30px; background-color:#F3E393;}
+
+a:link {
+    color: #034af3;
+    text-decoration: underline;
+}
+
+a:visited {
+    color: #505abc;
+}
+
+a:hover {
+    color: #1d60ff;
+    text-decoration: none;
+}
+
+a:active {
+    color: #12eb87;
+}
+
+p, ul {
+    margin-bottom: 20px;
+    line-height: 1.6em;
+}
+
+header,
+footer2,
+nav,
+section {
+    display: block;
+}
+
+/* HEADINGS   
+----------------------------------------------------------*/
+h1, h2, h3, h4, h5, h6 {
+    font-size: 1.5em;
+    color: #000;
+}
+
+h1 {
+    font-size: 2em;
+    padding-bottom: 0;
+    margin-bottom: 0;
+}
+
+h2 {
+    padding: 0 0 10px 0;
+}
+
+h3 {
+    font-size: 1.2em;
+}
+
+h4 {
+    font-size: 1.1em;
+}
+
+h5, h6 {
+    font-size: 1em;
+}
+
+/* PRIMARY LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+/* you can specify a greater or lesser percentage for the 
+page width. Or, you can specify an exact pixel width. */
+.page {
+    width: 90%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+header, #header {
+
+    position: relative;
+    margin-bottom: 0px;
+    color: #000;
+    padding: 0;
+
+}
+
+
+
+#header {
+background-image: url('../../Content/themes/base/images/NewLifeeChurch3.jpg');
+width:auto;
+height:260px;
+    
+}
+
+header h1, #header h1 {
+    font-weight: bold;
+    padding: 5px 0;
+    margin: 0;
+    color: #fff;
+    border: none;
+    line-height: 2em;
+    font-size: 32px !important;
+    text-shadow: 1px 1px 2px #111;
+}
+
+#main {
+    padding: 15px 30px 2px 30px;
+    background-color:#F3E393; /*main content background #F3E393*/
+    -webkit-border-radius: 4px 0 0 0;
+    -moz-border-radius: 4px 0 0 0;
+    border-radius: 4px 0 0 0;
+}
+
+footer2, 
+#footer2 {
+    background-color: #fff;
+    color: #999;
+    padding: 10px 0;
+    text-align: center;
+    line-height: normal;
+    margin: 0 0 30px 0;
+    font-size: .9em;
+    -webkit-border-radius: 0 0 4px 4px;
+    -moz-border-radius: 0 0 4px 4px;
+    border-radius: 0 0 4px 4px;
+}
+
+/* TAB MENU   
+----------------------------------------------------------*/
+ul#menu {
+    border-bottom: 1px #5C87B2 solid;
+    padding: 0 0 2px;
+    position: relative;
+    margin: 0;
+    text-align: right;
+}
+
+ul#menu li {
+    display: inline;
+    list-style: none;
+}
+
+ul#menu li#greeting {
+    padding: 10px 20px;
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 2.8em;
+    color: #fff;
+}
+
+ul#menu li a {
+    padding: 10px 20px;
+    font-weight: bold;
+    text-decoration: none;
+    line-height: 2.8em;
+    background-color: #e8eef4;
+    color: #034af3;
+    -webkit-border-radius: 4px 4px 0 0;
+    -moz-border-radius: 4px 4px 0 0;
+    border-radius: 4px 4px 0 0;
+}
+
+ul#menu li a:hover {
+    background-color: #fff;
+    text-decoration: none;
+}
+
+ul#menu li a:active {
+    background-color: #a6e2a6;
+    text-decoration: none;
+}
+
+ul#menu li.selected a {
+    background-color: #fff;
+    color: #000;
+}
+
+/* FORM LAYOUT ELEMENTS   
+----------------------------------------------------------*/
+
+fieldset {
+    border: none;/*1px solid #ddd;*/ 
+    background-color:#f8de9f;
+    padding: 0 1.4em 1.4em 1.4em;
+    margin: 0 0 1.5em 0;
+}
+
+legend {
+    font-size: 1.2em;
+    font-weight: bold;
+}
+
+textarea {
+    min-height: 75px;
+}
+
+input[type="text"], 
+input[type="password"] {
+    border: 1px solid #ccc;
+    padding: 2px;
+    font-size: 1.2em;
+    color: #444;
+    width: 200px;
+}
+
+select {
+    border: 1px solid #ccc;
+    padding: 2px;
+    font-size: 1.2em;
+    color: #444;
+}
+
+input[type="submit"] {
+    font-size: 1.2em;
+    padding: 5px;
+}
+
+/* TABLE
+----------------------------------------------------------*/
+
+table {
+    border: solid 1px #e8eef4;
+    border-collapse: collapse;
+}
+
+table td {
+    padding: 5px;
+    border: solid 1px #e8eef4;
+}
+
+table th {
+    padding: 6px 5px;
+    text-align: left;
+    background-color: #e8eef4;
+    border: solid 1px #e8eef4;
+}
+
+/* MISC  
+----------------------------------------------------------*/
+.clear {
+    clear: both;
+}
+
+.error {
+    color: Red;
+}
+
+nav, 
+#menucontainer {
+    margin-top: 5px;
+}
+
+div#title {
+    display: block;
+    float: left;
+    text-align: left;
+}
+
+#logindisplay {
+    font-size: 1.1em;
+    display: block;
+    text-align: right;
+    margin: 10px;
+    color: White;
+}
+
+#logindisplay a:link {
+    color: white;
+    text-decoration: underline;
+}
+
+#logindisplay a:visited {
+    color: white;
+    text-decoration: underline;
+}
+
+#logindisplay a:hover {
+    color: white;
+    text-decoration: none;
+}
+
+/* Styles for validation helpers
+-----------------------------------------------------------*/
+.field-validation-error {
+    color: #ff0000;
+}
+
+.field-validation-valid {
+    display: none;
+}
+
+.input-validation-error {
+    border: 1px solid #ff0000;
+    background-color: #ffeeee;
+}
+
+.validation-summary-errors {
+    font-weight: bold;
+    color: #ff0000;
+}
+
+.validation-summary-valid {
+    display: none;
+}
+
+/* Styles for editor and display helpers
+----------------------------------------------------------*/
+.display-label, 
+.editor-label {
+    margin: 1em 0 0 0;
+}
+
+.display-field, 
+.editor-field {
+    margin: 0.5em 0 0 0;
+}
+
+.text-box {
+    width: 30em;
+}
+
+.text-box.multi-line {
+    height: 6.5em;
+}
+
+.tri-state {
+    width: 6em;
+}
+
+
+/*=======Main Page=========*/
+/*
+body {
+
+    background-image:url(../images/crosses%20large.jpg); background-repeat:no-repeat; background-attachment:fixed; background-size:100%;
+    color: #000305;
+    font-size:87%;
+    font-family: Arial, 'Lucida Sans Unicode';
+    line-height: 1.5;
+    text-align: left;
+}
+
+
+
+.body {
+    margin: 0 auto;
+    width: 70%;
+    clear: both;
+}
+*/
+
+.mainheader nav {
+    background-color: black;
+    height: 40px;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.mainheader nav ul {
+    list-style: none;
+    margin: 0 auto;
+}
+
+.mainheader nav ul li {
+    float: left;
+    display: inline;
+}
+
+.mainheader nav a:link, .mainheader nav a:visited {
+    color: white;
+    display: inline-block;
+    padding: 10px 25px;
+    height: 20px;
+    text-decoration: none;
+}
+
+.mainheader nav a:hover, 
+/*
+.mainheader nav a:active,
+.mainheader nav .active a:link,
+    */
+ .mainheader nav .active a:visited {
+    background-color: #034af3;
+    text-shadow: none;
+}
+
+.mainheader nav ul li a {
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+}
+
+.mainheader {
+width:auto;
+height:40px;
+clear: both;
+}
+
+.minorheader nav {
+    margin-top: 5px;
+    height: 20px;
+    background: none;
+}
+.minorheader nav ul {
+    margin: 0 auto;
+    padding: 0;
+}
+
+
+.minorheader nav ul li {
+        list-style: none;
+}
+
+.minorheader nav a:active,
+.minorheader nav a:link, .minorheader nav a:visited {
+    color: black;
+    display: block;
+    padding: 5px 20px;
+    float: left;
+    text-decoration: none;
+}
+
+.minorheader nav ul li a:hover , 
+
+ .minorheader nav .active a:visited {
+    background-color: #a6e2a6;
+    text-shadow: none;
+}
+/*
+.minorheader nav a:hover, 
+
+ .minorheader nav .active a:visited {
+    background-color: #034af3;
+    text-shadow: none;
+}
+ */
+
+.mainContent {
+    line-height: 25px;
+        -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin-top: 3%;
+    clear:both;
+}
+
+.content {
+    width: 70%;
+    float: left;
+
+}
+
+.pageContent {
+    width: 100%;
+    float: left;
+    min-height:450px;
+
+}
+
+.topcontent {
+    background-color: #FFF;
+   -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 3% 5%;
+    margin-top:2%;
+}
+
+.bottomcontent {
+    background-color: #FFF;
+            -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 3% 5%;
+    margin-top:2%;
+}
+
+.post-info {
+    font-style: italic;
+    color: #999;
+    font-size:90%;
+    text-align:left;
+}
+
+.top-sidebar {
+    width: 21%;
+    float:left;
+    background-color: #FFF;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin:2% 0 0 2%;
+    padding: 2% 3%;
+}
+
+.middle-sidebar {
+     width: 21%;
+    float:left;
+    background-color: #FFF;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin:2% 0 0 2%;
+    padding: 2% 3%;
+}
+
+.bottom-sidebar {
+     width: 21%;
+    float:left;
+    background-color: #fff;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    margin:2% 0 1% 2%;
+    padding: 2% 3%;
+}
+
+
+.mainfooter {
+    width: 100%;
+    height:40px;
+    float: left;
+    -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    background-color: #666;
+    margin: 2% 0;
+}
+
+.mainfooter p {
+    width: 92%;
+    color: #FFF;
+    margin: 10px 0;
+    text-align:left;
+    padding-left: 20px;
+}
+
+@media only screen and (min-width: 150px) and (max-width: 600px) {
+.body {
+    width: 90%;
+    font-size: 95%;
+}
+
+.mainheader img {
+    width: 100%;
+}
+
+
+.mainheader nav {
+    height: 160px;
+}
+
+.mainheader nav ul {
+    padding-left: 0;
+}
+
+.mainheader nav ul li {
+  width: 100%;
+  text-align: center;
+}
+
+.mainheader nav a:link, .mainheader nav a:visited {
+    padding: 10px 25px;
+    height: 20px; 
+    display: block;  
+}
+
+
+
+.content {
+    width: 100%;
+    float: left;
+    margin-top: 2%;
+}
+
+.topcontent {
+    background-color: #FFF;
+   -moz-border-radius: 5px;
+    -webkit-border-radius: 5px;
+    border-radius: 5px;
+    padding: 3% 5%;
+    margin-top:2%;
+}
+
+.bottomcontent {
+    margin-top:2%;
+}   
+
+
+.top-sidebar, .middle-sidebar, .bottom-sidebar  {
+    width: 94%;
+    float:left;
+    margin:2% 0 2% 0;
+    padding: 2% 3%;
+}
+
+}
+
+.editor {
+margin-top:10px;
+}
+
+*.editor label{
+    font-family:'Courier New'; font-size:small;
+    float:left;  
+    width:120px; 
+    text-align:right; 
+    margin:10px 10px 0 5px;
+    display:block; 
+    font-weight:900;
+    color:black;
+}
+*.editor field{
+    width:50px;
+    margin-left:20px; 
+    float:left; 
+}
+
+fieldset input[type="submit"] {
+    font-size: 1.2em;
+    padding: 5px;
+    margin-left:50%;
+    background-color: whitesmoke;
+
+}
+
+.menu ul {
+   margin:0;
+   padding:0;
+   list-style:none;
+}
+
+.menu ul li {
+   float:left;
+   width: 150px;
+   height:30px;
+   line-height:30px;
+   text-align: center;
+   background:black; 
+   border-top: 1px solid white;
+}
+
+.menu ul li a {
+    text-decoration: none;
+    color: white;
+}
+
+.menu ul li li {
+    background-color:black;
+    color: #fff;
+    display: none;
+    text-align:left;
+    padding-left:10%;
+}
+
+.menu ul li li a {
+    text-decoration: none;
+    color: #fff;
+
+}
+
+.menu li li:hover {
+    background: gray;
+}
+
+#tabs {
+height:40px;
+background-color:whitesmoke;
+}
+
+#formSubmitButton {
+/*padding-left: 70%;*/
+}
+
+.center {margin: 0 auto}
+.border {}
+
+form{
+/*width:60%;*/
+margin:4% 15%;
+
+}
+
+
+/*New style*/
+
+.SubTitle {display:inline-block; font-size:x-large; font-family:Arial Verdana;line-height:150%;font-weight:bold;}
+#SubtitleInline {display:inline-block;width:900px;}
+    #SubtitleInline p {float: left;margin-right: 5px;}
+    #SubtitleInline input[type="text"] {float:left;margin-right: 5px;}
+    #SubtitleInline input[type="button"] {float:left;margin-right: 5px;}
+
+.Portrait-small{width:75px; height:100px; margin:0px; padding:5px; border-bottom:0px; text-align:center;border:1px solid whitesmoke;border-color:#999999;background-color:#fff;}
+.Portrait-medium{width:100%; height:170px; margin:0px; padding:0; border-bottom:0px; text-align:center;border:1px solid whitesmoke;border-color:#999999;background-color:#fff;}
+.Portrait-medium2{width:140px; height:140px; margin:0px; padding:5px; border-bottom:0px; text-align:center;border:1px solid whitesmoke;border-color:#999999;background-color:#fff;}
+.FamilyAlbumPortrait{width:540px;height:480px; margin:0px; border-bottom:0px; text-align:center;}
+.ProfilePortrait{width:100%;height:600px; margin:0px; border-bottom:0px; text-align:center;}

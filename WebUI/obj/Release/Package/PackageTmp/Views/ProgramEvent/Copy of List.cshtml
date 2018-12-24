@@ -1,0 +1,79 @@
+﻿@model IEnumerable<Domain.programevent>
+
+@{
+    ViewBag.Title = "List";
+    
+}
+
+<div>
+<div id="ProgramEventPane">
+
+</div>
+
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <caption>Upcoming Events...</caption>
+    <tr>
+        <th>
+            Title
+        </th>
+        <th>
+            Date
+        </th>
+        <th>
+            Start Time
+        </th>
+        <th>
+            End Time
+        </th>
+        <th>
+            Contact
+        </th>
+        <th>
+            Venue
+        </th>
+        <th></th>
+        <th></th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @item.C_When.ToShortDateString()
+        </td>
+        <td>
+            @item.BeginTime
+        </td>
+        <td>
+            @item.EndTime
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EventContact)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.C_Where)
+        </td>
+            <td>
+                    @Ajax.ActionLink("Edit", "Edit", "ProgramEvent", new {ProgramEventID=item.programEventID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ProgramEventPane" })
+            </td>
+            <td>
+                @Ajax.ActionLink("Delete", "Delete", "ProgramEvent", new {ProgramEventID=item.programEventID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "ProgramEventPane" })
+            </td>
+        <td>
+                @Html.ActionLink("Attendance", "AddAttendance", "ProgramEvent", new {ProgramEventID=item.programEventID},null)
+        </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p>No event added yet!</p>   
+}
+</div>

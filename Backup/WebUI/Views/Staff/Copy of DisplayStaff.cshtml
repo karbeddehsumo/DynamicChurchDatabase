@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Domain.staff>
+
+@{
+    ViewBag.Title = "DisplayStaff";
+}
+
+@foreach(Domain.staff item in @Model)
+{
+    
+        <div style="clear: left;">
+            <p style="float: left;">
+             @if (@item.picture != null)
+            {
+
+                <img class="Portrait-medium" align="left" src="@Url.Action("GetImageByID", "Picture",new {PictureID=@item.picture.pictureID})" />
+                 <strong>@string.Format("{0}",@item.FullNameTitle)</strong> 
+                 
+            }
+           @if (@item.mainResponsibility != null)
+            {
+               <br />
+            @string.Format("{0}",@item.mainResponsibility.Title)
+          }
+</p>
+            <p style="background-color:#e2e8da">
+            @if (@item.mainResponsibility != null)
+            {
+            @item.mainResponsibility.BriefDescription
+            }
+            </p>
+        </div>      
+    <br />
+}

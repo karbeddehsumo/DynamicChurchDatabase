@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Domain.ministry>
+
+@{
+    ViewBag.Title = "List";
+}
+
+
+<h3>Ministry List</h3>
+<div id="item">
+@foreach (var item in Model) {
+            @Ajax.ActionLink(@item.MinistryName,"MinistryView","Ministry", new {ministryID=@item.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "Pane" })
+    <br />
+}
+</div> 
+<div id="Pane" ></div>

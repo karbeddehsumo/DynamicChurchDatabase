@@ -1,0 +1,41 @@
+﻿@{
+    ViewBag.Title = "WebMaster";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<div class="center">
+<p>Admin Login:</p>
+@Html.ActionLink("AdminPage", "Member")
+@if (@ViewBag.RecordCount > 0)
+{
+    
+    <table>
+        <caption>Members Login</caption>
+        <tr>
+            <td>Name</td>
+            <td>Member</td>
+            <td>Admin</td>
+        </tr>
+        
+        @foreach(var item in @ViewBag.UserList)
+        {
+            <tr>
+                <td>
+                    @item.Name
+                </td>
+                <td>     
+                    @Html.ActionLink("Member Page","MyPage2", "Member", new {memberID= @item.PersonID},null)
+                </td>
+                <td>     
+                    @Html.ActionLink("Admin Page","AdminPage", "Member", new {memberID= @item.PersonID},null)
+                </td>
+                
+            </tr>
+            
+        }
+    </table>
+    
+}
+    </div>
+
+

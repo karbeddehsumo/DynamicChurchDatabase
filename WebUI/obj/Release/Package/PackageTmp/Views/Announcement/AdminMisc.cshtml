@@ -1,0 +1,41 @@
+﻿
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+    <h2>Miscellaneous</h2>
+    <div>
+        @if (@ViewBag.Supervisor == true)
+        {
+            @Ajax.ActionLink("View Constant", "Index", "Constant", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AdminMiscPane" }) <br />
+            @Ajax.ActionLink("View Roles", "MemberSecurity", "Member", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AdminMiscPane" }) <br />
+          
+        }
+        @Html.ActionLink("Story Center Page", "StoryCenteredPageLayout", "Ministry", new {target="_blank"},null)
+        @Html.ActionLink("Picture Center Page", "PictureCenteredPageLayout", "Ministry", new {target="_blank"},null)
+        @Ajax.ActionLink("Send Email", "EmailDialog", "Member", new {RecipientType=""}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AdminMiscPane" }) <br />
+
+     </div>
+        <div id="AdminMiscPane">
+    @if(@ViewBag.Page == "Announcement")
+    {      
+       @Html.Action("Index","Announcement")
+    }
+    
+    else
+    {  
+       @Html.Action("Index","Announcement")
+    }
+        </div>
+ 
+       
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+    });
+    </script>

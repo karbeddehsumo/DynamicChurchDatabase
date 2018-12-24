@@ -1,0 +1,94 @@
+﻿@model Domain.task
+
+@{
+    ViewBag.Title = "Delete";
+ 
+}
+
+
+<div id="AjaxFormPane">
+<h2>Delete Task Record</h2>
+
+<h3>Are you sure you want to delete this record?</h3>
+<table>
+    <tr>
+        <th>
+            goalID
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            AssignTo
+        </th>
+        <th>
+            AssignDate
+        </th>
+        <th>
+            DueDate
+        </th>
+        <th>
+            CompletionRatio
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            EnteredBy
+        </th>
+        <th>
+            DateEntered
+        </th>
+        <th></th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.goalID)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.AssignTo)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.AssignDate)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.DueDate)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.CompletionRatio)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.EnteredBy)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.DateEntered)
+        </td>
+    </tr>
+
+</table>
+@using (Ajax.BeginForm("Delete", "Task", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    <p>
+        <input id="TaskID" name="TaskID" type="hidden"  value="@ViewBag.TaskID"/>
+     <input type="submit" value="Delete" /> <input id="CancelDeleteBtn" name="CancelDeleteBtn" type="button" value="Cancel Delete"/>
+    </p>
+}
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#CancelDeleteBtn').click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+    });
+</script>

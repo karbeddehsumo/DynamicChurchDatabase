@@ -1,0 +1,178 @@
+﻿@model Domain.document
+
+@{
+    ViewBag.Title = "Create";
+    
+}
+
+<div id="AjaxFormPane" class="panel">
+    <h2 class="center">Add Document</h2>
+    <div class="center" style="color:red">@TempData["message2"]</div>
+
+    <div class="center">
+@using (Html.BeginForm("Create", "Document", new { }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+           
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Create Document</legend>
+        @if (@ViewBag.CallerType == "Officer")
+        {
+            <div class="editorx">
+            @Html.LabelFor(model => model.DocumentTypeID, "Document Type")
+            @Html.DropDownListFor(model => model.DocumentTypeID, ViewBag.DocumentTypeList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.DocumentTypeID)
+        </div>
+
+        <div class="editorx">
+            @Html.LabelFor(model => model.Title)
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+            if (@ViewBag.Ministry == "")
+            {
+        <div class="editorx">
+            @Html.LabelFor(model => model.ministryID, "Ministry")
+            @Html.DropDownListFor(model => model.ministryID, ViewBag.MinistryList as SelectList, "Choose Ministry (Optionl)")
+            @Html.ValidationMessageFor(model => model.ministryID)
+        </div>
+            }
+            else
+            {
+             @Html.HiddenFor(model => model.ministryID)
+            }
+
+                    <div class="editorx">
+        <label>Upload File</label> 
+        <input id="files" type="file" name="files" multiple />
+            </div>
+        }
+        else
+        {
+         <div class="editor">
+            @Html.LabelFor(model => model.DocumentTypeID, "Document Type")
+            @Html.DropDownListFor(model => model.DocumentTypeID, ViewBag.DocumentTypeList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.DocumentTypeID)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Title)
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+            if (@ViewBag.Ministry == "")
+            {
+        <div class="editor">
+            @Html.LabelFor(model => model.ministryID, "Ministry")
+            @Html.DropDownListFor(model => model.ministryID, ViewBag.MinistryList as SelectList, "Choose Ministry (Optionl)")
+            @Html.ValidationMessageFor(model => model.ministryID)
+        </div>
+            }
+            else
+            {
+             @Html.HiddenFor(model => model.ministryID)
+            }
+
+    
+        <div class="editor">
+        <label>Upload File</label> 
+        <input id="files" type="file" name="files" multiple />
+            </div>
+        }     
+             @Html.HiddenFor(model => model.FileName)
+             @Html.HiddenFor(model => model.SortOrder)
+            @Html.HiddenFor(model => model.Version)
+            @Html.HiddenFor(model => model.DateCreated)
+
+            @Html.HiddenFor(model => model.Status)
+            @Html.HiddenFor(model => model.EnteredBy)
+            @Html.HiddenFor(model => model.DateEntered)
+
+        
+        <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Add</button>
+            <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+   
+}
+        </div>
+     <div id="FieldSetSubMenu" class="center">
+    <input id="ShowAddDocumentTypeButton" value="Add document type" type="button" />
+      <div id="DocumentTypeDiv" class="center">
+     @using (Ajax.BeginForm("AddConstant", "Constant", new { @aCategory = "Document Type" }, new AjaxOptions
+     {
+         HttpMethod = "Post",
+         InsertionMode = InsertionMode.Replace,
+         UpdateTargetId = "familyroster"
+     }))
+     {
+                    
+                                 <label>Add Document Type</label>
+                             <input id="value1" name="value1"  type="text"/>
+                                 <input id="DocumentTypeSubmitID" type="submit" value="Add" />
+
+     }
+        
+        </div>
+        </div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#DocumentTypeID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the document type.");
+            }
+            else if ($("#Title").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the title.");
+            }
+
+
+        });
+
+        //Document Type
+        $('#DocumentTypeDiv').hide();
+        $(document).on("click", "#ShowAddDocumentTypeButton", function (event) {
+            $('#DocumentTypeDiv').hide();
+            $("#value1").val("")
+            $("#DocumentTypeDiv").show();
+        });
+        $(document).on("click", "#DocumentTypeSubmitID", function (event) {
+            $("#DocumentTypeDiv").hide();
+        });
+
+        $(document).on("click", "#DocumentTypeIDx", function (event) {
+            $.ajax({
+                url: '@Url.Action("RefreshViewBag", "Constant", new { SearchString = "Document Type&Z" })',
+                type: 'POST',
+                // data: JSON.stringify(appointment),
+                dataType: 'json',
+                processData: false,
+                contentType: 'application/json; charset=utf-8',
+                success: function (data) {
+                    var result = '';
+                    for (var i = 0, iL = data.length; i < iL; i++) {
+                        result += '<option value="' + data[i].Value + '">' + data[i].Text + '</option>';
+                    }
+                    $("#DocumentTypeID").html(result);
+                },
+            });
+        });
+
+    });
+</script>

@@ -1,0 +1,191 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+     <title>@ViewBag.Title</title>
+    @Styles.Render("~/Content/css",
+                   "~/Content/themes/base/css")
+    @Scripts.Render("~/bundles/modernizr")
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link href="../../Content/bootstrap.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+  <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+
+    <link href="../../Content/DreamWeaver/css/styles.css" rel="stylesheet" type="text/css"/>
+
+    <link href='http://fonts.googleapis.com/css?family=Tangerine' rel='stylesheet' type='text/css'>
+     <link href='http://fonts.googleapis.com/css?family=Playfair+Display:400italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Arvo:700italic' rel='stylesheet' type='text/css'>
+    <link href='http://fonts.googleapis.com/css?family=Oswald:700' rel='stylesheet' type='text/css'>
+    
+
+        <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js" ></script>
+    <link rel="stylesheet" href="../../Content/Dreamweaver/FancyBox/source/jquery.fancybox.css" type="text/css" media="screen" />
+    <script type="text/javascript" src="../../Content/Dreamweaver/FancyBox/source/jquery.fancybox.pack.js"></script>
+   
+
+</head>
+<body>
+    <div  class="container">
+<div class="row">
+        <div class="col-xs-4">
+    <a id="mainlogo" href="../Home/Index"><img src="../../Content/Dreamweaver/images/icf%20logo%20revised.jpg" class="img-responsive" /></a>
+        </div>
+   
+<div class="col-xs-8 pager">
+
+    <div class="next">
+
+        </div>
+        </div>
+        
+ </div>
+
+
+<div id="menuMain" class="row">
+    <div class="col-xs-12 col-sm-12 col-md-12">
+        <nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span> 
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="myNavbar">
+      <ul class="nav navbar-nav">
+
+      </ul>
+      <ul class="nav navbar-nav ">
+        <li class="active">@Ajax.ActionLink("Home", "Index", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "body" })</li>
+        <li>@Ajax.ActionLink("Ministries", "Ministries", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+        <li>@Ajax.ActionLink("Events", "Events", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+        <li>@Ajax.ActionLink("About Us", "About", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+        <li>@Ajax.ActionLink("Give", "Donation", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+        <li class="last">@Ajax.ActionLink("Contact Us", "Contact", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+      </ul>
+      @if(Request.IsAuthenticated) {
+          <form class="navbar-form navbar-right form-group-sm" role="form">
+     @Html.ActionLink("Log Off", "LogOff", "Account")
+              </form>
+    }
+else {  
+      <form class="navbar-form navbar-right form-group-sm" role="form" method="post"  action="@Url.Action("LogOnModal", "Account", new {returnUrl=""})">
+            <div class="form-group">
+                <span class="email-group-addon">
+                    <a href="../Account/RecoveryPassword"><span class="glyphicon glyphicon-user"></span></a>
+                    </span>
+              <input id="UserEmail"  name="UserEmail" type="text" placeholder="Email" class="form-control input-sm" size="7">
+            </div>
+            <div class="form-group">
+                <span class="password-group-addon">
+                    <span class="glyphicon glyphicon-lock"></span>
+                </span>
+              <input id="UserPassword" name="UserPassword" type="password" placeholder="Password" class="form-control input-sm" size="7">
+            </div>
+            <button id="LoginSubmitBtn" type="submit" class="btn btn-success btn-sm">Sign in</button>
+          </form>
+      }
+            <div class="float-right" style="color:red">@TempData["message3"]</div>
+    </div>
+  </div>
+</nav>
+        </div>
+</div>
+
+      <!--
+        <div class="row">
+            <div class=" visible-md visible-lg">
+<div id="HomePages" >
+    <ul>
+<li>@Ajax.ActionLink("Videos", "HowToVideos", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+<li>@Ajax.ActionLink("How to", "HowToInstructions", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })</li>
+</ul>
+</div>
+                </div>
+    </div>
+        -->
+
+<div id="contentwrapper">
+@RenderBody()
+</div>
+
+<div id="footer">
+    <div class="row">
+        <div class="col-md-12 visible-md visible-lg">
+<p>Copyright 2015 - All Rights Reserved - International Christian Fellowship
+461 School Drive, SE, Atlanta, GA 300354 - icfm@gmail.com - (404) 363-3300
+</p>
+<div> 
+    <a href="http://facebook.com/"><img src="../../Content/DreamWeaver/images/facebook.png" width="64" height="64" alt=""/></a>
+  <img src="../../Content/DreamWeaver/images/twitter.png" width="64" height="64" alt=""/><img src="../../Content/DreamWeaver/images/youtube.png" width="64" height="64" alt=""/>
+
+</div>
+</div>
+</div>
+</div>
+     
+</div>
+
+<div class="sitemap">
+    <div class="row">
+       <div class="col-xs-12 col-sm-6 col-md-3 visible-md visible-lg">
+           <p><u>Contact Us</u></p>
+            <p>International Christian Fellowship<br />
+     P. O. Box 82801<br />
+    461 School Street<br />
+    Atlanta, GA 30354<br />
+    Phone: 404-363-3300<br />
+    Fax: 404-363-1730<br />
+    Email: icfministries@comcast.net
+           </div>
+               <div class="col-xs-12 col-sm-6 col-md-3 visible-md visible-lg">
+                   <p><u>About Us</u></p>
+                    @Ajax.ActionLink("Home", "Index", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "body" })<br />
+                    @Ajax.ActionLink("Ministries", "Ministries", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("Events", "Events", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("About Us", "About", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("Give", "Donation", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("Contact Us", "Contact", "Home", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("Staff", "DisplayStaff", "Staff", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+
+
+           </div>
+               <div class="col-xs-12 col-sm-6 col-md-3 visible-md visible-lg">
+                   <p><u>Ministries</u></p>
+                    @Ajax.ActionLink("Men", "GetMinistryByName", "Home",new{ministryName="Men"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("Women", "GetMinistryByName", "Home",new{ministryName="Women"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("Youth", "GetMinistryByName", "Home",new{ministryName="Youth"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("Children", "GetMinistryByName", "Home",new{ministryName="Children"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                     @Ajax.ActionLink("Seniors", "GetMinistryByName", "Home",new{ministryName="Seniors"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                  
+           </div>
+                       <div class="col-xs-12 col-sm-6 col-md-3 visible-md visible-lg">
+                   <p><u>Resources</u></p>
+                    @Ajax.ActionLink("Bible Studies", "GetMinistryByName", "Home",new{ministryName="Education"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "body" })<br />                  
+                    @Ajax.ActionLink("Prayer", "GetMinistryByName", "Home",new{ministryName="Prayer"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("Outreach", "GetMinistryByName", "Home",new{ministryName="Outreah"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+                    @Ajax.ActionLink("Evangelism", "GetMinistryByName", "Home",new{ministryName="evangelism"}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "contentwrapper" })<br />
+
+           </div>
+    </div>
+    <span>Version: 20160329</span>
+ </div>
+    
+         @Scripts.Render("~/bundles/jquery",
+                    "~/bundles/jqueryui",
+                    "~/bundles/jqueryval")
+         @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+</body>
+</html>
+
+

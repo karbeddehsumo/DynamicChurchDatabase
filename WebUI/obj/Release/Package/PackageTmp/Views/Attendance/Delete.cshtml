@@ -1,0 +1,72 @@
+﻿@model Domain.attendance
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+
+
+<div id="AjaxFormPane">
+<h2>Delete Attendance</h2>
+
+<h3>Are you sure you want to delete this record?</h3>
+
+<table>
+    <tr>
+        <th>
+            memberID
+        </th>
+        <th>
+            RollCall
+        </th>
+        <th>
+            calendarID
+        </th>
+        <th>
+            EnteredBy
+        </th>
+        <th>
+            DateEntered
+        </th>
+        <th></th>
+    </tr>
+
+    <tr>
+        <td>
+            @Html.DisplayFor(model => model.memberID)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.RollCall)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.calendarID)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.EnteredBy)
+        </td>
+        <td>
+            @Html.DisplayFor(model => model.DateEntered)
+        </td>
+    </tr>
+
+</table>
+
+@using (Ajax.BeginForm("Delete", "Attendance", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    <p>
+        <input id="AttendanceID" name="AttendanceID" type="hidden"  value="@ViewBag.AttendanceID"/>
+    <input type="submit" value="Delete" /> <input id="CancelDeleteBtn" name="CancelDeleteBtn" type="button" value="Cancel Delete"/>
+    </p>
+}
+    </div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $('#CancelDeleteBtn').click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+    });
+</script>
+

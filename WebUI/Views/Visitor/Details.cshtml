@@ -1,0 +1,108 @@
+﻿@model Domain.visitor
+
+@{
+    ViewBag.Title = "Details";
+ 
+}
+
+<div id="AjaxFormPane" class="panel">
+    <h2 class="center">Visitor List</h2>
+        <strong class="center">Select Dates and search</strong><br />
+    <div class="center">
+        <label>Begin Date </label>
+    <input id="bDate" type="text"  class="datepicker" value="@ViewBag.BeginDate" style="width:100px;" />
+    
+         <label>End Date </label>
+     <input id="eDate" type="text"  class="datepicker" value="@ViewBag.EndDate" style="width:100px;" />
+    <input id="DateSearch" name="DateSearch" type="button" value="Search"/>  
+    <input id="SendEmail" type="button" value="Send Email" />   
+        </div>         
+
+  <div class="center">
+        @Html.DropDownList("CategorySearch", ViewBag.VisitorCategoryList as SelectList,"Search By Category...")
+        @Html.DropDownList("BestContactSearch", ViewBag.BestContactList as SelectList,"Search By Best Contact...")<br />
+        @Html.DropDownList("LastEventAttendedSearch", ViewBag.LastEventAttendedList as SelectList,"Search By Event Attended...")
+    @Html.DropDownList("StatusSearch", ViewBag.StatusList as SelectList,"Search By Status...")
+</div>
+<div id="DataPane" class="center">
+    @Html.Action("List", "Visitor", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate})
+</div>
+
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $('.datepicker').not('.hasDatePicker').datepicker();
+        $("#bDate").datepicker();
+        $("#eDate").datepicker();
+
+        $("#CategorySearch").change(function (event) {
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var categoryid = $('#CategorySearch option:selected').val();
+            var url = "/Visitor/List";
+            $("#BestContactSearch").val("Search By Best Contact...");
+            $("#LastEventAttendedSearch").val("Search By Event Attended...");
+            $("#StatusSearch").val("Search By Status...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: categoryid.toString(), SearchType: "CategorySearch" }, function (data) { $("#DataPane").html(data) });
+        });
+        $("#StatusSearch").change(function (event) {
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var status = $('#StatusSearch option:selected').val();
+            var url = "/Visitor/List";
+            $("#CategorySearch").val("Search By Category...");
+            $("#BestContactSearch").val("Search By Best Contact...");
+            $("#LastEventAttendedSearch").val("Search By Event Attended...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), code: status.toString(), SearchType: "StatusSearch" }, function (data) { $("#DataPane").html(data) });
+
+        });
+        $("#BestContactSearch").change(function (event) {
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var contact = $('#BestContactSearch option:selected').val();
+            var url = "/Visitor/List";
+            $("#CategorySearch").val("Search By Category...");
+            $("#LastEventAttendedSearch").val("Search By Event Attended...");
+            $("#StatusSearch").val("Search By Status...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: contact.toString(), SearchType: "BestContactSearch" }, function (data) { $("#DataPane").html(data) });
+
+        });
+
+        $("#LastEventAttendedSearch").change(function (event) {
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var contact = $('#LastEventAttendedSearch option:selected').val();
+            var url = "/Visitor/List";
+            $("#CategorySearch").val("Search By Category...");
+            $("#BestContactSearch").val("Search By Best Contact...");
+            $("#StatusSearch").val("Search By Status...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString(), codeID: contact.toString(), SearchType: "LastEventAttendedSearch" }, function (data) { $("#DataPane").html(data) });
+
+        });
+
+        $("#DateSearch").click(function (event) {
+            var bdate = $("#bDate").val();
+            var edate = $("#eDate").val();
+            var url = "/Visitor/List";
+            $("#CategorySearch").val("Search By Category...");
+            $("#BestContactSearch").val("Search By Best Contact...");
+            $("#LastEventAttendedSearch").val("Search By Event Attended...");
+            $("#StatusSearch").val("Search By Status...");
+            $.get(url, { bDate: bdate.toString(), eDate: edate.toString() }, function (data) { $("#DataPane").html(data) });
+
+        });
+
+        $("#SendEmail").click(function (event) {
+            var url = "/Member/EmailDialog";
+            $("#CategorySearch").val("Search By Category...");
+            $("#BestContactSearch").val("Search By Best Contact...");
+            $("#LastEventAttendedSearch").val("Search By Event Attended...");
+            $("#StatusSearch").val("Search By Status...");
+            $.get(url, { RecipientType: "Visitor",SimpleForm:true }, function (data) { $("#DataPane").html(data) });
+
+        });
+    });
+
+ </script>

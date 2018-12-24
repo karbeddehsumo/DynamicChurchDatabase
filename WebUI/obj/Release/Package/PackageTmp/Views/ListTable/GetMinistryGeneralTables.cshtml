@@ -1,0 +1,33 @@
+﻿@model IEnumerable<Domain.listtable>
+
+
+<div id="myPane" >
+    @if (((ViewBag.Supervisor == true) || (ViewBag.Supervisor2 == true)) && (@ViewBag.Requestor=="Officer"))
+    {
+        @Ajax.ActionLink("Add Datatable", "Create", "ListHeader", new {ministryID=@ViewBag.MinistryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane"}, new {@id="pageSubTitle"})
+    }
+    <br />
+    <div class="center">
+
+@foreach(Domain.listtable l in @Model)
+{
+    <div id="myTablePane" >
+
+    @if ((l.IsPublic == null) || (l.IsPublic  == true))
+    {
+        @Html.Action("Display", "ListTable", new {ListTableID=l.listTableID,canEdit=false}) <br />
+    }
+    else if (((l.IsPublic == false) && (@ViewBag.IsMember == true)) || (@ViewBag.Supervisor == true) || (@ViewBag.WebMaster == true))
+    {
+        @Html.Action("Display", "ListTable", new {ListTableID=l.listTableID,canEdit=false}) <br />
+    }
+
+    @if (((ViewBag.Supervisor == true) || (ViewBag.Supervisor2 == true)) && (@ViewBag.Requestor=="Officer"))
+    {
+        @Ajax.ActionLink("Add Record", "Create", "ListItem", new {ListTableID=l.listTableID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane"}, new {@id="pageSubTitle"})
+        @Ajax.ActionLink("Hide Table", "HideListTable", "ListTable", new {ListTableID=l.listTableID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "myPane"}, new {@id="pageSubTitle"})
+    }
+        </div>
+
+}
+</div></div>

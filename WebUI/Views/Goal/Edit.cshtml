@@ -1,0 +1,112 @@
+﻿@model Domain.goal
+
+@{
+    ViewBag.Title = "Edit";
+}
+
+<div id="AjaxFormPane" class="panel">
+    <div class="center" style="color:red">@TempData["message2"]</div>
+
+    <div class="center">
+@using (Ajax.BeginForm("Edit", "Goal", new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" }))
+{
+    @Html.AntiForgeryToken()
+            <br />
+   <h3 class="center-text">Edit Goal</h3>
+    @Html.ValidationSummary(true)
+    <fieldset>
+        <legend>Edit goal here...</legend>
+
+        @Html.HiddenFor(model => model.goalID)
+        @Html.HiddenFor(model => model.ministryID)
+
+        <div class="editor">
+            @Html.LabelFor(model => model.ministryID,"Ministry")
+            @Html.TextBoxFor(model => model.ministry.MinistryName, new { @readonly = "readonly" })
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Title,"Goal Title")
+            @Html.EditorFor(model => model.Title)
+            @Html.ValidationMessageFor(model => model.Title)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Description)
+            @Html.EditorFor(model => model.Description)
+            @Html.ValidationMessageFor(model => model.Description)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.AssignedTo,"Assigned To")
+            @Html.DropDownListFor(model => model.AssignedTo, ViewBag.MinistryMemberList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.AssignedTo)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.BeginDate,"Begin Date")
+            @Html.TextBoxFor(model => model.EndDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker" })
+            @Html.ValidationMessageFor(model => model.BeginDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.EndDate,"End Date")
+            @Html.TextBoxFor(model => model.EndDate, new { @Value = DateTime.Now.ToShortDateString(), id = "datepicker2" })
+            @Html.ValidationMessageFor(model => model.EndDate)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.CompletionRatio,"Completion (%)")
+            @Html.DropDownListFor(model => model.CompletionRatio, ViewBag.CompletionRatioList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.CompletionRatio)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Status)
+            @Html.DropDownListFor(model => model.Status, ViewBag.StatusList as SelectList, "")
+            @Html.ValidationMessageFor(model => model.Status)
+        </div>
+
+        <div class="editor">
+            @Html.LabelFor(model => model.Comment)
+            @Html.EditorFor(model => model.Comment)
+            @Html.ValidationMessageFor(model => model.Comment)
+        </div>
+
+         @Html.HiddenFor(model => model.EnteredBy)
+         @Html.HiddenFor(model => model.DateEntered)
+
+      <div id="formSubmitButton">
+            <button id="ButtonClick" type="submit" class="btn btn-default">Edit</button>
+          <button id="CloseBotton" class="btn btn-default">Close</button>
+        </div>
+    </fieldset>
+}
+</div>
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+
+        $(".datefield").datepicker();
+        $('#datepicker').not('.hasDatePicker').datepicker();
+        $('#datepicker2').not('.hasDatePicker').datepicker();
+
+        $("#CloseBotton").click(function (event) {
+            $("#AjaxFormPane").hide();
+        });
+
+        $('#ButtonClick').click(function (event) {
+            if ($('#ministryID option:selected').val().length == 0) {
+                event.preventDefault();
+                alert("Please select the ministry.");
+            }
+            else if ($("#Title").val() == 0) {
+                event.preventDefault();
+                alert("Please enter the title.");
+            }
+
+        });
+    });
+</script>

@@ -1,0 +1,98 @@
+﻿@model IEnumerable<Domain.goal>
+
+@{
+    ViewBag.Title = "List";
+}
+
+<div id="AjaxFormPane">
+<div class="center">
+<h2>Ministry Information</h2>
+<br>
+<strong>Description:</strong>
+  <p>@ViewBag.Ministry.Description</p>  
+
+<br />
+<strong>Mission Statement:</strong>
+  <p>@ViewBag.Ministry.MissionStatement</p>   
+
+
+<br />
+<strong>Vision:</strong>
+  <p>@ViewBag.Ministry.Vision</p>   
+<strong>Note:</strong>
+    <p>Ministry - Your ministry may be assigned one or more goals.</p>
+<p>Goal - a goal may consist of one or more tasks</p>
+<p>Task - a task may contain one or more action items</p>
+<p>Action items - An action item is assigned to member(s) of the team and has a completion (Due) date.</p>
+<p>Event - a goal may have an event.</p>
+
+@if (@ViewBag.RecordCount > 0)
+{
+    <strong class="center">Ministry Goal List</strong>
+<table>
+    <caption>@ViewBag.MinistryName</caption>
+    <thead>
+        <tr>
+            <th>Goal</th>
+            <th>Who</th>
+            <th>Assigned</th>
+            <th>Due</th>
+            <th>% Completed</th>
+            <th>Task</th>
+            <th>Event</th>
+            @if ((@ViewBag.Supervisor == true) || (@ViewBag.Supervisor1 == true) || (@ViewBag.Supervisor==true))
+            {
+            <th></th>
+            }
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Title
+        </td>
+        <td>
+            @if (@item.AssignedTo > 0)
+            {
+              @item.PersonAssignedTo.member.FirstNameTitle
+            }
+
+        </td>
+        <td>
+            @string.Format("{0:d}",@item.BeginDate)
+        </td>
+        <td>
+            @string.Format("{0:d}",@item.EndDate)
+        </td>
+        <td style="text-align:right">
+             @string.Format("{0}%",@item.CompletionRatio)
+        </td>
+
+        <td>
+            @Ajax.ActionLink("Tasks", "List", "Task", new { bDate = DateTime.Today.ToShortDateString(), eDate = DateTime.Today.ToShortDateString(), SearchType = "GoalSearch", codeID = @item.goalID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+             </td>
+        <td>
+            @Ajax.ActionLink("Event", "GoalEvents", "ProgramEvent", new { GoalID = item.goalID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+        </td>
+        @if ((@ViewBag.Supervisor == true) || (@ViewBag.Supervisor1 == true) || (@ViewBag.Supervisor==true))
+        {
+        <td>
+                @Ajax.ActionLink("Edit", "Edit", "Goal", new { GoalID = item.goalID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+        </td>
+        }
+
+    </tr>
+}
+</tbody>
+</table>
+}
+else
+{
+ <p>No goals records found!</p>   
+}
+
+
+</div>
+    </div>
+

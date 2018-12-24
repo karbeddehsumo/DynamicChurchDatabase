@@ -1,0 +1,55 @@
+﻿@{
+    ViewBag.Title = "Recover Password";
+}
+
+
+
+ <style type="text/css">
+
+      .form-signin {
+        max-width: 300px;
+        padding: 19px 29px 29px;
+        margin: 0 auto 20px;
+        background-color: #fff;
+        border: 1px solid #e5e5e5;
+        -webkit-border-radius: 5px;
+           -moz-border-radius: 5px;
+                border-radius: 5px;
+        -webkit-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+           -moz-box-shadow: 0 1px 2px rgba(0,0,0,.05);
+                box-shadow: 0 1px 2px rgba(0,0,0,.05);
+      }
+      .form-signin-heading
+      {
+        margin-bottom: 10px;
+        font-weight:bold;
+        font-size:large;
+      }
+      .form-signin input[type="text"],
+      .form-signin input[type="password"] {
+        font-size: 16px;
+        height: auto;
+        width: auto;
+        margin-bottom: 15px;
+        padding: 7px 9px;
+      }
+
+    </style>
+
+   <div class="row">
+    <div class="col-xs-12 col-sm-8 col-md-8 col-md-offset-2">
+        <div class="form-signin">
+@using (Ajax.BeginForm("RecoveryResetPasswrd", "Account", new { UserName = @ViewBag.UserName, MessageType = @ViewBag.MessageType }, new AjaxOptions {HttpMethod="Post", InsertionMode = InsertionMode.Replace, UpdateTargetId = "result" }))
+{
+        <form  >
+        <h2 class="form-signin-heading">Security Question</h2>
+    <p>@ViewBag.SecurityQuestion</p>
+        <input type="text" class="input-block-level" placeholder="Enter security answer" id="UserSecurityAnwer" name="UserSecurityAnwer">
+        <button class="btn btn-large btn-primary" type="submit">Submit</button>
+
+      </form>
+  }
+<div id="result" class="center" style="color:red">@TempData["message2"]</div>
+            </div>
+    </div>
+    </div> 

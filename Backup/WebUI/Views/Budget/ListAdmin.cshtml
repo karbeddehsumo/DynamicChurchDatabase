@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Domain.budget>
+
+@{
+    ViewBag.Title = "Budget";
+}
+<div id="TopPane">
+
+</div>
+
+
+@if (@ViewBag.RecordCount > 0)
+{
+    <strong>@ViewBag.Headering</strong>
+<table>
+    <tr>
+        <th>
+            Category
+        </th>
+         <th>
+            Amount
+        </th>
+        <th>
+            Comment
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.subcategory.SubCategoryName)
+        </td>
+        <td style="text-align:right">
+            @string.Format("{0:c}",@item.Amount)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Comment)
+        </td>
+
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p>No budget record found!</p>   
+}
+

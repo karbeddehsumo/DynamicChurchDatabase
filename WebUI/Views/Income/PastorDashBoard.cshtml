@@ -1,0 +1,30 @@
+﻿@{
+    ViewBag.Title = "PastorDashBoard";
+    Layout = "~/Views/Shared/_Layout3.cshtml";
+}
+
+<h2 class="center">Pastor Dashboard</h2>
+
+<div class="panel">
+<div class="center">
+<div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-6" style="background-color:#F0FFF0;min-height:40px;">
+                    <h2 class="center">Income</h2>
+        @Html.Action("List", "Income", new {code="DateRangeSearch",bDate=@ViewBag.EndDate7,eDate=@ViewBag.BeginDate,ReportType="Summary"})
+        <br />
+        <h2 class="center">Expenses</h2>
+        @Html.Action("List", "Expense", new {code="DateRangeSearch",bDate=@ViewBag.EndDate7,eDate=@ViewBag.BeginDate,ReportType="Summary"})
+    </div>
+    <div class="col-xs-12 col-sm-12 col-md-6" style="background-color:#DCDCDC;min-height:40px;">
+        <br />
+         <h2 class="center">Calendar</h2>
+            @Html.Action("List","Calendar", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate60})
+
+        <br />
+     <h2 class="center">Announcements</h2>
+        @Html.Action("List","Announcement", new {bDate=@ViewBag.BeginDate,eDate=@ViewBag.EndDate60,ReportType="Summary"})
+    </div>
+</div>
+    </div>
+    </div>
+

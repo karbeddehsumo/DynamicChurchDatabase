@@ -1,0 +1,112 @@
+﻿@model IEnumerable<Domain.ministry>
+
+@{
+    ViewBag.Title = "List";
+}
+
+
+<div id="AjaxFormPane">
+
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+            Contact
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Phone #
+        </th>
+        <th>
+            Status
+        </th>
+        <th>Page Style</th>
+        <th>Is Public</th>
+        <th>Default Member Type</th>
+        <th>Story Access</th>
+        <th>Picture Access</th>
+        <th>Video Access</th>
+        <th>Parent Ministry</th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.MinistryName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Contact)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ContactEmail)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PhoneNumber)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>@Html.DisplayFor(modelItem => item.PageStyle)</td>
+        <td>
+            @if ((@item.IsPublic == null || (@item.IsPublic == false)))
+            {
+                @string.Format("{0}","False");
+            }
+            else
+            {
+                @string.Format("{0}", "True");
+            }
+        </td>
+        <td>@Html.DisplayFor(modelItem => item.DefaultMemberType)</td>
+        <td>
+            @if((@item.StoryCreateAccess == null||(@item.StoryCreateAccess == false)))
+            {
+                @string.Format("{0}","False");
+            }
+            else
+            {
+                @string.Format("{0}", "True");
+            }
+        </td>
+        <td>
+            @if ((@item.PictureCreateAccess == null || (@item.PictureCreateAccess == false)))
+            {
+                @string.Format("{0}","False");
+            }
+            else
+            {
+                @string.Format("{0}", "True");
+            }
+        </td>
+        <td>
+            @if ((@item.VideoCreateAccess == null || (@item.VideoCreateAccess == false)))
+            {
+                @string.Format("{0}","False");
+            }
+            else
+            {
+                @string.Format("{0}", "True");
+            }
+        </td>
+        <td>@Html.DisplayFor(modelItem => item.ParentMinistryName)</td>
+            <td>
+                    @Ajax.ActionLink("Edit", "Edit", "Ministry", new {MinistryID=item.ministryID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+            </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p>No income added yet!</p>   
+}
+</div>
+

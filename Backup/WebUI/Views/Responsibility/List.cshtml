@@ -1,0 +1,85 @@
+﻿@model IEnumerable<Domain.responsibility>
+
+@{
+    ViewBag.Title = "List";
+    
+}
+
+<div class="panel">
+<div id="TopPane">
+
+</div>
+
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <tr>
+        <th>
+            staff
+        </th>
+        <th>
+            Date Created
+        </th>
+        <th>
+            Status
+        </th>
+        <th>
+            Brief Description
+        </th>
+          <th>
+            Full Description
+        </th>
+        <th>
+            Title
+        </th>
+        <th>
+            Entered By
+        </th>
+        <th>
+            Date Entered
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.staffID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateCreated)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.BriefDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullDescription)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Title)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.EnteredBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.DateEntered)
+        </td>
+            <td>
+                    @Ajax.ActionLink("Edit", "Edit", "Responsibility", new {ResponsibilityID=item.responsibilityID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+            </td>
+            <td>
+                @Ajax.ActionLink("Delete", "Delete", "Responsibility", new {ResponsibilityID=item.responsibilityID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "TopPane" })
+            </td>
+    </tr>
+}
+
+</table>
+}
+else
+{
+ <p>No responsibility added yet!</p>   
+}
+</div>

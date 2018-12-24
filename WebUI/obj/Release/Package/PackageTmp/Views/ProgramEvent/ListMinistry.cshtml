@@ -1,0 +1,11 @@
+﻿@model IEnumerable<Domain.programevent>
+
+@{
+    ViewBag.Title = "ListMinistry";
+}
+
+
+@foreach (Domain.programevent e in @Model)
+{
+    @string.Format("{0} {1}",@e.Title,@e.C_When.ToShortDateString())
+}

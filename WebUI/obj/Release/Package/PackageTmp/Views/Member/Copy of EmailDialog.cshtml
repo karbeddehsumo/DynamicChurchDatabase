@@ -1,0 +1,29 @@
+﻿@model WebUI.Models.EmailModel
+
+@using (Html.BeginForm("SendEmailDialog", "Member", new { }, FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+            <div class="editor">
+             <label>From</label>
+            <input  type="text" value="@ViewBag.Sender" readonly="true" /><br />
+                @Html.LabelFor(m => m.From)
+                @Html.EditorFor(m => m.From)
+                </div>
+     <div class="editor">
+            <label>To</label>
+            @Html.DropDownList("Ministry", ViewBag.MinistryList as SelectList, "") <br />
+         </div>
+     <div class="editor">
+           <label>Subject</label>
+            <input id="subject" type="text" placeholder="Subject" /><br />
+         </div>
+     <div class="editor">
+            <label>Choose Attachment(s)</label>
+            <input id="files" type="file" name="files" multiple />
+         </div>
+            <textarea id="message" style="width:80%; height:300px; background-color:whitesmoke;" placeholder="Your text goes here.."></textarea>
+            <div>
+                <input id="cancelButton" type="button" value="Cancel" />
+                <input id="submitButton" type="submit" />
+            </div>
+
+     }

@@ -1,0 +1,19 @@
+﻿@model Domain.propertyinventory
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+<div>
+
+<h2 class="center">Property Center</h2>
+    <div class="center">
+@Ajax.ActionLink("Add Property","Create","PropertyInventory", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "CreatePropertyPane" }, new {@id="pageSubTitle"})
+@Ajax.ActionLink("Property Group","PropertySummary","PropertyInventory", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "CreatePropertyPane" }, new {@id="pageSubTitle"})
+@Ajax.ActionLink("Property List","Details","PropertyInventory", new {}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "CreatePropertyPane" }, new {@id="pageSubTitle"})
+    </div>
+<div id="CreatePropertyPane">
+@Html.Action("Details","PropertyInventory")
+</div>
+</div>

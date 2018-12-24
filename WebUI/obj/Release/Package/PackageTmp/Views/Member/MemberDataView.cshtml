@@ -1,0 +1,13 @@
+﻿@model Domain.member
+
+<script src="../../Scripts/jquery-ui-1.8.20.min.js"></script>
+  <div id="MemberEditPane" class="collapse in alert alert-warning ">
+    <strong>@string.Format("{0}",@Model.FullNameTitle)</strong><br />
+     @ViewBag.FamilyAddress <br />
+    @ViewBag.FamilyCityStateZip <br />
+    @string.Format("Cell: {0}",@Model.PhoneNumber)  <br />
+    @string.Format("Email: {0}",@Model.EmailAddress) 
+    @Ajax.ActionLink("Update", "MyPageEdit", "Member", new {MemberID=@Model.memberID}, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "MemberEditPane" }, new { @class = "MyPageDataUpdateIcon" })
+</div>
+
+

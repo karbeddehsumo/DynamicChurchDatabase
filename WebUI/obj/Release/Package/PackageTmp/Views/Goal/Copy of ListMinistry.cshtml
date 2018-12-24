@@ -1,0 +1,81 @@
+﻿@model IEnumerable<Domain.goal>
+
+@{
+    ViewBag.Title = "List";
+}
+<div id="AjaxFormPane" class="slider">
+@if (@ViewBag.RecordCount > 0)
+{
+<table>
+    <caption>@ViewBag.Heading</caption>
+    <thead>
+        <tr>
+            <th>Goal</th>
+            <th>Assigned To</th>
+            <th>Assigned Date</th>
+            <th>Due Date</th>
+            <th>Comption Ratio(%)</th>
+            <th>Task</th>
+            <th>Event</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @item.Title
+        </td>
+        <td>
+            @if (g.AssignedTo > 0)
+            {
+              @item.PersonAssignedTo.member.FirstNameTitle
+            }
+
+        </td>
+        <td>
+            @item.BeginDate
+        </td>
+        <td>
+            @item.EndDate
+        </td>
+        <td>
+            @item.CompletionRatio
+        </td>
+        <td>
+            @Ajax.ActionLink("Tasks", "List", "Task", new { bDate = DateTime.Today.ToShortDateString(), eDate = DateTime.Today.ToShortDateString(), SearchType = "GoalSearch", codeID = @item.goalID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+             </td>
+        <td>
+            @Ajax.ActionLink("Event", "GoalEvents", "ProgramEvent", new { GoalID = item.goalID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+        </td>
+        <td>
+                @Ajax.ActionLink("Edit", "Edit", "Goal", new { GoalID = item.goalID }, new AjaxOptions { InsertionMode = InsertionMode.Replace, UpdateTargetId = "AjaxFormPane" })
+        </td>
+
+    </tr>
+}
+</tbody>
+</table>
+}
+else
+{
+ <p>No goals records found!</p>   
+}
+
+
+</div>
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+            $("a.GoalListClick").click(function (event) {
+                event.preventDefault();
+                var goalid = $(this).attr('id');
+            var url = "/Task/List";
+            $.get(url, { codeID: goalid.toString(),SearchType: "GoalSearch",bDate: "1/1/2010",eDate: "1/1/2010" }, function (data) { $("#GoalListPane").html(data) });
+        });
+
+
+    });
+
+ </script>
